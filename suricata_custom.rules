@@ -1,0 +1,79 @@
+pass ip $MANAGEMENT_SERVERS any -> any any (msg:"Ignored subnet"; sid:1;)
+
+# NTLM relay ESC8
+# detect NTLM authentication challenge from CA
+alert http any any -> any any (msg:"NTLM authentication challenge in HTTP"; flow:established,to_client; http.header.raw; content:"WWW-Authenticate|3A 20|NTLM|0D 0A|"; metadata: ntlmssp challenge; sid:20; rev:3; priority:1;)
+
+# NTLMSSP + NTLMSSP_CHALLENGE
+alert smb any 445 -> any any (msg:"NTLMSSP_CHALLENGE"; content:"|4E 54 4C 4D 53 53 50 00 02 00 00 00|"; metadata: ntlmssp challenge; sid:21; rev:2; priority:1;)
+alert tcp any 445 -> any any (msg:"NTLMSSP_CHALLENGE"; content:"|4E 54 4C 4D 53 53 50 00 02 00 00 00|"; metadata: ntlmssp challenge; sid:211; rev:2; priority:1;)
+
+
+# NTLM relay ESC8
+# detect NTLM authorization to CA
+alert http any any -> any any (msg:"NTLM authorization response in HTTP"; flow:established,to_server; http.header.raw; content:"Authorization|3A 20|NTLM|0D 0A|"; metadata: ntlmssp response; sid:22; rev:2; priority:1;)
+alert tcp any any -> any any (msg:"NTLM authorization response in HTTP"; content:"Authorization|3A 20|NTLM|0D 0A|"; metadata: ntlmssp response; sid:221; rev:2; priority:1;)
+
+alert tcp any any -> any 389 (msg:"LDAP searchRequest"; content:"|30|"; offset:0; depth:1; content:"|02 01|"; content:"|63|"; distance:1; within:2; flowbits:set,ldapsearch; noalert; sid:9;metadata: ldap searchrequest;rev:9; priority:1;)
+alert tcp any any -> any 389 (msg:"LDAP query for serviceprincipalname=*"; flowbits:isset,ldapsearch; content:"|87 14|serviceprincipalname"; sid:10;metadata: ldap searchrequest;rev:5; priority:1;)
+alert tcp any any -> any 389 (msg:"LDAP query for objectclass=user"; flowbits:isset,ldapsearch; content:"|A3 13 04 0B|objectclass|04 04|user"; sid:11;metadata: ldap searchrequest;rev:5; priority:1;)
+alert tcp any any -> any 389 (msg:"LDAP query for objectclass=computer"; flowbits:isset,ldapsearch; content:"|A3 17 04 0B|objectclass|04 08|computer"; sid:12;metadata: ldap searchrequest;rev:5; priority:1;)
+
+# Didier Stevens DCSync Detection -> altered to any any because of lack of zone variables
+alert tcp any any -> any any (msg:"Mimikatz DRSUAPI"; flow:established,to_server; content:"|05 00 0b|"; depth:3; content:"|35 42 51 e3 06 4b d1 11 ab 04 00 c0 4f c2 dc d2|"; depth:100; flowbits:set,drsuapi; flowbits:noalert; reference:url,blog.didierstevens.com; classtype:policy-violation; sid:1000001; rev:1; priority:1;)
+alert tcp any any -> any any (msg:"Mimikatz DRSUAPI DsGetNCChanges Request"; flow:established,to_server; flowbits:isset,drsuapi; content:"|05 00 00|"; depth:3; content:"|00 03|"; offset:22; depth:2; reference:url,blog.didierstevens.com; classtype:policy-violation; sid:1000002; rev:1; priority:1;)
+
+
+# OPNsense's Suricata IDS/IPS Detection Rules Against NMAP Scans
+# v. 2.1 / May 26th 2024 by Aleksi Bovellan
+# https://github.com/aleksibovellan/opnsense-suricata-nmaps
+
+# For NMAP scan detection between scan speeds of T1-T5
+# SYN SCAN -sS (speeds T1-T5)
+alert tcp any any -> any [21,22,23,25,53,80,88,110,135,137,138,139,143,161,389,443,445,465,514,587,636,853,993,995,1194,1433,1720,3306,3389,8080,8443,11211,27017,51820] (msg:"POSSBL PORT SCAN (NMAP -sS)"; flow:to_server,stateless; flags:S; window:1024; tcp.mss:1460; threshold:type threshold, track by_src, count 20, seconds 70; classtype:attempted-recon; sid:3400001; priority:2; rev:1;)
+alert tcp any any -> any ![21,22,23,25,53,80,88,110,135,137,138,139,143,161,389,443,445,465,514,587,636,853,993,995,1194,1433,1720,3306,3389,8080,8443,11211,27017,51820] (msg:"POSSBL PORT SCAN (NMAP -sS)"; flow:to_server,stateless; flags:S; window:1024; tcp.mss:1460; threshold:type threshold, track by_src, count 7, seconds 135; classtype:attempted-recon; sid:3400002; priority:2; rev:2;)
+
+# SYN-ACK 3-WAY SCAN -sT (speeds T2-T5)
+alert tcp any ![22,25,53,80,88,143,443,445,465,587,853,993,1194,8080,51820] -> any ![22,25,53,80,88,143,443,445,465,587,853,993,1194,8080,51820] (msg:"POSSBL PORT SCAN (NMAP -sT)"; flow:to_server; window:32120; flags:S; threshold:type threshold, track by_src, count 20, seconds 70; classtype:attempted-recon; sid:3400003; rev:3; priority:1;)
+
+# ACK SCAN -sA (speeds T2-T5)
+alert tcp any ![22,25,53,80,88,143,443,445,465,587,853,993,1194,8080,51820] -> any ![22,25,53,80,88,143,443,445,465,587,853,993,1194,8080,51820] (msg:"POSSBL PORT SCAN (NMAP -sA)"; flags:A; flow:stateless; window:1024; threshold:type threshold, track by_dst, count 20, seconds 70; classtype:attempted-recon; sid:3400004; priority:2; rev:5;)
+
+# CHRISTMAS TREE SCAN -sX (speeds T1-T5)
+alert tcp any any -> any any (msg:"POSSBL PORT SCAN (NMAP -sX)"; flags:FPU; flow:to_server,stateless; threshold:type threshold, track by_src, count 3, seconds 120; classtype:attempted-recon; sid:3400005; rev:2; priority:1;)
+
+# FRAGMENTED SCAN -f (speeds T1-T5)
+alert ip any any -> any any (msg:"POSSBL SCAN FRAG (NMAP -f)"; fragbits:M+D; threshold:type limit, track by_src, count 3, seconds 1210; classtype:attempted-recon; sid:3400006; priority:2; rev:6;)
+
+# UDP SCAN -sU (speeds T1-T5)
+alert udp any any -> any [53,67,68,69,123,161,162,389,520,1026,1027,1028,1029,1194,1434,1900,11211,12345,27017,51820] (msg:"POSSBL PORT SCAN (NMAP -sU)"; flow:to_server,stateless; classtype:attempted-recon; sid:3400007; priority:2; rev:6; threshold:type threshold, track by_src, count 20, seconds 70; dsize:0;)
+alert udp any any -> any ![53,67,68,69,123,161,162,389,520,1026,1027,1028,1029,1194,1434,1900,11211,12345,27017,51820] (msg:"POSSBL PORT SCAN (NMAP -sU)"; flow:to_server,stateless; classtype:attempted-recon; sid:3400008; priority:2; rev:6; threshold:type threshold, track by_src, count 7, seconds 135; dsize:0;)
+
+# For all usages of destination port 4444:
+
+# TCP destination port: 4444
+alert tcp any ![21,22,23,25,53,80,88,110,135,137,138,139,143,161,389,443,445,465,514,587,636,853,993,995,1194,1433,1720,3306,3389,8080,8443,11211,27017,51820] -> any 4444 (msg:"POSSBL SCAN SHELL M-SPLOIT TCP"; classtype:trojan-activity; sid:3400020; priority:1; rev:2;)
+# UDP destination port: 4444
+alert udp any ![53,67,68,69,123,161,162,389,520,1026,1027,1028,1029,1194,1434,1900,11211,12345,27017,51820] -> any 4444 (msg:"POSSBL SCAN SHELL M-SPLOIT UDP"; classtype:trojan-activity; sid:3400021; priority:1; rev:2;)
+
+
+
+
+# Write 1 to register 5
+alert udp ![$CLIENT,$SERVER] any -> $PLC_SERVERS 420 (msg:"Debug Modbus connection to port 420 detected."; classtype:unusual-client-port-connection; sid:1336; priority:4; rev:1;)
+
+# no outbound for PLC (10.0.x.74)
+alert ip $PLC_SERVERS ![502,420,1502] -> [$INTERNAL_NET, ! $ENG_WORKSTATIONS] ![53,123,4789] (msg:"PLC established an illegal connection to either a host or a port that is not whitelisted."; flow:to_client; classtype:unusual-client-port-connection; sid:1337; priority:3; rev:1;)
+
+# SCADALTS
+alert ip $SCADALTS_SERVERS ![502,8080] -> $INTERNAL_NET ![53,123,502,4789,1514,1515] (msg:"SCADA established an illegal connection to either a host or a port that is not whitelisted."; flow:established; classtype:unusual-client-port-connection; sid:1338; priority:2; rev:1;)
+
+# ENGINEERING WS
+alert ip $ENG_WORKSTATIONS ![3389] -> [$INTERNAL_NET, ! $PLC_SERVERS] ![53,123,4789,1514,1515,8080] (msg:"ENG WS established an illegal connection to either a host or a port that is not whitelisted."; flow:to_server,established; classtype:unusual-client-port-connection; sid:1339; priority:2; rev:1;)
+
+# HISTORIAN
+alert ip $HISTORIAN ![3000] -> $INTERNAL_NET ![53,123,1502,4789,1515,1514] (msg:"HISTORIAN established an illegal connection to either a host or a port that is not whitelisted."; flow:to_server,established; classtype:unusual-client-port-connection; sid:1340; priority:2; rev:1;)
+
+# Monitoring RDP
+alert tcp ![$JUMP_SERVERS,$CLIENT_SERVERS] any -> any 3389 (msg:"Unexpected RDP connection"; flow:to_server,established; classtype:targeted-activity; sid:1341; priority:3; rev:1;)
+

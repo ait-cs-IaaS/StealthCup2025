@@ -1,0 +1,385 @@
+<group name="windows,activedirectoryattacks">
+  
+  <rule id="100005" level="3">
+    <if_sid>92651</if_sid>
+    <field name="win.eventdata.ipAddress">::\.+:10.0.0.\d+</field>
+    <description>Successful Remote Logon by user:$(win.eventdata.targetDomainName)\$(win.eventdata.targetUserName) from $(win.eventdata.ipAddress).</description>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+    <group>authentication_success,gdpr_IV_32.2,gpg13_7.1,gpg13_7.2,hipaa_164.312.b,nist_800_53_AC.7,nist_800_53_AU.14,pci_dss_10.2.5,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+  </rule>
+     
+  <rule id="100100" level="4">
+    <decoded_as>LDAPQueryLogParser</decoded_as>
+    <description>LDAP Query from $(srcip): $(filter)</description>
+    <group>ldap</group>
+  </rule>
+</group>
+
+<group name="kerberoast,windows,activedirectoryattacks">
+  <rule id="100010" level="16">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4769$</field>
+    <field name="win.eventdata.serviceName" type="pcre2">^(?i)(tracy|alfred|lillian|earl|nelson|melissa|willie|cliff|herman|lori|rosemarie)$</field>
+    <description>Honey Token Service Account Ticket requested from $(win.eventdata.ipAddress) with $(win.eventdata.ticketEncryptionType) and $(win.eventdata.ticketOptions) for User $(win.eventdata.targetUserName)</description>
+    <group>,honeytoken</group>
+  </rule>
+  
+  <rule id="100006" level="13">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4769$</field>
+    <field name="win.eventdata.TicketEncryptionType" type="pcre2">0x17</field>
+    <description>Possible Keberoasting attack - Single RC4 encrypted TGS issued</description>
+  </rule>
+  
+ <rule id="100007" level="16" frequency="2" timeframe="1">
+    <if_matched_sid>100006</if_matched_sid>
+    <different_field>serviceName</different_field>
+    <description>Certain Kerberoasting attack - Multiple RC4 encrypted TGS issued in 1s</description>
+  </rule>
+  
+  <rule id="100101" level="12">
+     <if_sid>100100</if_sid>
+     <field name="filter" type="pcre2">(?i)servicePrincipalName=\*</field>
+     <description>Suspicious LDAP Query for SPNs found from $(srcip): $(filter)</description>
+  </rule>
+  
+  <rule id="100102" level="16" timeframe="360">
+    <if_sid>100101</if_sid>
+    <if_matched_sid>100007</if_matched_sid>
+    <description>Certain Kerberoasting attack - multiple RC4 ticket requests and suspicious LDAP Query detected</description>
+  </rule>
+  
+  <rule id="100103" level="16" timeframe="360">
+     <if_sid>100007</if_sid>
+     <if_matched_sid>100101</if_matched_sid>
+     <description>Certain Kerberoasting attack - RC4 ticket and suspicious LDAP Query detected</description>
+  </rule>
+  
+     <rule id="100104" level="16" timeframe="360">
+    <if_sid>100101</if_sid>
+    <if_matched_sid>100006</if_matched_sid>
+    <description>Certain Kerberoasting attack - $(win.eventdata.ipAddress): RC4 ticket request and suspicious LDAP Query detected</description>
+  </rule>
+  
+  <rule id="100105" level="16" timeframe="360">
+     <if_sid>100006</if_sid>
+     <if_matched_sid>100101</if_matched_sid>
+     <description>Certain Kerberoasting attack - RC4 ticket and suspicious LDAP Query detected</description>
+  </rule>
+</group>
+
+<group name="fileaccess,windows,activedirectoryattacks,honeytoken">
+  <rule id="100020" level="16">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4663$</field>
+    <field name="win.eventdata.objectName" type="pcre2">passwords\.txt</field>
+    <description>Honey Token Accessed by User $(win.eventdata.subjectUserName) on $(win.system.computer)</description>
+  </rule>
+  
+  <rule id="100021" level="16">
+    <if_sid>100020</if_sid>
+    <field name="win.system.eventID">^4663$</field>
+    <field name="win.eventdata.objectName" type="pcre2">C:\\\\Shares\\\\sensitive\\\\passwords\.txt</field>
+    <description>Honey Token Accessed by User $(win.eventdata.subjectUserName) on $(win.system.computer)</description>
+  </rule>
+</group>
+
+<group name="asreproast,windows,activedirectoryattacks">
+  <rule id="100110" level="12">
+     <if_sid>100100</if_sid>
+     <field name="filter" type="pcre2">(?i)userAccountControl.4194304</field>
+     <description>Suspicious LDAP Query for Users without Kerberos Pre-Authentication found from $(srcip): $(filter)</description>
+  </rule>
+  
+  <rule id="100030" level="13">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4768$</field>
+    <field name="win.eventdata.TicketEncryptionType" type="pcre2">0x17</field>
+    <field name="win.eventdata.preAuthType">0</field>
+    <description>Possible AS-REP Roasting attack - RC4 encrypted TGT without Pre-Autheintication issued for $(win.eventdata.targetUserName) from $(win.eventdata.ipAddress)</description>
+  </rule>
+  
+  <rule id="100031" level="16" timeframe="360">
+    <if_sid>100030</if_sid>
+    <if_matched_sid>100110</if_matched_sid>
+    <description>Certain AS-REP Roasting attack - RC4 ticket and suspicious LDAP Query detected</description>
+  </rule>
+  
+  <rule id="100032" level="16" timeframe="360">
+    <if_sid>100110</if_sid>
+    <if_matched_sid>100030</if_matched_sid>
+    <description>Certain AS-REP Roasting attack - RC4 ticket and suspicious LDAP Query detected</description>
+  </rule>
+</group>
+
+<group name="adcs,windows,activedirectoryattacks">
+  <rule id="100040" level="0">
+    <if_sid>61101</if_sid>
+    <field name="win.system.providerName">^Microsoft-Windows-Kerberos-Key-Distribution-Center$</field>
+    <options>no_full_log</options>
+    <description>Group of KDC rules.</description>
+  </rule>
+  
+  <rule id="100041" level="16">
+    <if_sid>100040</if_sid>
+    <field name="win.system.eventID">^39$</field>
+    <description>Certain ESC1 attack: No strong certificate mappings could be found, and the certificate did not have the new security identifier (SID) extension that the KDC could validate: $(win.eventdata.Subject) for $(win.eventdata.AccountName)</description>
+  </rule>
+  
+  <rule id="100042" level="16">
+    <if_sid>100040</if_sid>
+    <field name="win.system.eventID">^40$</field>
+    <description>Certain ESC1 attack: The certificate was issued to the user before the user existed in Active Directory and no strong mapping could be found: $(win.eventdata.Subject) for $(win.eventdata.AccountName)</description>
+  </rule>
+  
+  <rule id="100043" level="16">
+    <if_sid>100040</if_sid>
+    <field name="win.system.eventID">^41$</field>
+    <description>Certain ESC1 attack: The SID contained in the new extension of the users certificate does not match the users SID: $(win.eventdata.Subject) for $(win.eventdata.AccountName)</description>
+  </rule>
+</group>
+
+<group name="ADObjects,RBCD,windows,activedirectoryattacks">
+  <rule id="100050" level="3">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^5136$</field>
+    <description>User $(win.eventdata.subjectUserName) changed property $(win.eventdata.attributeLDAPDisplayName) on $(win.eventdata.objectClass) $(win.eventdata.objectDN) to $(win.eventdata.attributeValue).</description>
+  </rule>
+  
+  <rule id="100051" level="3">
+    <if_sid>60229</if_sid>
+    <field name="win.eventdata.objectClass" type="pcre2">^(?i)computer$</field>
+    <description>User $(win.eventdata.subjectUserName) changed property $(win.eventdata.attributeLDAPDisplayName) on computer $(win.eventdata.objectDN) to $(win.eventdata.attributeValue).</description>
+  </rule>
+  
+  <rule id="100052" level="12">
+    <if_sid>100051</if_sid>
+    <field name="win.eventdata.attributeLDAPDisplayName" type="pcre2">^(?i)sAMAccountName$</field>
+    <list field="win.eventdata.subjectUserName" lookup="not_match_key">etc/lists/DomainJoiners</list>
+    <list field="win.eventdata.subjectUserName" lookup="not_match_key">etc/lists/Admins</list>
+    <description>User initiated Domain Join: User $(win.eventdata.subjectUserName) added computer $(win.eventdata.attributeValue) to the domain, although not in allowed domain joiners group.</description>
+  </rule>
+  
+  <rule id="100053" level="3">
+    <if_sid>100051</if_sid>
+    <field name="win.eventdata.attributeLDAPDisplayName" type="pcre2">^(?i)msDS-AllowedToActOnBehalfOfOtherIdentity$</field>
+    <description>RBCD Configuration: User $(win.eventdata.subjectUserName) configured RBCD on computer $(win.eventdata.objectDN).</description>
+  </rule>
+  
+  <rule id="100054" level="16">
+    <if_sid>100053</if_sid>
+    <list field="win.eventdata.subjectUserName" lookup="not_match_key">etc/lists/DomainJoiners</list>
+    <list field="win.eventdata.subjectUserName" lookup="not_match_key">etc/lists/Admins</list>
+    <description>RBCD Abuse: User $(win.eventdata.subjectUserName) configured RBCD on computer $(win.eventdata.objectDN) although not member of privileged groups.</description>
+  </rule>
+  
+  <rule id="100055" level="16">
+    <if_sid>100051</if_sid>
+    <field name="win.eventdata.attributeLDAPDisplayName" type="pcre2">^(?i)msds-KeyCredentialLink$</field>
+    <list field="win.eventdata.subjectUserName" lookup="not_match_key">etc/lists/DomainJoiners</list>
+    <list field="win.eventdata.subjectUserName" lookup="not_match_key">etc/lists/Admins</list>
+    <description>Shadow Credentials: User $(win.eventdata.subjectUserName) added KeyCredentialLink on $(win.eventdata.objectDN), although not in allowed domain joiners group.</description>
+  </rule>
+</group>
+
+<group name="kerberos,bruteforce,windows,activedirectoryattacks">
+  <rule id="100060" level="16">
+    <if_sid>60205</if_sid>
+    <field name="win.eventdata.preAuthType">2</field>
+    <field name="win.eventdata.status">0x18</field>
+    <description>Certain Kerberos Pre-Authentication brute forcing attack by $(win.eventdata.ipAddress) on account $(win.eventdata.targetUserName) detected.</description>
+  </rule>
+</group>
+
+<group name="relay,windows,activedirectoryattacks,suricata">
+  <rule id="100070" level="3">
+    <if_sid>86601</if_sid>
+    <field name="alert.metadata.ntlmssp">challenge</field>
+    <description>NTLM Challenge from $(src_ip) to $(dest_ip)</description>
+  </rule>
+
+  <rule id="100071" level="16" frequency="2" timeframe="1">
+    <if_matched_sid>100070</if_matched_sid>
+    <different_field>src_ip</different_field>
+    <description>Certain NTLM relaying from $(src_ip) to $(dest_ip)</description>
+  </rule>
+</group>
+
+<group name="suricata, ids">
+  <rule id="100080" level="0">
+    <if_sid>86601</if_sid>
+    <field name="alert.category">Generic Protocol Command Decode</field>
+    <description>Filtered Suricata Alert from Generic Protocol Command Decode: $(alert.signature)</description>
+  </rule>
+  <rule id="100082" level="0">
+    <if_sid>86601</if_sid>
+    <field name="dest_ip" type="pcre2">^169\.254\.169\.254$</field>
+    <description>Filtered Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100084" level="16">
+    <if_sid>86601</if_sid>
+    <field name="alert.severity">4</field>
+    <description>Critical Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100085" level="13">
+    <if_sid>86601</if_sid>
+    <field name="alert.severity">3</field>
+    <description>High Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100086" level="9">
+    <if_sid>86601</if_sid>
+    <field name="alert.severity">2</field>
+    <description>Medium Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100087" level="1">
+    <if_sid>86601</if_sid>
+    <field name="alert.severity">1</field>
+    <description>Low Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100088" level="13">
+    <if_sid>86601</if_sid>
+    <field name="alert.message" type="pcre2">DRSUAPI</field>
+    <description>Possible DCSync</description>
+  </rule>
+  <rule id="100083" level="2">
+    <if_sid>100086</if_sid>
+    <field name="alert.signature">POSSBL PORT SCAN</field>
+    <description>Filtered Suricata Alert: $(alert.signature)</description>
+    <options>no_log</options>
+  </rule>
+  <rule id="100095" level="2">
+    <if_sid>100086</if_sid>
+    <field name="alert.signature_id" type="pcre2">nothing</field>
+    <description>Filtered Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100089" level="9" frequency="50" timeframe="1">
+    <if_matched_sid>100083</if_matched_sid>
+    <description>Possible Port Scan</description>
+  </rule>
+  <rule id="100081" level="3">
+    <if_sid>100084, 100085, 100086, 100087</if_sid>
+    <field name="alert.metadata.signature_severity">Informational</field>
+    <description>Informational Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100096" level="7">
+    <if_sid>100084, 100085, 100086, 100087</if_sid>
+    <field name="alert.metadata.signature_severity">Minor</field>
+    <description>Medium Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100097" level="13">
+    <if_sid>100084, 100085, 100086, 100087</if_sid>
+    <field name="alert.metadata.signature_severity">Major</field>
+    <description>High Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100098" level="16">
+    <if_sid>100084, 100085, 100086, 100087</if_sid>
+    <field name="alert.metadata.signature_severity">Critical</field>
+    <description>Critical Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100093" level="3">
+    <if_sid>100084, 100085, 100086, 100087</if_sid>
+    <field name="alert.signature">TGI HUNT</field>
+    <description>TGI HUNT Suricata Alert: $(alert.signature)</description>
+  </rule>
+  <rule id="100094" level="3">
+    <if_sid>100084, 100085, 100086, 100087</if_sid>
+    <field name="alert.category">Not Suspicious Traffic</field>
+    <description>Not Suspicious Traffic: $(alert.signature)</description>
+  </rule>
+</group>
+
+<group name="windows,activedirectoryattacks,dcsync">
+  <rule id="100090" level="3">
+    <if_sid>60103</if_sid>
+    <field name="win.system.providerName">Microsoft-Windows-Security-Auditing</field>
+    <field name="win.system.eventID">4662</field>
+    <description>An operation was performed on an object.</description>
+    <options>no_full_log</options>
+  </rule>
+  <rule id="100091" level="16">
+    <if_sid>100090</if_sid>
+    <field name="win.eventdata.accessMask">0x100</field>
+    <field name="win.eventdata.subjectUserName" negate="yes" type="pcre2">DC1\$</field>
+    <field name="win.eventdata.properties" type="pcre2">\{1131f6ad\-9c07\-11d1\-f79f\-00c04fc2dcd2\}</field>
+    <description>Certain DCSync attack</description>
+  </rule>
+</group>
+
+<group name="windows,activedirectoryattacks,integrity,">
+  <rule id="100200" level="9">
+    <if_sid>550</if_sid>
+    <match>backup.ps1</match>
+    <description>Backup Job altered</description>
+  </rule>
+</group>
+
+<group name="windows,activedirectoryattacks,ProcessAccess,">
+  <rule id="100210" level="15">
+    <if_group>sysmon_event_10</if_group>
+    <match>KeePass.exe</match>
+    <description>KeePass.exe accessed</description>
+  </rule>
+  <rule id="100211" level="15">
+    <if_group>sysmon_event_10</if_group>
+    <match>lsass.exe</match>
+    <description>lsass.exe accessed</description>
+  </rule>
+  <rule id="100212" level="1">
+    <if_sid>100210, 100211</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">^(?i)(C:\\\\Windows\\\\system32\\\\csrss\.exe|C:\\\\Windows\\\\system32\\\\wininit\.exe|C:\\\\Windows\\\\Sysmon64\.exe|C:\\\\Windows\\\\system32\\\\svchost\.exe|C:\\\\Windows\\\\Explorer\.EXE|C:\\\\Windows\\\\system32\\\\lsass\.exe|C:\\\\Users\\\\[0-9a-zA-Z\.-]{1,}\\\\Desktop\\\\keepass\\\\KeePassStarter\.exe|C:\\\\Program Files \(x86\)\\\\ossec-agent\\\\wazuh-agent\.exe|C:\\\\Program Files\\\\ossec-agent\\\\wazuh-agent\.exe)$</field>
+    <description>Filtered false positive</description>
+  </rule>
+</group>
+
+<group name="ssh,linux,login,">
+  <rule id="100220" level="8">
+    <if_sid>5715</if_sid>
+    <user>admin</user>
+    <description>Logon as user admin</description>
+  </rule>
+</group>
+
+<group name="wazuh agent,">
+  <rule id="100230" level="11">
+    <if_sid>504, 506</if_sid>
+    <description>Wazuh agent connection lost.</description>
+    <mitre>
+      <id>T1562.001</id>
+    </mitre>
+    <group>pci_dss_10.6.1,pci_dss_10.2.6,gpg13_10.1,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,nist_800_53_AU.14,nist_800_53_AU.5,tsc_CC7.2,tsc_CC7.3,tsc_CC6.8,</group>
+  </rule>
+</group>
+
+<group name="filtering">
+  <rule id="999993" level="0">
+    <if_group>syslog, dpkg, config_changed</if_group>
+    <description>Filtered dpkg alerts</description>
+  </rule>
+  <rule id="999994" level="0">
+    <if_sid>60112</if_sid>
+    <field name="win.eventdata.subjectLogonId">0x3e7</field>
+    <description>Filtered Policy Modification by local SYSTEM</description>
+  </rule>
+  <rule id="999995" level="0">
+    <if_group>sysmon_eid1_detections</if_group>
+    <description>Filtered Sysmon Wazuh default rules</description>
+  </rule>
+  <rule id="999996" level="0">
+    <if_group>sysmon_eid10_detections</if_group>
+    <description>Filtered Sysmon Wazuh default rules</description>
+  </rule>
+  <rule id="999997" level="0">
+    <if_group>sysmon_eid11_detections</if_group>
+    <description>Filtered Sysmon Wazuh default rules</description>
+  </rule>
+  <rule id="999998" level="3">
+    <if_sid>18154</if_sid>
+    <description>Down-grade Windows Application Errors</description>
+  </rule>
+  <rule id="999999" level="0">
+  <if_group>vulnerability-detector</if_group>
+  <description>Filter Vulnerability Detection Alerts</description>
+  </rule>
+</group>
