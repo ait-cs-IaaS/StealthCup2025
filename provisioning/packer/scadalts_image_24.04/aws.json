@@ -1,0 +1,8 @@
+{
+  "image_name": "scadalts-ubuntu-2404",
+  "region": "eu-central-1",
+  "instance_type":"t2.medium",
+  "base_image": "ami-0265dc4673f9d6a35",
+  "build_user": "ubuntu",
+  "ansible_groups": ["scada"]
+}

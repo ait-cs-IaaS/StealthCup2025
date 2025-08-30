@@ -1,0 +1,61 @@
+---
+- name: Copy Scada Credentials to the Fileshare
+  hosts: dmz:&dc
+  gather_facts: false
+
+  tasks:
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Debug the extracted team name
+      debug:
+        msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+    - name: Get environment ID
+      set_fact:
+        environment_id: "{{ lookup('vars', team_name ~ '_environment_id') }}"
+
+    - name: Debug environment ID
+      debug:
+        msg: "Environment ID for Team {{ team_name }} is {{ environment_id }}"
+
+    - name: Set config file
+      set_fact:
+        configuration_file: "./configs/config_{{ environment_id }}.json"
+
+    - name: Load configuration JSON from local machine
+      set_fact:
+        configuration_json: "{{ lookup('file', configuration_file) | from_json }}"
+
+    - name: Get scada configuration
+      set_fact:
+        scada_configuration: >-
+          {{ configuration_json['Software'] | selectattr('SoftwareID', 'equalto', 'scada') | list | first | default({}) }}
+
+    - name: Debug Scada configuration
+      debug:
+        msg: "{{ scada_configuration }}"
+
+    - name: Extract Scada Credentials
+      set_fact:
+        scada_username: "{{ scada_configuration['Username'] | default({}) }}"
+        scada_password: "{{ scada_configuration['Password'] | default({}) }}"
+
+    - name: Prepare text content
+      set_fact:
+        credential_text: |
+          Scada-LTS:
+          URL: http://scada.plumetech-ot.local:8080/Scada-LTS
+          Username: {{ scada_username }}
+          Password: {{ scada_password }}
+
+    - name: Save credentials to a text file on the Fileshare
+      copy:
+        dest: C:\Fileshares\OT\credentials_scada.txt
+        content: "{{ credential_text }}"
+
+    - name: Copy OT-Documentation to Fileshare
+      win_copy:
+        src: ./files/ChemTankDocumentation.pdf
+        dest: C:\Fileshares\OT\ChemTankDocumentation.pdf

@@ -1,0 +1,23 @@
+---
+- name: Configure InfluxDB to listen on localhost
+  hosts: "dmz:&historian"
+  gather_facts: false
+  become: yes
+
+  tasks:
+    - name: Configure InfluxDB to listen on localhost
+      lineinfile:
+        path: /etc/influxdb/config.toml
+        regexp: '^http-bind-address'
+        line: 'http-bind-address = "127.0.0.1:8086"'
+        state: present
+
+    - name: Restart influxdb
+      ansible.builtin.service:
+        name: influxdb
+        state: restarted
+
+    - name: Restart grafana-server
+      ansible.builtin.service:
+        name: grafana-server
+        state: restarted

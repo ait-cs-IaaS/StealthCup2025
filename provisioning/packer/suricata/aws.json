@@ -1,0 +1,8 @@
+{
+  "image_name": "suricata",
+  "region": "eu-central-1",
+  "instance_type":"c5n.large",
+  "base_image": "ami-0a628e1e89aaedf80",
+  "build_user": "ubuntu",
+  "ansible_groups": ["suricata"]
+}

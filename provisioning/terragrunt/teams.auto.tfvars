@@ -1,0 +1,17 @@
+teams = [
+    #{ name = "team0", subnet_id = 0 },
+    { name = "team1", subnet_id = 1 },
+    { name = "team2", subnet_id = 2 },
+    { name = "team3", subnet_id = 3 },
+    { name = "team4", subnet_id = 4 },
+    { name = "team5", subnet_id = 5 },
+    { name = "team6", subnet_id = 6 },
+    { name = "team7", subnet_id = 7 },
+    { name = "team8", subnet_id = 8 },
+    { name = "team9", subnet_id = 9 },
+    { name = "team10", subnet_id = 10 },
+    { name = "team11", subnet_id = 11 },
+    { name = "team12", subnet_id = 12 },
+    #{ name = "team13", subnet_id = 13 },
+    #{ name = "team14", subnet_id = 14 },
+]

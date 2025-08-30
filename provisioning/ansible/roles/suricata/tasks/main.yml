@@ -1,0 +1,132 @@
+- name: Install necessary packages
+  apt:
+    name:
+      - suricata
+      - suricata-update
+#      - xfsprogs
+    state: latest
+    update_cache: yes
+
+#- name: Check if the storage disk is present
+#  stat:
+#    path: "{{ disk_device }}"
+#  register: disk
+
+#- name: Fail if disk is not present
+#  fail:
+#    msg: "The specified disk device {{ disk_device }} does not exist."
+#  when: not disk.stat.exists
+
+#- name: Create a filesystem on the disk
+#  filesystem:
+#    fstype: xfs
+#    dev: "{{ disk_device }}"
+#  when: disk.stat.exists
+
+#- name: Create a mount point
+#  file:
+#    path: "{{ mount_point }}"
+#    state: directory
+
+#- name: Mount the disk
+#  mount:
+#    path: "{{ mount_point }}"
+#    src: "{{ disk_device }}"
+#    fstype: xfs
+#    state: mounted
+#    opts: defaults
+#    dump: 0
+#    passno: 2
+
+#- name: Ensure the disk mounts on boot
+#  lineinfile:
+#    path: /etc/fstab
+#    regexp: '^{{ disk_device }}\s+{{ mount_point }}\s+xfs'
+#    line: "{{ disk_device }} {{ mount_point }} xfs defaults,nofail 0 2"
+#    create: yes
+#    state: present
+
+- name: Update Suricata rules
+  become: true
+  command: suricata-update
+
+- name: Check if ET open ruleset source is already added
+  become: true
+  command: suricata-update list-sources
+  register: suricata_sources
+  changed_when: false
+
+- name: Activate ET open ruleset
+  become: true
+  command: suricata-update add-source et/open https://rules.emergingthreats.net/open/suricata-7.0.3/emerging-all.rules.tar.gz
+  when: "'et/open' not in suricata_sources.stdout"
+
+- name: Activate stamus-lateral
+  become: true
+  command: suricata-update enable-source stamus/lateral
+
+- name: Activate tgreen-hunting
+  become: true
+  command: suricata-update enable-source tgreen/hunting
+
+- name: Create or update disable.conf with specified SIDs
+  become: true
+  copy:
+    dest: /etc/suricata/disable.conf
+    content: |
+      {% for sid in suricata_disable_sids %}
+      {{ sid }}
+      {% endfor %}
+    mode: '0644'
+
+- name: Create or update threshold.config
+  become: true
+  copy:
+    dest: /etc/suricata/threshold.config
+    content: |
+      {% for sid in suricata_threshold %}
+      {{ sid }}
+      {% endfor %}
+    mode: '0644'
+
+- name: Update Suricata rules
+  become: true
+  command: suricata-update
+
+- name: Create nsm_data directory
+  file:
+    path: "{{ suricata_nsm_folder }}"
+    state: directory
+
+- name: Copy custom rules
+  copy:
+    src: ./templates/suricata_custom.rules
+    dest: /var/lib/suricata/rules/custom.rules
+    owner: root  # Optional: Set the owner of the file
+    group: root  # Optional: Set the group of the file
+    mode: '0644'  # Optional: Set the permissions of the file
+
+- name: Deploy Suricata configuration file
+  copy:
+    src: ./templates/suricata.yaml
+    dest: /etc/suricata/suricata.yaml
+    owner: root  # Optional: Set the owner of the file
+    group: root  # Optional: Set the group of the file
+    mode: '0644'  # Optional: Set the permissions of the file
+
+- name: Apply sysctl settings
+  become: true
+  ansible.posix.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present  # Ensures it's persistent in /etc/sysctl.conf or /etc/sysctl.d
+    reload: yes     # Reloads sysctl settings after applying
+  loop: "{{ sysctl_settings }}"
+  tags: sysctl
+
+#ensure eve.json is rotated and sent to wazuh
+- name: Ensure Suricata is enabled and running
+  systemd:
+    name: suricata
+    enabled: yes
+    state: started

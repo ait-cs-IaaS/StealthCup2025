@@ -1,0 +1,7 @@
+{
+  "image_name": "kali",
+  "region": "eu-central-1",
+  "instance_type":"t3.small",
+  "base_image": "ami-02cbe978f93c6f078",
+  "build_user": "kali"
+}

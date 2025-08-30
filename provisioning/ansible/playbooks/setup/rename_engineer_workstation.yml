@@ -1,0 +1,12 @@
+---
+- name: Rename Host Engineer Workstation
+  hosts: supervision:&engineer_workstation
+  gather_facts: false
+
+  tasks:
+    - name: Rename the computer
+      win_hostname:
+        name: "ENG1"
+
+    - name: Reboot the machine
+      win_reboot:

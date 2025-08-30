@@ -1,0 +1,68 @@
+---
+- name: Split hostname and extract the team part
+  set_fact:
+    team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+- name: Debug the extracted team name
+  debug:
+    msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+- name: Set enterprise_dc_ip
+  set_fact:
+    enterprise_dc_ip: "{{ hostvars[team_name ~ '_enterprise_domain_controller']['private_ip_address'] }}"
+
+- name: Set ot_dc_ip
+  set_fact:
+    ot_dc_ip: "{{ hostvars[team_name ~ '_dmz_domain_controller']['private_ip_address'] }}"
+
+- name: Set DNS server on Windows for all except DC
+  ansible.windows.win_dns_client:
+    adapter_names: 'Eth*'
+    dns_servers: "{{ ot_dc_ip }}"
+  register: dns_update
+  when: "'windows' in group_names and not 'dc' in group_names"
+
+- name: Add updated forwarder for OT DC
+  win_shell: |
+    Set-DnsServerConditionalForwarderZone -Name "plumetech.local" -MasterServers "{{ enterprise_dc_ip }}"
+  register: dns_update
+  when: "'dc' in group_names and enterprise_dc_ip is defined"
+
+- name: Stop and disable systemd-resolved for linux hosts
+  become: true
+  systemd:
+    name: systemd-resolved.service
+    state: stopped
+    enabled: no
+  when: "'linux' in group_names"
+
+- name: Delete existing /etc/resolv.conf file or link for linux hosts
+  become: true
+  file: 
+    path: /etc/resolv.conf
+    state: absent
+  when: "'linux' in group_names"
+
+- name: Ensure /etc/resolv.conf exists
+  become: true
+  file:
+    path: /etc/resolv.conf
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'linux' in group_names"
+
+- name: Set DNS server in /etc/resolv.conf for linux hosts
+  become: true
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: '^nameserver'
+    line: "nameserver {{ ot_dc_ip }}"
+    state: present
+  when: "'linux' in group_names"
+  register: dns_update
+
+- name: Verify DNS update
+  debug:
+    msg: "DNS server for {{ inventory_hostname }} set to {{ ot_dc_ip }}. Result: {{ dns_update }}"

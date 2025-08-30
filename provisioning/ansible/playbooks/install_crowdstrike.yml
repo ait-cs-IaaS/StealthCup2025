@@ -1,0 +1,57 @@
+---
+- name: Install CrowdStrike Falcon Sensor
+  hosts: enterprise:dmz:supervision:&windows
+  tasks:
+    - name: Disable Windows Defender Real-Time Protection
+      win_shell: "Set-MpPreference -DisableRealtimeMonitoring $true"
+      register: disable_defender
+      ignore_errors: yes
+
+    - name: Disable Windows Defender Cloud-Delivered Protection
+      win_shell: "Set-MpPreference -MAPSReporting 0"
+      ignore_errors: yes
+
+    - name: Disable Windows Defender Automatic Sample Submission
+      win_shell: "Set-MpPreference -SubmitSamplesConsent 2"
+      ignore_errors: yes
+
+    - name: Copy CrowdStrike Falcon Sensor to target machine
+      win_copy:
+        src: "templates/executables/FalconSensor_Windows.exe"
+        dest: "C:\\Windows\\Temp\\FalconSensor_Windows.exe"
+
+    - name: Install CrowdStrike Falcon Sensor
+      #win_command: "C:\\Windows\\Temp\\FalconSensor_Windows.exe /install /quiet /norestart CID=7165A1F3F84C40739E792FB8CCD14112-B1 GROUPING_TAGS=\"AIT\" VDI=1"
+      win_command: "C:\\Windows\\Temp\\FalconSensor_Windows.exe /install /quiet CID=9374A063CBA648FF951D57EBC35EB15E-1A GROUPING_TAGS=\"AIT\" NO_START=1 /norestart" #VDI=1"
+
+    # - name: Ensure CrowdStrike Falcon Sensor Service is running
+    #   win_service:
+    #     name: csagent
+    #     start_mode: auto
+    #     state: started
+
+- name: Install CrowdStrike Falcon Sensor on Debian
+  hosts: supervision:dmz:&linux
+  become: yes
+  tasks:
+    - name: Copy CrowdStrike Falcon Sensor to target machine
+      copy:
+        src: "templates/executables/falcon-sensor_7.20.0-17306_amd64.deb"
+        dest: "/tmp/falcon-sensor_7.20.0-17306_amd64.deb"
+
+    - name: Install CrowdStrike Falcon Sensor
+      apt:
+        deb: "/tmp/falcon-sensor_7.20.0-17306_amd64.deb"
+        state: present
+
+    - name: Register CrowdStrike Falcon Sensor
+      command: "/opt/CrowdStrike/falconctl -s --cid=9374A063CBA648FF951D57EBC35EB15E-1A --tags=AIT" # --VDI=1"
+
+    - name: Remove the hosts agent ID (AID)
+      command: "/opt/CrowdStrike/falconctl -d -f --aid"
+
+    # - name: Ensure CrowdStrike Falcon Sensor Service is running
+    #   service:
+    #     name: falcon-sensor
+    #     enabled: yes
+    #     state: started

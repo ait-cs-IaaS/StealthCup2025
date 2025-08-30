@@ -1,0 +1,27 @@
+---
+- name: Set system hostname
+  ansible.builtin.hostname:
+    name: "{{ new_hostname }}"
+
+- name: Ensure hostname is in /etc/hostname (for persistence)
+  ansible.builtin.copy:
+    content: "{{ new_hostname }}\n"
+    dest: /etc/hostname
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Add or update a hosts entry for 127.0.0.1
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: "^127\\.0\\.0\\.1\\s+"
+    line: "127.0.0.1 localhost {{ new_hostname }}"
+    state: present
+    backrefs: yes
+
+- name: Ensure cloud-init preserves the hostname
+  ansible.builtin.lineinfile:
+    path: /etc/cloud/cloud.cfg
+    regexp: '^preserve_hostname: false'
+    line: 'preserve_hostname: true'
+  become: true

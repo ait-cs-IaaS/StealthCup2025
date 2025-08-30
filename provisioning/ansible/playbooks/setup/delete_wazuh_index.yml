@@ -1,0 +1,71 @@
+- name: Delete Wazuh Index
+  hosts: monitoring:&wazuh
+  gather_facts: false
+  #strategy: free
+
+  vars:
+    cert_src_dir: "../indexer/certificates/wazuh-certificates"
+    cert_dest_dir: "/tmp/wazuh-certificates"
+    index_url: ""
+
+  tasks:
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Debug the extracted team name
+      debug:
+        msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+    - name: Fetch the private IP of the Wazuh machine
+      set_fact:
+        monitoring_wazuh_ip: "{{ hostvars[team_name ~ '_monitoring_wazuh']['private_ip_address'] }}"
+
+    - name: Debug Wazuh IP
+      debug:
+        msg: "Wazuh IP: {{ monitoring_wazuh_ip }}"
+
+    - name: Get current date
+      ansible.builtin.command: date +"%Y.%m.%d"
+      register: today_date
+      changed_when: false
+
+    - name: Set index name
+      ansible.builtin.set_fact:
+        index_name: "wazuh-alerts-4.x-{{ today_date.stdout }}"
+
+    - name: Create remote certificate directory
+      ansible.builtin.file:
+        path: "{{ cert_dest_dir }}"
+        state: directory
+        mode: "0700"
+
+    - name: Copy certificates to remote machine
+      ansible.builtin.copy:
+        src: "{{ cert_src_dir }}/{{ item }}"
+        dest: "{{ cert_dest_dir }}/{{ item }}"
+        mode: "0600"
+      loop:
+        - admin.pem
+        - admin-key.pem
+        - root-ca.pem
+
+    - name: Delete Wazuh index
+      ansible.builtin.uri:
+        url: "https://{{ monitoring_wazuh_ip }}:9200/{{ index_name }}"
+        method: DELETE
+        validate_certs: no
+        client_cert: "{{ cert_dest_dir }}/admin.pem"
+        client_key: "{{ cert_dest_dir }}/admin-key.pem"
+        ca_path: "{{ cert_dest_dir }}/root-ca.pem"
+        status_code: [200, 404]  # Handle index not found case
+      register: result
+
+    - name: Debug response
+      ansible.builtin.debug:
+        var: result
+
+    - name: Remove certificate files from remote machine
+      ansible.builtin.file:
+        path: "{{ cert_dest_dir }}"
+        state: absent

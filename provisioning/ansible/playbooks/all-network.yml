@@ -1,0 +1,28 @@
+- import_playbook: set_dns.yml
+- import_playbook: set_dns_plumetech_ot_non_domain_joined.yml
+- import_playbook: set_dns_plumetech_non_domain_joined.yml
+
+- name: Clear DNS Cache on DCs
+  hosts: dc
+  gather_facts: false
+  # strategy: free
+  tasks:
+    - name: Clear DNS Cache on DCs
+      win_command: dnscmd /clearcache
+      register: dnscmd_result
+    - name: Display output
+      debug:
+        msg: "{{ dnscmd_result.stdout }}"
+
+- name: Clear DNS Cache on Windows Hosts
+  hosts: windows
+  gather_facts: no
+  # strategy: free
+  tasks:
+    - name: Clear DNS Cache on Windows Hosts
+      win_command: ipconfig /flushdns
+      register: flushdns_result
+    - name: Display output
+      debug:
+        msg: "{{ flushdns_result.stdout }}"
+

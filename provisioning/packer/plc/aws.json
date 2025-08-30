@@ -1,0 +1,7 @@
+{
+  "image_name": "control_plc",
+  "region": "eu-central-1",
+  "instance_type":"t3.medium",
+  "base_image": "ami-03250b0e01c28d196",
+  "build_user": "ubuntu"
+}

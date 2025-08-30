@@ -1,0 +1,6 @@
+---
+- name: Configure DEMOCORP Domain Controller
+  hosts: enterprise_domain_controller
+  roles:
+  - ../roles/windows/general-domain-controller
+  - ../roles/windows/democorp-domain-controller

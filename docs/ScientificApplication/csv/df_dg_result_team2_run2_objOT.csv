@@ -1,0 +1,46 @@
+SEVERITY,ID,OCCURRED_AT,TYPE,DETECTION_QUADS,SUMMARY,CONTENT,DETECTION,ASSET_IDS,SOURCE_HOST_NAME,DESTINATION_HOST_NAME,SOURCE_IP,DESTINATION_IP,OTHER_IP,SOURCE,PACKET_CAPTURE_STATE
+Low,38307,2025-03-28T15:25:56Z,Communication,Configuration,Detected 8 NewSourceEth between 2025-03-28T15:14:14.043Z and 2025-03-28T15:25:56.028Z,"Sample NewSourceEth values include:
+  dst__port: ('',);
+  midpointId: 4d06bebb-d788-430a-a723-e06a652f5854, c1a36162-4109-4ff6-8876-83a226e3d512, 2c56c702-d67a-425b-909c-c2dbcfe5cbb4;
+  uuid: 11760e5f-24bb-409a-a9fe-dc3cc8fa3cb2, 1ce9b844-ed88-453f-8cc8-5a2aecf94d2a, 06f2d11b-730c-4402-9656-a4197afa3b37, 7e2ff60d-aa23-475d-99bb-47e000bd395a, 1360616b-a00f-4eb6-b254-3b6ffdf0a681, 00119d59-b41b-44b9-8648-aecc4306430a, 4294255a-7358-432f-9b20-86c2d8122b87, 08ad1cdc-94cc-4a2c-bbe8-7472c865476f;
+  eth_src_asset_id: ('4160', '4150', '4151', '4154', '4153', '4146', '4152', '4149');
+  src__mac: ;
+  eth_src: 02:72:DD:BE:BC:8B, 02:FB:CA:85:1B:B9, 02:FF:B6:CB:FD:B7, 02:DA:28:7A:06:1B, 02:D3:61:D5:2A:9D, 02:B3:EB:9C:8D:1F, 02:02:27:D2:AF:31, 02:D5:29:60:0D:DD;
+  dst__mac: ;
+  protocol: HTTP, DNS, TLS, TCP;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New Ethernet Address as Source,"4160,4150,4151,4154,4153,4146,4152,4149",,,,,,"11760e5f-24bb-409a-a9fe-dc3cc8fa3cb2, 1ce9b844-ed88-453f-8cc8-5a2aecf94d2a, 06f2d11b-730c-4402-9656-a4197afa3b37, 7e2ff60d-aa23-475d-99bb-47e000bd395a, 1360616b-a00f-4eb6-b254-3b6ffdf0a681, 00119d59-b41b-44b9-8648-aecc4306430a, 4294255a-7358-432f-9b20-86c2d8122b87, 08ad1cdc-94cc-4a2c-bbe8-7472c865476f",
+Low,38308,2025-03-28T15:28:20Z,Communication,Configuration,Detected 9 NewDestEth between 2025-03-28T15:14:33.047Z and 2025-03-28T15:28:20.022Z,"Sample NewDestEth values include:
+  dst__port: ('',);
+  midpointId: 4d06bebb-d788-430a-a723-e06a652f5854, c1a36162-4109-4ff6-8876-83a226e3d512, 2c56c702-d67a-425b-909c-c2dbcfe5cbb4;
+  eth_dst_asset_id: ('4160', '4140', '4150', '4151', '4154', '4153', '4146', '4152', '4149');
+  uuid: 0d52c6b5-afb5-44ed-ac3c-8c6762a8d82d, 235d6a9c-df82-4e5c-a3b0-2e82103c6d2c, 0c30b29c-3b4c-4ea7-b572-66307767b769, 04155cfb-9832-4cb7-bfce-eb85cccaf915, 1d4771c9-d26c-4ab7-9941-34cc7a72e2bc, 0d24cf1f-ab7c-4859-82ad-a203cc91f45d, 19e40dda-3007-4ae9-ab8a-598cdd4071b6, 31928d3e-d036-4ba1-b0b5-e2d2732940c6, 1d633e0d-ff8c-4a98-87df-83729a6dc8de;
+  src__mac: ;
+  dst__mac: ;
+  eth_dst: 02:79:FF:96:1C:AB, 02:72:DD:BE:BC:8B, 02:FB:CA:85:1B:B9, 02:FF:B6:CB:FD:B7, 02:DA:28:7A:06:1B, 02:D3:61:D5:2A:9D, 02:B3:EB:9C:8D:1F, 02:02:27:D2:AF:31, 02:D5:29:60:0D:DD;
+  protocol: SMB2, SMBV23, DNS;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New Ethernet Address as Destination,"4160,4150,4151,4154,4153,4146,4152,4149,4140",,,,,,"0d52c6b5-afb5-44ed-ac3c-8c6762a8d82d, 235d6a9c-df82-4e5c-a3b0-2e82103c6d2c, 0c30b29c-3b4c-4ea7-b572-66307767b769, 04155cfb-9832-4cb7-bfce-eb85cccaf915, 1d4771c9-d26c-4ab7-9941-34cc7a72e2bc, 0d24cf1f-ab7c-4859-82ad-a203cc91f45d, 19e40dda-3007-4ae9-ab8a-598cdd4071b6, 31928d3e-d036-4ba1-b0b5-e2d2732940c6, 1d633e0d-ff8c-4a98-87df-83729a6dc8de",
+Low,38668,2025-03-28T15:28:19Z,Communication,Configuration,Detected 8 RDP New Comms between 2025-03-28T15:21:26.932Z and 2025-03-28T15:28:19.542Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.12.43, 10.0.12.11, 10.0.242.127, 10.0.2.44, 10.0.1.43, 10.0.1.44, 10.0.10.29;
+  dst_asset_id: 1737, 118, 154, 2896, 1919, 141, 1742;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.242.127, 10.0.12.11, 10.0.10.30, 10.0.12.29, 10.0.1.43, 10.0.1.44, 10.0.2.30;
+  rdp_selected_protocol: , hybrid, hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 118, 2896, 1801, 141, 1663, 1742, 143;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , administrator, dragon, plumber;
+  src__ip: ;",RDP New Comms Pattern,"1737,1742,1801,118,1663,2896,141,143,154,1919",,,"10.0.12.11,10.0.10.29,10.0.1.43,10.0.12.43,10.0.242.127,10.0.1.44,10.0.2.44","10.0.12.29,10.0.12.11,10.0.1.43,10.0.242.127,10.0.1.44,10.0.2.30,10.0.10.30",,,
+Low,38691,2025-03-28T15:25:11Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.2.30.,SSH Authentication Failure,"2896,154",,,10.0.242.127,10.0.2.30,,daa20b8f-7742-4e01-b43b-d5d35f44975e,
+Medium,38799,2025-03-28T15:36:35Z,Indicator,Threat Behavior,RDP Auth Bypass Attempt Possible,RDP Auth Bypass Attempt Possible,RDP Negotiation Request,"142,143",,,10.0.2.44,10.0.2.59,,Network Traffic,
+Low,38897,2025-03-28T15:43:02Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.74.,SSH Authentication Failure,"2896,1847",,,10.0.242.127,10.0.3.74,,2bda5a33-935a-4ee0-b597-dea67b5b2027,
+Low,38966,2025-03-28T15:33:56Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 154 (10.0.2.30) connected via RDP to asset 143 (10.0.2.44) to then pivot to asset 142 (10.0.2.59) via RDP.,Interactive Session Pivots,"154,142",,,10.0.2.30,10.0.2.59,,,
+Low,38970,2025-03-28T15:31:07Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 154 (10.0.2.30) to then pivot to asset 143 (10.0.2.44) via RDP.,Interactive Session Pivots,"2896,143",,,10.0.242.127,10.0.2.44,,,

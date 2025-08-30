@@ -1,0 +1,47 @@
+#!/bin/bash
+
+{{ os_home }}/{{ os_user }}/plc/setup-nat.sh &
+
+SESSION_NAME="{{ plc_tmux_session }}"
+WINDOW_NAME="{{ plc_tmux_window }}"
+
+# Path to the script to be executed
+SCRIPT_PATH="/bin/bash /home/ubuntu/plc/startup.sh"
+
+# Check if the tmux session already exists
+tmux has-session -t $SESSION_NAME 2>/dev/null
+
+if [ $? != 0 ]; then
+  # If the session does not exist, create it with the specified window
+  tmux new-session -d -s $SESSION_NAME -n $WINDOW_NAME
+  if [ $? == 0 ]; then
+    echo "Session '$SESSION_NAME' created with window '$WINDOW_NAME'."
+  else
+    echo "Failed to create session '$SESSION_NAME'." >&2
+    exit 1
+  fi
+else
+  # If the session exists, check if the window exists
+  tmux list-windows -t $SESSION_NAME | grep -q "^0: $WINDOW_NAME"
+  if [ $? != 0 ]; then
+    # Create the window if it does not exist
+    tmux new-window -t $SESSION_NAME -n $WINDOW_NAME
+    if [ $? == 0 ]; then
+      echo "Window '$WINDOW_NAME' created in session '$SESSION_NAME'."
+    else
+      echo "Failed to create window '$WINDOW_NAME' in session '$SESSION_NAME'." >&2
+      exit 1
+    fi
+  else
+    echo "Window '$WINDOW_NAME' already exists in session '$SESSION_NAME'."
+  fi
+fi
+
+# Send the command to the specified window in the tmux session
+tmux send-keys -t $SESSION_NAME:$WINDOW_NAME "$SCRIPT_PATH" C-m
+if [ $? == 0 ]; then
+  echo "Command sent to window '$WINDOW_NAME' in session '$SESSION_NAME'."
+else
+  echo "Failed to send command to window '$WINDOW_NAME' in session '$SESSION_NAME'." >&2
+  exit 1
+fi

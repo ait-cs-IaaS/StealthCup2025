@@ -1,0 +1,64 @@
+---
+- name: Wazuh Agent on enterprise domain controllers of all teams
+  hosts: enterprise_domain_controller,team2_enterprise_domain_controller,team3_enterprise_domain_controller
+  ignore_unreachable: true
+  become: yes
+  become_user: administrator
+  become_method: runas
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:
+      - address: "{{ hostvars['wazuh']['private_ip_address'] }}"
+        port: 1514
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'https'
+        api_user: wazuh
+        max_retries: 5
+        retry_interval: 5
+    wazuh_agent_localfiles:
+      windows:
+        - format: 'eventlog'
+          location: 'Application'
+        - format: 'eventchannel'
+          location: 'Security'
+          query: 'Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and EventID != 4656 and EventID != 4658 and EventID != 4660 and EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]'
+        - format: 'eventlog'
+          location: 'System'
+        - format: 'syslog'
+          location: 'active-response\active-responses.log'
+        - format: 'syslog'
+          location: '%PROGRAMDATA%\AIT\LDAPQueryLogParser-%y-%m-%d.log'
+    wazuh_agent_enrollment:
+      enabled: 'yes'
+      manager_address: ''
+      port: 1515
+      agent_name: "{{ private_dns_name}}"
+      groups: ''
+      agent_address: ''
+      ssl_ciphers: HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH
+      server_ca_path: ''
+      agent_certificate_path: ''
+      agent_key_path: ''
+      authorization_pass_path: "{{ wazuh_dir }}/etc/authd.pass"
+      authorization_pass_path_macos: "/etc/authd.pass"
+      auto_method: 'no'
+      delay_after_enrollment: 20
+      use_source_ip: 'no'
+- hosts: enterprise_domain_controller,team2_enterprise_domain_controller,team3_enterprise_domain_controller
+  name: Copy internal options for Wazuh
+  tasks:
+    - name: Copy Write-LDAPQueryLog.ps1
+      ansible.builtin.win_copy:
+        src: ../roles/wazuh/local_internal_options.conf
+        dest: 'C:\Program Files (x86)\ossec-agent\local_internal_options.conf'
+- name: Configure enterprise domain controllers of all teams
+  hosts: enterprise_domain_controller,team2_enterprise_domain_controller,team3_enterprise_domain_controller
+  roles:
+  - ../roles/windows/general-domain-controller
+
+
+# ansible team2_enterprise_domain_controller -m win_shell -a "gc 'C:\program files (x86)\ossec-agent\ossec.conf'"
+# ansible team2_enterprise_domain_controller -m win_shell -a "test-netconnection 10.0.241.10 -port 1514"
+

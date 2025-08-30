@@ -1,0 +1,28 @@
+---
+ait_ssh_use_proxy: true
+ait_ssh_proxy_user: ubuntu
+ait_ssh_proxy_host: "{{ hostvars['mgmt'].public_ip_address }}"
+ait_ssh_proxy_address: "{{ ait_ssh_proxy_user }}@{{ ait_ssh_proxy_host }}"
+
+ansible_ssh_common_args: -o ControlMaster=auto -o ControlPersist=30m -o StrictHostKeyChecking=no -J {{ ait_ssh_proxy_address }}
+
+# initial id: 1
+# increment the id at every reset (maximum: 10)
+# if the number of resets is higher than 10, restart at id 1
+team0_environment_id: 1
+team1_environment_id: 1
+team2_environment_id: 1
+team3_environment_id: 1
+# ...
+team20_environment_id: 1
+team21_environment_id: 2
+team22_environment_id: 3
+team23_environment_id: 4
+team24_environment_id: 5
+team25_environment_id: 6
+team26_environment_id: 7
+team27_environment_id: 8
+team28_environment_id: 9
+team29_environment_id: 10
+team30_environment_id: 11
+team31_environment_id: 12

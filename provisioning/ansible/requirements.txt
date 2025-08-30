@@ -1,0 +1,6 @@
+ansible
+boto3
+ansible-lint
+molecule
+molecule[podman]
+passlib

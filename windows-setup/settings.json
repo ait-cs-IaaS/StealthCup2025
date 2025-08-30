@@ -1,0 +1,18 @@
+{
+    "groupID": 2,
+    "InterfacePrefix": "tap",
+    "CorpDomainName": "corp.local",
+    "CorpDCLocalAdminPwd": "P@ssw0rd1",
+    "CorpDCHostname": "DC1",
+    "CorpDSRMPwd": "P@ssw0rd2",
+    "CorpDomainAdminPwd":  "P@ssw0rd1",
+    "CorpFSHostname": "FS1",
+    "CorpFSLocalAdminPwd": "P@ssw0rd1",
+    "CorpClientHostname": "CLI1",
+    "CorpClientLocalAdminPwd": "P@ssw0rd1",
+    "OTDomainName": "ot.local",
+    "OTDCLocalAdminPwd": "P@ssw0rd1",
+    "OTDCHostname": "OTDC1",
+    "OTDSRMPwd": "P@ssw0rd2",
+    "OTDomainAdminPwd":  "P@ssw0rd"
+}

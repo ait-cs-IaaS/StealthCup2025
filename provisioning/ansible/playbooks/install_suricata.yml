@@ -1,0 +1,162 @@
+---
+- name: Install and Configure Suricata on Ubuntu 24.04
+  hosts: suricata
+  become: yes  # Use sudo
+  roles:
+  - ../roles/suricata
+  vars:
+    suricata_interface: ens5  # Define the network interface Suricata should monitor
+    disk_device: /dev/nvme1n1
+    mount_point: /var/log/suricata
+    suricata_nsm_folder: /var/log/suricata/nsm_data
+    suricata_threshold:
+      - "threshold gen_id 1, sig_id 1337, type limit, track by_src, count 1, seconds 60"
+      - "threshold gen_id 1, sig_id 1338, type limit, track by_src, count 1, seconds 60"
+      - "threshold gen_id 1, sig_id 1339, type limit, track by_src, count 1, seconds 60"
+      - "threshold gen_id 1, sig_id 1340, type limit, track by_src, count 1, seconds 60"
+      - "threshold gen_id 1, sig_id 1341, type limit, track by_src, count 1, seconds 60"
+    suricata_disable_sids:
+      - 2002087
+      - 2000328
+      - 2011802
+      - 2210000
+      - 2210001
+      - 2210002
+      - 2210003
+      - 2210004
+      - 2210005
+      - 2210006
+      - 2210007
+      - 2210008
+      - 2210009
+      - 2210010
+      - 2210011
+      - 2210012
+      - 2210013
+      - 2210014
+      - 2210015
+      - 2210016
+      - 2210017
+      - 2210018
+      - 2210019
+      - 2210020
+      - 2210021
+      - 2210022
+      - 2210023
+      - 2210024
+      - 2210025
+      - 2210026
+      - 2210027
+      - 2210028
+      - 2210029
+      - 2210030
+      - 2210031
+      - 2210032
+      - 2210033
+      - 2210034
+      - 2210035
+      - 2210036
+      - 2210037
+      - 2210038
+      - 2210039
+      - 2210040
+      - 2210041
+      - 2210042
+      - 2210043
+      - 2210044
+      - 2210045
+      - 2210046
+      - 2210047
+      - 2210048
+      - 2210049
+      - 2210050
+      - 2210051
+      - 2210052
+      - 2210053
+      - 2210054
+      - 2210055
+      - 2210056
+      - 2210057
+      - 2210058
+      - 2210059
+      - 2210060
+      - 2210061
+      - 2210062
+      - 2210063
+      - 2210064
+      - 2210065
+    sysctl_settings:
+      - { name: "net.core.rmem_max", value: "268435456" }
+      - { name: "net.core.wmem_max", value: "268435456" }
+      - { name: "net.core.netdev_max_backlog", value: "250000" }
+      - { name: "net.ipv4.tcp_rmem", value: "4096 87380 16777216" }
+      - { name: "net.ipv4.tcp_wmem", value: "4096 65536 16777216" }
+
+- name: Deploy VXLAN Forwarder
+  hosts: suricata
+  become: true
+  tasks:
+    - name: Copy forward.py script
+      copy:
+        dest: /usr/local/bin/forward.py
+        content: |
+          #!/usr/bin/env python3
+          import socket
+          import fcntl
+          import struct
+
+          def get_ip_address(ifname):
+              s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+              return socket.inet_ntoa(
+                  fcntl.ioctl(
+                      s.fileno(),
+                      0x8915,
+                      struct.pack('256s', ifname[:15].encode())
+                  )[20:24]
+              )
+
+          src_ip = get_ip_address("ens5")
+          octets = src_ip.split('.')
+          dest_ip = f"10.0.{octets[2]}.8"
+          print(f"[INFO] Forwarding incoming VXLAN packets to {dest_ip}:4789")
+          SRC_PORT = 4789
+          DEST = (dest_ip, 4789)
+          sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+          sock.bind(("0.0.0.0", SRC_PORT))
+          while True:
+              data, addr = sock.recvfrom(9000)
+              sock.sendto(data, DEST)
+        mode: '0755'
+
+    - name: Create systemd service for VXLAN forwarder
+      copy:
+        dest: /etc/systemd/system/vxlan-forwarder.service
+        content: |
+          [Unit]
+          Description=VXLAN Fanout Forwarder
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/local/bin/forward.py
+          Restart=always
+          RestartSec=5
+          User=root
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: true
+
+    - name: Enable and start VXLAN forwarder service
+      systemd:
+        name: vxlan-forwarder
+        enabled: true
+        state: started
+
+  handlers:
+  - name: restart suricata
+    systemd:
+      name: suricata
+      state: restarted

@@ -1,0 +1,2 @@
+"timestamp","Host","severity_name","severity","description","cmdline","files_written","entities"
+"2025-03-28T15:31:36.31Z","10.0.2.44","Critical","90","A process appears to be accessing credentials and might be dumping passwords. If this is unexpected, review the process tree.","""C:\Windows\system32\taskmgr.exe"" /7","",

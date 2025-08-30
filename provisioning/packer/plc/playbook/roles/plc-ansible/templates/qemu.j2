@@ -1,0 +1,19 @@
+[Unit]
+Description=Run tmux.sh script at boot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/bin/bash {{ os_home }}/{{ os_user }}/plc/tmux.sh
+WorkingDirectory={{ os_home }}/{{ os_user }}/plc
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=5
+ConditionPathExists=/sys/class/net/virbr0
+Environment=TERM=xterm-256color
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,58 @@
+function Get-ADNestedGroupMembers {
+    param($groupname)
+
+    $nestedgroupmembers = @()
+    foreach ($object in (Get-ADGroupMember $groupname)) {
+        Write-Debug "Processing Group Member $($object.name) with objectClass $($object.objectClass)"
+        switch ($object.objectClass) {
+            'group' {
+                Write-Debug "Recursive call of funciton with $($object.name)"
+                $nestedgroupmembers += Get-ADNestedGroupMembers -groupname $object.name
+            }
+            'user' {$nestedgroupmembers += $object.name}
+            default {Write-Debug "objectClass $($object.objectClass) not relevant"}
+        }
+
+    }
+
+    return $nestedgroupmembers
+
+}
+
+function Write-ADNestedGroupMembers {
+	param([String[]]$groupnames, $path)
+	Write-Debug "Initializing Script with $($groupnames) and $path"
+	
+	$output = @()
+	
+	foreach ($group in $groupnames) {
+		Write-Debug "Processing $group"
+		$output += Get-ADNestedGroupMembers -groupname $group
+	}
+	Write-Debug "Uniqualizing output"
+    $output = $output | Select-Object -Unique
+	Write-Debug "Writing $output to $path"
+	Set-Content -Path $path -Value $output
+}
+
+function Write-ADNestedGroupMembersWazuhCDB {
+	param([String[]]$groupnames, $path)
+	Write-Debug "Initializing Script with $($groupnames) and $path"
+	
+	$output = @()
+	
+	foreach ($group in $groupnames) {
+		Write-Debug "Processing $group"
+		$output += Get-ADNestedGroupMembers -groupname $group
+	}
+	
+    Write-Debug "Uniqualizing output"
+    $output = $output | Select-Object -Unique
+    Write-Debug "Inserting line separator for Wazuh CDB"
+    for ($i=0; $i -lt $output.length; $i++) {
+        $output[$i] += ':'
+        Write-Debug "output[$i]: $($output[$i])"
+    }
+	Write-Debug "Writing $output to $path"
+	Set-Content -Path $path -Value $output
+}

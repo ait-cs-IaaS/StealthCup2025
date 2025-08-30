@@ -1,0 +1,95 @@
+---
+- name: Split hostname and extract the team part
+  set_fact:
+    team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+- name: Debug the extracted team name
+  debug:
+    msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+- name: Set DNS to ENTERPRISE
+  set_fact:
+    dns_server: "{{ hostvars[team_name ~ '_enterprise_domain_controller']['private_ip_address'] }}"
+  when: "'enterprise' in group_names or 'monitoring' in group_names"
+  ignore_errors: yes
+
+- name: Set OTHER_DNS to DMZ
+  set_fact:
+    dns_server_other: "{{ hostvars[team_name ~ '_dmz_domain_controller']['private_ip_address'] }}"
+  when: "'enterprise' in group_names or 'monitoring' in group_names"
+  ignore_errors: yes
+
+- name: Set DNS to DMZ
+  set_fact:
+    dns_server: "{{ hostvars[team_name ~ '_dmz_domain_controller']['private_ip_address'] }}"
+  when: "'enterprise' not in group_names or 'monitoring' not in group_names"
+  ignore_errors: yes
+
+- name: Set OTHER_DNS to ENT
+  set_fact:
+    dns_server_other: "{{ hostvars[team_name ~ '_enterprise_domain_controller']['private_ip_address'] }}"
+  when: "'enterprise' not in group_names or 'monitoring' not in group_names"
+  ignore_errors: yes
+
+- name: Print DNS
+  debug:
+    msg: "dns_server is: {{ dns_server }}"
+  when: dns_server is defined
+
+- name: Set DNS server on Windows for all except DC
+  ansible.windows.win_dns_client:
+    adapter_names: 'Eth*'
+    dns_servers: "{{ dns_server }}"
+  register: dns_update
+  when: "'windows' in group_names and not 'dc' in group_names"
+
+- name: Add updated forwarder for Enterprise DC
+  win_shell: |
+    Set-DnsServerConditionalForwarderZone -Name "plumetech-ot.local" -MasterServers "{{ dns_server_other }}"
+  register: dns_update
+  when: "'enterprise' in group_names and 'dc' in group_names and dns_server_other is defined"
+
+- name: Add updated forwarder for DMZ DC
+  win_shell: |
+    Set-DnsServerConditionalForwarderZone -Name "plumetech.local" -MasterServers "{{ dns_server_other }}"
+  register: dns_update
+  when: "'dmz' in group_names and 'dc' in group_names and dns_server_other is defined"
+  
+- name: Stop and disable systemd-resolved for linux hosts
+  become: true
+  systemd:
+    name: systemd-resolved.service
+    state: stopped
+    enabled: no
+  when: "'linux' in group_names"
+
+- name: Delete existing /etc/resolv.conf file or link for linux hosts
+  become: true
+  file: 
+    path: /etc/resolv.conf
+    state: absent
+  when: "'linux' in group_names"
+
+- name: Ensure /etc/resolv.conf exists
+  become: true
+  file:
+    path: /etc/resolv.conf
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'linux' in group_names"
+
+- name: Set DNS server in /etc/resolv.conf for linux hosts
+  become: true
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: '^nameserver'
+    line: "nameserver {{ dns_server }}"
+    state: present
+  when: "'linux' in group_names"
+  register: dns_update
+
+- name: Verify DNS update
+  debug:
+    msg: "DNS server for {{ inventory_hostname }} set to {{ dns_server }}. Result: {{ dns_update }}"

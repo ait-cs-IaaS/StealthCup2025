@@ -1,0 +1,7 @@
+---
+# defaults file for plc-ansible
+os_home: /home
+os_user: ubuntu
+image_filename: axcf2152_v1.tar.gz
+plc_tmux_session: "plc"
+plc_tmux_window: "plc"

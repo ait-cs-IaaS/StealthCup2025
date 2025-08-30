@@ -1,0 +1,106 @@
+---
+
+- name: Update APT package list
+  apt:
+    update_cache: yes
+
+- name: Upgrade all packages
+  apt:
+    upgrade: dist
+
+- name: Install kali-linux-default package
+  apt:
+    name: kali-linux-default
+    state: present
+
+- name: Install jq
+  apt:
+    name: jq
+    state: present
+
+- name: Install seclists
+  apt:
+    name: seclists
+    state: present
+
+- name: Copy 2023-200_most_used_passwords.txt to home directory
+  shell: cp /usr/share/seclists/Passwords/Common-Credentials/2023-200_most_used_passwords.txt /home/kali/
+
+- name: Unzip rockyou.txt.tar.gz to home directory
+  shell: tar -xzvf /usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt.tar.gz -C /home/kali
+
+- name: Download Ghostpack-CompiledBinaries
+  ansible.builtin.get_url:
+    url: "https://github.com/r3motecontrol/Ghostpack-CompiledBinaries.git"
+    dest: "/home/kali/Ghostpack-CompiledBinaries"
+
+- name: Download Snaffler
+  ansible.builtin.get_url:
+    url: "https://github.com/SnaffCon/Snaffler/releases/download/1.0.184/Snaffler.exe"
+    dest: "/home/kali/snaffler.exe"
+
+- name: Download Mimikatz
+  ansible.builtin.get_url:
+    url: "https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip"
+    dest: "/home/kali/mimikatz_trunk.zip"
+
+- name: Download kerbrute
+  ansible.builtin.get_url:
+    url: "https://github.com/ropnop/kerbrute/releases/latest/download/kerbrute_linux_amd64"
+    dest: "/usr/local/bin/kerbrute"
+    mode: '0755'
+
+- name: "Download PyWhisker"
+  ansible.builtin.git:
+    repo: "https://github.com/ShutdownRepo/pywhisker.git"
+    dest: "/home/kali/pywhisker"
+
+- name: "Install PyWhisker"
+  ansible.builtin.command:
+    cmd: python3 /home/kali/pywhisker/setup.py install
+    chdir: /home/kali/pywhisker
+
+- name: "Download PKINITTools"
+  ansible.builtin.git:
+    repo: "https://github.com/dirkjanm/PKINITtools.git"
+    dest: "/home/kali/PKINITtools"
+
+- name: "Create a Python Virtual Environment"
+  ansible.builtin.command:
+    cmd: python3 -m venv /home/kali/PKINITtools/venv
+    creates: /home/kali/PKINITtools/venv
+
+- name: Install Dependencies in the Virtual Environment
+  ansible.builtin.pip:
+    virtualenv: /home/kali/PKINITtools/venv
+    name:
+      - impacket
+      - minikerberos
+      - oscrypto@ git+https://github.com/wbond/oscrypto@master
+
+# this is required to enable legacy algorithms (MD4)
+# see https://forum.hackthebox.com/t/evil-winrm-error-on-connection-to-host/257342/18
+- name: "Configure OpenSSL: replace [provider_sect]"
+  blockinfile:
+    path: /etc/ssl/openssl.cnf
+    marker: "{mark}"
+    marker_begin: "[provider_sect]"
+    marker_end: default = default_sect
+    block: |
+      legacy = legacy_sect
+    state: present
+
+- name: "Configure OpenSSL: replace [default_sect]"
+  blockinfile:
+    path: /etc/ssl/openssl.cnf
+    marker: "{mark}"
+    marker_begin: "[default_sect]"
+    marker_end: "# activate = 1"
+    block: |
+      activate = 1
+      [legacy_sect]
+      activate = 1
+    state: present
+
+- name: Ensure the permissions are set correctly
+  shell: chown -R kali:kali /home/kali

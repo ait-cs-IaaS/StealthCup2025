@@ -1,0 +1,16 @@
+Tactic;Technique;Wazuh default;Wazuh custom;Suricata ET;Suricata Custom;Dragos;Crowdstrike;Crowdstrike IDP
+Resource Development;Obtain Capabilities: Exploits - T1588.005;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+Initial Access;External Remote Services - T1133;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+Initial Access;Valid Accounts - T1078;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+Reconnaissance;Network Service Discovery - T1046;None,N/A;None,N/A;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A
+Reconnaissance;Remote System Discovery - T1018;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Reconnaissance;Search Victim-Owned Websites - T1594;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Reconnaissance;Gather Victim Identity Information: Email Addresses - T1589.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Credential Access;Brute Force: Password Spraying - T1110.003;Technique,Medium;Technique,Medium;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Initial Access;Valid Accounts - T1078;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Reconnaissance;Account Discovery: Domain Account - T1087.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Reconnaissance;Permission Groups Discovery - T1069;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Credential Access;Steal or Forge Authentication Certificates - T1649;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;Technique,Informational
+Initial Access;Valid Accounts - T1078;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+Persistence;Create Account: Domain Account - T1136.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;Technique,High;None,N/A
+Persistence;Account Manipulation: Additional Local or Domain Groups - T1098.007;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A

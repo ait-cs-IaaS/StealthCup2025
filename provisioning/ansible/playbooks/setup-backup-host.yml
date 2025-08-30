@@ -1,0 +1,277 @@
+---
+- name: Setup StealthCup Environment
+  hosts: 18.192.61.60
+  become: true
+  vars:
+    app_directory: "/home/ubuntu/stealthcup"
+    domain_name: "cup.stealth.ait.ac.at"
+    ssl_email: "admin@stealth.ait.ac.at"  # Change to a real email for Let's Encrypt
+    app_directory: "/home/ubuntu/stealthcup"
+    flask_port: 5000
+    gunicorn_workers: 4
+    wazuh_certificates:
+      - { src: "indexer/certificates/wazuh-certificates/admin.pem", dest: "/home/ubuntu/admin.pem" }
+      - { src: "indexer/certificates/wazuh-certificates/admin-key.pem", dest: "/home/ubuntu/admin-key.pem" }
+      - { src: "indexer/certificates/wazuh-certificates/root-ca.pem", dest: "/home/ubuntu/root-ca.pem" }
+    disk_device: /dev/nvme1n1
+    mount_point: /home/ubuntu/backups
+
+  tasks:
+    - name: Set ownership of mount point to ubuntu:ubuntu
+      ansible.builtin.file:
+        path: "{{ mount_point }}"
+        owner: ubuntu
+        group: ubuntu
+        recurse: yes
+
+
+    - name: Create application directory
+      file:
+        path: "{{ app_directory }}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+
+    - name: Update system packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install required packages
+      apt:
+        name:
+          - python3
+          - python3-venv
+          - python3-pip
+          - nginx
+          - certbot
+          - python3-certbot-nginx
+          - rsync
+        state: present
+
+    - name: Rsync Wazuh certificates from localhost to remote destination
+      become: false
+      delegate_to: localhost
+      synchronize:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        rsync_opts:
+          - "--chmod=600"  # Ensure correct file permissions
+      loop: "{{ wazuh_certificates }}"
+
+    - name: Synchronize application files
+      become: false
+      synchronize:
+        src: "../../../portal/"
+        dest: "{{ app_directory }}"
+        delete: no
+        recursive: yes
+      delegate_to: localhost
+
+    - name: Ensure virtual environment exists
+      stat:
+        path: "{{ app_directory }}/venv/bin/activate"
+      register: venv_status
+
+    - name: Set up Python virtual environment (only if missing)
+      command: python3 -m venv {{ app_directory }}/venv
+      when: not venv_status.stat.exists
+
+    - name: Ensure log directory exists
+      ansible.builtin.file:
+        path: /home/ubuntu/stealthcup/logs
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+
+    - name: Add a cron job to run the local backup
+      ansible.builtin.cron:
+        name: "Run backup script local"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_stealthcup.py >> /home/ubuntu/stealthcup/logs/backup_steathcup.log 2>&1"
+        minute: "*/10"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup metrics
+      ansible.builtin.cron:
+        name: "Run backup script metrics"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_metrics.py >> /home/ubuntu/stealthcup/logs/backup_metrics.log 2>&1"
+        minute: "14,29,44,59"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup wazuh index
+      ansible.builtin.cron:
+        name: "Run backup script wazuh"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_wazuh_index.py >> /home/ubuntu/stealthcup/logs/backup_wazuhindex.log 2>&1"
+        minute: "29,59"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup firewall logs
+      ansible.builtin.cron:
+        name: "Run backup script firwall"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_firewall_logs.py >> /home/ubuntu/stealthcup/logs/backup_firewall.log 2>&1"
+        minute: "*/10"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup hosts
+      ansible.builtin.cron:
+        name: "Run backup script hosts"
+        job: "cd /home/ubuntu/stealthcup && sudo /home/ubuntu/stealthcup/venv/bin/python3 /home/ubuntu/stealthcup/backup_hosts.py >> /home/ubuntu/stealthcup/logs/backup_hosts.log 2>&1"
+        minute: "29,59"
+        user: ubuntu
+
+    - name: Fix permissions for backups
+      ansible.builtin.cron:
+        name: "Fix permissions for backups"
+        job: "sudo chown ubuntu:ubuntu /home/ubuntu/backups/*"
+        minute: "*"
+        user: root
+
+    - name: Push to s3
+      ansible.builtin.cron:
+        name: "Push to s3"
+        job: 'H=$(date +\%H -d "1 hour ago"); python3 /home/ubuntu/stealthcup/backup_to_aws.py -f /home/ubuntu/backups/$H -n uploadbackup/$H >> /home/stealthcup/logs/backup_aws.log 2>&1'
+        minute: "10"
+        user: root
+
+    - name: Allow ubuntu user to run backup hosts without password
+      become: yes
+      lineinfile:
+        path: /etc/sudoers.d/ubuntu_iptables
+        create: yes
+        state: present
+        line: 'ubuntu ALL=(ALL) NOPASSWD: /home/ubuntu/stealthcup/venv/bin/python3 /home/ubuntu/stealthcup/backup_hosts.py'
+        validate: 'visudo -cf %s'
+
+    - name: Allow ubuntu user to run iptables without password
+      become: yes
+      lineinfile:
+        path: /etc/sudoers.d/ubuntu_iptables
+        create: yes
+        state: present
+        line: 'ubuntu ALL=(ALL) NOPASSWD: /sbin/iptables'
+        validate: 'visudo -cf %s'
+
+    - name: Ensure /usr/local/bin/ exists
+      file:
+        path: /usr/local/bin/
+        state: directory
+        mode: '0755'
+
+    # if returns 0, plumber exists and is domain admin
+    - name: Deploy check_domain_admin.sh script
+      copy:
+        dest: /usr/local/bin/check_domain_admin.sh
+        mode: '0755'
+        owner: root
+        group: root
+        content: |
+            #!/bin/bash
+
+            # Prevent wildcard expansion
+            set -f
+
+            # Check if argument is provided
+            if [[ -z "$1" ]]; then
+                echo "Usage: $0 <DC_IP>"
+                exit 1
+            fi
+
+            # Validate IP address format (basic check)
+            if [[ ! "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                echo "Error: Invalid IP address format."
+                exit 1
+            fi
+
+            readonly DC_HOST="$1"
+            readonly SSH_USER="administrator"
+
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa $SSH_USER@$DC_HOST 'if ((Get-ADGroupMember -Identity "Domain Admins" -Recursive | where {$_.samaccountname -eq "plumber"})) { exit 0 } else { exit 1 }'
+
+            # Return the exit status of the SSH command
+            exit $?
+
+    - name: Ensure /root/.ssh exists
+      file:
+        path: /root/.ssh
+        state: directory
+        mode: '0700'
+        owner: root
+        group: root
+
+    - name: Deploy SSH private key from local machine
+      copy:
+        src: ~/.ssh/stealthcup
+        dest: /root/.ssh/id_rsa
+        mode: '0600'
+        owner: root
+        group: root
+
+    - name: Allow low-privileged users to run script with sudo
+      lineinfile:
+        path: /etc/sudoers.d/check_domain_admin
+        create: yes
+        mode: '0440'
+        owner: root
+        group: root
+        line: "%sudo ALL=(ALL) NOPASSWD: /usr/local/bin/check_domain_admin.sh"
+        validate: "visudo -cf %s"
+
+    - name: Set high open file limit for root user
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: "{{ item }}"
+        create: yes
+      loop:
+        - "* soft nofile 65535"
+        - "* hard nofile 65535"
+        - "* soft nproc  65535"
+        - "* hard nproc  65535"
+
+    - name: Ensure systemd override directory exists
+      file:
+        path: /etc/systemd/system.conf.d
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Set system-wide file descriptor limit
+      copy:
+        dest: /etc/systemd/system.conf.d/99-bastion.conf
+        content: |
+          [Manager]
+          DefaultLimitNOFILE=65535
+          DefaultLimitNPROC=65535
+        mode: '0644'
+
+    - name: Configure SSHD for high concurrency
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^{{ item.key }}'
+        line: '{{ item.key }} {{ item.value }}'
+        state: present
+        backup: yes
+      loop:
+        - { key: 'MaxSessions', value: '200' }
+        - { key: 'MaxStartups', value: '100:30:200' }
+        - { key: 'ClientAliveInterval', value: '60' }
+        - { key: 'ClientAliveCountMax', value: '3' }
+        - { key: 'TCPKeepAlive', value: 'yes' }
+
+    - name: Ensure systemd manager re-exec (applies DefaultLimit* configs)
+      ansible.builtin.command: systemctl daemon-reexec
+
+    - name: Reload systemd and SSHD
+      systemd:
+        daemon_reload: true
+
+    - name: Restart SSH
+      service:
+        name: ssh
+        state: restarted
+
+ 

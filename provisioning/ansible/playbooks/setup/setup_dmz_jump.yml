@@ -1,0 +1,111 @@
+---
+- name: Setup DMZ JUMP
+  hosts: dmz:&jump
+  gather_facts: false
+
+  tasks:
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Debug the extracted team name
+      debug:
+        msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+    - name: Get environment ID
+      set_fact:
+        environment_id: "{{ lookup('vars', team_name ~ '_environment_id') }}"
+
+    - name: Debug environment ID
+      debug:
+        msg: "Environment ID for Team {{ team_name }} is {{ environment_id }}"
+
+    - name: Copy initial_setup_dmz_jump.ps1 to DMZ Jump
+      win_copy:
+        src: ./scripts/initial_setup_dmz_jump.ps1
+        dest: C:\Windows\Temp\initial_setup_dmz_jump.ps1
+
+    - name: Copy utils.psm1 to DMZ Jump
+      win_copy:
+        src: ./scripts/utils.psm1
+        dest: C:\Windows\Temp\utils.psm1
+
+    - name: Copy config.json to DMZ Jump
+      win_copy:
+        src: "./configs/config_{{ environment_id }}.json"
+        dest: C:\Windows\Temp\config.json
+
+    - name: Copy inventory.json to DMZ Jump
+      win_copy:
+        src: ./inventory_{{ team_name }}.json
+        dest: C:\Windows\Temp\inventory.json
+
+    - name: Run Setup Script (First Execution)
+      win_shell: powershell.exe -ExecutionPolicy Bypass \
+        -File C:\Windows\Temp\initial_setup_dmz_jump.ps1 \
+        C:\Windows\Temp\config.json \
+        C:\Windows\Temp\inventory.json
+      register: setup_output
+    - debug:
+        msg:
+          - "=== STDOUT ==="
+          - "{{ setup_output.stdout_lines | default('No stdout output') }}"
+          - "=== STDERR ==="
+          - "{{ setup_output.stderr_lines | default('No stderr output') }}"
+
+    - name: Reboot
+      win_reboot:
+
+    - name: Run Setup Script (Second Execution)
+      win_shell: powershell.exe -ExecutionPolicy Bypass \
+        -File C:\Windows\Temp\initial_setup_dmz_jump.ps1 \
+        C:\Windows\Temp\config.json \
+        C:\Windows\Temp\inventory.json
+      register: setup_output
+    - debug:
+        msg:
+          - "=== STDOUT ==="
+          - "{{ setup_output.stdout_lines | default('No stdout output') }}"
+          - "=== STDERR ==="
+          - "{{ setup_output.stderr_lines | default('No stderr output') }}"
+
+    - name: Reboot
+      win_reboot:
+
+    - name: Run Setup Script (Third Execution)
+      win_shell: powershell.exe -ExecutionPolicy Bypass \
+        -File C:\Windows\Temp\initial_setup_dmz_jump.ps1 \
+        C:\Windows\Temp\config.json \
+        C:\Windows\Temp\inventory.json
+      register: setup_output
+    - debug:
+        msg:
+          - "=== STDOUT ==="
+          - "{{ setup_output.stdout_lines | default('No stdout output') }}"
+          - "=== STDERR ==="
+          - "{{ setup_output.stderr_lines | default('No stderr output') }}"
+
+    - name: Remove initial_setup_dmz_jump.ps1 after execution
+      win_file:
+        path: C:\Windows\Temp\initial_setup_dmz_jump.ps1
+        state: absent
+
+    - name: Remove utils.psm1 after execution
+      win_file:
+        path: C:\Windows\Temp\utils.psm1
+        state: absent
+
+    - name: Remove config.json after execution
+      win_file:
+        path: C:\Windows\Temp\config.json
+        state: absent
+
+    - name: Remove inventory.json after execution
+      win_file:
+        path: C:\Windows\Temp\inventory.json
+        state: absent
+
+    - name: Remove StealthCupSetup.log after execution
+      win_file:
+        path: C:\Windows\Temp\StealthCupSetup.log
+        state: absent

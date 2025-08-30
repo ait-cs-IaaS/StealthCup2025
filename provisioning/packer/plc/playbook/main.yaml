@@ -1,0 +1,26 @@
+---
+- name: Upgrade system and install security fixes (Debian)
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update APT cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install updates
+      ansible.builtin.apt:
+        upgrade: dist
+        autoclean: yes
+        autoremove: yes
+  roles:
+    - role: auditd
+
+- hosts: all
+  become: true
+  roles:
+    - role: set-hostname
+      vars:
+        new_hostname: plc1
+    #tar -czf /home/ubuntu/axcf2152_v1.tar.gz -C /home/ubuntu plc
+    #scp ubuntu@10.0.0.73:/home/ubuntu/axcf2152_v1.tar.gz . 
+    - role: plc-ansible

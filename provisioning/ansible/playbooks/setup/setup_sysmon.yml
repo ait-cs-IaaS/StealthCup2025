@@ -1,0 +1,24 @@
+---
+- name: Setup Sysmon
+  # hosts: windows:!engineer_workstation
+  hosts: enterprise:dmz:&windows
+  gather_facts: false
+
+  tasks:
+    - name: Download Sysmon
+      win_get_url:
+        url: https://download.sysinternals.com/files/Sysmon.zip
+        dest: C:\Windows\Temp\Sysmon.zip
+
+    - name: Extract Sysmon
+      win_unzip:
+        src: C:\Windows\Temp\Sysmon.zip
+        dest: C:\Windows\Temp\Sysmon
+
+    - name: Copy configuration to the remote host
+      win_copy:
+        src: ./files/sysmonconfig.xml
+        dest: C:\Windows\Temp\
+
+    - name: Install Sysmon with config
+      win_command: C:\Windows\Temp\Sysmon\Sysmon64.exe -accepteula -i C:\Windows\Temp\sysmonconfig.xml

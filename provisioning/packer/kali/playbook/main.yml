@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: set-hostname
+      vars:
+        new_hostname: kali
+
+  tasks:
+    - import_tasks: "{{ playbook_dir }}/../../../ansible/playbooks/setup/setup_enterprise_kali_tasks.yml"

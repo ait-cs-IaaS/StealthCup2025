@@ -1,0 +1,12 @@
+---
+- name: Update and upgrade apt packages
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Install nginx
+  become: true
+  ansible.builtin.apt:
+    name: nginx
+    state: present

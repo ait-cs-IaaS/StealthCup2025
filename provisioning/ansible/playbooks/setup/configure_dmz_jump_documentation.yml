@@ -1,0 +1,75 @@
+---
+- name: Copy Documentation to DMZ Jump
+  hosts: dmz:&jump
+  gather_facts: false
+
+  vars:
+    seperator: '\' # https://stackoverflow.com/questions/58487845/ansible-jinja-split-on-backslash-fails
+
+  tasks:
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Debug the extracted team name
+      debug:
+        msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+    - name: Get environment ID
+      set_fact:
+        environment_id: "{{ lookup('vars', team_name ~ '_environment_id') }}"
+
+    - name: Debug environment ID
+      debug:
+        msg: "Environment ID for Team {{ team_name }} is {{ environment_id }}"
+
+    - name: Set config file
+      set_fact:
+        configuration_file: "./configs/config_{{ environment_id }}.json"
+
+    - name: Load configuration JSON from local machine
+      set_fact:
+        configuration_json: "{{ lookup('file', configuration_file) | from_json }}"
+
+    - name: Extract machine name from inventory_hostname
+      set_fact:
+        machine_name: "{{ inventory_hostname.split('_', 1)[1] if '_' in inventory_hostname else inventory_hostname }}"
+
+    - name: Get workstation configuration
+      set_fact:
+        workstation_configuration: >-
+          {{ configuration_json['WindowsHosts'] | selectattr('HostID', 'equalto', machine_name) | list | first | default({}) }}
+
+    - name: Get documentation username
+      set_fact:
+        documentation_user: "{{ workstation_configuration['DomainAccountUsernameDocumentation'] }}"
+      
+    - name: Get domain
+      set_fact:
+        domain: "{{ documentation_user.split(seperator)[0] }}"
+        domain_user_name: "{{ documentation_user.split(seperator)[-1] }}"
+
+    - name: Get domain configuration
+      set_fact:
+        domain_configuration: >-
+          {{ configuration_json['Domains'] | selectattr('Domain', 'equalto', domain) | list | first | default({}) }}
+
+    - name: Get domain user
+      set_fact:
+        domain_user_configuration: >-
+          {{ domain_configuration['DomainUsers'] | selectattr('Username', 'equalto', documentation_user) | list | first | default({}) }}
+
+    - name: Debug domain user
+      debug:
+        msg: "{{ domain_user_configuration }}"
+
+    - name: Logon as target user
+      win_shell: |
+        $Password = ConvertTo-SecureString "{{ domain_user_configuration['Password'] }}" -AsPlainText -Force
+        $Credential = New-Object System.Management.Automation.PSCredential("{{ domain_user_configuration['Username'] }}", $Password)
+        Start-Process C:\Windows\System32\WindowsPowershell\v1.0\powershell.exe -Wait -NoNewWindow -Credential $Credential -ArgumentList "-Command whoami"
+
+    - name: Copy Documentation to DMZ Jump
+      win_copy:
+        src: ./files/ChemTankDocumentation.pdf
+        dest: C:\Users\{{ domain_user_name }}\Desktop

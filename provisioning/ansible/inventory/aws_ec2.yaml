@@ -1,0 +1,22 @@
+---
+plugin: amazon.aws.aws_ec2
+aws_profile: default
+hostnames:
+  - tag:Name
+
+hostvars_prefix: ''
+hostvars_suffix: ''
+strict: False
+
+compose:
+  ansible_host: public_ip_address | default(private_ip_address)
+  ansible_user: >
+    (
+      'Administrator' if 'windows' in groups else 'ubuntu'
+    )
+
+keyed_groups:
+  - key: tags | dict2items | selectattr('key', '==', 'Groups') | map(attribute='value') | join(',') | split(',')
+    prefix: ""
+    separator: ""
+    default_value: "ungrouped"

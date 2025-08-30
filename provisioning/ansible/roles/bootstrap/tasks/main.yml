@@ -1,0 +1,12 @@
+---
+- name: Update and upgrade apt packages
+  become: true
+  ansible.builtin.apt:
+    upgrade: true
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Set a hostname
+  become: true
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"

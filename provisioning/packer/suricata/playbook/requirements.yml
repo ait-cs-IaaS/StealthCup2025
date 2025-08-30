@@ -1,0 +1,4 @@
+roles:
+  - src: https://github.com/ait-cs-IaaS/ansible-auditd.git
+    version: v1.1
+    name: auditd

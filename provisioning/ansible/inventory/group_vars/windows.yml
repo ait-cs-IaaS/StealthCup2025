@@ -1,0 +1,5 @@
+---
+ansible_user: Administrator
+ansible_connection: ssh
+ansible_shell_type: powershell  # Specify PowerShell as the shell type
+ansible_shell_executable: powershell.exe  # Ensure commands are executed using PowerShell

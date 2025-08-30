@@ -1,0 +1,25 @@
+---
+# - name: Configure DNS for all networks across all teams
+#   hosts: "enterprise:dmz:supervision:monitoring" # for all team hosts, add control in the future.
+#   gather_facts: no
+  #strategy: free
+
+#   tasks:
+#     - name: Set DNS for each team's networks
+#       include_tasks: set_per_team_dns_backup.yml.yml
+
+- name: Configure Enterprise DNS for enterprise:monitoring across all teams
+  hosts: "enterprise:monitoring" # for all team hosts, add control in the future.
+  gather_facts: no
+
+  tasks:
+    - name: Set DNS for each team's networks
+      include_tasks: set_per_team_dns_enterprise.yml
+
+- name: Configure OT DNS for dmz:supervision across all teams
+  hosts: "dmz:supervision" # for all team hosts, add control in the future.
+  gather_facts: no
+
+  tasks:
+    - name: Set DNS for each team's networks
+      include_tasks: set_per_team_dns_ot.yml

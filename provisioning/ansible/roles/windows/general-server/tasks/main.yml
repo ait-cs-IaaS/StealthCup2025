@@ -1,0 +1,5 @@
+- name: Stop Spooler
+  ansible.windows.win_service:
+    name: spooler
+    start_mode: disabled
+    state: stopped

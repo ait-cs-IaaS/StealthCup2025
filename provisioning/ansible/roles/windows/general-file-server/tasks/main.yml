@@ -1,0 +1,16 @@
+- name: Setup Honey Share and Passwords File
+  win_shell: |
+    New-Item C:\Shares\sensitive -ItemType Directory
+    New-SmbShare -ReadAccess "Authenticated Users" -Name "Sensitive$" -Path C:\Shares\sensitive
+    Set-Content C:\Shares\sensitive\passwords.txt -Value "User1:P@ssw0rd"
+- name: Setup Auditing for Honey Share
+  win_shell: |
+    $AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule('NT AUTHORITY\Authenticated Users','ReadData, Delete', 'ContainerInherit, ObjectInherit', 'none', 'Success')
+    $Acl = Get-Acl -Path C:\Shares\sensitive
+    $Acl.AddAuditRule($AuditRule)
+    Set-Acl -Path C:\Shares\sensitive -AclObject $Acl
+- name: Update Group Policies
+  win_shell: |
+    gpupdate.exe /force
+- name: Reboot File Server
+  win_reboot:

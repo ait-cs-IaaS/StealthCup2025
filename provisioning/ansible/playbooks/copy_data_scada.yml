@@ -1,0 +1,17 @@
+---
+#sudo find /opt/scadalts -type f -mmin -10 | xargs -I {} dirname {} | sort -u > /tmp/changed_dirs.txt
+#sudo tar -czvf /tmp/scadalts_backup.tar.gz -T /tmp/changed_dirs.txt --absolute-names
+#scp ubuntu@10.0.0.60:/tmp/scadalts_backup.tar.gz .
+
+- name: Backup and Deploy Only Changed Directories
+  hosts: scada
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Upload the backup archive
+      copy:
+        src: ./templates/scadalts_backup.tar.gz
+        dest: /tmp/scadalts_backup.tar.gz
+
+    - name: Extract the backup
+      command: tar -xzvf /tmp/scadalts_backup.tar.gz -C /

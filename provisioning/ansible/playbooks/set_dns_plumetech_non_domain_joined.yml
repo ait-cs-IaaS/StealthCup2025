@@ -1,0 +1,33 @@
+---
+- name: Set DNS for non domain joined machines
+  hosts: enterprise:&dc
+  gather_facts: false
+  vars:
+    domain: "plumetech.local"
+
+  tasks:
+  - name: Split hostname and extract the team part
+    set_fact:
+      team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+  - name: Print team name
+    debug:
+      msg: "Extracted team name: {{ team_name }}"
+
+  - name: Get Wazuh IP
+    set_fact:
+      wazuh_ip: "{{ hostvars[team_name ~ '_monitoring_wazuh']['private_ip_address'] }}"
+
+  - name: Print Wazuh IP
+    debug:
+      msg: "Wazuh IP: {{ wazuh_ip }}"
+
+  - name: Add DNS records
+    community.windows.win_dns_record:
+      name: "{{ item.name }}"
+      type: "A"
+      value: "{{ item.ip }}"
+      zone: "{{ domain }}"
+      state: present
+    loop:
+      - { name: "WAZUH", ip: "{{ wazuh_ip }}" }
