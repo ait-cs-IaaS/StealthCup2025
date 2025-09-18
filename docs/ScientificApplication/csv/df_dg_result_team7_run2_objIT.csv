@@ -1,0 +1,42 @@
+SEVERITY,ID,OCCURRED_AT,TYPE,DETECTION_QUADS,SUMMARY,CONTENT,DETECTION,ASSET_IDS,SOURCE_HOST_NAME,DESTINATION_HOST_NAME,SOURCE_IP,DESTINATION_IP,OTHER_IP,SOURCE,PACKET_CAPTURE_STATE
+Low,36734,2025-03-28T14:54:56Z,Communication,Configuration,Detected 15 NewX509Certificate between 2025-03-28T14:45:57.707Z and 2025-03-28T14:54:56.456Z,"Sample NewX509Certificate values include:
+  server: 20.97.190.220, 20.12.23.50, 142.250.184.195, 4.154.131.224, 3.160.150.90, 20.163.45.188, 40.69.70.68, 13.74.186.119, 20.189.173.9, 13.74.142.6;
+  subject: , C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com, C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=fe2cr.update.microsoft.com, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-16T00:00:00Z, 2025-03-04T20:39:31Z, 2024-11-07T19:28:51Z;
+  server_asset_id: 4111, 4110, 2808, 2615, 4107, 4106, 4104, 4114, 4108, 4113;
+  dst__port: ('',);
+  dns: ;
+  uuid: b91bb837-987b-43a2-8b52-a156a058231f, a2f171bb-4453-40ca-abfd-fa839f5a05e9, 91fa61c2-2911-4be6-9a1a-4f1af98386d2, 6497950e-f3b5-46b0-b687-2b5743e15274, e13fb67a-c428-41de-a8f0-3bf3f2548ed5, 0003e30e-6ef5-4c73-b25e-c4c219cd855f, 4246147b-f108-4d54-ae6c-fd439f053950, 55e95481-c276-4f3f-b6eb-03c00ffc9f46, 00e4e171-600d-4dd8-b07e-3bf62480e017, 68711d39-e415-476a-ac5a-d39f6a3ad1ad;
+  issuer: , C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Update Secure Server CA 2.1, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1680, 1905, 50, 1841, 46, 1916, 1772, 1746, 1801, 1754;
+  src__mac: ;
+  not_after: , 2025-11-07T19:28:51Z, 2026-03-04T20:39:31Z, 2025-09-16T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.1.12, 10.0.1.29, 10.0.6.29, 10.0.7.29, 10.0.4.30, 10.0.8.30, 10.0.7.12, 10.0.6.11, 10.0.7.11, 10.0.10.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1754,1841,1680,46,1772,1746,1916,1801,1905,50,4107,4111,4110,2808,2615,4106,4104,4114,4108,4113",,,"13.32.99.21,20.163.45.188,40.69.70.68,20.190.159.68,20.3.187.198,184.25.50.128,3.160.150.90,20.189.173.9,20.97.190.220,4.154.131.224","10.0.6.11,10.0.7.12,10.0.7.29,10.0.1.12,10.0.7.11,10.0.6.29,10.0.8.30,10.0.10.29,10.0.4.30,10.0.2.29",,"b91bb837-987b-43a2-8b52-a156a058231f, a2f171bb-4453-40ca-abfd-fa839f5a05e9, 91fa61c2-2911-4be6-9a1a-4f1af98386d2, 6497950e-f3b5-46b0-b687-2b5743e15274, e13fb67a-c428-41de-a8f0-3bf3f2548ed5, 0003e30e-6ef5-4c73-b25e-c4c219cd855f, 4246147b-f108-4d54-ae6c-fd439f053950, 55e95481-c276-4f3f-b6eb-03c00ffc9f46, 00e4e171-600d-4dd8-b07e-3bf62480e017, 68711d39-e415-476a-ac5a-d39f6a3ad1ad",
+Low,36740,2025-03-28T14:54:56Z,Asset,Configuration,Detected 19 NewUserAgent between 2025-03-28T14:45:14.327Z and 2025-03-28T14:54:56.478Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 03d27bee-7c90-497b-956e-2ccfdf2d3776, 0a059ae3-60e4-41b2-a23e-c5281d9c7bae, 192f2110-36cc-456d-93ad-7d4a96502513, 024e851a-4fa8-49b0-9d12-c0ed966bb462, 0008335e-1627-45d3-9754-28637665152d, 07317a54-fedf-4e94-b299-8f22abc87ef4, 0034a611-d016-44e8-96ae-172c793f333f, 0484cd27-ed2f-4fdf-bf60-90e9c90932aa, c2e29799-470f-42ae-b022-2a6420d8f07f, 1aaac9d8-9dd3-49e5-b8cc-2b2e22c6c6e1;
+  src__mac: ;
+  src_ip: 10.0.1.12, 10.0.1.29, 10.0.6.29, 10.0.7.29, 10.0.7.12, 10.0.6.12, 10.0.2.11, 10.0.1.11, 10.0.2.29;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1680, 45, 48, 1841, 50, 46, 1746, 1810, 44;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Microsoft-Delivery-Optimization/10.0, Microsoft BITS/7.8, Microsoft Edge Update/1.3.195.45;winhttp, Microsoft-CryptoAPI/10.0, Windows-Update-Agent/10.0.10011.16384 Client-Protocol/2.51;
+  src__ip: ;",User Agent First Seen,"1841,1810,1680,46,44,1746,45,48,50",,,,,"10.0.7.12,10.0.6.12,10.0.7.29,10.0.1.12,10.0.1.29,10.0.6.29,10.0.1.11,10.0.2.11,10.0.2.29","03d27bee-7c90-497b-956e-2ccfdf2d3776, 0a059ae3-60e4-41b2-a23e-c5281d9c7bae, 192f2110-36cc-456d-93ad-7d4a96502513, 024e851a-4fa8-49b0-9d12-c0ed966bb462, 0008335e-1627-45d3-9754-28637665152d, 07317a54-fedf-4e94-b299-8f22abc87ef4, 0034a611-d016-44e8-96ae-172c793f333f, 0484cd27-ed2f-4fdf-bf60-90e9c90932aa, c2e29799-470f-42ae-b022-2a6420d8f07f, 1aaac9d8-9dd3-49e5-b8cc-2b2e22c6c6e1",
+Low,37482,2025-03-28T15:04:31Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.7.30.,SSH Authentication Failure,"2896,1914",,,10.0.242.127,10.0.7.30,,bcdd3eb0-d4f3-4627-a5de-8f8138c93ffe,
+Low,37495,2025-03-28T15:10:56Z,Communication,Indicator,Failed HTTP Logon,"Asset 1772 (10.0.7.11) returned an HTTP response code of 401 'Unauthorized' to asset 1914 (10.0.7.30), which represents a failed logon attempt via HTTP by asset 1914. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1772,1914",,,10.0.7.11,10.0.7.30,,b5b4c10d-01b3-4df9-80e8-fbc955bf5078,
+Low,37614,2025-03-28T15:08:29Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1914 (10.0.7.30) to then pivot to asset 1772 (10.0.7.11) via RDP.,Interactive Session Pivots,"2896,1772",,,10.0.242.127,10.0.7.11,,,
+Medium,37814,2025-03-28T15:18:06Z,Indicator,Configuration,HTTP POST Cleartext Auth Success,HTTP POST Cleartext Auth Success,HTTP Cleartext Authentication,"2896,1839",,,10.0.7.60,10.0.242.127,,Network Traffic,
+Low,37815,2025-03-28T15:18:06Z,Indicator,Configuration,HTTP POST Cleartext Auth Attempt,HTTP POST Cleartext Auth Attempt,HTTP Cleartext Authentication,"2896,1839",,,10.0.242.127,10.0.7.60,,Network Traffic,
+Low,39371,2025-03-28T14:57:33Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.7.30.,SSH Authentication Failure,"2896,1914",,,10.0.242.127,10.0.7.30,,5dbd7a7a-2249-4885-b694-023f46be8363,
+Low,39373,2025-03-28T14:56:46Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.7.30.,SSH Authentication Failure,"2896,1914",,,10.0.242.127,10.0.7.30,,ff516d57-c989-417b-83e4-30eec76a3609,
+Low,39374,2025-03-28T14:56:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.7.30.,SSH Authentication Failure,"2896,1914",,,10.0.242.127,10.0.7.30,,a48aaa45-aa9e-41eb-a258-be440f1c312a,
+Low,39376,2025-03-28T14:55:58Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.7.30.,SSH Authentication Failure,"2896,1914",,,10.0.242.127,10.0.7.30,,99dec440-9ea6-4dd0-a804-84694f3f72d0,
+Low,39377,2025-03-28T14:55:26Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.7.30.,SSH Authentication Failure,"2896,1914",,,10.0.242.127,10.0.7.30,,3b837262-9535-4459-80ec-8e22b138f835,
+Low,39388,2025-03-28T14:57:38Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.7.30.,SSH Authentication Failure,"2896,1914",,,10.0.242.127,10.0.7.30,,529efbb0-e126-4293-8772-857080816413,
