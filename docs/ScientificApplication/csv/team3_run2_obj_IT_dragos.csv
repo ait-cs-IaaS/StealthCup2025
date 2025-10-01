@@ -1,0 +1,20 @@
+SEVERITY,ID,OCCURRED_AT,TYPE,DETECTION_QUADS,SUMMARY,CONTENT,DETECTION,ASSET_IDS,SOURCE_HOST_NAME,DESTINATION_HOST_NAME,SOURCE_IP,DESTINATION_IP,OTHER_IP,SOURCE,PACKET_CAPTURE_STATE
+Low,35794,2025-03-28T13:29:07Z,Communication,Configuration,Detected 58 NewModbusTCPCommunication between 2025-03-28T13:23:34.648Z and 2025-03-28T13:29:07.987Z,"Sample NewModbusTCPCommunication values include:
+  dst__port: ('',);
+  ip_src: 10.0.6.60, 10.0.8.60, 10.0.4.60, 10.0.4.74, 10.0.3.74, 10.0.7.60, 10.0.12.74, 10.0.2.74, 10.0.7.74, 10.0.12.60;
+  dst_asset_id: 569, 1940, 1662, 1945, 1881, 1827, 1870, 139, 1839, 1866;
+  modbus_unit_id: 1;
+  uuid: f99b7166-074c-49b3-b9cc-b1307d4479f0, f1014924-345e-423c-b279-7dd84abece49, 50102667-9195-4552-85a9-e49446a7c093, 387f6ac9-c501-48c8-a074-77d9cbdd9ad5, 51de78bb-b55e-4827-9826-709f8402dd57, 293ad670-a386-4459-a920-e393618c79be, 67df2f30-34ee-48ec-96dc-4115b369ca49, d71e7f37-9b68-47d4-b039-5215f400ae1c, 3ff1f76d-b482-419f-941f-a82e7627e03b, 877d9b3b-d656-46fa-b295-93c8b5455a56;
+  ip_dst: 10.0.6.60, 10.0.8.60, 10.0.4.60, 10.0.4.74, 10.0.3.74, 10.0.7.60, 10.0.12.74, 10.0.2.74, 10.0.7.74, 10.0.12.60;
+  src__mac: ;
+  dst__mac: ;
+  modbus_function_code_description: Read Input Registers, Read Holding Registers, Read Coils, Execute Operation, Read Discrete Inputs, Write Single Coil;
+  protocol: ;
+  modbus_exception_code_description: ;
+  src_asset_id: 569, 1940, 1662, 1945, 1827, 1870, 1881, 1926, 1839, 1866;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",ModbusTCP New Function Code,"1839,1662,1866,1881,569,1940,1945,1827,1870,1926,139",,,"10.0.7.60,10.0.12.60,10.0.12.74,10.0.4.60,10.0.2.74,10.0.3.60,10.0.8.74,10.0.4.74,10.0.8.60,10.0.6.60","10.0.7.60,10.0.12.60,10.0.12.74,10.0.4.60,10.0.2.74,10.0.3.60,10.0.8.74,10.0.4.74,10.0.8.60,10.0.2.60",,"f99b7166-074c-49b3-b9cc-b1307d4479f0, f1014924-345e-423c-b279-7dd84abece49, 50102667-9195-4552-85a9-e49446a7c093, 387f6ac9-c501-48c8-a074-77d9cbdd9ad5, 51de78bb-b55e-4827-9826-709f8402dd57, 293ad670-a386-4459-a920-e393618c79be, 67df2f30-34ee-48ec-96dc-4115b369ca49, d71e7f37-9b68-47d4-b039-5215f400ae1c, 3ff1f76d-b482-419f-941f-a82e7627e03b, 877d9b3b-d656-46fa-b295-93c8b5455a56",
+Low,38739,2025-03-28T13:34:19Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,b5460687-01e6-4722-ab69-e6de29d6f9a7,
+Low,38945,2025-03-28T13:21:34Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,05b8ea0d-0939-4a57-b965-09dff9129901,
+Low,39453,2025-03-28T13:21:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,979d540f-b5cf-46a9-973e-6622002328fe,
