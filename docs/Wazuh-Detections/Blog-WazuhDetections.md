@@ -685,9 +685,3 @@ In a produciton environment with a SOC in charge, most of these alerts may be wa
   </rule>
 </group>
 ```
-
-# TODO Files
-
-- sysmonconfig.xml
-- LDAPQUeryParser stuff
-- local_rules.xml
