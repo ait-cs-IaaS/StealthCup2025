@@ -1,0 +1,2 @@
+"timestamp","Host","severity_name","severity","description","cmdline","files_written","entities"
+"2025-03-28T16:31:54.386Z",,"Informational","10","A user executed a suspicious LDAP search enumerating AD accounts",,"",

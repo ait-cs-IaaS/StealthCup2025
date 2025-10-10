@@ -1,0 +1,94 @@
+SEVERITY,ID,OCCURRED_AT,TYPE,DETECTION_QUADS,SUMMARY,CONTENT,DETECTION,ASSET_IDS,SOURCE_HOST_NAME,DESTINATION_HOST_NAME,SOURCE_IP,DESTINATION_IP,OTHER_IP,SOURCE,PACKET_CAPTURE_STATE
+Low,35794,2025-03-28T13:29:07Z,Communication,Configuration,Detected 58 NewModbusTCPCommunication between 2025-03-28T13:23:34.648Z and 2025-03-28T13:29:07.987Z,"Sample NewModbusTCPCommunication values include:
+  dst__port: ('',);
+  ip_src: 10.0.6.60, 10.0.8.60, 10.0.4.60, 10.0.4.74, 10.0.3.74, 10.0.7.60, 10.0.12.74, 10.0.2.74, 10.0.7.74, 10.0.12.60;
+  dst_asset_id: 569, 1940, 1662, 1945, 1881, 1827, 1870, 139, 1839, 1866;
+  modbus_unit_id: 1;
+  uuid: f99b7166-074c-49b3-b9cc-b1307d4479f0, f1014924-345e-423c-b279-7dd84abece49, 50102667-9195-4552-85a9-e49446a7c093, 387f6ac9-c501-48c8-a074-77d9cbdd9ad5, 51de78bb-b55e-4827-9826-709f8402dd57, 293ad670-a386-4459-a920-e393618c79be, 67df2f30-34ee-48ec-96dc-4115b369ca49, d71e7f37-9b68-47d4-b039-5215f400ae1c, 3ff1f76d-b482-419f-941f-a82e7627e03b, 877d9b3b-d656-46fa-b295-93c8b5455a56;
+  ip_dst: 10.0.6.60, 10.0.8.60, 10.0.4.60, 10.0.4.74, 10.0.3.74, 10.0.7.60, 10.0.12.74, 10.0.2.74, 10.0.7.74, 10.0.12.60;
+  src__mac: ;
+  dst__mac: ;
+  modbus_function_code_description: Read Input Registers, Read Holding Registers, Read Coils, Execute Operation, Read Discrete Inputs, Write Single Coil;
+  protocol: ;
+  modbus_exception_code_description: ;
+  src_asset_id: 569, 1940, 1662, 1945, 1827, 1870, 1881, 1926, 1839, 1866;
+  dst__ip: ;
+  src__port: ('',);
+  src__ip: ;",ModbusTCP New Function Code,"1839,1662,1866,1881,569,1940,1945,1827,1870,1926,139",,,"10.0.7.60,10.0.12.60,10.0.12.74,10.0.4.60,10.0.2.74,10.0.3.60,10.0.8.74,10.0.4.74,10.0.8.60,10.0.6.60","10.0.7.60,10.0.12.60,10.0.12.74,10.0.4.60,10.0.2.74,10.0.3.60,10.0.8.74,10.0.4.74,10.0.8.60,10.0.2.60",,"f99b7166-074c-49b3-b9cc-b1307d4479f0, f1014924-345e-423c-b279-7dd84abece49, 50102667-9195-4552-85a9-e49446a7c093, 387f6ac9-c501-48c8-a074-77d9cbdd9ad5, 51de78bb-b55e-4827-9826-709f8402dd57, 293ad670-a386-4459-a920-e393618c79be, 67df2f30-34ee-48ec-96dc-4115b369ca49, d71e7f37-9b68-47d4-b039-5215f400ae1c, 3ff1f76d-b482-419f-941f-a82e7627e03b, 877d9b3b-d656-46fa-b295-93c8b5455a56",
+Low,36293,2025-03-28T14:24:35Z,Communication,Configuration,Detected 11 RDP New Comms between 2025-03-28T14:14:40.852Z and 2025-03-28T14:24:35.303Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.10.43, 10.0.12.11, 10.0.6.29, 10.0.5.43, 10.0.12.12, 10.0.7.11, 10.0.10.44, 10.0.3.44;
+  dst_asset_id: 1898, 1896, 1910, 1807, 2896, 1801, 1686, 1693, 1914;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.10.43, 10.0.242.127, 10.0.7.30, 10.0.5.44, 10.0.6.30, 10.0.10.29, 10.0.3.30, 10.0.10.44, 10.0.12.30;
+  rdp_selected_protocol: , hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1868, 1772, 1746, 1807, 1707, 1695, 1686, 1742;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , PLUMETECH, frank, fernando, martin, bob, dragon;
+  src__ip: ;",RDP New Comms Pattern,"1807,1686,2896,1896,1707,1801,1695,1693,1910,1868,1914,1746,1898,1772,1742",,,"10.0.10.44,10.0.10.43,10.0.3.44,10.0.5.43,10.0.12.12,10.0.6.29,10.0.7.11,10.0.12.11","10.0.10.44,10.0.10.43,10.0.242.127,10.0.3.30,10.0.10.29,10.0.5.44,10.0.12.30,10.0.7.30,10.0.6.30",,,
+Low,36295,2025-03-28T14:21:16Z,Communication,Configuration,RDP New Cookie,New RDP cookie fernando from host 10.0.3.44 (asset 1707) to host 10.0.3.30 (asset 1896).,RDP New Cookie,"1896,1707",,,10.0.3.44,10.0.3.30,,,
+Low,36413,2025-03-28T14:18:38Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1896 (10.0.3.30) to then pivot to asset 1707 (10.0.3.44) via RDP.,Interactive Session Pivots,"2896,1707",,,10.0.242.127,10.0.3.44,,,
+Low,37419,2025-03-28T15:09:17Z,Communication,Configuration,RDP New Cookie,New RDP cookie Bobby from host 10.0.3.44 (asset 1707) to host 10.0.3.30 (asset 1896).,RDP New Cookie,"1896,1707",,,10.0.3.44,10.0.3.30,,,
+Low,37462,2025-03-28T15:09:17Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.3.44 (1707) to host 10.0.3.30 (1896). If unencrypted, may also include the RDP cookie (Bobby), selected protocol (), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1896,1707",,,10.0.3.44,10.0.3.30,,,
+Low,37471,2025-03-28T15:11:41Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"1896,2896",,,10.0.242.127,10.0.3.30,,9fb9d7d4-617d-4980-94b6-31ee1f0f751a,
+Low,37486,2025-03-28T15:01:52Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"1896,2896",,,10.0.242.127,10.0.3.30,,fcb5f38e-1eeb-44ea-bf0a-f2c5900e34c4,
+Low,37491,2025-03-28T15:01:30Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"1896,2896",,,10.0.242.127,10.0.3.30,,743299a6-e14b-4a05-a969-555b775660a4,
+Low,37623,2025-03-28T14:47:59Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1896 (10.0.3.30) to then pivot to asset 1707 (10.0.3.44) via RDP.,Interactive Session Pivots,"2896,1707",,,10.0.242.127,10.0.3.44,,,
+Low,37812,2025-03-28T15:17:48Z,Indicator,Configuration,HTTP POST Cleartext Auth Attempt,HTTP POST Cleartext Auth Attempt,HTTP Cleartext Authentication,"2896,1940",,,10.0.242.127,10.0.3.60,,Network Traffic,
+Medium,37813,2025-03-28T15:17:48Z,Indicator,Configuration,HTTP POST Cleartext Auth Success,HTTP POST Cleartext Auth Success,HTTP Cleartext Authentication,"2896,1940",,,10.0.3.60,10.0.242.127,,Network Traffic,
+Low,38305,2025-03-28T15:17:10Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1896 (10.0.3.30) to then pivot to asset 1707 (10.0.3.44) via RDP.,Interactive Session Pivots,"2896,1707",,,10.0.242.127,10.0.3.44,,,
+Low,38671,2025-03-28T15:23:56Z,Communication,Indicator,Failed HTTP Logon,"Asset 1798 (10.0.3.45) returned an HTTP response code of 401 'Unauthorized' to asset 1707 (10.0.3.44), which represents a failed logon attempt via HTTP by asset 1707. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1798,1707",,,10.0.3.45,10.0.3.44,,533b4037-c0c3-41a4-b45a-c1c5445e441b,
+Low,38673,2025-03-28T15:22:24Z,Asset,Configuration,Detected 8 NewUserAgent between 2025-03-28T15:17:02.526Z and 2025-03-28T15:22:24.508Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 62842248-30ce-49c9-b09f-20ca453abd95, 67c7c5db-358f-497b-97b8-f5ddc2813021, 3c137687-70b2-4b72-a573-52befca93680, 006ce32d-65d8-4057-80db-bb712cbd987d, aecd34a2-ea09-4bf0-989c-bd4d1df2a8db, 247493c2-2334-41bc-a9af-c1eb460b9aa2, 009f5510-4b2c-4d2b-bda6-c91662abd9e9, 04a5bb52-3ced-4920-b016-f6ee5cc1a09a;
+  src__mac: ;
+  src_ip: 10.0.4.11, 10.0.1.30, 10.0.4.12, 10.0.4.29, 10.0.3.44;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1829, 1832, 1707, 1763, 151;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Microsoft-Delivery-Optimization/10.0, curl/8.5.0, Microsoft Edge Update/1.3.195.45;winhttp, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0, Microsoft-CryptoAPI/10.0, Windows-Update-Agent/10.0.10011.16384 Client-Protocol/2.51;
+  src__ip: ;",User Agent First Seen,"1763,1832,1829,1707,151",,,,,"10.0.4.29,10.0.4.11,10.0.4.12,10.0.3.44,10.0.1.30","62842248-30ce-49c9-b09f-20ca453abd95, 67c7c5db-358f-497b-97b8-f5ddc2813021, 3c137687-70b2-4b72-a573-52befca93680, 006ce32d-65d8-4057-80db-bb712cbd987d, aecd34a2-ea09-4bf0-989c-bd4d1df2a8db, 247493c2-2334-41bc-a9af-c1eb460b9aa2, 009f5510-4b2c-4d2b-bda6-c91662abd9e9, 04a5bb52-3ced-4920-b016-f6ee5cc1a09a",
+Low,38676,2025-03-28T15:14:02Z,Communication,Configuration,New SMB Communication detected,"New SMB_FileInfo (version: ['SMB1', 'SMB2']) traffic between Asset:1709 and Asset:1896",New SMB Communication Detection,"1709,1896",,,10.0.3.29,10.0.3.30,,89f0377a-553c-4b84-a247-cf7fb45480cc,
+Low,38679,2025-03-28T15:28:21Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,1194d20a-882a-4a22-8256-4ad50a2bf24a,
+Low,38739,2025-03-28T13:34:19Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,b5460687-01e6-4722-ab69-e6de29d6f9a7,
+Low,38893,2025-03-28T15:43:03Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.12.,SSH Authentication Failure,"2896,1791",,,10.0.242.127,10.0.3.12,,0988b142-5154-4067-b845-5564e9299051,
+Low,38894,2025-03-28T15:43:11Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.59.,SSH Authentication Failure,"2896,1795",,,10.0.242.127,10.0.3.59,,d4c58f03-4027-495d-b438-1a6b78356ed2,
+Low,38895,2025-03-28T15:43:16Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.43.,SSH Authentication Failure,"1710,2896",,,10.0.242.127,10.0.3.43,,ad999b3f-4823-45b3-99f4-fc4b9ed2f803,
+Low,38897,2025-03-28T15:43:02Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.74.,SSH Authentication Failure,"2896,1847",,,10.0.242.127,10.0.3.74,,2bda5a33-935a-4ee0-b597-dea67b5b2027,
+Low,38899,2025-03-28T15:42:58Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.44.,SSH Authentication Failure,"2896,1707",,,10.0.242.127,10.0.3.44,,94352fb9-a210-4032-9f9d-021fc8100452,
+Low,38901,2025-03-28T15:42:58Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.11.,SSH Authentication Failure,"1713,2896",,,10.0.242.127,10.0.3.11,,1134495c-8ac2-48bc-b0a7-d04bada57440,
+Low,38929,2025-03-28T14:39:06Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,0ae34b75-6ae4-4c1a-a637-f36e6419dfa7,
+Low,38930,2025-03-28T14:36:33Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,f7a177e7-08fb-44fd-bc14-bbd0332474ed,
+Low,38945,2025-03-28T13:21:34Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,05b8ea0d-0939-4a57-b965-09dff9129901,
+Medium,39138,2025-03-28T15:48:26Z,Indicator,Threat Behavior,HTTP Download Executable Smaller than 1 MB,HTTP Download Executable Smaller than 1 MB,HTTP Executable Download Signatures,"3923,1709",,,184.25.50.170,10.0.3.29,,Network Traffic,
+Low,39343,2025-03-28T14:36:05Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,a4358cb5-efa5-4ddc-b15f-b1302d0935cf,
+Low,39344,2025-03-28T14:35:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,a7268556-7567-429f-9d44-fa0a757c97f5,
+Low,39345,2025-03-28T14:35:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,56a6ef72-be00-4df0-8e5d-722ceb85a846,
+Low,39346,2025-03-28T14:35:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,558f02cf-65b7-48f7-b26c-8318330c3697,
+Low,39347,2025-03-28T14:35:01Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,e9c67f97-2403-4606-9273-13cdc37d7c91,
+Low,39348,2025-03-28T14:35:10Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,aef9aba9-2ba9-4135-bd2a-4cc993c7fbee,
+Low,39453,2025-03-28T13:21:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,979d540f-b5cf-46a9-973e-6622002328fe,
+Low,39823,2025-03-28T15:49:05Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.43.,SSH Authentication Failure,"2896,1710",,,10.0.242.127,10.0.3.43,,ad237a77-635d-4747-94db-e7c5b309343c,
+Low,39825,2025-03-28T15:48:55Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.59.,SSH Authentication Failure,"2896,1795",,,10.0.242.127,10.0.3.59,,38be5173-4c93-496f-9912-7d4e5e5a9acd,
+Low,39830,2025-03-28T15:48:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.12.,SSH Authentication Failure,"2896,1791",,,10.0.242.127,10.0.3.12,,75f69c59-44ac-4562-b1a2-4e31a5bb9681,
+Low,39832,2025-03-28T15:48:45Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.11.,SSH Authentication Failure,"2896,1713",,,10.0.242.127,10.0.3.11,,11064e0d-cd99-4987-9da9-299a560e043a,
+Low,39834,2025-03-28T15:47:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.60.,SSH Authentication Failure,"2896,1940",,,10.0.242.127,10.0.3.60,,b14a8581-0846-4c14-aa74-0ba0bfadd39d,
+Low,39835,2025-03-28T15:47:49Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.45.,SSH Authentication Failure,"2896,1798",,,10.0.242.127,10.0.3.45,,0b2f2f9a-5e67-41e4-900d-8286c9c1b398,
+Low,39837,2025-03-28T15:47:47Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.29.,SSH Authentication Failure,"2896,1709",,,10.0.242.127,10.0.3.29,,e0e3b923-cf49-41e8-8193-63911cec3f4a,
+Low,39838,2025-03-28T15:47:29Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.11.,SSH Authentication Failure,"2896,1713",,,10.0.242.127,10.0.3.11,,c1c26376-6265-465c-b3ca-ccac405f7554,
+Low,39841,2025-03-28T15:46:32Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.43.,SSH Authentication Failure,"2896,1710",,,10.0.242.127,10.0.3.43,,9b73600a-4d42-4f26-94c1-2548e0292680,
+Low,39844,2025-03-28T15:46:12Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.59.,SSH Authentication Failure,"2896,1795",,,10.0.242.127,10.0.3.59,,2c2bdcdd-ab57-419c-8063-a2ef0396ee14,
+Low,39845,2025-03-28T15:45:39Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.11.,SSH Authentication Failure,"2896,1713",,,10.0.242.127,10.0.3.11,,9e2e96b5-f102-4efa-aaee-473e21bade12,
+Low,39849,2025-03-28T15:43:57Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,a02a25cd-e8f2-4b23-8ff0-6132b8c7637b,
+Low,39851,2025-03-28T15:44:13Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.45.,SSH Authentication Failure,"2896,1798",,,10.0.242.127,10.0.3.45,,be30e90f-f0cb-40bc-8512-453a2e7e9381,
+Low,39852,2025-03-28T15:44:06Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.60.,SSH Authentication Failure,"2896,1940",,,10.0.242.127,10.0.3.60,,e85ac880-a9b9-44bd-b79d-20a17f4fa37a,
+Low,41065,2025-03-28T15:02:43Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,d2b3c1be-0d7e-4087-944d-68a2d2d606a8,
+Low,41162,2025-03-28T15:49:48Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1713 (10.0.3.11) to then pivot to asset 1896 (10.0.3.30) via RDP.,Interactive Session Pivots,"2896,1896",,,10.0.242.127,10.0.3.30,,,
+Low,41715,2025-03-28T15:05:35Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.3.30.,SSH Authentication Failure,"2896,1896",,,10.0.242.127,10.0.3.30,,2761448c-d292-47ef-be7a-37ad8e70db77,

@@ -1,0 +1,131 @@
+SEVERITY,ID,OCCURRED_AT,TYPE,DETECTION_QUADS,SUMMARY,CONTENT,DETECTION,ASSET_IDS,SOURCE_HOST_NAME,DESTINATION_HOST_NAME,SOURCE_IP,DESTINATION_IP,OTHER_IP,SOURCE,PACKET_CAPTURE_STATE
+Low,36728,2025-03-28T14:56:44Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.6.43 (1749) to host 10.0.6.11 (1754). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1749,1754",,,10.0.6.43,10.0.6.11,,,
+Low,36734,2025-03-28T14:54:56Z,Communication,Configuration,Detected 15 NewX509Certificate between 2025-03-28T14:45:57.707Z and 2025-03-28T14:54:56.456Z,"Sample NewX509Certificate values include:
+  server: 20.97.190.220, 20.12.23.50, 142.250.184.195, 4.154.131.224, 3.160.150.90, 20.163.45.188, 40.69.70.68, 13.74.186.119, 20.189.173.9, 13.74.142.6;
+  subject: , C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com, C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=fe2cr.update.microsoft.com, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=login.live.com;
+  not_before: , 2025-03-16T00:00:00Z, 2025-03-04T20:39:31Z, 2024-11-07T19:28:51Z;
+  server_asset_id: 4111, 4110, 2808, 2615, 4107, 4106, 4104, 4114, 4108, 4113;
+  dst__port: ('',);
+  dns: ;
+  uuid: b91bb837-987b-43a2-8b52-a156a058231f, a2f171bb-4453-40ca-abfd-fa839f5a05e9, 91fa61c2-2911-4be6-9a1a-4f1af98386d2, 6497950e-f3b5-46b0-b687-2b5743e15274, e13fb67a-c428-41de-a8f0-3bf3f2548ed5, 0003e30e-6ef5-4c73-b25e-c4c219cd855f, 4246147b-f108-4d54-ae6c-fd439f053950, 55e95481-c276-4f3f-b6eb-03c00ffc9f46, 00e4e171-600d-4dd8-b07e-3bf62480e017, 68711d39-e415-476a-ac5a-d39f6a3ad1ad;
+  issuer: , C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Update Secure Server CA 2.1, C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA;
+  client_asset_id: 1680, 1905, 50, 1841, 46, 1916, 1772, 1746, 1801, 1754;
+  src__mac: ;
+  not_after: , 2025-11-07T19:28:51Z, 2026-03-04T20:39:31Z, 2025-09-16T23:59:59Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.1.12, 10.0.1.29, 10.0.6.29, 10.0.7.29, 10.0.4.30, 10.0.8.30, 10.0.7.12, 10.0.6.11, 10.0.7.11, 10.0.10.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1754,1841,1680,46,1772,1746,1916,1801,1905,50,4107,4111,4110,2808,2615,4106,4104,4114,4108,4113",,,"13.32.99.21,20.163.45.188,40.69.70.68,20.190.159.68,20.3.187.198,184.25.50.128,3.160.150.90,20.189.173.9,20.97.190.220,4.154.131.224","10.0.6.11,10.0.7.12,10.0.7.29,10.0.1.12,10.0.7.11,10.0.6.29,10.0.8.30,10.0.10.29,10.0.4.30,10.0.2.29",,"b91bb837-987b-43a2-8b52-a156a058231f, a2f171bb-4453-40ca-abfd-fa839f5a05e9, 91fa61c2-2911-4be6-9a1a-4f1af98386d2, 6497950e-f3b5-46b0-b687-2b5743e15274, e13fb67a-c428-41de-a8f0-3bf3f2548ed5, 0003e30e-6ef5-4c73-b25e-c4c219cd855f, 4246147b-f108-4d54-ae6c-fd439f053950, 55e95481-c276-4f3f-b6eb-03c00ffc9f46, 00e4e171-600d-4dd8-b07e-3bf62480e017, 68711d39-e415-476a-ac5a-d39f6a3ad1ad",
+Low,36740,2025-03-28T14:54:56Z,Asset,Configuration,Detected 19 NewUserAgent between 2025-03-28T14:45:14.327Z and 2025-03-28T14:54:56.478Z,"Sample NewUserAgent values include:
+  dst__port: ('',);
+  uuid: 03d27bee-7c90-497b-956e-2ccfdf2d3776, 0a059ae3-60e4-41b2-a23e-c5281d9c7bae, 192f2110-36cc-456d-93ad-7d4a96502513, 024e851a-4fa8-49b0-9d12-c0ed966bb462, 0008335e-1627-45d3-9754-28637665152d, 07317a54-fedf-4e94-b299-8f22abc87ef4, 0034a611-d016-44e8-96ae-172c793f333f, 0484cd27-ed2f-4fdf-bf60-90e9c90932aa, c2e29799-470f-42ae-b022-2a6420d8f07f, 1aaac9d8-9dd3-49e5-b8cc-2b2e22c6c6e1;
+  src__mac: ;
+  src_ip: 10.0.1.12, 10.0.1.29, 10.0.6.29, 10.0.7.29, 10.0.7.12, 10.0.6.12, 10.0.2.11, 10.0.1.11, 10.0.2.29;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1680, 45, 48, 1841, 50, 46, 1746, 1810, 44;
+  dst__ip: ;
+  src__port: ('',);
+  user_agent: Microsoft-Delivery-Optimization/10.0, Microsoft BITS/7.8, Microsoft Edge Update/1.3.195.45;winhttp, Microsoft-CryptoAPI/10.0, Windows-Update-Agent/10.0.10011.16384 Client-Protocol/2.51;
+  src__ip: ;",User Agent First Seen,"1841,1810,1680,46,44,1746,45,48,50",,,,,"10.0.7.12,10.0.6.12,10.0.7.29,10.0.1.12,10.0.1.29,10.0.6.29,10.0.1.11,10.0.2.11,10.0.2.29","03d27bee-7c90-497b-956e-2ccfdf2d3776, 0a059ae3-60e4-41b2-a23e-c5281d9c7bae, 192f2110-36cc-456d-93ad-7d4a96502513, 024e851a-4fa8-49b0-9d12-c0ed966bb462, 0008335e-1627-45d3-9754-28637665152d, 07317a54-fedf-4e94-b299-8f22abc87ef4, 0034a611-d016-44e8-96ae-172c793f333f, 0484cd27-ed2f-4fdf-bf60-90e9c90932aa, c2e29799-470f-42ae-b022-2a6420d8f07f, 1aaac9d8-9dd3-49e5-b8cc-2b2e22c6c6e1",
+Low,37420,2025-03-28T14:59:57Z,Communication,Configuration,X509 Certificate Seen for First Time,"Asset 2265 seen using a certificate that hasn't been observed before.
+ subject: 
+ issuer:",X509 Certificate First Seen,"2265,2896",,,10.0.6.74,10.0.242.127,,061978ff-0928-46b4-95cd-5160e79e1b62,
+Low,37422,2025-03-28T15:06:45Z,Communication,Configuration,X509 Certificate Seen for First Time,"Asset 4128 seen using a certificate that hasn't been observed before.
+ subject: 
+ issuer:",X509 Certificate First Seen,"4128,1898",,,140.82.114.26,10.0.6.30,,5bb91754-f145-49bd-8664-9ca0d7f339bf,
+Low,37463,2025-03-28T15:00:59Z,Communication,Configuration,RDP New Comms,"New RDP communication profile from host 10.0.6.11 (1754) to host 10.0.6.12 (1810). If unencrypted, may also include the RDP cookie (), selected protocol (hybrid_ex), client_name (), and keyboard_layout ().",RDP New Comms Pattern,"1754,1810",,,10.0.6.11,10.0.6.12,,,
+Low,37494,2025-03-28T15:06:46Z,Communication,Indicator,Failed HTTP Logon,"Asset 1810 (10.0.6.12) returned an HTTP response code of 403 'Forbidden' to asset 1898 (10.0.6.30), which represents a failed logon attempt via HTTP by asset 1898. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1898,1810",,,10.0.6.12,10.0.6.30,,d88a5fac-8719-414f-9e6f-d6373fb7143a,
+Low,37613,2025-03-28T14:57:18Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1749 (10.0.6.43) connected via RDP to asset 1754 (10.0.6.11) to then pivot to asset 1810 (10.0.6.12) via RDP.,Interactive Session Pivots,"1810,1749",,,10.0.6.43,10.0.6.12,,,
+Medium,37627,2025-03-28T15:14:54Z,Indicator,Indicator,Evil-WinRM User Agent Rapid Usage,Evil-WinRM User Agent Rapid Usage,WinRM Signatures,"1898,1754",,,10.0.6.30,10.0.6.11,,Network Traffic,
+Medium,37628,2025-03-28T15:14:28Z,Indicator,Indicator,Evil-WinRM User Agent,Evil-WinRM User Agent,WinRM Signatures,"1898,1754",,,10.0.6.30,10.0.6.11,,Network Traffic,
+Low,38303,2025-03-28T15:17:17Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1898 (10.0.6.30) to then pivot to asset 1746 (10.0.6.29) via RDP.,Interactive Session Pivots,"2896,1746",,,10.0.242.127,10.0.6.29,,,
+Low,38669,2025-03-28T15:14:28Z,Communication,Indicator,Failed HTTP Logon,"Asset 1754 (10.0.6.11) returned an HTTP response code of 401 'Unauthorized' to asset 1898 (10.0.6.30), which represents a failed logon attempt via HTTP by asset 1898. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1754,1898",,,10.0.6.11,10.0.6.30,,4321371c-da93-4380-a3e4-c4d0fe9852cc,
+Medium,38674,2025-03-28T15:29:54Z,Indicator,Threat Behavior,RDP Auth Bypass Attempt Possible,RDP Auth Bypass Attempt Possible,RDP Negotiation Request,"1898,1746",,,10.0.6.30,10.0.6.29,,Network Traffic,
+Medium,38824,2025-03-28T15:40:04Z,Indicator,Threat Behavior,HTTP Download Executable Smaller than 1 MB,HTTP Download Executable Smaller than 1 MB,HTTP Executable Download Signatures,"2737,1746",,,208.89.74.29,10.0.6.29,,Network Traffic,
+Low,38843,2025-03-28T15:38:26Z,Communication,Configuration,Detected 9 NewX509Certificate between 2025-03-28T15:35:50.166Z and 2025-03-28T15:38:26.940Z,"Sample NewX509Certificate values include:
+  server: 10.0.10.43, 104.126.37.176, 52.168.117.175, 142.250.186.161, 184.25.50.178, 184.25.50.176, 10.0.10.59;
+  subject: , CN=ENG1, CN=OTDC1.PLUMETECH-OT.LOCAL;
+  not_before: , 2025-03-26T01:59:49Z, 2025-03-17T11:08:25Z;
+  server_asset_id: 1907, 4163, 1686, 4164, 4162, 4016, 4161;
+  dst__port: ('',);
+  dns: ;
+  uuid: b817b7a8-eae6-4240-9da6-a0c19937a42b, b3ebf48d-5ae8-403d-bde6-b04e1c88d2d3, 99aca297-1100-4a2b-b940-2b4f5bdb376a, 6ae85535-43a1-40fa-a031-1dceaba07c1c, 46e7e307-41b8-4814-b446-b0cd791ff3f6, e4573b27-3ae6-485a-b01d-651f0755c65c, 82c44d0c-28cc-4e07-918b-f3f5b173a2e5, 5aed8bc1-87f6-4171-8d54-55aa0e7553d9, 54d6d332-44ee-43df-bcf0-ea86b20fc503;
+  issuer: , CN=ENG1, CN=OTDC1.PLUMETECH-OT.LOCAL;
+  client_asset_id: 1807, 1746;
+  src__mac: ;
+  not_after: , 2025-09-25T01:59:49Z, 2025-09-16T11:08:25Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.10.44, 10.0.6.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1807,1907,4164,4162,4163,4161,1686,4016,1746",,,"10.0.10.59,52.168.117.175,104.126.37.176,184.25.50.176,142.250.186.161,10.0.10.43,184.25.50.178","10.0.10.44,10.0.6.29",,"b817b7a8-eae6-4240-9da6-a0c19937a42b, b3ebf48d-5ae8-403d-bde6-b04e1c88d2d3, 99aca297-1100-4a2b-b940-2b4f5bdb376a, 6ae85535-43a1-40fa-a031-1dceaba07c1c, 46e7e307-41b8-4814-b446-b0cd791ff3f6, e4573b27-3ae6-485a-b01d-651f0755c65c, 82c44d0c-28cc-4e07-918b-f3f5b173a2e5, 5aed8bc1-87f6-4171-8d54-55aa0e7553d9, 54d6d332-44ee-43df-bcf0-ea86b20fc503",
+Low,38891,2025-03-28T15:42:42Z,Communication,Configuration,Detected 9 RDP New Comms between 2025-03-28T15:29:43.793Z and 2025-03-28T15:42:42.065Z,"Sample RDP New Comms values include:
+  rdp_client_name: ;
+  dst__port: ('',);
+  ip_src: 10.0.10.43, 10.0.1.29, 10.0.6.29, 10.0.10.11, 10.0.10.29, 10.0.10.59;
+  dst_asset_id: 1898, 1807, 1919, 1735, 151;
+  rdp_keyboard_layout: ;
+  ip_dst: 10.0.10.30, 10.0.1.30, 10.0.6.30, 10.0.10.11, 10.0.10.44;
+  rdp_selected_protocol: , hybrid_ex;
+  src__mac: ;
+  dst__mac: ;
+  protocol: ;
+  src_asset_id: 1746, 1801, 1907, 1686, 1735, 44;
+  dst__ip: ;
+  src__port: ('',);
+  rdp_rt_cookie: , plumetech, plumber, Nina, nmap, administrator, dragon;
+  src__ip: ;",RDP New Comms Pattern,"1807,1907,1686,1746,151,44,1919,1735,1898,1801",,,"10.0.10.59,10.0.10.43,10.0.6.29,10.0.1.29,10.0.10.11,10.0.10.29","10.0.10.44,10.0.1.30,10.0.10.30,10.0.10.11,10.0.6.30",,,
+Low,38968,2025-03-28T15:32:54Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1898 (10.0.6.30) to then pivot to asset 1746 (10.0.6.29) via RDP.,Interactive Session Pivots,"2896,1746",,,10.0.242.127,10.0.6.29,,,
+Low,39369,2025-03-28T14:58:17Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.6.30.,SSH Authentication Failure,"2896,1898",,,10.0.242.127,10.0.6.30,,0549b67f-ee9d-41f1-a5ae-184ed96bad3c,
+Low,39941,2025-03-28T15:53:20Z,Communication,Configuration,Detected 26 NewX509Certificate between 2025-03-28T15:39:45.914Z and 2025-03-28T15:53:20.163Z,"Sample NewX509Certificate values include:
+  server: 3.167.227.102, 95.100.158.114, 34.250.89.120, 199.232.19.19, 52.216.213.96, 172.217.16.168, 151.101.1.91, 104.18.29.104, 184.30.22.94, 13.74.142.52;
+  subject: , C=US, ST=California, L=San Francisco, O=Mozilla Corporation, CN=addons.mozilla.org, C=US, ST=California, L=South San Francisco, O=Stripe, Inc, CN=*.stripe.com, CN=archive.mozilla.org, C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com, CN=*.services.mozilla.com;
+  not_before: , 2025-03-04T20:39:31Z, 2025-01-31T11:43:37Z, 2025-01-30T00:00:00Z, 2025-03-10T19:48:24Z, 2024-04-19T00:00:00Z;
+  server_asset_id: 4204, 4192, 4182, 4199, 4212, 4213, 4193, 4216, 4211, 4190;
+  dst__port: ('',);
+  dns: ;
+  uuid: 09a92ae7-4efb-453e-afd1-e54fbcf72ee9, dae0ec80-29d9-4be7-92e9-8bd40572b0e5, 3687bb63-1ed4-4bd9-b488-c23d1ee92ae9, 8ad8e2d5-b016-468a-aa22-29ee19619816, 021aea56-86e6-4e84-aa85-9f8286160f50, 3846406b-b2da-415b-8589-e94fbc6be5f6, a7a7d0ce-b343-47df-8605-74d790b92bc9, 1f228568-193f-4a9e-8e51-5f4d4abf499f, c5678388-3d3c-4f5e-a2c8-433161871218, 88a82dcc-e0f2-4dad-931b-82d95171022b;
+  issuer: , C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1, C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1, C=US, O=Let's Encrypt, CN=R10, C=US, O=DigiCert Inc, CN=DigiCert TLS Hybrid ECC SHA384 2020 CA1;
+  client_asset_id: 44, 1916, 1772, 1746, 1801, 1921;
+  src__mac: ;
+  not_after: , 2026-03-04T20:39:31Z, 2025-05-01T23:59:59Z, 2025-06-08T19:48:23Z, 2025-05-07T23:59:59Z, 2025-05-01T11:43:36Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.1.29, 10.0.6.29, 10.0.9.30, 10.0.8.30, 10.0.7.11, 10.0.10.29;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"1772,1921,1916,4192,1801,44,1746,4204,4182,4199,4212,4213,4193,4216,4211,4190",,,"3.167.227.102,199.232.16.176,51.132.193.105,44.240.131.83,199.232.19.19,172.67.69.238,18.245.46.117,52.182.143.208,151.101.1.91,52.168.112.67","10.0.7.11,10.0.9.30,10.0.8.30,10.0.10.29,10.0.1.29,10.0.6.29",,"09a92ae7-4efb-453e-afd1-e54fbcf72ee9, dae0ec80-29d9-4be7-92e9-8bd40572b0e5, 3687bb63-1ed4-4bd9-b488-c23d1ee92ae9, 8ad8e2d5-b016-468a-aa22-29ee19619816, 021aea56-86e6-4e84-aa85-9f8286160f50, 3846406b-b2da-415b-8589-e94fbc6be5f6, a7a7d0ce-b343-47df-8605-74d790b92bc9, 1f228568-193f-4a9e-8e51-5f4d4abf499f, c5678388-3d3c-4f5e-a2c8-433161871218, 88a82dcc-e0f2-4dad-931b-82d95171022b",
+Low,40997,2025-03-28T16:08:26Z,Communication,Configuration,Detected 9 NewX509Certificate between 2025-03-28T15:55:25.892Z and 2025-03-28T16:08:26.628Z,"Sample NewX509Certificate values include:
+  server: 13.89.178.27, 40.126.32.134, 184.25.50.131, 20.189.173.10, 13.74.138.242, 20.189.173.26, 104.46.162.227, 23.3.89.113, 216.58.212.142;
+  subject: , C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com;
+  not_before: , 2025-03-04T20:39:31Z;
+  server_asset_id: 2675, 4219, 4215, 388, 4221, 4220, 4218, 4155, 4223;
+  dst__port: ('',);
+  dns: ;
+  uuid: 609669f4-5180-491b-a7d5-320bdf799808, 4a32c2ee-25eb-43e8-b2a7-e5cb48c93efc, 1ff3dc39-72eb-418f-9509-5b18a5b51eba, c1ee869a-047b-4f98-9814-e8f098a7051a, fbe2768e-e719-46ba-8dae-c81ecb746560, 51ec6105-394e-4934-9104-6089c758796c, b0a62e1f-f1ff-44e2-971e-668e1af717a1, 91cb3105-2051-4aee-9acd-8adf685167f2, d6ce0beb-24f2-4978-944d-9c2b6bac4048;
+  issuer: , C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1;
+  client_asset_id: 45, 1754, 1746;
+  src__mac: ;
+  not_after: , 2026-03-04T20:39:31Z;
+  dst__mac: ;
+  protocol: ;
+  dst__ip: ;
+  client: 10.0.1.11, 10.0.6.29, 10.0.6.11;
+  src__port: ('',);
+  src__ip: ;",X509 Certificate First Seen,"2675,4219,4215,388,4221,4220,4218,4155,4223,45,1754,1746",,,"40.126.32.134,13.74.138.242,216.58.212.142,23.3.89.113,13.89.178.27,20.189.173.26,104.46.162.227,184.25.50.131,20.189.173.10","10.0.1.11,10.0.6.11,10.0.6.29",,"609669f4-5180-491b-a7d5-320bdf799808, 4a32c2ee-25eb-43e8-b2a7-e5cb48c93efc, 1ff3dc39-72eb-418f-9509-5b18a5b51eba, c1ee869a-047b-4f98-9814-e8f098a7051a, fbe2768e-e719-46ba-8dae-c81ecb746560, 51ec6105-394e-4934-9104-6089c758796c, b0a62e1f-f1ff-44e2-971e-668e1af717a1, 91cb3105-2051-4aee-9acd-8adf685167f2, d6ce0beb-24f2-4978-944d-9c2b6bac4048",
+Low,41070,2025-03-28T16:09:59Z,Communication,Indicator,Failed HTTP Logon,"Asset 117 (199.232.210.172) returned an HTTP response code of 403 'Forbidden' to asset 1754 (10.0.6.11), which represents a failed logon attempt via HTTP by asset 1754. Logon attempts that result in HTTP status codes such as 401 'Unauthorized', 403 'Forbidden', or 407 'Proxy Authentication Required' can occur legitimately when users mistype credentials or attempt to access resources they are not authorized to use; however, they can also be indicative of malicious activities, such as unauthorized access attempts, brute force attacks, or the misuse of stolen credentials, where adversaries are testing access controls and trying to gain illicit entry into systems.",HTTP Auth Failure,"1754,117",,,199.232.210.172,10.0.6.11,,73d148e8-7b93-4a28-abcb-22e690c922e2,
+Low,41166,2025-03-28T16:04Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1746 (10.0.6.29) connected via RDP to asset 1754 (10.0.6.11) to then pivot to asset 1746 (10.0.6.29) via RDP.,Interactive Session Pivots,1746,,,10.0.6.29,10.0.6.29,,,
+Low,41173,2025-03-28T15:48:13Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1898 (10.0.6.30) to then pivot to asset 1746 (10.0.6.29) via RDP.,Interactive Session Pivots,"1746,2896",,,10.0.242.127,10.0.6.29,,,
+Low,41179,2025-03-28T15:46:46Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1898 (10.0.6.30) connected via RDP to asset 1746 (10.0.6.29) to then pivot to asset 1754 (10.0.6.11) via RDP.,Interactive Session Pivots,"1754,1898",,,10.0.6.30,10.0.6.11,,,
+Low,41685,2025-03-28T16:20:44Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1898 (10.0.6.30) connected via RDP to asset 1746 (10.0.6.29) to then pivot to asset 1754 (10.0.6.11) via RDP.,Interactive Session Pivots,"1898,1754",,,10.0.6.30,10.0.6.11,,,
+Low,41686,2025-03-28T16:20:36Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 2896 (10.0.242.127) connected via SSH to asset 1898 (10.0.6.30) to then pivot to asset 1746 (10.0.6.29) via RDP.,Interactive Session Pivots,"2896,1746",,,10.0.242.127,10.0.6.29,,,
+Low,41716,2025-03-28T15:05:14Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.6.30.,SSH Authentication Failure,"2896,1898",,,10.0.242.127,10.0.6.30,,2bbafcf7-d8a2-4011-b2db-914cb112a394,
+Low,41859,2025-03-28T16:10:02Z,Communication,Configuration,X509 Certificate Seen for First Time,"Asset 4222 seen using a certificate that hasn't been observed before.
+ subject: C=US, ST=WA, L=Redmond, O=Microsoft, OU=DSP, CN=*.prod.do.dsp.mp.microsoft.com
+ issuer: C=US, ST=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft ECC Content Distribution Secure Server CA 2.1",X509 Certificate First Seen,"1754,4222",,,20.191.76.110,10.0.6.11,,50751daf-5646-401a-88f9-a67872f6b04a,
+Low,41951,2025-03-28T15:04:54Z,Communication,Configuration,SSH Authentication Failure,SSH authentication failure from 10.0.242.127 to 10.0.6.30.,SSH Authentication Failure,"2896,1898",,,10.0.242.127,10.0.6.30,,7ae871d2-9769-49dd-a884-b77593f95ce0,
+Low,41992,2025-03-28T16:39:41Z,Communication,Threat Behavior,Interactive Session Pivot,Asset 1746 (10.0.6.29) connected via RDP to asset 1754 (10.0.6.11) to then pivot to asset 1810 (10.0.6.12) via RDP.,Interactive Session Pivots,"1746,1810",,,10.0.6.29,10.0.6.12,,,

@@ -1,3 +1,0 @@
-"timestamp","Host","severity_name","severity","description","cmdline","files_written","entities"
-"2025-03-28T14:39:35.008Z","10.0.9.11","High","70","A user created a new user account. Attackers can create new accounts to maintain their foothold on a system. Investigate the active user and newly created account.","net  user plumber Pentest123 /domain /add ","",
-"2025-03-28T14:39:34.429Z","10.0.9.11","High","70","A process appears to be using Windows Management Instrumentation (WMI) to suspiciously execute code. Investigate the command line and process tree.","cmd.exe /Q /c net user plumber Pentest123 /domain /add 1> \Windows\Temp\QnSeRX 2>&1","",
