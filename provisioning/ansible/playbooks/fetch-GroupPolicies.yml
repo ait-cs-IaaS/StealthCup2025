@@ -1,0 +1,10 @@
+---
+- name: Run PowerShell script on Windows
+  hosts: enterprise_domain_controller
+  gather_facts: no
+  tasks:
+    - name: fetch
+      fetch:
+        src: 'C:\GPO.zip'
+        dest: /home/sefd/StealthCup/provisioning/ansible/roles/windows/
+        flat: yes

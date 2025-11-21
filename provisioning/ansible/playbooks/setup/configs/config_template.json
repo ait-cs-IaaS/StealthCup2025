@@ -1,0 +1,265 @@
+{
+    "Domains": [
+        {
+            "HostID": "enterprise_domain_controller",
+            "Domain": "PLUMETECH.LOCAL",
+            "DsrmPassword": "uncrackable",
+            "DomainUsers": [
+                {
+                    "Username": "PLUMETECH.LOCAL\\Felix",
+                    "Password": "uncrackable",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\###########################Nina_NTLM",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\###########################Martin_website",
+                    "Password": "crackable",
+                    "HasPreAuthDisabled": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\###########################Alice_website",
+                    "Password": "sprayable"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\###########################Jack_website",
+                    "Password": "crackable",
+                    "Description": "RDP access to JUMP.PLUMETECH-OT.LOCAL"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\###########################Helpdesk",
+                    "Password": "###########################crackable_match1",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Carrie",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Tracy",
+                    "Password": "uncrackable",
+                    "ServicePrincipalName": "MegaSVC/DC1.PLUMETECH.LOCAL:1337"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Howard",
+                    "Password": "uncrackable",
+                    "HasPreAuthDisabled": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Dominic",
+                    "Password": "uncrackable",
+                    "ServicePrincipalName": "SuperSVC/DC1.PLUMETECH.LOCAL:4444"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Sabrina",
+                    "Password": "uncrackable",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Taylor",
+                    "Password": "uncrackable",
+                    "ServicePrincipalName": "GigaSVC/DC1.PLUMETECH.LOCAL:12345"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Frank",
+                    "Password": "###########################crackable_match1",
+                    "ServicePrincipalName": "UltraSVC/DC1.PLUMETECH.LOCAL:54321"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\###########################user_match1",
+                    "Password": "###########################uncrackable_match1",
+                    "IsDomainAdmin": true,
+                    "ServicePrincipalName": "BackupSVC/DC1.PLUMETECH.LOCAL:45454"
+                }
+            ]
+        },
+        {
+            "HostID": "dmz_domain_controller",
+            "Domain": "PLUMETECH-OT.LOCAL",
+            "DsrmPassword": "uncrackable",
+            "DomainUsers": [
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\###########################Bob_OT",
+                    "Password": "###########################crackable_rockyou_top10000"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\John",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Nichole",
+                    "Password": "uncrackable",
+                    "ServicePrincipalName": "OTSVC/DC1.PLUMETECH.LOCAL:7777",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Lena",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\William",
+                    "Password": "uncrackable",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\###########################user_match1",
+                    "Password": "###########################uncrackable_match1",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Tom",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Linda",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Nicky",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Willi",
+                    "Password": "uncrackable",
+                    "HasPreAuthDisabled": true,
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Corina",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Emmy",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Jonathon",
+                    "Password": "uncrackable",
+                    "HasPreAuthDisabled": true
+                }
+            ]
+        }
+    ],
+    "WindowsHosts": [
+        {
+            "HostID": "enterprise_domain_controller",
+            "Hostname": "DC1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "uncrackable",
+            "DNSForwarderHostID": "dmz_domain_controller",
+            "GenericAllAccessUsers": [
+                "PLUMETECH.LOCAL\\###########################Martin_website"
+            ]
+        },
+        {
+            "HostID": "dmz_domain_controller",
+            "Hostname": "OTDC1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "uncrackable",
+            "DNSForwarderHostID": "enterprise_domain_controller",
+            "BiDirectionalTrustHostID": "enterprise_domain_controller",
+            "Fileshares": [
+                {
+                    "Name": "OT",
+                    "Path": "C:\\Fileshares\\OT",
+                    "Access": "PLUMETECH-OT.LOCAL\\Domain Users"
+                }
+            ]
+        },
+        {
+            "HostID": "enterprise_file_server",
+            "DCHostID": "enterprise_domain_controller",
+            "Hostname": "FS1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "uncrackable",
+            "DomainAccountUsername": "PLUMETECH.LOCAL\\###########################Helpdesk",
+            "Fileshares": [
+                {
+                    "Name": "IT",
+                    "Path": "C:\\Fileshares\\IT",
+                    "Access": "PLUMETECH.LOCAL\\Domain Users"
+                }
+            ]
+        },
+        {
+            "HostID": "enterprise_client",
+            "DCHostID": "enterprise_domain_controller",
+            "Hostname": "CLI1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "uncrackable",
+            "DomainAccountUsername": "PLUMETECH.LOCAL\\###########################Nina_NTLM",
+            "RDPAccess": [
+                "PLUMETECH.LOCAL\\###########################Nina_NTLM",
+                "PLUMETECH.LOCAL\\Domain Users"
+            ]
+        },
+        {
+            "HostID": "dmz_jump",
+            "DCHostID": "dmz_domain_controller",
+            "Hostname": "JUMP",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "uncrackable",
+            "DomainAccountUsername": "PLUMETECH-OT.LOCAL\\###########################Bob_OT",
+            "DomainAccountUsernameDocumentation": "PLUMETECH.LOCAL\\###########################Jack_website",
+            "RDPAccess": [
+                "PLUMETECH-OT.LOCAL\\Domain Users",
+                "PLUMETECH.LOCAL\\###########################Jack_website"
+            ]
+        },
+        {
+            "HostID": "supervision_engineer_workstation",
+            "Hostname": "ENG1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "###########################from_keepass_db"
+        }
+    ],
+    "LinuxHosts": [
+        {
+            "HostID": "supervision_scada",
+            "LocalAccounts": [
+                {
+                    "Username": "simon",
+                    "Password": "uncrackable"
+                },
+                {
+                    "Username": "ubuntu",
+                    "Password": "uncrackable"
+                }
+            ]
+        },
+        {
+            "HostID": "dmz_historian",
+            "LocalAccounts": [
+                {
+                    "Username": "admin",
+                    "Password": "###########################uncrackable_match2"
+                },
+                {
+                    "Username": "ubuntu",
+                    "Password": "uncrackable"
+                }
+            ]
+        }
+    ],
+    "Software": [
+        {
+            "SoftwareID": "grafana",
+            "Username": "admin",
+            "Password": "###########################uncrackable_match2",
+            "Salt": "pepper",
+            "Hash": "###########################uncrackable_match2_update_grafana_password.py"
+        },
+        {
+            "SoftwareID": "scada",
+            "Username": "admin",
+            "Password": "###########################uncrackable_2char",
+            "Hash": "###########################uncrackable_2char_update_scada_password.py"
+        },
+        {
+            "SoftwareID": "keepass",
+            "Password": "###########################keepass_master"
+        }
+    ]
+}

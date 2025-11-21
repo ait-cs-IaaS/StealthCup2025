@@ -1,0 +1,35 @@
+---
+- name: Setup Inventory File
+  hosts: enterprise:&dc
+  gather_facts: false
+
+  tasks:
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Extract the number from team_name
+      set_fact:
+        team_id: "{{ team_name | regex_replace('^team', '') }}"
+
+    - name: Create JSON content
+      set_fact:
+        json_data: >-
+          {
+            "dmz_domain_controller": "10.0.{{ team_id }}.43",
+            "dmz_jump": "10.0.{{ team_id }}.44",
+            "enterprise_client": "10.0.{{ team_id }}.29",
+            "enterprise_domain_controller": "10.0.{{ team_id }}.11",
+            "enterprise_file_server": "10.0.{{ team_id }}.12",
+            "enterprise_kali": "10.0.{{ team_id }}.30"
+          }
+
+    - name: Save the inventory to a JSON file on the local machine
+      local_action:
+        module: copy
+        dest: "./inventory_{{ team_name }}.json"
+        content: "{{ json_data | to_nice_json }}"
+
+    - name: Debug JSON output
+      debug:
+        msg: "{{ json_data }}"

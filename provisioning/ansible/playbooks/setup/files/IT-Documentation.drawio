@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0" version="26.1.1">
+  <diagram name="Page-1" id="VzMFCliwgrnhEQdm6Vnz">
+    <mxGraphModel dx="-712" dy="5372" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-31" value="&lt;div&gt;Supervision Subnet: 10.0.X.48/28&lt;/div&gt;&lt;div&gt;Hosts: 10.0.X.49 - 10.0.X.62&lt;br&gt;&lt;/div&gt;" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=light-dark(#B85450,#B85450);fillColor=light-dark(#F8CECC,#F8CECC);verticalAlign=top;align=left;spacingLeft=30;fontColor=light-dark(#B85450,#B85450);dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="2570" y="-4000" width="930" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-6" value="&lt;div&gt;Enterprise Server Subnet: 10.0.X.0/28&lt;/div&gt;&lt;div&gt;Hosts: 10.0.X.1 - 10.0.X.14&lt;br&gt;&lt;/div&gt;" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=light-dark(#147EBA,#147EBA);fillColor=#E6F6F7;verticalAlign=top;align=left;spacingLeft=30;fontColor=light-dark(#147EBA,#147EBA);dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="2570" y="-4380" width="620" height="190" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;div&gt;DC1&lt;/div&gt;&lt;div&gt;&lt;span&gt;Microsoft Windows Server 2022&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;span&gt;10.0.X.11&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;" id="mgby5GRjXfnLW3ttPsaJ-5">
+          <mxCell style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.windows_server;" parent="1" vertex="1">
+            <mxGeometry x="2690" y="-4312.5" width="52" height="55" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-9" value="&lt;div&gt;Enterprise Client Subnet: 10.0.X.16/28&lt;/div&gt;&lt;div&gt;Hosts: 10.0.X.17 - 10.0.X.30&lt;br&gt;&lt;/div&gt;" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=light-dark(#147EBA,#147EBA);fillColor=#E6F6F7;verticalAlign=top;align=left;spacingLeft=30;fontColor=light-dark(#147EBA,#147EBA);dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="3190" y="-4380" width="310" height="190" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;div&gt;FS1&lt;/div&gt;&lt;div&gt;&lt;span&gt;Microsoft Windows Server 2022&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;span&gt;10.0.X.12&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;" id="mgby5GRjXfnLW3ttPsaJ-11">
+          <mxCell style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.windows_server;" parent="1" vertex="1">
+            <mxGeometry x="3000" y="-4312.5" width="52" height="55" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;div&gt;CLI1&lt;/div&gt;&lt;div&gt;&lt;span&gt;Microsoft Windows Server 2022&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;span&gt;10.0.X.29&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;" id="mgby5GRjXfnLW3ttPsaJ-13">
+          <mxCell style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.windows_server;" parent="1" vertex="1">
+            <mxGeometry x="3310" y="-4312.5" width="52" height="55" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-20" value="&lt;div&gt;DMZ Subnet: 10.0.X.32/28&lt;/div&gt;&lt;div&gt;Hosts: 10.0.X.33 - 10.0.X.46&lt;br&gt;&lt;/div&gt;" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=light-dark(#9673A6,#9673A6);fillColor=light-dark(#EAE1EE,#E1D5E7);verticalAlign=top;align=left;spacingLeft=30;fontColor=light-dark(#9673A6,#9673A6);dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="2570" y="-4190" width="930" height="190" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;div&gt;OTDC1&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;Microsoft Windows Server 2022&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;span&gt;10.0.X.43&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;" id="mgby5GRjXfnLW3ttPsaJ-23">
+          <mxCell style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.windows_server;" parent="1" vertex="1">
+            <mxGeometry x="2698" y="-4122.5" width="52" height="55" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-25" value="&lt;div&gt;HIST&lt;div&gt;Ubuntu Server 24.04 LTS&lt;/div&gt;&lt;div&gt;&lt;b&gt;10.0.X.45&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/VM_Linux_Non_Azure.svg;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="3316.01" y="-4120" width="55.98" height="51.5" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;div&gt;JUMP&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;Microsoft Windows Server 2022&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;span&gt;10.0.X.44&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;" id="mgby5GRjXfnLW3ttPsaJ-29">
+          <mxCell style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.windows_server;" parent="1" vertex="1">
+            <mxGeometry x="3008" y="-4122.5" width="52" height="55" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;div&gt;ENG1&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;Microsoft Windows Server 2022&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;span&gt;10.0.X.59&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;" id="mgby5GRjXfnLW3ttPsaJ-34">
+          <mxCell style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.windows_server;" parent="1" vertex="1">
+            <mxGeometry x="2852.25" y="-3932.5" width="52" height="55" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-36" value="&lt;div&gt;SCADA&lt;div&gt;Ubuntu Server 24.04 LTS&lt;/div&gt;&lt;div&gt;&lt;b&gt;10.0.X.60&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/VM_Linux_Non_Azure.svg;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="3159.76" y="-3930" width="55.98" height="51.5" as="geometry" />
+        </mxCell>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-37" value="&lt;div&gt;Control Subnet: 10.0.X.64/28&lt;/div&gt;&lt;div&gt;Hosts: 10.0.X.65- 10.0.X.78&lt;br&gt;&lt;/div&gt;" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=light-dark(#D6B656,#D6B656);fillColor=light-dark(#FFF2CC,#FFF2CC);verticalAlign=top;align=left;spacingLeft=30;fontColor=light-dark(#D6B656,#D6B656);dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="2570" y="-3810" width="930" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-39" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=none;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/png,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;spacing=-15;fontStyle=0" parent="1" vertex="1">
+          <mxGeometry x="2995.5199999999995" y="-3780" width="78.96" height="78.96" as="geometry" />
+        </mxCell>
+        <mxCell id="mgby5GRjXfnLW3ttPsaJ-44" value="PLC1&lt;br&gt;Ubuntu Server 24.04 LTS&lt;br&gt;&lt;b&gt;10.0.X.74&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="2950" y="-3730" width="170" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

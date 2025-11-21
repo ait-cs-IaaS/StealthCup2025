@@ -1,0 +1,5 @@
+{
+  "base_image": "kali",
+  "image_name": "kali-linux",
+  "security_group": ["SSH-ONLY"]
+}

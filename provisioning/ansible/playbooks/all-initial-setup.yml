@@ -1,0 +1,103 @@
+---
+- name: Setup the Inventory File
+  import_playbook: ./setup/setup_inventory_file.yml
+
+- name: Initial Setup Enterprise Domain Controller
+  import_playbook: ./setup/setup_enterprise_domain_controller.yml
+
+- name: Initial Setup DMZ Domain Controller
+  import_playbook: ./setup/setup_dmz_domain_controller.yml
+
+- name: Initial Setup DMZ Jump
+  import_playbook: ./setup/setup_dmz_jump.yml
+
+- name: Initial Setup Enterprise Client
+  import_playbook: ./setup/setup_enterprise_client.yml
+
+- name: Initial Setup Enterprise File Server
+  import_playbook: ./setup/setup_enterprise_file_server.yml
+
+# - name: Initial Setup Enterprise Kali
+#   import_playbook: ./setup/setup_enterprise_kali.yml
+
+- name: Import all-network.yml
+  import_playbook: all-network.yml
+
+- name: Import setup_dmz_jump_keepass.yml
+  import_playbook: ./setup/setup_dmz_jump_keepass.yml
+
+- name: Import setup_enterprise_client_scheduled_ntlm_task.yml
+  import_playbook: ./setup/setup_enterprise_client_scheduled_ntlm_task.yml
+
+- name: Import update_local_account_passwords_windows.yml
+  import_playbook: ./setup/update_local_account_passwords_windows.yml
+
+- name: Import update_local_account_passwords_linux.yml
+  import_playbook: ./setup/update_local_account_passwords_linux.yml
+
+- name: Import update_grafana_password.yml
+  import_playbook: ./setup/update_grafana_password.yml
+
+- name: Import update_scada_password.yml
+  import_playbook: ./setup/update_scada_password.yml
+
+- name: Import configure_enterprise_client_credential_manager.yml
+  import_playbook: ./setup/configure_enterprise_client_credential_manager.yml
+
+- name: Import configure_dmz_domain_controller_fileshare.yml
+  import_playbook: ./setup/configure_dmz_domain_controller_fileshare.yml
+
+- name: Configure DMZ Jump Privesc
+  import_playbook: ./setup/configure_dmz_jump_privesc.yml
+
+- name: Import configure_dmz_historian_privesc.yml
+  import_playbook: ./setup/configure_dmz_historian_privesc.yml
+
+- name: Import configure_dmz_historian_influxdb.yml
+  import_playbook: ./setup/configure_dmz_historian_influxdb.yml
+
+- name: Import enable_ssh_password_authentication.yml
+  import_playbook: ./setup/enable_ssh_password_authentication.yml
+
+- name: Initial Setup Sysmon requires all-network to set dns first
+  import_playbook: ./setup/setup_sysmon.yml
+
+- name: General Windows Server Settings # atm only includes stopping of spooler service
+  hosts: dc:fs
+  roles:
+  - ../roles/windows/general-server
+
+- name: Configure PLUMETECH Domain Controller
+  hosts: enterprise:&dc
+  roles:
+  - ../roles/windows/general-domain-controller
+  - ../roles/windows/plumetech-domain-controller
+
+- name: Configure PLUMETECH-OT Domain Controller
+  hosts: dmz:&dc
+  roles:
+  - ../roles/windows/general-domain-controller
+  - ../roles/windows/plumetech-ot-domain-controller
+
+- name: Configure File Server
+  hosts: enterprise:&fs
+  roles:
+  - ../roles/windows/general-file-server
+
+- import_playbook: wazuh-agent.yml
+- import_playbook: install_vendoredr.yml
+
+- import_playbook: ./setup/_debug_dmz_jump_rdp.yml # make sure RDP access to jump is configured properly
+
+# - name: Shutdown Linux Hosts
+#   hosts: linux
+#   become: yes
+#   tasks:
+#     - name: Shutdown Linux systems
+#       command: shutdown now
+  
+# - name: Shutdown Windows Hosts
+#   hosts: windows
+#   tasks:
+#     - name: Shutdown Windows Hosts
+#       win_shell: shutdown /t 0 /f

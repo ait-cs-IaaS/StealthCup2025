@@ -1,0 +1,79 @@
+- name: Wazuh Server Certificate Generation
+  hosts: wazuh
+  roles:
+    - role: ../roles/wazuh/wazuh-indexer
+      perform_installation: false
+  become: no
+  #become_user: root
+  vars:
+    indexer_node_master: true
+    instances:
+      node1:
+        name: node-1       # Important: must be equal to indexer_node_name.
+        ip: 0.0.0.0        # leave it open so we an connect to the api from external; 127.0.0.1
+        role: indexer
+  tags:
+    - generate-certs
+- name: Wazuh single node install
+  hosts: wazuh
+  become: yes
+  become_user: root
+  roles:
+    - role: ../roles/wazuh/wazuh-indexer
+    - role: ../roles/wazuh/ansible-wazuh-manager
+    - role: ../roles/wazuh/ansible-filebeat-oss
+    - role: ../roles/wazuh/wazuh-dashboard
+  vars:
+    single_node: true
+    minimum_master_nodes: 1
+    indexer_node_master: true
+    indexer_network_host: 0.0.0.0  # leave it open so we an connect to the api from external; 127.0.0.1
+    filebeat_node_name: node-1
+    filebeat_output_indexer_hosts:
+    - 127.0.0.1
+    instances:
+      node1:
+        name: node-1       # Important: must be equal to indexer_node_name.
+        ip: 127.0.0.1
+        role: indexer
+    ansible_shell_allow_world_readable_temp: true
+    wazuh_manager_ruleset:
+      rules_path: 'custom_ruleset/rules/'
+      decoders_path: 'custom_ruleset/decoders/'
+      cdb_lists:
+        - 'audit-keys'
+        - 'security-eventchannel'
+        - 'amazon/aws-eventnames'
+        - 'Admins'
+        - 'DomainJoiners'
+- name: Wazuh copy custom rules
+  hosts: wazuh
+  become: yes
+  become_user: root
+  tasks: 
+    - name: Copy local_rules.xml
+      ansible.builtin.copy:
+        src: ../roles/wazuh/local_rules.xml
+        dest: /var/ossec/etc/rules/local_rules.xml
+    - name: Copy LDAPQueryLogParser_decoder.xml
+      ansible.builtin.copy:
+        src: ../roles/wazuh/LDAPQueryLogParser_decoder.xml
+        dest: /var/ossec/etc/decoders/LDAPQueryLogParser_decoder.xml
+    - name: Copy CDBs for Allowlisting
+      ansible.builtin.copy:
+        src: ../roles/wazuh/Admins
+        dest: "{{ item }}"
+      loop:
+        - /var/ossec/etc/lists/DomainJoiners
+        - /var/ossec/etc/lists/Admins
+    - name: Restart wazuh-manager
+      service:
+        name: wazuh-manager
+        state: restarted
+        enabled: true
+    - name: Reset Wazuh default credentials
+      shell: |
+        curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/4.10/wazuh-passwords-tool.sh
+        sudo bash wazuh-passwords-tool.sh -a
+      register: wazuh_passwords_tool
+    - debug: var=wazuh_passwords_tool.stdout_lines

@@ -1,0 +1,13 @@
+---
+- name: Allow all users to run vi as sudo
+  hosts: "dmz:&historian"
+  gather_facts: false
+  become: yes
+
+  tasks:
+    - name: Add sudoers entry for vi
+      lineinfile:
+        path: /etc/sudoers.d/vi
+        line: "ALL ALL=(ALL) NOPASSWD: /usr/bin/vi"
+        create: yes
+        mode: '0440'

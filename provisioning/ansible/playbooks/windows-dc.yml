@@ -1,0 +1,98 @@
+---
+- name: Configure Domain Controller
+  hosts: enterprise_domain_controller
+  tasks:
+  - name: Set StrongCertificateBindingEnforcement
+    ansible.windows.win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\Kdc
+      name: StrongCertificateBindingEnforcement
+      data: 2
+      type: dword
+
+  - name: Turn on LDAP Logging
+    ansible.windows.win_regedit:
+      path: "{{ item.path }}"
+      name: "{{ item.name }}"
+      data: "{{ item.data }}"
+      type: "{{ item.type }}"
+    with_items:
+      - { path: 'HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Diagnostics', name: '15 Field Engineering', data: '5', type: 'dword' }
+      - { path: 'HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters', name: 'Expensive Search Result Threshold', data: '1', type: 'dword'} 
+      - { path: 'HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters', name: 'Inefficient Search Results Threshold', data: '1', type: 'dword' } 
+
+  - name: Increase Directory Service Log Size
+    ansible.windows.win_regedit:
+      path: 'HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Directory Service'
+      name: MaxSize
+      data: 104857600
+      type: dword
+
+  - name: Ensure the target directory exists
+    win_file:
+      path: 'C:\Program Files\AIT'
+      state: directory
+  - name: Copy Write-LDAPQueryLog.ps1
+    ansible.builtin.win_copy:
+      src: ../roles/windows/Write-LDAPQueryLog.ps1
+      dest: 'C:\Program Files\AIT\Write-LDAPQueryLog.ps1'
+  - name: Create Directory in ProgramData AIT
+    win_file:
+      path: 'C:\ProgramData\AIT'
+      state: directory
+
+  - name: Initial LDAP Log Parsing
+    win_shell: |
+      powershell.exe -ExecutionPolicy Bypass -File "C:\Program Files\AIT\Write-LDAPQueryLog.ps1"
+
+  - name: Create Scheduled Task for LDAPLogQueryParser
+    community.windows.win_scheduled_task:
+      name: LDAPLogQueryParser
+      description: Parse Directory Service Logs
+      actions:
+        - path: powershell.exe
+          arguments: -nop -exec bypass -File "C:\Program Files\AIT\Write-LDAPQueryLog.ps1"
+          working_directory: C:\ProgramData\AIT
+      triggers:
+        - type: registration
+          repetition:
+            interval: PT1M
+      username: SYSTEM
+      run_level: highest
+
+  - name: Create new OU and move Fileserver
+    win_shell: |
+      New-ADOrganizationalUnit -Name "Servers"
+      Move-ADObject -Identity "CN=FS1,CN=Computers,DC=democorp,DC=local" -TargetPath "OU=Servers,DC=democorp,DC=local"
+
+# Better do this with 7z cause Compress-archive, Expand-archive seems to suck
+
+#  - name: Copy Policies to Domain Controller
+#    win_copy:
+#      src: /home/sefd/StealthCup/provisioning/ansible/roles/windows/Policies.zip
+#      dest: 'C:\'
+#  - name: Unzipping Policies and Importing Group Policies
+#    win_shell: |
+#      Expand-Archive -Path "C:\Policies.zip" -DestinationPath "C:\"
+#      Import-GPO -Path C:\Export-GPO -BackupGpoName 'Custom Domain Controller Policy' -TargetName 'Custom Domain Controller Policy'
+#      New-GPLink -Name 'Custom Domain Controller Policy' -Target "cn=domain controllers,dc=democorp,dc=local"
+#      Import-GPO -Path C:\Export-GPO -BackupGpoName 'Custom Server Policy' -TargetName 'Custom Server Policy' 
+#      New-GPLink -Name 'Custom Server Policy' -Target "OU=Servers,dc=democorp,dc=local"
+
+# GPO Stuff:
+# Backup-GPO -Name "Your GPO Name" -Path "C:\Path\To\Backup"
+# Import-GPO -Path "C:\Path\To\Backup\YourGPOBackup" -TargetName "New GPO Name"
+# $xml=[xml](gc 'C:\ExportGPO\{45590E82-ED2B-432D-AF5A-3D06747C5E39}\Backup.xml')
+# $xml.GroupPolicyBackupScheme.GroupPolicyObject.GroupPolicyCoreSettings.DisplayName.'#cdata-section'
+
+# TODO: reboot
+
+#- name: Set multiple registry keys
+#  win_registry:
+#    path: HKLM:\SOFTWARE\MyCompany\MyApp
+#    name: "{{ item.name }}"
+#    value: "{{ item.value }}"
+#    type: "{{ item.type }}"
+#  with_items:
+#    - { name: 'Key1', value: 'Value1', type: 'string' }
+#    - { name: 'Key2', value: 'Value2', type: 'dword' }
+#    - { name: 'Key3', value: 'Value3', type: 'qword' }

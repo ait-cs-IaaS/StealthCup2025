@@ -1,0 +1,79 @@
+---
+- name: Set DNS for non domain joined machines
+  hosts: dmz:&dc
+  gather_facts: false
+  vars:
+    domain: "plumetech-ot.local"
+
+  tasks:
+  - name: Split hostname and extract the team part
+    set_fact:
+      team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+  - name: Print team name
+    debug:
+      msg: "Extracted team name: {{ team_name }}"
+
+  - name: Get Historian IP
+    set_fact:
+      historian_ip: "{{ hostvars[team_name ~ '_dmz_historian']['private_ip_address'] }}"
+
+  - name: Print Historian IP
+    debug:
+      msg: "Historian IP: {{ historian_ip }}"
+
+  - name: Get Engineer Workstation IP
+    set_fact:
+      engineer_workstation_ip: "{{ hostvars[team_name ~ '_supervision_engineer_workstation']['private_ip_address'] }}"
+
+  - name: Print Engineer Workstation IP
+    debug:
+      msg: "Engineer Workstation IP: {{ engineer_workstation_ip }}"
+
+  - name: Get Scada IP
+    set_fact:
+      scada_ip: "{{ hostvars[team_name ~ '_supervision_scada']['private_ip_address'] }}"
+
+  - name: Print Scada IP
+    debug:
+      msg: "Scada IP: {{ scada_ip }}"
+
+  - name: Get PLC1 IP 0
+    set_fact:
+      plc1_ip_0: "{{ hostvars[team_name ~ '_control_plc_1']['network_interfaces'][0]['private_ip_address'] }}"
+
+  - name: Print PLC1 IP 0
+    debug:
+      msg: "PLC1 IP: {{ plc1_ip_0 }}"
+
+  - name: Get PLC1 IP 1
+    set_fact:
+      plc1_ip_1: "{{ hostvars[team_name ~ '_control_plc_1']['network_interfaces'][1]['private_ip_address'] }}"
+
+  - name: Print PLC1 IP 1
+    debug:
+      msg: "PLC1 IP: {{ plc1_ip_1 }}"
+
+  # the plc has 2 ips due to virtualization
+  # always assign the dns record to the higher ip address
+  # e.g. plc1_ip_0 == 10.0.0.200 and plc1_ip_1 == 10.0.0.100 -> plc_ip = 10.0.0.200
+  - name: Determine higher PLC1 IP
+    set_fact:
+      plc1_ip: "{{ plc1_ip_1 if (plc1_ip_1.split('.')[-1]|int) > (plc1_ip_0.split('.')[-1]|int) else plc1_ip_0 }}"
+
+  - name: Print Selected PLC1 IP
+    debug:
+      msg: "Selected PLC1 IP: {{ plc1_ip }}"
+
+  - name: Add DNS records
+    community.windows.win_dns_record:
+      name: "{{ item.name }}"
+      type: "A"
+      value: "{{ item.ip }}"
+      zone: "{{ domain }}"
+      state: present
+    loop:
+      - { name: "SCADA", ip: "{{ scada_ip }}" }
+      - { name: "HIST", ip: "{{ historian_ip }}" }
+      - { name: "PLC1", ip: "{{ plc1_ip }}" }
+      - { name: "ENG1", ip: "{{ engineer_workstation_ip }}" }

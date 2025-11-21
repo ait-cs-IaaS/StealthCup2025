@@ -1,0 +1,255 @@
+---
+- name: Upgrade system and install security fixes (Debian)
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update APT cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install updates
+      ansible.builtin.apt:
+        upgrade: dist
+        autoclean: yes
+        autoremove: yes
+  roles:
+    - role: auditd
+        
+- name: Deploy and configure Historian
+  hosts: all
+  become: true
+  roles:
+    - role: set-hostname
+      vars:
+        new_hostname: hist
+    - role: grafana.grafana.grafana
+      vars:
+        grafana_alerting: {}
+        grafana_security:
+          admin_user: admin
+          admin_password: admin
+    - role: telegraf
+      become: true
+    - role: influxdb
+      become: true
+      vars:
+        influxdb_install_url: https://dl.influxdata.com/influxdb/releases/influxdb2_2.7.11-1_amd64.deb #https://github.com/influxdata/influxdb/releases/tag/v2.7.11
+        influxdb_install_package: influxdb2
+  vars:
+    new_hostname: hist
+    full_hostname: hist.plumetech-ot.local
+    plc_connstring: tcp://plc1.plumetech-ot.local:1502
+    influxdb_token: "{{ lookup('community.general.random_string', length=64, special=false) }}"
+    grafana_instance: hist.plumetech-ot.local
+    influxdb_org: "PlumeTech"
+    influxdb_bucket: "ChemTank Modbus Data"
+    influxdb_url: "http://localhost:8086"
+    influxdb_retention: "30d"
+    influxdb_admin_user: "admin"
+    influxdb_admin_password: "admi3242342335423ergn"
+    new_hostname: hist
+
+  tasks:
+    - name: Update apt package list
+      apt:
+        update_cache: yes
+        
+    - name: Install influxdb2
+      apt:
+          name: influxdb2
+          state: present
+    - name: Install influxdb2-cli
+      apt:
+          name: influxdb2-cli
+          state: present
+    - name: Install telegraf
+      apt:
+          name: telegraf
+          state: present
+
+    - name: Configure InfluxDB to listen on localhost
+      lineinfile:
+        path: /etc/influxdb/config.toml
+        regexp: '^http-bind-address'
+        line: 'http-bind-address = "127.0.0.1:8086"'
+        state: present
+      notify: Restart Influxdb
+  
+    - name: Check if InfluxDB is already set up
+      ansible.builtin.uri:
+        url: "{{ influxdb_url }}/api/v2/setup"
+        method: GET
+        return_content: true
+      register: influxdb_setup_status
+      changed_when: false
+      ignore_errors: true
+
+    - name: Run InfluxDB setup if needed
+      ansible.builtin.command:
+        cmd: >
+          influx setup --host {{ influxdb_url }}
+          --org "{{ influxdb_org }}"
+          --bucket "{{ influxdb_bucket }}"
+          --retention "{{ influxdb_retention }}"
+          --username "{{ influxdb_admin_user }}"
+          --password "{{ influxdb_admin_password }}"
+          --token "{{ influxdb_token }}"
+          --force
+      when: influxdb_setup_status.status == 200 and influxdb_setup_status.json.allowed == true
+      changed_when: true
+
+    - name: Store InfluxDB admin token securely
+      ansible.builtin.copy:
+        dest: "/root/influxdb_admin_token.txt"
+        content: "{{ influxdb_token }}"
+        mode: "0600"
+
+    - name: Create an InfluxDB admin token if not exists
+      ansible.builtin.command:
+        cmd: influx auth create --org "{{ influxdb_org }}" --all-access --description "Admin Token"
+      register: influxdb_admin_token_2
+      changed_when: true
+
+    - name: Extract the generated token from the output
+      ansible.builtin.set_fact:
+        influxdb_admin_token_2: "{{ influxdb_admin_token_2.stdout_lines[1].split('\t')[2] }}"
+
+    - name: Store the admin token in a secure file
+      ansible.builtin.copy:
+        dest: "/root/influxdb_admin_token_2.txt"
+        content: "{{ influxdb_admin_token_2 }}"
+        owner: root
+        group: root
+        mode: "0600"
+
+    - name: Display the stored admin token (for debugging)
+      ansible.builtin.debug:
+        msg: "InfluxDB Admin Token: {{ influxdb_admin_token_2 }}"
+
+    - name: Ensure Grafana service is enabled and started
+      ansible.builtin.service:
+        name: grafana-server
+        enabled: yes
+        state: started
+
+    - name: Configure Grafana
+      ansible.builtin.template:
+        dest: /etc/grafana/grafana.ini
+        src: grafana.ini.j2
+        owner: root
+        group: grafana
+        mode: "0644"
+      notify: Restart Grafana
+
+    - name: Ensure Grafana provisioning directory exists
+      ansible.builtin.file:
+        path: /var/lib/grafana/dashboards
+        state: directory
+        owner: grafana
+        group: grafana
+        mode: "0755"
+
+    - name: Add InfluxDB as a data source in Grafana
+      ansible.builtin.uri:
+        url: "http://localhost:3000/api/datasources"
+        method: POST
+        headers:
+          Content-Type: "application/json"
+          Authorization: "Basic {{ 'admin:admin' | b64encode }}"
+        body_format: json
+        body:
+          name: "InfluxDB"
+          type: "influxdb"
+          url: "{{ influxdb_url }}"
+          access: "proxy"
+          jsonData:
+            version: "Flux"
+            organization: "{{ influxdb_org }}"
+            defaultBucket: "{{ influxdb_bucket }}"
+          secureJsonData:
+            token: "{{ influxdb_admin_token_2 }}"
+        status_code: [200, 409]  # 409 means the data source already exists
+
+    - name: Get InfluxDB data source UID from Grafana (Using Basic Auth)
+      ansible.builtin.uri:
+        url: "http://localhost:3000/api/datasources"
+        method: GET
+        headers:
+          Content-Type: "application/json"
+          Authorization: "Basic {{ 'admin:admin' | b64encode }}"  # Base64 encode user:pass
+        return_content: true
+        status_code: 200
+      register: grafana_datasources
+    - name: Debug Grafana API response
+      debug:
+        var: grafana_datasources.json
+
+    - name: Extract the correct InfluxDB UID
+      set_fact:
+        influxdb_uid: "{{ grafana_datasources.json | selectattr('type', 'equalto', 'influxdb') | map(attribute='uid') | first }}"
+        
+    - name: Replace InfluxDB UID in the Grafana dashboard
+      ansible.builtin.template:
+        src: my_dashboard.json.j2
+        dest: /etc/grafana/provisioning/dashboards/my_dashboard.json
+        owner: grafana
+        group: grafana
+        mode: "0644"
+      notify: Restart Grafana
+
+    - name: Create provisioning config for dashboards
+      ansible.builtin.copy:
+        dest: /etc/grafana/provisioning/dashboards/default.yaml
+        content: |
+          apiVersion: 1
+          providers:
+            - name: "default"
+              orgId: 1
+              folder: ""
+              type: file
+              disableDeletion: false
+              updateIntervalSeconds: 10
+              options:
+                path: /etc/grafana/provisioning/dashboards
+        owner: grafana
+        group: grafana
+        mode: "0644"
+      notify: Restart Grafana
+
+    - name: Ensure Telegraf service is enabled and started
+      ansible.builtin.service:
+        name: telegraf
+        enabled: yes
+        state: started
+
+    - name: Configure Telegraf
+      ansible.builtin.template:
+        dest: /etc/telegraf/telegraf.conf
+        src: telegraf.conf.j2
+        owner: root
+        group: telegraf
+        mode: "0644"
+      notify: Restart Telegraf
+
+    - name: Ensure cloud-init preserves the hostname
+      ansible.builtin.lineinfile:
+        path: /etc/cloud/cloud.cfg
+        regexp: '^preserve_hostname: false'
+        line: 'preserve_hostname: true'
+      become: true
+
+  handlers:
+    - name: Restart Grafana
+      ansible.builtin.service:
+        name: grafana-server
+        state: restarted
+
+    - name: Restart Telegraf
+      ansible.builtin.service:
+        name: telegraf
+        state: restarted
+
+    - name: Restart Influxdb
+      ansible.builtin.service:
+        name: influxdb
+        state: restarted

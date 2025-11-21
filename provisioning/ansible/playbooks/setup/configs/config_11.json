@@ -1,0 +1,265 @@
+{
+    "Domains": [
+        {
+            "HostID": "enterprise_domain_controller",
+            "Domain": "PLUMETECH.LOCAL",
+            "DsrmPassword": "KVV12pBTvlWR2crEyBU1tdXf29s0rw",
+            "DomainUsers": [
+                {
+                    "Username": "PLUMETECH.LOCAL\\Rochelle",
+                    "Password": "O2emSxhXlo775GxSJivN1E6Om7vmTq",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Noel",
+                    "Password": "aI0trImrmVbSw9uzSyhM4QYsjQ4woA"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Nadine",
+                    "Password": "jlhow18691611",
+                    "HasPreAuthDisabled": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Catherine",
+                    "Password": "theworldinyourhand"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Darryl",
+                    "Password": "cat&rob58",
+                    "Description": "RDP access to JUMP.PLUMETECH-OT.LOCAL"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Susanne",
+                    "Password": "123456y7u8i9",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Jill",
+                    "Password": "BGWAwh4AfODvtKW2srQU7aRnb6eJtY"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\James",
+                    "Password": "e1i4bt6uyKw2wJsiph2lCDnexXy34H",
+                    "ServicePrincipalName": "GigaSVC/DC1.PLUMETECH.LOCAL:12345"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Vera",
+                    "Password": "2z2yzwOUsHYm9IyX3ewekSi42Ougzf",
+                    "HasPreAuthDisabled": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Kenneth",
+                    "Password": "z6OUbrs1gLoJJEnOdnicuvXEomPW0l",
+                    "ServicePrincipalName": "UltraSVC/DC1.PLUMETECH.LOCAL:45454"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Karin",
+                    "Password": "Z74X4d6NIhCTc4cfrcDqN1keG6xsqo",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Allison",
+                    "Password": "WH6NVSHFgdo2QR58wXtCePTWPZUWfU",
+                    "ServicePrincipalName": "MegaSVC/DC1.PLUMETECH.LOCAL:1337"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Janette",
+                    "Password": "123456y7u8i9",
+                    "ServicePrincipalName": "SuperSVC/DC1.PLUMETECH.LOCAL:54321"
+                },
+                {
+                    "Username": "PLUMETECH.LOCAL\\Lori",
+                    "Password": "tKBI9j0HAhkFUMMUBbTNv0Qd2wpAgJ",
+                    "IsDomainAdmin": true,
+                    "ServicePrincipalName": "BackupSVC/DC1.PLUMETECH.LOCAL:4444"
+                }
+            ]
+        },
+        {
+            "HostID": "dmz_domain_controller",
+            "Domain": "PLUMETECH-OT.LOCAL",
+            "DsrmPassword": "IImXpucwCDgs1dO9e8MeuwZsOy0v78",
+            "DomainUsers": [
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Michael",
+                    "Password": "scoobydoo"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Ted",
+                    "Password": "pvNLt0BpXY1EqryC4WPoQ4qoROZM8h"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Adam",
+                    "Password": "2pqU2jhW12t1O4YIQcGJ4jZDCuzsCH",
+                    "ServicePrincipalName": "OTSVC/DC1.PLUMETECH.LOCAL:7777",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Geoffrey",
+                    "Password": "SSj0cr9LPVPCLkgpqmob9xjuwJQlTl"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Donna",
+                    "Password": "z4rhtYg6rxG238cjgznrKyLokwLaz9",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Lori",
+                    "Password": "tKBI9j0HAhkFUMMUBbTNv0Qd2wpAgJ",
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Francis",
+                    "Password": "FPyZGDoc93SG3TS1bVU3NNf4crWfAi"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Santiago",
+                    "Password": "aZNDUlWsGppEoFgrGopnQH5Sob50aG"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Angie",
+                    "Password": "1mOk14AFoAFmyRkZNG4O80NLsdQiTP"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Crystal",
+                    "Password": "vOxAuZmYfwgbFXhsuKQ6Z321OMyft8",
+                    "HasPreAuthDisabled": true,
+                    "IsDomainAdmin": true
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Don",
+                    "Password": "0LotNSzh6KXf8zaf4GVVIFLjyssAc7"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Caroline",
+                    "Password": "xa9WM5B7tj3F66XbBTv81GVtMuVQGk"
+                },
+                {
+                    "Username": "PLUMETECH-OT.LOCAL\\Mindy",
+                    "Password": "wjzoPI6ZOCmyZ9WfcfNvpwAi5WcZR5",
+                    "HasPreAuthDisabled": true
+                }
+            ]
+        }
+    ],
+    "WindowsHosts": [
+        {
+            "HostID": "enterprise_domain_controller",
+            "Hostname": "DC1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "fpMBsAT6nAWh0jA3rV5U28TuIQ3x3e",
+            "DNSForwarderHostID": "dmz_domain_controller",
+            "GenericAllAccessUsers": [
+                "PLUMETECH.LOCAL\\Nadine"
+            ]
+        },
+        {
+            "HostID": "dmz_domain_controller",
+            "Hostname": "OTDC1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "Ca1vtBFGScMkS8yoYMQXvpRk4cymG3",
+            "DNSForwarderHostID": "enterprise_domain_controller",
+            "BiDirectionalTrustHostID": "enterprise_domain_controller",
+            "Fileshares": [
+                {
+                    "Name": "OT",
+                    "Path": "C:\\Fileshares\\OT",
+                    "Access": "PLUMETECH-OT.LOCAL\\Domain Users"
+                }
+            ]
+        },
+        {
+            "HostID": "enterprise_file_server",
+            "DCHostID": "enterprise_domain_controller",
+            "Hostname": "FS1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "Y6qPDqsgf2tIwmrirNdVrAQPiKT5Cy",
+            "DomainAccountUsername": "PLUMETECH.LOCAL\\Susanne",
+            "Fileshares": [
+                {
+                    "Name": "IT",
+                    "Path": "C:\\Fileshares\\IT",
+                    "Access": "PLUMETECH.LOCAL\\Domain Users"
+                }
+            ]
+        },
+        {
+            "HostID": "enterprise_client",
+            "DCHostID": "enterprise_domain_controller",
+            "Hostname": "CLI1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "3q3cwDDJA0U3oGGqTt9HE07XKT6hwV",
+            "DomainAccountUsername": "PLUMETECH.LOCAL\\Noel",
+            "RDPAccess": [
+                "PLUMETECH.LOCAL\\Noel",
+                "PLUMETECH.LOCAL\\Domain Users"
+            ]
+        },
+        {
+            "HostID": "dmz_jump",
+            "DCHostID": "dmz_domain_controller",
+            "Hostname": "JUMP",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "jpYidPpHMh5EUqnYHoXZwasddpf17k",
+            "DomainAccountUsername": "PLUMETECH-OT.LOCAL\\Michael",
+            "DomainAccountUsernameDocumentation": "PLUMETECH.LOCAL\\Darryl",
+            "RDPAccess": [
+                "PLUMETECH-OT.LOCAL\\Domain Users",
+                "PLUMETECH.LOCAL\\Darryl"
+            ]
+        },
+        {
+            "HostID": "supervision_engineer_workstation",
+            "Hostname": "ENG1",
+            "LocalAccountUsername": "Administrator",
+            "LocalAccountPassword": "e9o7EyX6I3RDmvBpPYTJosBnqejPbV"
+        }
+    ],
+    "LinuxHosts": [
+        {
+            "HostID": "supervision_scada",
+            "LocalAccounts": [
+                {
+                    "Username": "phillip",
+                    "Password": "pHyj47h8NDQMSCIB72DSR4Qvqdrpgx"
+                },
+                {
+                    "Username": "ubuntu",
+                    "Password": "u0JUKWE4dwTf7Sy3wEGKm45SjQdeDQ"
+                }
+            ]
+        },
+        {
+            "HostID": "dmz_historian",
+            "LocalAccounts": [
+                {
+                    "Username": "admin",
+                    "Password": "3xjceofVAgeYtfCDNN5kk1sgvZfDxY"
+                },
+                {
+                    "Username": "ubuntu",
+                    "Password": "BQxP5col15jo2yozyuwgHOKF9kXGH8"
+                }
+            ]
+        }
+    ],
+    "Software": [
+        {
+            "SoftwareID": "grafana",
+            "Username": "admin",
+            "Password": "3xjceofVAgeYtfCDNN5kk1sgvZfDxY",
+            "Salt": "pepper",
+            "Hash": "e26fd2a00668181d7ddec4f35ca44ed3c92a916bc8e8959dafec6c4ffbedfc2a95d9cf32ce21d9db97e3ea4737b8ccc89fb4"
+        },
+        {
+            "SoftwareID": "scada",
+            "Username": "admin",
+            "Password": "NPyljHnf7BUwjxoyZF7k",
+            "Hash": "8LEcRiPTny4E47D4KMv9Cy6UUxs="
+        },
+        {
+            "SoftwareID": "keepass",
+            "Password": "OctopusesAreJustAliensWhoGaveUp"
+        }
+    ]
+}

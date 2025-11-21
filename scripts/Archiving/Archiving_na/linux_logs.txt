@@ -1,0 +1,16 @@
+/root/.bash_history
+/var/ossec/logs/
+/var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/
+/var/ossec/stats/
+/var/ossec/logs/
+/var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/*
+/var/ossec/queue/ 
+/var/ossec/stats/
+/opt/VendorEDR/
+/home
+/var/log
+/var/lib/influxdb/
+/var/lib/grafana/
+/opt/scadalts/mysql/server/data/
+/opt/scadalts/mysql/server/mysqld.log
+/opt/scadalts/tomcat/server/logs/

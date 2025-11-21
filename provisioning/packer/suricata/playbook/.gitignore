@@ -1,0 +1,5 @@
+# Ignore roles and collections directories containing our dependent roles and collections
+roles/*
+!roles/.gitkeep
+collections/*
+!collections/.gitkeep

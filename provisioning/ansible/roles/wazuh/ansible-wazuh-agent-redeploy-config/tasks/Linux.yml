@@ -1,0 +1,31 @@
+---
+- name: Linux | Installing agent configuration (ossec.conf)
+  template:
+    src: var-ossec-etc-ossec-agent.conf.j2
+    dest: "{{ wazuh_dir }}/etc/ossec.conf"
+    owner: root
+    group: wazuh
+    mode: 0644
+  notify: restart wazuh-agent
+  tags:
+    - init
+    - config
+
+- name: Linux | Installing local_internal_options.conf
+  template:
+    src: var-ossec-etc-local-internal-options.conf.j2
+    dest: "{{ wazuh_dir }}/etc/local_internal_options.conf"
+    owner: root
+    group: wazuh
+    mode: 0640
+  notify: restart wazuh-agent
+  tags:
+    - init
+    - config
+
+- name: Linux | Ensure Wazuh Agent service is started and enabled
+  service:
+    name: wazuh-agent
+    enabled: true
+    state: started
+  tags: config

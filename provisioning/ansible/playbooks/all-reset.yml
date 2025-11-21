@@ -1,0 +1,24 @@
+- import_playbook: aws_backup_suricata.yml
+- import_playbook: all-network.yml
+- import_playbook: ./setup/_reset_dmz_jump_keepass.yml # removes scheduled task and autologon credentials
+- import_playbook: ./setup/_reset_enterprise_client_scheduled_ntlm_task.yml # updates kali ip and removes autologon credentials
+- import_playbook: ./setup/setup_scheduled_log_collection_task.yml
+- import_playbook: ./setup/start_wazuh_indexer.yml
+- import_playbook: ./setup/delete_wazuh_index.yml
+
+#- name: Reboot SCADA
+#  hosts: supervision:&scada
+#  gather_facts: false
+#  become: true
+#  tasks:
+#    - name: Reboot the machine
+#      reboot:
+
+#- name: Reboot SCADA
+#  hosts: control:&plc #todo fix
+#  gather_facts: false
+#  become: true
+#  tasks:
+#    - name: Reboot the machine
+#      reboot:
+

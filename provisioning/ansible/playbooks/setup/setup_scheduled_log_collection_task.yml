@@ -1,0 +1,46 @@
+---
+- name: Setup Scheduled Log Collection Task
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Remove existing Scheduled Task if it exists
+      win_shell: |
+        $TaskName = "StealthCupLogCollector"
+        if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) {
+          Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false
+        }
+
+    - name: Create output dir
+      win_shell: |
+        New-Item -Path "C:\Windows\LogCollect" -ItemType Directory -Force
+        icacls "C:\Windows\LogCollect" /remove "BUILTIN\Users" /T
+        icacls "C:\Windows\LogCollect" /remove "APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES" /T
+        icacls "C:\Windows\LogCollect" /remove "APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES" /T
+        icacls "C:\Windows\LogCollect" /grant "BUILTIN\Administrators:(F)" /T
+        icacls "C:\Windows\LogCollect" /grant "NT AUTHORITY\SYSTEM:(F)" /T
+        icacls "C:\Windows\LogCollect" /inheritance:r
+
+    - name: Create new Scheduled Task
+      win_shell: |
+        $Interval = 20 # interval in minutes
+        $Command = "whoami >> C:\whoami.txt"
+        $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -Command `"& { 
+            wevtutil epl System 'C:\Windows\LogCollect\System.evtx' /ow:true; 
+            wevtutil epl Application 'C:\Windows\LogCollect\Application.evtx' /ow:true; 
+            wevtutil epl Security 'C:\Windows\LogCollect\Security.evtx' /ow:true; 
+            wevtutil epl Setup 'C:\Windows\LogCollect\Setup.evtx' /ow:true; 
+            wevtutil epl 'Microsoft-Windows-Sysmon/Operational' 'C:\Windows\LogCollect\Microsoft-Windows-Sysmon-Operational.evtx' /ow:true; 
+            wevtutil epl 'Microsoft-Windows-Windows Defender/Operational' 'C:\Windows\LogCollect\Microsoft-Windows-Windows Defender-Operational.evtx' /ow:true; 
+            wevtutil epl 'Microsoft-Windows-PowerShell/Operational' 'C:\Windows\LogCollect\Microsoft-Windows-PowerShell-Operational.evtx' /ow:true; 
+            wevtutil epl 'Microsoft-Windows-TaskScheduler/Operational' 'C:\Windows\LogCollect\Microsoft-Windows-TaskScheduler-Operational.evtx' /ow:true; 
+            wevtutil epl 'Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational' 'C:\Windows\LogCollect\Microsoft-Windows-TerminalServices-RemoteConnectionManager-Operational.evtx' /ow:true 
+        }`""
+        $Trigger1 = New-ScheduledTaskTrigger -AtStartup
+        $Trigger2 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $Interval)
+        $Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+        Register-ScheduledTask -TaskName "StealthCupLogCollector" -Action $Action -Trigger $Trigger1, $Trigger2 -Principal $Principal
+
+    - name: Start the Scheduled Task
+      win_shell: |
+        Start-ScheduledTask -TaskName "StealthCupLogCollector"

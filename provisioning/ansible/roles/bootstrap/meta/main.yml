@@ -1,0 +1,17 @@
+---
+dependencies: []
+galaxy_info:
+  role_name: bootstrap
+  author: Benjamin Akhras (b3n4kh)
+  description: Bootstrap
+  license: GPLv3
+  min_ansible_version: "2.10"
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - development

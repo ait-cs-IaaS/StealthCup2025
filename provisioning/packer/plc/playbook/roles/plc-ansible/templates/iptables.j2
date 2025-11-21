@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Set the interface and VM IP
+NAT_INTERFACE="ens5"
+VM_IP="192.168.122.76"
+ROUTING_TABLE="100"
+
+# Get the current IP address of the NAT interface
+ENS_IP=$(ip -4 addr show "$NAT_INTERFACE" | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+# Get the default gateway dynamically
+DEFAULT_GATEWAY=$(ip route show default | awk '/default/ {print $3}' | head -1)
+
+# Validate IP and gateway
+if [[ -z "$ENS_IP" || -z "$DEFAULT_GATEWAY" ]]; then
+    echo "Error: Could not retrieve IP for $NAT_INTERFACE or default gateway."
+    exit 1
+fi
+
+echo "Using ens IP: $ENS_IP"
+echo "Using default gateway: $DEFAULT_GATEWAY"
+
+# Flush existing NAT and filter rules
+sudo iptables -t nat -F
+sudo iptables -F
+
+# DNAT: Redirect incoming traffic to VM
+sudo iptables -t nat -A PREROUTING -i "$NAT_INTERFACE" -d "$ENS_IP" -j DNAT --to-destination "$VM_IP"
+
+# SNAT: Rewrite source address for outgoing traffic
+sudo iptables -t nat -A POSTROUTING -o "$NAT_INTERFACE" -s "$VM_IP" -j SNAT --to-source "$ENS_IP"
+
+# Allow forwarding between interfaces
+sudo iptables -A FORWARD -i "$NAT_INTERFACE" -o virbr0 -d "$VM_IP" -j ACCEPT
+sudo iptables -A FORWARD -o "$NAT_INTERFACE" -i virbr0 -s "$VM_IP" -j ACCEPT
+
+# Add custom routing table if not already present
+grep -qxF "$ROUTING_TABLE enstable" /etc/iproute2/rt_tables || echo "$ROUTING_TABLE enstable" | sudo tee -a /etc/iproute2/rt_tables
+
+# Add route in table 100 for the default gateway
+sudo ip route add default via "$DEFAULT_GATEWAY" dev "$NAT_INTERFACE" table "$ROUTING_TABLE"
+
+# Create rule to use table 100 for VM traffic
+sudo ip rule add from "$VM_IP" lookup "$ROUTING_TABLE"
+
+echo "NAT and routing setup complete."

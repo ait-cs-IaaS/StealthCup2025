@@ -1,0 +1,276 @@
+---
+- name: Install Wazuh Agent on Linux Clients
+  hosts: historian:scada:!control
+  ignore_unreachable: true
+  become: yes
+  become_user: root
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:
+      - address: "wazuh.plumetech.local"
+        port: 1514
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'https'
+        api_user: wazuh
+        max_retries: 5
+        retry_interval: 5
+
+- name: Install Wazuh Agent on Windows Clients
+  hosts: jump:client:engineer_workstation
+  ignore_unreachable: true
+  become: yes
+  become_user: administrator
+  become_method: runas
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:
+      - address: "wazuh.plumetech.local"
+        port: 1514
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'https'
+        api_user: wazuh
+        max_retries: 5
+        retry_interval: 5
+    wazuh_agent_localfiles:
+      windows:
+        - format: 'eventlog'
+          location: 'Application'
+        - format: 'eventchannel'
+          location: 'Security'
+          query: 'Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and EventID != 4656 and EventID != 4658 and EventID != 4660 and EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]'
+        - format: 'eventlog'
+          location: 'System'
+        - format: 'syslog'
+          location: 'active-response\active-responses.log'
+        - format: 'eventchannel'
+          location: 'Microsoft-Windows-Sysmon/Operational'
+          query: 'Event/System[*]'
+    wazuh_agent_syscheck:
+      frequency: 1800
+      scan_on_start: 'yes'
+      auto_ignore: 'no'
+      win_audit_interval: 60
+      skip_nfs: 'yes'
+      skip_dev: 'yes'
+      skip_proc: 'yes'
+      skip_sys: 'yes'
+      process_priority: 10
+      max_eps: 100
+      sync_enabled: 'yes'
+      sync_interval: '5m'
+      sync_max_interval: '1h'
+      sync_max_eps: 10
+      ignore_win:
+        - '.log$|.htm$|.jpg$|.png$|.chm$|.pnf$|.evtx$'
+      win_directories:
+        - dirs: '%WINDIR%'
+          checks: 'recursion_level="0" restrict="regedit.exe$|system.ini$|win.ini$"'
+        - dirs: '%WINDIR%\SysNative'
+          checks: >-
+            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|
+            net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe|subst.exe$"
+        - dirs: '%WINDIR%\SysNative\drivers\etc%'
+          checks: 'recursion_level="0"'
+        - dirs: '%WINDIR%\SysNative\wbem'
+          checks: 'recursion_level="0" restrict="WMIC.exe$"'
+        - dirs: '%WINDIR%\SysNative\WindowsPowerShell\v1.0'
+          checks: 'recursion_level="0" restrict="powershell.exe$"'
+        - dirs: '%WINDIR%\SysNative'
+          checks: 'recursion_level="0" restrict="winrm.vbs$"'
+        - dirs: '%WINDIR%\System32'
+          checks: >-
+            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|
+            netsh.exe$|reg.exe$|regedit.exe$|regedt32.exe$|regsvr32.exe$|runas.exe$|sc.exe$|schtasks.exe$|sethc.exe$|subst.exe$"
+        - dirs: '%WINDIR%\System32\drivers\etc'
+          checks: 'recursion_level="0"'
+        - dirs: '%WINDIR%\System32\wbem'
+          checks: 'recursion_level="0" restrict="WMIC.exe$"'
+        - dirs: '%WINDIR%\System32\WindowsPowerShell\v1.0'
+          checks: 'recursion_level="0" restrict="powershell.exe$"'
+        - dirs: '%WINDIR%\System32'
+          checks: 'recursion_level="0" restrict="winrm.vbs$"'
+        - dirs: '%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup'
+          checks: 'realtime="yes"'
+        - dirs: '%SystemDrive%\scripts'
+          checks: 'realtime="yes" restrict="backup.ps1$"'
+      windows_registry:
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\cmdfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\comfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\exefile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\piffile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\AllFilesystemObjects'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Directory'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Protocols'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Policies'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Security'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services'
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\KnownDLLs'
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\SecurePipeServers\winreg'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnceEx'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\URL'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Active Setup\Installed Components'
+          arch: "both"
+      windows_registry_ignore:
+        - key: 'HKEY_LOCAL_MACHINE\Security\Policy\Secrets'
+        - key: 'HKEY_LOCAL_MACHINE\Security\SAM\Domains\Account\Users'
+        - key: '\Enum$'
+          type: "sregex"
+
+- name: Install Wazuh Agent on Suricata Host
+  hosts: suricata
+  become: yes
+  become_user: root
+  ignore_unreachable: true
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:
+      - address: "wazuh.plumetech.local"
+        port: 1514
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'https'
+        api_user: wazuh
+        max_retries: 5
+        retry_interval: 5
+    wazuh_agent_localfiles:
+      debian:
+        - format: 'syslog'
+          location: '/var/log/auth.log'
+        - format: 'syslog'
+          location: '/var/log/syslog'
+        - format: 'syslog'
+          location: '/var/log/dpkg.log'
+        - format: 'syslog'
+          location: '/var/log/kern.log'
+      linux:
+        - format: 'syslog'
+          location: "{{ wazuh_dir }}/logs/active-responses.log"
+        - format: 'full_command'
+          command: 'last -n 20'
+          frequency: '360'
+        - format: 'command'
+          command: df -P
+          frequency: '360'
+        - format: 'full_command'
+          command: netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d
+          alias: 'netstat listening ports'
+          frequency: '360'
+        - format: 'json'
+          location: '/var/log/suricata/eve.json'
+          label:
+            - key: 'source'
+              value: 'suricata'
+    wazuh_agent_enrollment:
+      enabled: 'yes'
+      manager_address: ''
+      port: 1515
+      agent_name: "suricata" # we hardcode it here because packer needs it!
+      groups: ''
+      agent_address: ''
+      ssl_ciphers: HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH
+      server_ca_path: ''
+      agent_certificate_path: ''
+      agent_key_path: ''
+      authorization_pass_path: "{{ wazuh_dir }}/etc/authd.pass"
+      authorization_pass_path_macos: "/etc/authd.pass"
+      auto_method: 'no'
+      delay_after_enrollment: 20
+      use_source_ip: 'no'
+
+
+- name: Install Wazuh on domain controllers
+  hosts: dc
+  ignore_unreachable: true
+  become: yes
+  become_user: administrator
+  become_method: runas
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:
+      - address: "wazuh.plumetech.local"
+        port: 1514
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'https'
+        api_user: wazuh
+        max_retries: 5
+        retry_interval: 5
+    wazuh_agent_localfiles:
+      windows:
+        - format: 'eventlog'
+          location: 'Application'
+        - format: 'eventchannel'
+          location: 'Security'
+          query: 'Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and EventID != 4656 and EventID != 4658 and EventID != 4660 and EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]'
+        - format: 'eventlog'
+          location: 'System'
+        - format: 'syslog'
+          location: 'active-response\active-responses.log'
+        - format: 'syslog'
+          location: '%PROGRAMDATA%\AIT\LDAPQueryLogParser-%y-%m-%d.log'
+        - format: 'eventchannel'
+          location: 'Microsoft-Windows-Sysmon/Operational'
+          query: 'Event/System[*]'
+
+- hosts: dc
+  name: Copy internal options for Wazuh
+  tasks:
+    - name: Copy internal options for Wazuh
+      ansible.builtin.win_copy:
+        src: ../roles/wazuh/local_internal_options.conf
+        dest: 'C:\Program Files (x86)\ossec-agent\local_internal_options.conf'
+
+- hosts: enterprise:&fs
+  ignore_unreachable: true
+  become: yes
+  become_user: administrator
+  become_method: runas
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:
+      - address: "wazuh.plumetech.local"
+        port: 1514
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'https'
+        api_user: wazuh
+        max_retries: 5
+        retry_interval: 5
+    wazuh_agent_localfiles:
+      windows:
+        - format: 'eventlog'
+          location: 'Application'
+        - format: 'eventchannel'
+          location: 'Security'
+          query: 'Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and EventID != 4656 and EventID != 4658 and EventID != 4660 and EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]'
+        - format: 'eventlog'
+          location: 'System'
+        - format: 'syslog'
+          location: 'active-response\active-responses.log'
+        - format: 'eventchannel'
+          location: 'Microsoft-Windows-Sysmon/Operational'
+          query: 'Event/System[*]'

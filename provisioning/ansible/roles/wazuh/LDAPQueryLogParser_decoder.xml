@@ -1,0 +1,15 @@
+<!-- 
+2024-09-04T07:51:50.372+00:00 enterprise-dc.enterprise.local LDAPQueryLogParser: date=2024-09-04 time=07:51:50 hostname=enterprise-dc.enterprise.local srcip=10.0.0.156 win.eventdata.ipAddress=::ffff:10.0.0.156 srcport=51825 user=ENTERPRISE\ENTERPRISE-FS$ filter="( & ( !  (flags&2) )  (gPCMachineExtensionNames=[*])  ( |  (distinguishedName=CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=enterprise,DC=local) ) )" scope=subtree startingnode=cn=policies,cn=system,DC=enterprise,DC=local
+-->
+
+<decoder name="LDAPQueryLogParser">
+  <program_name>LDAPQueryLogParser</program_name>
+</decoder>
+
+<decoder name="LDAPQueryLogParser">
+  <parent>LDAPQueryLogParser</parent>
+  <regex type="pcre2">date=(\d+-\d+-\d+) time=(\d+:\d+:\d+) hostname=(\S+) srcip=(\S+) win\.eventdata\.ipAddress=(\S+) srcport=(\S+) user=(\S+) filter="([a-zA-Z0-9\(\)&!|{}\[\]*,;=\s\-\'\$]+)" scope=(\S+) startingnode=(\S+) attributeselection=(\S+)</regex>
+  <order>date, time, hostname, srcip, win.eventdata.ipAddress, srcport, user, filter, scope, startingnode, attributeselection</order>
+</decoder>
+
+

@@ -1,0 +1,73 @@
+- name: Post-Deployment Stuff on JUMP
+  hosts: dmz:&jump
+  gather_facts: false
+  become: yes
+  become_user: administrator
+  become_method: runas
+
+  tasks:
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Debug the extracted team name
+      debug:
+        msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+    - name: Get environment ID
+      set_fact:
+        environment_id: "{{ lookup('vars', team_name ~ '_environment_id') }}"
+
+    - name: Debug environment ID
+      debug:
+        msg: "Environment ID for Team {{ team_name }} is {{ environment_id }}"
+
+    - name: Set config file
+      set_fact:
+        configuration_file: "./configs/config_{{ environment_id }}.json"
+
+    - name: Load configuration JSON from local machine
+      set_fact:
+        configuration_json: "{{ lookup('file', configuration_file) | from_json }}"
+
+    - name: Extract machine name from inventory_hostname
+      set_fact:
+        machine_name: "{{ inventory_hostname.split('_', 1)[1] if '_' in inventory_hostname else inventory_hostname }}"
+
+    - name: Get workstation configuration
+      set_fact:
+        workstation_configuration: >-
+          {{ configuration_json['WindowsHosts'] | selectattr('HostID', 'equalto', machine_name) | list | first | default({}) }}
+
+    - name: Get RDP Users from configuration
+      set_fact:
+        rdp_users_configuration: >-
+          {{ workstation_configuration['RDPAccess'] | default([]) }}
+
+    - name: Display RDP Users from configuration
+      debug:
+        msg: "{{ rdp_users_configuration }}"
+
+    - name: Get Remote Desktop Users from machine
+      win_shell: |
+        net localgroup "Remote Desktop Users"
+      register: rdp_users
+
+    - name: Display Remote Desktop Users from machine
+      debug:
+        msg: "{{ rdp_users.stdout_lines }}"
+        
+    - name: Add users to Remote Desktop Users group
+      win_group_membership:
+        name: "Remote Desktop Users"
+        members: "{{ rdp_users_configuration }}"
+        state: present
+
+    - name: Get Remote Desktop Users from machine (again)
+      win_shell: |
+        net localgroup "Remote Desktop Users"
+      register: rdp_users
+
+    - name: Display Remote Desktop Users from machine (again)
+      debug:
+        msg: "{{ rdp_users.stdout_lines }}"

@@ -1,0 +1,20 @@
+---
+- name: Copy Engineer_Documents to Windows host Documents folder
+  hosts: engineer_workstation
+  gather_facts: true
+  vars:
+    source_folder: "templates/Engineering_Documents"
+    destination_folder: "{{ ansible_env.USERPROFILE }}\\Documents\\"
+    service_name: plc-vm.service
+
+  tasks:
+    - name: Ensure destination directory exists
+      win_file:
+        path: "{{ destination_folder }}"
+        state: directory
+
+    - name: Copy Engineer_Documents folder to Windows Documents
+      win_copy:
+        src: "{{ source_folder }}"
+        dest: "{{ destination_folder }}"
+

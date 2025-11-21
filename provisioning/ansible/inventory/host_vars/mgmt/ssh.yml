@@ -1,0 +1,3 @@
+---
+ansible_ssh_common_args: "-o ControlMaster=auto -o ControlPersist=30m -o StrictHostKeyChecking=no"
+ait_ssh_use_proxy: false

@@ -1,0 +1,13 @@
+sleep 5
+
+fsck.ext2 -y {{ os_home }}/{{ os_user }}/plc/images/rootfs.ext2
+
+qemu-system-arm \
+-machine virt \
+-cpu cortex-a15 -smp 2 \
+-m 512 \
+-nographic \
+-no-reboot \
+-kernel images/zImage -append "rootwait root=/dev/vda console=ttyAMA0" \
+-drive file={{ os_home }}/{{ os_user }}/plc/images/rootfs.ext2,if=none,format=raw,id=hd0 -device virtio-blk-device,drive=hd0 \
+-netdev bridge,id=br0,br=virbr0 -device virtio-net-device,netdev=br0

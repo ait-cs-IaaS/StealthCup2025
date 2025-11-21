@@ -1,0 +1,17 @@
+---
+dependencies: []
+galaxy_info:
+  role_name: mirror
+  author: Benjamin Akhras (b3n4kh)
+  license: GPLv3
+  description: Mirror
+  min_ansible_version: "2.10"
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - development

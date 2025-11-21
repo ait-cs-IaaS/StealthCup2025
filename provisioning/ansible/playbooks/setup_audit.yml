@@ -1,0 +1,56 @@
+- name: Enable and Configure Linux Audit Logs
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Install auditd package
+      ansible.builtin.package:
+        name: auditd
+        state: present
+
+    - name: Ensure auditd service is enabled and started
+      ansible.builtin.service:
+        name: auditd
+        state: started
+        enabled: yes
+
+    - name: Configure auditd rules
+      ansible.builtin.copy:
+        dest: /etc/audit/rules.d/audit.rules
+        content: |
+          ## Log file access
+          -w /var/log/auth.log -p wa -k authlog
+          -w /var/log/syslog -p wa -k syslog
+
+          ## Monitor sudo commands
+          -w /etc/sudoers -p wa -k sudoers
+          -w /var/log/sudo.log -p wa -k sudo
+
+          ## Log changes to system files
+          -w /etc/passwd -p wa -k passwd_changes
+          -w /etc/shadow -p wa -k shadow_changes
+          -w /etc/group -p wa -k group_changes
+
+          ## Log executions of binaries
+          -a always,exit -F arch=b64 -S execve -k exec_tracking
+          -a always,exit -F arch=b32 -S execve -k exec_tracking
+
+          ## Log modifications to audit logs
+          -w /var/log/audit/ -p wa -k audit_log
+
+          ## Make the logs immutable (cannot be changed after startup)
+          -e 2
+      notify: Restart auditd
+
+    - name: Configure auditd.conf for persistent logging
+      ansible.builtin.lineinfile:
+        path: /etc/audit/auditd.conf
+        regexp: "^max_log_file_action"
+        line: "max_log_file_action = ROTATE"
+      notify: Restart auditd
+
+  handlers:
+    - name: Restart auditd
+      ansible.builtin.service:
+        name: auditd
+        state: restarted

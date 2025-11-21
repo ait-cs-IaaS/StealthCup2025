@@ -1,0 +1,8 @@
+{
+    "dmz_domain_controller": "10.0.24.43",
+    "dmz_jump": "10.0.24.44",
+    "enterprise_client": "10.0.24.29",
+    "enterprise_domain_controller": "10.0.24.11",
+    "enterprise_file_server": "10.0.24.12",
+    "enterprise_kali": "10.0.24.30"
+}

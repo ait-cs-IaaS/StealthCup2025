@@ -1,0 +1,12 @@
+---
+- name: Bootstrap
+  hosts: all
+  roles:
+    - bootstrap
+
+- name: Mirror
+  hosts:
+    - mirror
+  become: true
+  roles:
+    - mirror

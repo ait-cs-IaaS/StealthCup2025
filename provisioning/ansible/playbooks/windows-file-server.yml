@@ -1,0 +1,5 @@
+---
+- name: Configure File Server
+  hosts: enterprise_file_server
+  roles:
+  - ../roles/windows/general-file-server

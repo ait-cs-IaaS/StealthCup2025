@@ -1,0 +1,178 @@
+- name: Installs necessary packages
+  ansible.builtin.package:
+    name:
+      - qemu-system-arm
+      - qemu-system
+      - libvirt-daemon-system
+      - bridge-utils
+      - tmuxinator
+    state: present
+
+- name: Create qemu directory
+  ansible.builtin.file:
+    path: "/etc/qemu"
+    state: directory
+    mode: '0755' 
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+
+- name: Write 'allow virbr0' to /etc/qemu/bridge.conf
+  ansible.builtin.lineinfile:
+    path: /etc/qemu/bridge.conf
+    line: 'allow virbr0'
+    create: yes
+    mode: '0644'
+
+#echo "<network>
+#  <name>default</name>
+#  <uuid>97830d6b-afe2-476f-81f1-7e8c7a3b0049</uuid>
+#  <forward mode='open' />
+#  <bridge name='virbr0' stp='on' delay='0'/>
+#  <mac address='52:54:00:b5:13:51'/>
+#  <ip address='192.168.122.1' netmask='255.255.255.0'>
+#    <dhcp>
+#      <range start='192.168.122.76' end='192.168.122.76'/>
+#    </dhcp>
+#  </ip>
+#</network>" | virsh net-define /dev/stdin && virsh net-destroy default && virsh net-start default && virsh net-autostart default
+
+- name: Stop and remove existing default network
+  command: virsh net-destroy default
+  ignore_errors: true
+
+- name: Undefine existing default network
+  command: virsh net-undefine default
+  ignore_errors: true
+
+- name: Create new default network XML file
+  copy:
+    dest: "/tmp/default_network.xml"
+    content: |
+      <network>
+        <name>default</name>
+        <uuid>97830d6b-afe2-476f-81f1-7e8c7a3b0049</uuid>
+        <forward mode='open'/>
+        <bridge name='virbr0' stp='on' delay='0'/>
+        <mac address='52:54:00:b5:13:51'/>
+        <ip address='192.168.122.1' netmask='255.255.255.0'>
+          <dhcp>
+            <range start='192.168.122.76' end='192.168.122.76'/>
+          </dhcp>
+        </ip>
+      </network>
+
+- name: Define new default network
+  command: virsh net-define /tmp/default_network.xml
+
+- name: Start new default network
+  command: virsh net-start default
+
+- name: Enable auto-start for default network
+  command: virsh net-autostart default
+
+- name: Upload image tar.gz to the target machine
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/{{ image_filename }}"
+    dest: "{{ os_home }}/{{ os_user }}/{{ image_filename }}"
+    mode: '0644'
+
+- name: Ensure the directory {{ os_home }}/{{ os_user }}/plc exists
+  ansible.builtin.file:
+    path: "{{ os_home }}/{{ os_user }}/plc"
+    state: directory
+    mode: '0755'
+
+- name: Unpack image tar.gz into {{ os_home }}/{{ os_user }}
+  ansible.builtin.unarchive:
+    src: "{{ os_home }}/{{ os_user }}/{{ image_filename }}"
+    dest: "{{ os_home }}/{{ os_user }}"
+    remote_src: yes
+
+- name: Copy script that runs startup.sh in tmux session
+  ansible.builtin.template:
+    src: tmux.j2
+    dest: "{{ os_home }}/{{ os_user }}/plc/tmux.sh"
+    mode: '0755'
+
+- name: Copy script that runs plc
+  ansible.builtin.template:
+    src: startup-plc.j2
+    dest: "{{ os_home }}/{{ os_user }}/plc/startup.sh"
+    mode: '0755'
+
+- name: Copy script that sets up nat to plc
+  ansible.builtin.template:
+    src: iptables.j2
+    dest: "{{ os_home }}/{{ os_user }}/plc/setup-nat.sh"
+    mode: '0755'
+
+- name: Ensure startup.sh is executable
+  ansible.builtin.file:
+    path: "{{ os_home }}/{{ os_user }}/plc/startup.sh"
+    mode: '0755'
+
+- name: Ensure tmux.sh is executable
+  ansible.builtin.file:
+    path: "{{ os_home }}/{{ os_user }}/plc/tmux.sh"
+    mode: '0755'
+
+- name: Ensure setup-nat.sh is executable
+  ansible.builtin.file:
+    path: "{{ os_home }}/{{ os_user }}/plc/setup-nat.sh"
+    mode: '0755'
+
+- name: Enable IP forwarding
+  copy:
+    dest: /etc/sysctl.d/99-custom.conf
+    content: "net.ipv4.ip_forward=1"
+    mode: '0644'
+
+- name: Create systemd service file for running startup.sh via tmux.sh
+  ansible.builtin.template:
+    src: qemu.j2
+    dest: /etc/systemd/system/qemu.service
+    mode: '0644'
+  notify: reload systemd
+
+- name: start and enable qemu.service to start on boot
+  ansible.builtin.systemd:
+    name: qemu.service
+    daemon-reload: true
+    enabled: true
+    state: stopped
+  notify: reload systemd
+
+- name: Start QEMU in the background
+  ansible.builtin.shell: "nohup sudo ./startup.sh > /tmp/qemu.log 2>&1 &"
+  args:
+    chdir: "{{ os_home }}/{{ os_user }}/plc"
+  async: 0
+  poll: 0
+
+- name: Wait for 180 seconds # to boot the plc
+  ansible.builtin.pause:
+    seconds: 180
+
+- name: Kill all QEMU processes
+  ansible.builtin.command: killall qemu-system-arm
+  ignore_errors: yes
+
+- name: Run sync to flush filesystem buffers
+  ansible.builtin.command: sync
+
+- name: Wait for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Run filesystem check on rootfs.ext2
+  ansible.builtin.command: fsck.ext2 -y {{ os_home }}/{{ os_user }}/plc/images/rootfs.ext2
+  ignore_errors: yes
+
+
+
+
+
+
+
+
+

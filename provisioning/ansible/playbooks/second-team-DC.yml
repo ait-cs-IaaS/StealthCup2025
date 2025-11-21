@@ -1,0 +1,32 @@
+---
+- name: Second Team Domain Controller Wazuh Agent
+  hosts: enterprise_domain_controller
+  ignore_unreachable: true
+  become: yes
+  become_user: administrator
+  become_method: runas
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:
+      - address: "{{ hostvars['wazuh']['private_ip_address'] }}"
+        port: 1514
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'https'
+        api_user: wazuh
+        max_retries: 5
+        retry_interval: 5
+    wazuh_agent_localfiles:
+      windows:
+        - format: 'eventlog'
+          location: 'Application'
+        - format: 'eventchannel'
+          location: 'Security'
+          query: 'Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and EventID != 4656 and EventID != 4658 and EventID != 4660 and EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]'
+        - format: 'eventlog'
+          location: 'System'
+        - format: 'syslog'
+          location: 'active-response\active-responses.log'
+        - format: 'syslog'
+          location: '%PROGRAMDATA%\AIT\LDAPQueryLogParser-%y-%m-%d.log'

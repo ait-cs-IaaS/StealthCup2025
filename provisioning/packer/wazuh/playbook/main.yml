@@ -1,0 +1,26 @@
+---
+- name: Upgrade system and install security fixes (Debian)
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update APT cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install updates
+      ansible.builtin.apt:
+        upgrade: dist
+        autoclean: yes
+        autoremove: yes
+  roles:
+    - role: auditd
+    
+- hosts: all
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: set-hostname
+      vars:
+        new_hostname: wazuh
+
+- import_playbook: ../../../ansible/playbooks/wazuh-single.yml

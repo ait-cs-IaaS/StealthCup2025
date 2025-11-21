@@ -1,0 +1,29 @@
+---
+- name: Retrieve log files from Windows hosts for archiving purposes.
+  hosts: windows
+  gather_facts: false
+  become_method: runas
+  become: yes
+  become_user: Administrator
+
+  tasks:
+    - name: Define remote paths
+      set_fact:
+        cylr_exe_path: "C:\\Windows\\Temp\\CyLR.exe"
+        cylr_output_zip: "C:\\Windows\\Temp\\cylr_out.zip"
+
+    - name: Copy CyLR binary to remote Windows host
+      ansible.builtin.copy:
+        src: "helper_binaries/CyLR.exe"
+        dest: "{{ cylr_exe_path }}"
+        mode: '0755'
+
+    - name: Execute CyLR tool on remote Windows host
+      ansible.windows.win_shell: "{{ cylr_exe_path }} -od C:\\Windows\\Temp\\ -of cylr_out.zip"
+
+    - name: Fetch CyLR output zip from remote Windows host
+      ansible.builtin.fetch:
+        src: "{{ cylr_output_zip }}"
+        dest: "~/retrieved_logs/windows/{{ inventory_hostname }}_{{ lookup('pipe', 'uuidgen') }}/cylr_out.zip"
+        flat: yes
+

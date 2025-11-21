@@ -1,0 +1,73 @@
+- name: Add iptables drop rule for suricata icmp messages
+  hosts: suricata
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Add iptables rule to drop ICMP port-unreachable messages
+      ansible.builtin.iptables:
+        chain: OUTPUT
+        protocol: icmp
+        icmp_type: port-unreachable
+        jump: DROP
+        
+    - name: Upload the backup script
+      copy:
+        src: ../../../portal/backup_to_aws.py
+        dest: /root/backup_to_aws.py
+
+    - name: Add a cron job to run the backup
+      ansible.builtin.cron:
+        name: "Run backup suricata"
+        job: "python3 /root/backup_to_aws.py -f /var/log/suricata -n uploadbackup/suircata/{{ inventory_hostname.split('_')[0] }} -dt -b >> /root/backup_suricata.log 2>&1"
+        minute: "27,57"
+        user: root
+
+- name: Setup Suricata systemd override with VXLAN BPF filter
+  hosts: suricata
+  gather_facts: true
+  become: true
+  vars:
+    host_ip: "{{ ansible_default_ipv4.address }}"  # Replace with another fact if needed
+
+  tasks:
+    - name: Ensure suricata override directory exists
+      file:
+        path: /etc/systemd/system/suricata.service.d
+        state: directory
+        mode: '0755'
+
+    - name: Create suricata systemd override with BPF filter
+      copy:
+        dest: /etc/systemd/system/suricata.service.d/override.conf
+        mode: '0644'
+        content: |
+          [Unit]
+          Description=Suricata IDS/IDP daemon
+          After=network.target network-online.target
+          Requires=network-online.target
+          Documentation=man:suricata(8) man:suricatasc(8)
+          Documentation=https://suricata.io/documentation/
+
+          [Service]
+          Type=forking
+          #Environment=LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4
+          PIDFile=/run/suricata.pid
+          ExecStart=
+          ExecStart=/usr/bin/suricata -D --af-packet -c /etc/suricata/suricata.yaml --pidfile /run/suricata.pid udp dst port 4789 and dst host {{ host_ip }}
+          ExecReload=/usr/bin/suricatasc -c reload-rules ; /bin/kill -HUP $MAINPID
+          ExecStop=/usr/bin/suricatasc -c shutdown
+          Restart=on-failure
+          ProtectSystem=full
+          ProtectHome=true
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd daemon
+      command: systemctl daemon-reload
+
+    - name: Restart suricata service
+      systemd:
+        name: suricata
+        state: restarted
+        enabled: true

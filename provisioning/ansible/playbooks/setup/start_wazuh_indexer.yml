@@ -1,0 +1,10 @@
+- name: Start Wazuh Indexer Service
+  hosts: monitoring:&wazuh
+  become: true
+  #strategy: free
+
+  tasks:
+    - name: Start wazuh-indexer service
+      systemd:
+        name: wazuh-indexer
+        state: started

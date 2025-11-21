@@ -1,0 +1,60 @@
+- name: Enable SID-Hostory on Domain Trust
+  win_shell: netdom trust plumetech-ot.local /domain:plumetech.local /enablesidhistory:yes
+
+- name: Create new privileged group VEEAM
+  ansible.windows.win_powershell:
+    script: |
+      Import-Module ActiveDirectory
+      if (Test-Path 'AD:\CN=VEEAM,CN=Users,DC=PLUMETECH-OT,DC=LOCAL') {
+        $Ansible.Changed = $false
+        $Ansible.Result = "done"
+      } else { 
+        $domainName = "plumetech-ot.local"
+        $groupName = "VEEAM"
+        $groupDescription = "VEEAM Backup"
+        New-ADGroup -Name $groupName -Description $groupDescription -GroupScope Global -Path "CN=Users,DC=plumetech-ot,DC=local"
+        $groupDN = Get-ADGroup -Identity $groupName
+        $acl = get-acl 'AD:\CN=OTDC1,OU=Domain Controllers,DC=PLUMETECH-OT,DC=LOCAL'
+        $accessRule = New-Object System.DirectoryServices.ActiveDirectoryAccessRule($groupDN.SID, [System.DirectoryServices.ActiveDirectoryRights]::GenericAll, [System.Security.AccessControl.AccessControlType]::Allow)
+        $acl.AddAccessRule($accessRule)
+        Set-Acl 'AD:\CN=OTDC1,OU=Domain Controllers,DC=PLUMETECH-OT,DC=LOCAL' $acl
+        net localgroup administrators /add plumetech-ot\veeam
+        $Ansible.Changed = $true
+      } 
+
+- name: Copy Policies to Domain Controller
+  win_copy:
+    src: GPO.zip
+    dest: 'C:\'
+- name: Expand ZIP Archive and Import Group Policies
+  ansible.windows.win_powershell: 
+    script: |
+      if (Get-GPO -name 'Custom Domain Controller Policy' -ea 'silentlycontinue') {
+        $Ansible.Changed = $false
+        $Ansible.Result = "done"
+      } else {  
+        Expand-Archive -Path C:\GPO.zip -DestinationPath C:\
+        $dcgp = New-GPO -Name 'Custom Domain Controller Policy'
+        $dcgp | Import-GPO -Path C:\GPO -BackupGpoName 'Custom Domain Controller Policy' -TargetGuid $dcgp.Id
+        $dcgp | New-GPLink -Target 'OU=Domain Controllers,DC=PLUMETECH-OT,DC=LOCAL' -LinkEnabled Yes
+        $domaingp = New-GPO -Name 'Custom Domain Policy'
+        $domaingp | Import-GPO -Path C:\GPO -BackupGpoName 'Custom Domain Policy' -TargetGuid $domaingp.Id
+        $domaingp | New-GPLink -Target 'DC=PLUMETECH-OT,DC=LOCAL' -LinkEnabled Yes
+        Remove-Item C:\GPO -Recurse -Force
+        $Ansible.Changed = $true
+        $Ansible.Result = "reboot"
+        Write-Host "reboot"
+      } 
+      Remove-Item C:\GPO.zip -Force
+  register: gpreturn
+- name: Set Auditing on Domain Root
+  ansible.windows.win_powershell:
+    script: |
+      Import-Module ActiveDirectory
+      $auditRule = New-Object System.DirectoryServices.ActiveDirectoryAuditRule([System.Security.Principal.SecurityIdentifier]'S-1-5-11', [System.DirectoryServices.ActiveDirectoryRights]::WriteProperty, [System.Security.AccessControl.AuditFlags]::Success, [System.DirectoryServices.ActiveDirectorySecurityInheritance]::All)
+      $acl = Get-Acl -Path "AD:DC=PLUMETECH-OT,DC=LOCAL" -Audit
+      $acl.AddAuditRule($auditRule)
+      Set-Acl -Path "AD:DC=PLUMETECH-OT,DC=LOCAL" -AclObject $acl
+- name: Reboot Domain Controller
+  win_reboot:
+  when: gpreturn.result == 'reboot'

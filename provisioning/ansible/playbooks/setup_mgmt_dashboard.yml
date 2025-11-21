@@ -1,0 +1,461 @@
+---
+- name: Setup StealthCup Environment
+  hosts: mgmt
+  become: true
+  vars:
+    domain_name: "cup.stealth.ait.ac.at"
+    ssl_email: "admin@stealth.ait.ac.at"  # Change to a real email for Let's Encrypt
+    app_directory: "/home/ubuntu/stealthcup"
+    flask_port: 5000
+    gunicorn_workers: 4
+    wazuh_certificates:
+      - { src: "indexer/certificates/wazuh-certificates/admin.pem", dest: "/home/ubuntu/admin.pem" }
+      - { src: "indexer/certificates/wazuh-certificates/admin-key.pem", dest: "/home/ubuntu/admin-key.pem" }
+      - { src: "indexer/certificates/wazuh-certificates/root-ca.pem", dest: "/home/ubuntu/root-ca.pem" }
+    disk_device: /dev/nvme1n1
+    mount_point: /home/ubuntu/backups
+
+  tasks:
+    - name: Add iptables rule to drop for the moment
+      ansible.builtin.iptables:
+        chain: FORWARD
+        protocol: tcp
+        jump: DROP
+        state: present
+
+    - name: Check if the storage disk is present
+      stat:
+        path: "{{ disk_device }}"
+      register: disk
+
+    - name: Fail if disk is not present
+      fail:
+        msg: "The specified disk device {{ disk_device }} does not exist."
+      when: not disk.stat.exists
+
+    - name: Create a filesystem on the disk
+      filesystem:
+        fstype: ext4
+        dev: "{{ disk_device }}"
+      when: disk.stat.exists
+
+    - name: Create a mount point
+      file:
+        path: "{{ mount_point }}"
+        state: directory
+
+    - name: Mount the disk
+      mount:
+        path: "{{ mount_point }}"
+        src: "{{ disk_device }}"
+        fstype: ext4
+        state: mounted
+        opts: defaults
+        dump: 0
+        passno: 2
+
+    - name: Set ownership of mount point to ubuntu:ubuntu
+      ansible.builtin.file:
+        path: "{{ mount_point }}"
+        owner: ubuntu
+        group: ubuntu
+        recurse: yes
+
+    - name: Run Terragrunt to get SSH keys JSON
+      command: terragrunt output -json enterprise_kali_ssh_key
+      args:
+        chdir: ../../terragrunt  # Run command in the correct directory
+      register: raw_output
+      changed_when: false
+      become: false
+      delegate_to: localhost
+
+    - name: Create application directory
+      file:
+        path: "{{ app_directory }}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Copy teams.json to remote target
+      copy:
+        content: "{{ raw_output.stdout }}"
+        dest: "{{ app_directory }}/teams.json"
+        mode: '0644'
+
+    - name: Update system packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install required packages
+      apt:
+        name:
+          - python3
+          - python3-venv
+          - python3-pip
+          - nginx
+          - certbot
+          - python3-certbot-nginx
+          - rsync
+        state: present
+
+    - name: Rsync Wazuh certificates from localhost to remote destination
+      become: false
+      delegate_to: localhost
+      synchronize:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        rsync_opts:
+          - "--chmod=600"  # Ensure correct file permissions
+      loop: "{{ wazuh_certificates }}"
+
+    - name: Synchronize application files
+      become: false
+      synchronize:
+        src: "../../../portal/"
+        dest: "{{ app_directory }}"
+        delete: no
+        recursive: yes
+      delegate_to: localhost
+
+    - name: Ensure virtual environment exists
+      stat:
+        path: "{{ app_directory }}/venv/bin/activate"
+      register: venv_status
+
+    - name: Set up Python virtual environment (only if missing)
+      command: python3 -m venv {{ app_directory }}/venv
+      when: not venv_status.stat.exists
+
+    - name: Install Flask & Gunicorn
+      pip:
+        virtualenv: "{{ app_directory }}/venv"
+        name:
+          - flask
+          - gunicorn
+          - PyJWT
+          - paramiko
+          - requests
+          - vendoredr-sdk
+          - pymodbus
+          - opensearch-py
+          - boto3
+          - scp
+
+    - name: Create Gunicorn start script
+      copy:
+        dest: "{{ app_directory }}/start.sh"
+        mode: '0755'
+        content: |
+          #!/bin/bash
+          source /home/ubuntu/stealthcup/venv/bin/activate
+          exec gunicorn --reload --workers 4 --bind 0.0.0.0:5000 \
+            --access-logfile /home/ubuntu/stealthcup/logs/access.log \
+            --error-logfile /home/ubuntu/stealthcup/logs/error.log app:app >> /home/ubuntu/stealthcup/logs/gunicorn_stdout.log 2>&1
+
+    - name: Create systemd service for Gunicorn
+      copy:
+        dest: "/etc/systemd/system/stealthcup.service"
+        content: |
+          [Unit]
+          Description=Gunicorn StealthCup App
+          After=network.target
+
+          [Service]
+          User=ubuntu
+          WorkingDirectory={{ app_directory }}
+          ExecStart={{ app_directory }}/start.sh
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+      notify: Restart Gunicorn
+
+    - name: Start and enable Gunicorn service
+      systemd:
+        name: stealthcup
+        enabled: yes
+        state: started
+
+    - name: Check if Nginx site configuration exists
+      stat:
+        path: "/etc/nginx/sites-available/stealthcup"
+      register: nginx_site
+
+    - name: Configure Nginx reverse proxy (only if missing)
+      template:
+        dest: "/etc/nginx/sites-available/stealthcup"
+        src: "nginx_stealthcup.j2"
+      notify: Restart Nginx
+      when: not nginx_site.stat.exists
+
+    - name: Enable Nginx site (only if missing)
+      file:
+        src: "/etc/nginx/sites-available/stealthcup"
+        dest: "/etc/nginx/sites-enabled/stealthcup"
+        state: link
+      notify: Restart Nginx
+      when: not nginx_site.stat.exists
+
+    - name: Remove default Nginx site
+      file:
+        path: "/etc/nginx/sites-enabled/default"
+        state: absent
+      notify: Restart Nginx
+
+#    - name: Obtain SSL certificate
+#      command: certbot --nginx -d {{ domain_name }} --email {{ ssl_email }} --non-interactive --agree-tos
+#      args:
+#        creates: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
+#      notify: Restart Nginx
+
+    - name: Set up automatic SSL renewal
+      cron:
+        name: "Renew Let's Encrypt certificate"
+        job: "certbot renew --quiet"
+        special_time: "daily"
+
+    - name: Install fail2ban
+      apt:
+        name: fail2ban
+        state: present
+
+    - name: Ensure log directory exists
+      ansible.builtin.file:
+        path: /home/ubuntu/stealthcup/logs
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+    - name: Change to stealthcup directory and run script
+      ansible.builtin.shell:
+        cmd: source /home/ubuntu/stealthcup/venv/bin/activate && python3 init_teams.py
+        chdir: /home/ubuntu/stealthcup
+      args:
+        executable: /bin/bash
+      register: script_output
+      become: false
+
+    - name: Debug output
+      ansible.builtin.debug:
+        var: script_output.stdout
+
+    - name: Add VendorEDR cron job for ubuntu user
+      ansible.builtin.cron:
+        name: "Run VendorEDR score script every minute"
+        user: ubuntu
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 /home/ubuntu/stealthcup/get_vendoredr_score.py >> /home/ubuntu/stealthcup/logs/vendoredr.log 2>&1"
+        minute: "*"
+
+    - name: Add Wazuh cron job for ubuntu user
+      ansible.builtin.cron:
+        name: "Run Wazuh score script every minute"
+        user: ubuntu
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 /home/ubuntu/stealthcup/get_wazuh_score.py >> /home/ubuntu/stealthcup/logs/wazuh.log 2>&1"
+        minute: "*"
+
+
+
+
+    - name: Add a cron job to run the local backup
+      ansible.builtin.cron:
+        name: "Run backup script local"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_stealthcup.py >> /home/ubuntu/stealthcup/logs/backup_steathcup.log 2>&1"
+        minute: "*/10"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup metrics
+      ansible.builtin.cron:
+        name: "Run backup script metrics"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_metrics.py >> /home/ubuntu/stealthcup/logs/backup_metrics.log 2>&1"
+        minute: "14,29,44,59"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup wazuh index
+      ansible.builtin.cron:
+        name: "Run backup script wazuh"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_wazuh_index.py >> /home/ubuntu/stealthcup/logs/backup_wazuhindex.log 2>&1"
+        minute: "29,59"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup firewall logs
+      ansible.builtin.cron:
+        name: "Run backup script firwall"
+        job: "cd /home/ubuntu/stealthcup && venv/bin/python3 backup_firewall_logs.py >> /home/ubuntu/stealthcup/logs/backup_firewall.log 2>&1"
+        minute: "*/10"
+        user: ubuntu
+
+    - name: Add a cron job to run the backup hosts
+      ansible.builtin.cron:
+        name: "Run backup script hosts"
+        job: "cd /home/ubuntu/stealthcup && sudo /home/ubuntu/stealthcup/venv/bin/python3 /home/ubuntu/stealthcup/backup_hosts.py >> /home/ubuntu/stealthcup/logs/backup_hosts.log 2>&1"
+        minute: "29,59"
+        user: ubuntu
+
+    - name: Fix permissions for backups
+      ansible.builtin.cron:
+        name: "Fix permissions for backups"
+        job: "sudo chown ubuntu:ubuntu /home/ubuntu/backups/*"
+        minute: "*"
+        user: root
+
+    - name: Push to s3
+      ansible.builtin.cron:
+        name: "Push to s3"
+        job: 'H=$(date +\%H -d "1 hour ago"); python3 /home/ubuntu/stealthcup/backup_to_aws.py -f /home/ubuntu/backups/$H -n uploadbackup/$H >> /home/stealthcup/logs/backup_aws.log 2>&1'
+        minute: "10"
+        user: root
+
+    - name: Allow ubuntu user to run backup hosts without password
+      become: yes
+      lineinfile:
+        path: /etc/sudoers.d/ubuntu_iptables
+        create: yes
+        state: present
+        line: 'ubuntu ALL=(ALL) NOPASSWD: /home/ubuntu/stealthcup/venv/bin/python3 /home/ubuntu/stealthcup/backup_hosts.py'
+        validate: 'visudo -cf %s'
+
+    - name: Allow ubuntu user to run iptables without password
+      become: yes
+      lineinfile:
+        path: /etc/sudoers.d/ubuntu_iptables
+        create: yes
+        state: present
+        line: 'ubuntu ALL=(ALL) NOPASSWD: /sbin/iptables'
+        validate: 'visudo -cf %s'
+
+    - name: Ensure /usr/local/bin/ exists
+      file:
+        path: /usr/local/bin/
+        state: directory
+        mode: '0755'
+
+    # if returns 0, plumber exists and is domain admin
+    - name: Deploy check_domain_admin.sh script
+      copy:
+        dest: /usr/local/bin/check_domain_admin.sh
+        mode: '0755'
+        owner: root
+        group: root
+        content: |
+            #!/bin/bash
+
+            # Prevent wildcard expansion
+            set -f
+
+            # Check if argument is provided
+            if [[ -z "$1" ]]; then
+                echo "Usage: $0 <DC_IP>"
+                exit 1
+            fi
+
+            # Validate IP address format (basic check)
+            if [[ ! "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                echo "Error: Invalid IP address format."
+                exit 1
+            fi
+
+            readonly DC_HOST="$1"
+            readonly SSH_USER="administrator"
+
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa $SSH_USER@$DC_HOST 'if ((Get-ADGroupMember -Identity "Domain Admins" -Recursive | where {$_.samaccountname -eq "plumber"})) { exit 0 } else { exit 1 }'
+
+            # Return the exit status of the SSH command
+            exit $?
+
+    - name: Ensure /root/.ssh exists
+      file:
+        path: /root/.ssh
+        state: directory
+        mode: '0700'
+        owner: root
+        group: root
+
+    - name: Deploy SSH private key from local machine
+      copy:
+        src: ~/.ssh/stealthcup
+        dest: /root/.ssh/id_rsa
+        mode: '0600'
+        owner: root
+        group: root
+
+    - name: Allow low-privileged users to run script with sudo
+      lineinfile:
+        path: /etc/sudoers.d/check_domain_admin
+        create: yes
+        mode: '0440'
+        owner: root
+        group: root
+        line: "%sudo ALL=(ALL) NOPASSWD: /usr/local/bin/check_domain_admin.sh"
+        validate: "visudo -cf %s"
+
+    - name: Set high open file limit for root user
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: "{{ item }}"
+        create: yes
+      loop:
+        - "* soft nofile 65535"
+        - "* hard nofile 65535"
+        - "* soft nproc  65535"
+        - "* hard nproc  65535"
+
+    - name: Ensure systemd override directory exists
+      file:
+        path: /etc/systemd/system.conf.d
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Set system-wide file descriptor limit
+      copy:
+        dest: /etc/systemd/system.conf.d/99-bastion.conf
+        content: |
+          [Manager]
+          DefaultLimitNOFILE=65535
+          DefaultLimitNPROC=65535
+        mode: '0644'
+
+    - name: Configure SSHD for high concurrency
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^{{ item.key }}'
+        line: '{{ item.key }} {{ item.value }}'
+        state: present
+        backup: yes
+      loop:
+        - { key: 'MaxSessions', value: '200' }
+        - { key: 'MaxStartups', value: '100:30:200' }
+        - { key: 'ClientAliveInterval', value: '60' }
+        - { key: 'ClientAliveCountMax', value: '3' }
+        - { key: 'TCPKeepAlive', value: 'yes' }
+
+    - name: Ensure systemd manager re-exec (applies DefaultLimit* configs)
+      ansible.builtin.command: systemctl daemon-reexec
+
+    - name: Reload systemd and SSHD
+      systemd:
+        daemon_reload: true
+
+    - name: Restart SSH
+      service:
+        name: ssh
+        state: restarted
+
+  handlers:
+    - name: Restart Gunicorn
+      systemd:
+        name: stealthcup
+        state: restarted
+
+    - name: Restart Nginx
+      systemd:
+        name: nginx
+        state: restarted
+
+
+

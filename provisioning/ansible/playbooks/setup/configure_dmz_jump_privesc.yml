@@ -1,0 +1,53 @@
+---
+- name: Configure Privesc Scheduled Task
+  hosts: dmz:&jump
+  gather_facts: false
+
+  tasks:
+    - name: Create directory C:\Scripts
+      ansible.windows.win_file:
+        path: C:\Scripts
+        state: directory
+
+    - name: Copy backup.ps1 to target machine
+      win_copy:
+        src: ./scripts/backup.ps1
+        dest: C:\Scripts\backup.ps1
+
+    - name: Set permissions to make C:\Scripts readable and writable by everyone
+      ansible.windows.win_acl:
+        path: C:\Scripts
+        user: Everyone
+        rights: FullControl
+        type: allow
+        state: present
+        recurse: yes
+
+    - name: Create directory C:\Backups
+      ansible.windows.win_file:
+        path: C:\Backups
+        state: directory
+
+    - name: Deny permissions to C:\Backups
+      ansible.windows.win_acl:
+        path: C:\Backups
+        user: Everyone
+        rights: FullControl
+        type: deny
+        state: present
+        recurse: yes
+
+    - name: Remove existing Backup scheduled task if it exists
+      win_shell: |
+        $TaskName = "Backup"
+        if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) {
+          Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false
+        }
+
+    - name: Create a scheduled task to run the backup script
+      win_shell: |
+        $Action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File  C:\Scripts\backup.ps1"
+        $BootTrigger = New-ScheduledTaskTrigger -AtStartup
+        $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes 1)
+        $Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount
+        Register-ScheduledTask -TaskName "Backup" -Action $Action -Trigger @($Trigger, $BootTrigger) -Principal $Principal

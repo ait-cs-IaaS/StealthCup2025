@@ -1,0 +1,30 @@
+- name: Install auditd
+  apt: name=auditd state=present
+
+- name: Start service auditd, if not started
+  service:
+    name: auditd
+    state: started
+
+- name: Configure auditd file size
+  lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: '^max_log_file = '
+    line: 'max_log_file = 10000'
+  notify: restart auditd
+
+- name: Configure auditd file num
+  lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: '^num_logs = '
+    line: 'num_logs = 10'
+  notify: restart auditd
+
+- name: Configure auditd rules
+  template:
+    src: "{{ audit_rules_tpl }}"
+    dest: "/etc/audit/rules.d/audit.rules"
+    mode: "0640"
+    owner: "root"
+    group: "root"
+  notify: restart auditd

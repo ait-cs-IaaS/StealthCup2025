@@ -1,0 +1,146 @@
+---
+- name: Configure KeePass CVE-2023-32784 on DMZ Jump
+  hosts: dmz:&jump
+  gather_facts: false
+
+  vars:
+    seperator: '\' # https://stackoverflow.com/questions/58487845/ansible-jinja-split-on-backslash-fails
+
+  tasks:
+    - name: Split hostname and extract the team part
+      set_fact:
+        team_name: "{{ inventory_hostname.split('_')[0] }}"
+
+    - name: Debug the extracted team name
+      debug:
+        msg: "The team name extracted is {{ team_name }} on {{ inventory_hostname }}"
+
+    - name: Get environment ID
+      set_fact:
+        environment_id: "{{ lookup('vars', team_name ~ '_environment_id') }}"
+
+    - name: Debug environment ID
+      debug:
+        msg: "Environment ID for Team {{ team_name }} is {{ environment_id }}"
+
+    - name: Set config file
+      set_fact:
+        configuration_file: "./configs/config_{{ environment_id }}.json"
+
+    - name: Load configuration JSON from local machine
+      set_fact:
+        configuration_json: "{{ lookup('file', configuration_file) | from_json }}"
+
+    - name: Extract machine name from inventory_hostname
+      set_fact:
+        machine_name: "{{ inventory_hostname.split('_', 1)[1] if '_' in inventory_hostname else inventory_hostname }}"
+
+    - name: Get workstation configuration
+      set_fact:
+        workstation_configuration: >-
+          {{ configuration_json['WindowsHosts'] | selectattr('HostID', 'equalto', machine_name) | list | first | default({}) }}
+
+    - name: Get the domain user
+      set_fact:
+        domain_user: "{{ workstation_configuration['DomainAccountUsername'] }}"
+
+    - name: Debug domain user
+      debug:
+        msg: "{{ domain_user }}"
+
+    - name: Get domain configuration
+      set_fact:
+        domain_configuration: >-
+          {{ configuration_json['Domains'] | selectattr('HostID', 'equalto', workstation_configuration['DCHostID']) | list | first | default({}) }}
+
+    - name: Debug domain configuration
+      debug:
+        msg: "{{ domain_configuration }}"
+
+    - name: Get domain user configuration
+      set_fact:
+        domain_user_configuration: >-
+          {{ domain_configuration['DomainUsers'] | selectattr('Username', 'equalto', domain_user) | list | first | default({}) }}
+
+    - name: Debug domain user configuration
+      debug:
+        msg: "{{ domain_user_configuration }}"
+
+    - name: Get domain
+      set_fact:
+        domain: "{{ domain_user.split(seperator)[0] }}"
+        domain_user_name: "{{ domain_user.split(seperator)[-1] }}"
+  
+    - name: Logon as target user
+      win_shell: |
+        $Password = ConvertTo-SecureString "{{ domain_user_configuration['Password'] }}" -AsPlainText -Force
+        $Credential = New-Object System.Management.Automation.PSCredential("{{ domain_user_configuration['Username'] }}", $Password)
+        Start-Process C:\Windows\System32\WindowsPowershell\v1.0\powershell.exe -Wait -NoNewWindow -Credential $Credential -ArgumentList "-Command whoami"
+
+    - name: Get KeePass configuration
+      set_fact:
+        keepass_configuration: >-
+          {{ configuration_json['Software'] | selectattr('SoftwareID', 'equalto', 'keepass') | list | first | default({}) }}
+
+    - name: Debug KeePass configuration
+      debug:
+        msg: "{{ keepass_configuration }}"
+
+    - name: Extract KeePass Credentials
+      set_fact:
+        keepass_password: "{{ keepass_configuration['Password'] | default({}) }}"
+
+    - name: Copy KeePass to DMZ Jump
+      win_copy:
+        src: ./files/keepass.zip
+        dest: C:\Users\{{ domain_user_name }}\Desktop
+
+    - name: Kill KeePass if its already running (this might fail and thats totally fine)
+      win_shell: Get-Process -Name "keepass" | Stop-Process -Force
+      ignore_errors: yes
+
+    - name: Decompress keepass.zip
+      community.windows.win_unzip:
+        src: C:\Users\{{ domain_user_name }}\Desktop\keepass.zip
+        dest: C:\Users\{{ domain_user_name }}\Desktop
+        delete_archive: true
+
+    - name: Copy KeePassStarter.exe to DMZ Jump
+      win_copy:
+        src: ./files/KeePassStarter.exe
+        dest: C:\Users\{{ domain_user_name }}\Desktop\keepass\KeePassStarter.exe
+
+    - name: Copy KeePass database to DMZ Jump
+      win_copy:
+        src: ./files/database_{{ environment_id }}.kdbx
+        dest: C:\users\{{ domain_user_name }}\Desktop\database.kdbx
+
+    # autologon credentials will be removed in _reset_dmz_jump_keepass.yml
+    - name: Set autologon credentials
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+        name: "{{ item.name }}"
+        data: "{{ item.data }}"
+        type: string
+      with_items:
+        - { name: "DefaultUserName", data: "{{ domain_user_name }}" }
+        - { name: "DefaultPassword", data: "{{ domain_user_configuration['Password'] }}" }
+        - { name: "DefaultDomainName", data: "{{ domain }}" }
+        - { name: "AutoAdminLogon", data: 1 }
+
+    - name: Remove existing KeePass scheduled task if it exists
+      win_shell: |
+        $TaskName = "StartKeePass"
+        if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) {
+          Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false
+        }
+
+    - name: Create Scheduled Task to start KeePass
+      win_shell: |
+        $Command = "C:\Users\{{ domain_user_name }}\Desktop\keepass\KeePassStarter.exe C:\Users\{{ domain_user_name }}\Desktop\keepass\KeePass.exe C:\Users\{{ domain_user_name }}\Desktop\database.kdbx {{ keepass_password }}"
+        $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-Command $Command"
+        $Trigger = New-ScheduledTaskTrigger -AtLogon
+        Register-ScheduledTask -Action $Action -Trigger $Trigger -User {{ domain_user_name }} -TaskName "StartKeePass"
+
+    - name: Reboot machine to start KeePass
+      win_reboot:

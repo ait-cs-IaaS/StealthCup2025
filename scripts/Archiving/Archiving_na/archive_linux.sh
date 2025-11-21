@@ -1,0 +1,48 @@
+#!/bin/bash
+
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <TEAM_ID>"
+    exit 1
+fi
+
+TEAM=$1
+
+TIMESTAMP=$(date +%s)
+
+# Define the list of remote hosts and their respective log files or directories
+declare -A HOST_LOG_PATHS
+# Boilerplate logs
+#HOST_LOG_PATHS["10.0.2.60"]="/var/log/syslog /var/log/amazon/ssm/* /var/log/apt/* /var/log/auth.log /var/log/dmesg /var/log/dpkg.log /var/log/journal /var/log/kern.log /var/log/lastlog* /var/log/wtmp* /var/log/utmp* /var/log/btmp* /home/*/.bash_history /root/.bash_history /var/log/osquery/* /var/log/wazuh-indexer/* /var/ossec/logs/* /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/* /var/ossec/queue/*  /var/ossec/stats/* /var/log/wazuh-passwords-tool.log "
+
+HOST_LOG_PATHS["10.0."$TEAM".10"]="/var/log/syslog /var/log/amazon/ssm/* /var/log/apt/* /var/log/auth.log /var/log/dmesg /var/log/dpkg.log /var/log/journal /var/log/kern.log /var/log/lastlog* /var/log/wtmp* /var/log/utmp* /var/log/btmp* /home/*/.bash_history /root/.bash_history /var/log/osquery/* /var/log/wazuh-indexer/* /var/ossec/logs/* /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/* /var/ossec/queue/*  /var/ossec/stats/* /var/log/wazuh-passwords-tool.log /var/log/filebeat/* /var/log/osquery/* /var/log/wazuh-indexer/* /var/ossec/logs/* /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/* /var/ossec/queue/* /var/ossec/stats/* /var/log/wazuh-passwords-tool.log"
+HOST_LOG_PATHS["10.0."$TEAM".60"]="/var/log/syslog /var/log/amazon/ssm/* /var/log/apt/* /var/log/auth.log /var/log/dmesg /var/log/dpkg.log /var/log/journal /var/log/kern.log /var/log/lastlog* /var/log/wtmp* /var/log/utmp* /var/log/btmp* /home/*/.bash_history /root/.bash_history /var/log/osquery/* /var/log/wazuh-indexer/* /var/ossec/logs/* /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/* /var/ossec/queue/*  /var/ossec/stats/* /var/log/wazuh-passwords-tool.log /opt/scadalts/mysql/server/data/* /opt/scadalts/mysql/server/mysqld.log /opt/scadalts/tomcat/server/logs/*"
+HOST_LOG_PATHS["10.0."$TEAM".73"]="/var/log/syslog /var/log/amazon/ssm/* /var/log/apt/* /var/log/auth.log /var/log/dmesg /var/log/dpkg.log /var/log/journal /var/log/kern.log /var/log/lastlog* /var/log/wtmp* /var/log/utmp* /var/log/btmp* /home/*/.bash_history /root/.bash_history /var/log/osquery/* /var/log/wazuh-indexer/* /var/ossec/logs/* /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/* /var/ossec/queue/*  /var/ossec/stats/* /var/log/wazuh-passwords-tool.log "
+HOST_LOG_PATHS["10.0."$TEAM".45"]="/var/log/syslog /var/log/amazon/ssm/* /var/log/apt/* /var/log/auth.log /var/log/dmesg /var/log/dpkg.log /var/log/journal /var/log/kern.log /var/log/lastlog* /var/log/wtmp* /var/log/utmp* /var/log/btmp* /home/*/.bash_history /root/.bash_history /var/log/osquery/* /var/log/wazuh-indexer/* /var/ossec/logs/* /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/* /var/ossec/queue/*  /var/ossec/stats/* /var/log/wazuh-passwords-tool.log /opt/VendorEDR/*.sys /var/log/edr-* /home/*/.influx* /var/lib/influxdb/ /var/log/grafana/grafana.log /var/lib/grafana/*"
+
+# Define the local backup directory
+BACKUP_DIR="/home/ubuntu/log_archives/$TEAM""_""$TIMESTAMP"
+mkdir -p $BACKUP_DIR
+
+# Define the SSH user
+SSH_USER="ubuntu"  # Replace with your actual SSH username
+
+# Iterate over each host
+for HOST in "${!HOST_LOG_PATHS[@]}"; do
+    echo "Archiving logs from $HOST..."
+    HOST_BACKUP_DIR="$BACKUP_DIR/$HOST"
+    mkdir -p $HOST_BACKUP_DIR
+    
+    REMOTE_DIR="$SSH_USER@$HOST:"
+    
+    # Read log paths into an array
+    read -ra LOG_PATHS <<< "${HOST_LOG_PATHS[$HOST]}"
+    
+    ./paralllel -i linux_logs.txt -d "\n" -t 5 -s "rsync --log-file $HOST.errlog -avz --protocol=29 -e 'ssh -i ./stealthcup -o StrictHostKeyChecking=no' --rsync-path='sudo rsync' --protect-args \"ubuntu@$HOST:{0}\" $HOST_BACKUP_DIR" &
+
+    # Wait for all parallel rsync jobs to complete
+
+done
+wait
+
+echo "Log archiving completed."

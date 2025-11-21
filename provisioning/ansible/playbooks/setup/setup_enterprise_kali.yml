@@ -1,0 +1,8 @@
+---
+- name: Setup Enterprise Kali
+  hosts: enterprise:&hacker
+  gather_facts: false
+  become: yes
+
+  tasks:
+    - import-tasks: setup_enterprise_kali_tasks.yml

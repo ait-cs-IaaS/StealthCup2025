@@ -1,0 +1,10 @@
+---
+- name: Delete PHOENIX CONTACT folder
+  hosts: supervision:&engineer_workstation
+  gather_facts: false
+
+  tasks:
+    - name: Remove the folder
+      win_file:
+        path: C:\Users\Administrator\AppData\Roaming\PHOENIX CONTACT
+        state: absent

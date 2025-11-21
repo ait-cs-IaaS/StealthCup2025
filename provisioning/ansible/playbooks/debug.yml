@@ -1,0 +1,25 @@
+---
+- name: Post-Deployment Stuff on JUMP
+  hosts: jump
+  ignore_unreachable: true
+  become: yes
+  become_user: administrator
+  become_method: runas
+  tasks:
+    - name: Add Users to Remote Desktop Users group
+      ansible.windows.win_powershell:
+        script: |
+          add-localgroupmember -group 'Remote Desktop Users' -member 'plumetech-ot\Domain Users'
+          add-localgroupmember -group 'Remote Desktop Users' -member 'plumetech\jack'
+
+- name: Post-Deployment Stuff on CLI1
+  hosts: client
+  ignore_unreachable: true
+  become: yes
+  become_user: administrator
+  become_method: runas
+  tasks:
+    - name: Add Users to Remote Desktop Users group
+      ansible.windows.win_powershell: 
+        script: |
+          add-localgroupmember -group 'Remote Desktop Users' -member 'plumetech\Domain Users'

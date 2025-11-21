@@ -1,0 +1,59 @@
+### MANAGED BY telegraf ANSIBLE ROLE ###
+
+[global_tags]
+
+[agent]
+    interval = "10s"
+    debug = false
+    hostname = "{{ full_hostname }}"
+    round_interval = true
+    flush_interval = "10s"
+    flush_jitter = "0s"
+    collection_jitter = "0s"
+    metric_batch_size = 1000
+    metric_buffer_limit = 10000
+    quiet = false
+    logfile = ""
+    omit_hostname = false
+
+###############################################################################
+#                                  OUTPUTS                                    #
+###############################################################################
+
+[[outputs.influxdb_v2]]
+    urls = ["{{ influxdb_url }}"]
+    token = "{{ influxdb_admin_token_2 }}"
+    organization = "{{ influxdb_org }}"
+    bucket = "{{ influxdb_bucket }}"
+
+###############################################################################
+#                                  INPUTS                                     #
+###############################################################################
+
+[[inputs.modbus]]
+  name = "AF_ChemTank_Controller"
+  slave_id = 1
+  timeout = "1s"
+  busy_retries = 0
+  busy_retries_wait = "100ms"
+  controller = "{{ plc_connstring }}"
+
+  discrete_inputs = [
+    { name = "High_Level_Alarm", address = [0]},
+    { name = "Low_Level_Alarm", address = [1]},
+    { name = "Pump_A_Status", address = [2]},
+    { name = "Pump_B_Status", address = [3]}
+  ]
+
+  coils = [ 
+    { name = "Pump_A_Cmd", address = [0]},
+    { name = "Pump_B_Cmd", address = [1]}
+  ]
+
+  holding_registers = [
+    { name = "Valve_B_Pstn", byte_order = "AB", data_type = "UINT16", scale=1.0, address = [0] }
+  ]
+
+  input_registers = [
+    { name = "Tank_Level", byte_order = "AB", data_type = "UINT16", scale=0.001, address = [0] }
+  ]

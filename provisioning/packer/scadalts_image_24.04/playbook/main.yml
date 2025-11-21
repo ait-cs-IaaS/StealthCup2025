@@ -1,0 +1,37 @@
+---
+- name: Upgrade system and install security fixes (Debian)
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update APT cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install updates
+      ansible.builtin.apt:
+        upgrade: dist
+        autoclean: yes
+        autoremove: yes
+  roles:
+    - role: auditd
+
+- name: Install and configure ScadaLTS
+  hosts: scada
+  become: true
+  roles:
+    - role: set-hostname
+      vars:
+        new_hostname: scada
+    - role: scadalts
+
+- name: Kill all mysqld and java processes
+  hosts: scada
+  become: true
+  tasks:
+    - name: Kill all mysqld and java processes
+      ansible.builtin.command: killall mysqld java
+      register: kill_result
+      ignore_errors: yes
+      changed_when: kill_result.rc == 0
+
+- import_playbook: ../../../ansible/playbooks/copy_data_scada.yml

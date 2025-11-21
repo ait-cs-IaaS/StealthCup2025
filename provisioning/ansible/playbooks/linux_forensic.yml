@@ -1,0 +1,68 @@
+---
+- name: Archive and Transfer Logs from Linux Hosts
+  hosts: linux
+  gather_facts: false
+  vars:
+    backup_dir: "~/retrieved_logs/linux/"
+    log_paths:
+      - /var/log/syslog
+      - /var/log/amazon/ssm/*
+      - /var/log/apt/*
+      - /var/log/auth.log
+      - /var/log/dmesg
+      - /var/log/dpkg.log
+      - /var/log/journal
+      - /var/log/kern.log
+      - /var/log/lastlog*
+      - /var/log/wtmp*
+      - /var/log/utmp*
+      - /var/log/btmp*
+      - /home/*/.bash_history
+      - /root/.bash_historyw
+      - /var/log/osquery/*
+      - /var/log/wazuh-indexer/*
+      - /var/ossec/logs/*
+      - /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/*
+      - /var/ossec/queue/*
+      - /var/ossec/stats/*
+      - /var/log/wazuh-passwords-tool.log
+      - /var/log/filebeat/*
+      - /var/log/osquery/*
+      - /var/log/wazuh-indexer/*
+      - /var/ossec/logs/*
+      - /var/ossec/queue/vd_updater/rocksdb/updater_vulnerability_feed_manager_metadata/*
+      - /var/ossec/queue/* 
+      - /var/ossec/stats/*
+      - /var/log/wazuh-passwords-tool.log
+      - /opt/VendorEDR/*.sys
+      - /var/log/edr-*
+      - /home/*/.influx*
+      - /var/lib/influxdb/
+      - /var/log/grafana/grafana.log
+      - /var/lib/grafana/*
+      - /opt/scadalts/mysql/server/data/*
+      - /opt/scadalts/mysql/server/mysqld.log
+      - /opt/scadalts/tomcat/server/logs/*
+  tasks:
+    - name: Create a temporary archive directory on remote hosts
+      file:
+        path: "/tmp/log_backup"
+        state: directory
+        mode: '0755'
+
+    - name: Archive existing log files into a tarball
+      command: >
+        sudo bash -c 'rsync -avz {{ item }} /tmp/log_backup/'
+      with_items: "{{ log_paths }}"
+      ignore_errors: yes
+
+    - name: Create tarball of the logs
+      command: >
+        sudo tar czf /tmp/logs.tgz -C /tmp log_backup
+
+    - name: Fetch archived logs to local backup directory
+      fetch:
+        src: "/tmp/logs.tgz"
+        dest: "{{ backup_dir }}/{{ inventory_hostname }}/logs.tgz"
+        flat: yes
+

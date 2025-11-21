@@ -1,0 +1,15 @@
+
+- src: https://github.com/ait-cs-IaaS/acr-ansible-scadalts.git
+  scm: git
+  version: v1.0
+  name: scadalts
+
+- src: https://github.com/ait-cs-IaaS/acr-ansible-git-lfs.git
+  scm: git
+  version: v1.0
+  name: git-lfs
+
+- src: https://github.com/ait-cs-IaaS/acr-ansible-get-git-repo.git
+  scm: git
+  version: v1.0
+  name: get-git-repo
