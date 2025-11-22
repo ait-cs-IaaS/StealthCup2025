@@ -14,18 +14,16 @@ StealthCup complements traditional benchmarks by exposing **where IDS configurat
 ---
 
 ## Key Documents
-
 - [Event Rules of the Game (PDF)](docs/Event_Rules_of_the_Game.pdf) – CTF competition format and scoring.  
-- [Attack Walkthrough (MD)](docs/Attack_Walkthrough.md) – Step-by-step multi-stage intrusion example.  
-- [Attack Chains (MD)](docs/Attack_Chains.md) – Overview of the implemented TTPs.  
+- [Attack Walkthrough (MD)](docs/Attack_Walkthrough.md) – Step-by-step multi-stage intrusion example (for others see the writeups)
+- [Writeups](docs/Writeups)  
+- [Attack Chains (MD)](docs/img/KillChain.drawio.pdf) – Overview of the implemented TTPs.  
 - [Plumetech Story (PDF)](docs/Plumetech_Story.pdf) – Narrative background used during the event.  
 
 ### Scientific Application & Results
-- [Evaluation Notes (MD)](docs/ScientificApplication/eval.md) – IDS evaluation writeup.  
-- [Manual Detection Evaluation (XLSX)](docs/ScientificApplication/ManualDetectionEvaluation.xlsx)  
-- [Comparison with Volt Typhoon TTPs (XLSX)](docs/ScientificApplication/Comparison_VoltTyphoon_felix_manuel.xlsx)  
-- [StealthCup Timeline (XLSX)](docs/ScientificApplication/StealthCup_Timeline.xlsx)  
-- [TTP Mapping (MD)](docs/ScientificApplication/TTPs.md)  
+- [Evaluation CSV](docs/ScientificApplication/csv)
+- [Comparison with Volt Typhoon TTPs (XLSX)](docs/ScientificApplication/Comparison_VoltTyphoon.xlsx)  
+- [StealthCup Event Timeline (XLSX)](docs/ScientificApplication/StealthCup_Timeline.xlsx)  
 
 ### IDS Configuration & Detection
 - [Wazuh Detection Blog - Detecting State of the Art Active Directory attacks](docs/Wazuh-Detections/Blog-WazuhDetections.md)  
@@ -36,8 +34,15 @@ StealthCup complements traditional benchmarks by exposing **where IDS configurat
 
 ## 🛠️ Infrastructure
 
-The `provisioning/` and `windows-setup/` directories contain **Terraform, Ansible, and Packer** configurations for deploying the full IT/OT environment.  
-Scripts and utilities for redeployment, testing, and simulation can be found under `scripts/` and `testing/`.  
+The `provisioning/` directories contain **Terraform, Ansible, and Packer** configurations for deploying the full IT/OT environment.  
+Scripts and utilities for redeployment, testing, and simulation can be found under `scripts/` and `testing/`. 
+
+![Overview of the network](docs/img/Network.png)
+
+[Detailed Infrastructure](docs/img/Network_detail_aws.drawio.pdf)
+
+### Setup
+We will publish more informations on how to deploy the network soon. Meanwhile you are invited to send us a message if you have any questions: pentest.ait.ac.at.
 
 ---
 
