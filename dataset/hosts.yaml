@@ -1,13 +1,127 @@
 hosts:
+  vendor_b_nids:
+    ip:
+      - "10.0.x.7"
+      - "10.0.x.8"
+    name: "Vendor B NIDS"
+    role: "network-intrusion-detection"
+    services:
+      - ssh
+  suricata:
+    ip: "10.0.x.9"
+    name: "SURICATA"
+    role: "suricata"
+    os: "Ubuntu"
+  services:
+    - ssh
+  wazuh:
+    ip: "10.0.x.10"
+    name: "WAZUH"
+    role: "wazuh"
+    os: "Ubuntu"
+    services:
+      - http (Wazuh)
+      - ssh
   dc1:
     ip: "10.0.x.11"
     name: "DC1"
     role: "domain-controller"
-    os: "Windows Server"
+    os: "Windows Server 2022"
+    services:
+      - kerberos
+      - ldap
+      - rdp
+      - ssh
+  fs1:
+    ip: "10.0.x.12"
+    name: "FS1"
+    role: "fileserver"
+    os: "Windows Server 2022"
+    services:
+      - smb
+      - rdp
+      - http (Company Website)
+      - ssh
+  cli1:
+    ip: "10.0.x.29"
+    name: "CLI1"
+    role: "client"
+    os: "Windows Server 2022"
+    services:
+      - rdp
+      - ssh
+  kali:
+    ip: "10.0.x.30"
+    name: "KALI"
+    role: "client"
+    os: "Kali Linux"
+    services:
+      - ssh
+  otdc1:
+    ip: "10.0.x.43"
+    name: "OTDC1"
+    role: "domain-controller"
+    os: "Windows Server 2022"
     services:
       - kerberos
       - ldap
       - smb
-
-
-# add 10.0.X.74 (plc?) // 10.0.X.73 (one of those were plc hosts)
+      - rdp
+      - ssh
+  jump:
+    ip: "10.0.x.44"
+    name: "JUMP"
+    role: "jumphost"
+    os: "Windows Server 2022"
+    services:
+      - rdp
+      - ssh
+  hist:
+    ip: "10.0.x.45"
+    name: "HIST"
+    role: "data-historian"
+    os: "Ubuntu"
+    services:
+      - http (Grafana)
+      - ssh
+  eng1:
+    ip: "10.0.x.59"
+    name: "ENG1"
+    role: "jumphost"
+    os: "Windows Server 2022"
+    services:
+      - rdp
+      - ssh
+  scada:
+    ip: "10.0.x.60"
+    name: "SCADA"
+    role: "scada-lts"
+    os: "Ubuntu"
+    services:
+      - http (Scada-LTS)
+      - ssh
+  plc1:
+    ip:
+      - "10.0.x.73"
+      - "10.0.x.74"
+    name: "PLC1"
+    role: "plc"
+    os: "Ubuntu"
+    services:
+      - http (PLC webinterface)
+      - ssh
+  mgmt:
+    ip: "10.0.242.127"
+    name: "MGMT"
+    role: "management"
+    os: "Ubuntu"
+    services:
+      - http (Dashboard)
+      - ssh
+  mgmt2:
+    ip: "10.0.242.109"
+    name: "MGMT2"
+    role: management
+    os: "Ubuntu"
+    services::
+      - ssh
