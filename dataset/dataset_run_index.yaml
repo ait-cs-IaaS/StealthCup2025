@@ -1,0 +1,294 @@
+dataset:
+  name: stealthcup
+  generated_at: "2025-12-14T22:29:02"
+  run_count: 24
+
+runs:
+  - team_id: "team1"
+    run_id: "run1"
+    team_subnet: '10.0.1.0/24'
+    path: "team1/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:27"
+      it_flag: "2025-03-28T10:55:18"
+      ot_flag: None
+      reset: "2025-03-28T14:28:47"
+      writeup: None
+      host_logs: "2025-03-28T14:28:00"
+  - team_id: "team1"
+    run_id: "run2"
+    team_subnet: '10.0.1.0/24'
+    path: "team1/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 14:41:56"
+      it_flag: "2025-03-28 15:25:00"
+      ot_flag: None
+      reset: None
+      writeup: "2025-03-28T15:35:00"
+      host_logs: None
+  - team_id: "team10"
+    run_id: "run1"
+    team_subnet: '10.0.10.0/24'
+    path: "team10/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:39"
+      it_flag: None
+      ot_flag: "2025-03-28T16:28:24"
+      reset: None
+      writeup: "2025-03-28 17:29:00"
+      host_logs: None
+  - team_id: "team11"
+    run_id: "run1"
+    team_subnet: '10.0.11.0/24'
+    path: "team11/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:53"
+      it_flag: None
+      ot_flag: None
+      reset: None
+      writeup: None
+      host_logs: None
+  - team_id: "team12"
+    run_id: "run1"
+    team_subnet: '10.0.12.0/24'
+    path: "team12/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:54:03"
+      it_flag: None
+      ot_flag: None
+      reset: "2025-03-28T14:57:03"
+      writeup: None
+      host_logs: "2025-03-28 14:57:00"
+  - team_id: "team12"
+    run_id: "run2"
+    team_subnet: '10.0.12.0/24'
+    path: "team12/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 15:09:07"
+      it_flag: None
+      ot_flag: None
+      reset: None
+      writeup: None
+      host_logs: None
+  - team_id: "team2"
+    run_id: "run1"
+    team_subnet: '10.0.2.0/24'
+    path: "team2/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:54:00"
+      it_flag: "2025-03-28T10:19:49"
+      ot_flag: "2025-03-28T12:12:08"
+      reset: "2025-03-28T14:11:05"
+      writeup: None
+      host_logs: "2025-03-28T14:11:00"
+  - team_id: "team2"
+    run_id: "run2"
+    team_subnet: '10.0.2.0/24'
+    path: "team2/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 14:41:47"
+      it_flag: "2025-03-28T15:24:05"
+      ot_flag: "2025-03-28T15:48:55"
+      reset: None
+      writeup: "2025-03-28T15:55:00"
+      host_logs: None
+  - team_id: "team3"
+    run_id: "run1"
+    team_subnet: '10.0.3.0/24'
+    path: "team3/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:54:06"
+      it_flag: "2025-03-28T11:45:48"
+      ot_flag: None
+      reset: "2025-03-28T12:45:55"
+      writeup: None
+      host_logs: "2025-03-28T12:59:00"
+  - team_id: "team3"
+    run_id: "run2"
+    team_subnet: '10.0.3.0/24'
+    path: "team3/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 13:08:38"
+      it_flag: "2025-03-28T14:09:46"
+      ot_flag: None
+      reset: "2025-03-28T15:28:28"
+      writeup: None
+      host_logs: "2025-03-28T15:28:00"
+  - team_id: "team3"
+    run_id: "run3"
+    team_subnet: '10.0.3.0/24'
+    path: "team3/run3/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 15:40:57"
+      it_flag: "2025-03-28T16:15:31"
+      ot_flag: None
+      reset: None
+      writeup: "2025-03-28T16:19:00"
+      host_logs: None
+  - team_id: "team4"
+    run_id: "run1"
+    team_subnet: '10.0.4.0/24'
+    path: "team4/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:26"
+      it_flag: "2025-03-28T11:31:04"
+      ot_flag: None
+      reset: "2025-03-28T14:37:54"
+      writeup: "2025-03-28T12:07:00"
+      host_logs: "2025-03-28T15:37:00"
+  - team_id: "team4"
+    run_id: "run2"
+    team_subnet: '10.0.4.0/24'
+    path: "team4/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 15:08:53"
+      it_flag: "2025-03-28T15:51:57"
+      ot_flag: None
+      reset: None
+      writeup: "2025-03-28T16:32:00"
+      host_logs: None
+  - team_id: "team5"
+    run_id: "run1"
+    team_subnet: '10.0.5.0/24'
+    path: "team5/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:27"
+      it_flag: None
+      ot_flag: None
+      reset: None
+      writeup: None
+      host_logs: None
+  - team_id: "team6"
+    run_id: "run1"
+    team_subnet: '10.0.6.0/24'
+    path: "team6/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:28"
+      it_flag: None
+      ot_flag: None
+      reset: "2025-03-28T14:16:54"
+      writeup: None
+      host_logs: "2025-03-28T14:16:00"
+  - team_id: "team6"
+    run_id: "run2"
+    team_subnet: '10.0.6.0/24'
+    path: "team6/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 14:41:59"
+      it_flag: "2025-03-28T15:19:12"
+      ot_flag: None
+      reset: None
+      writeup: "2025-03-28T15:38:00"
+      host_logs: None
+  - team_id: "team7"
+    run_id: "run1"
+    team_subnet: '10.0.7.0/24'
+    path: "team7/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:53"
+      it_flag: "2025-03-28T13:43:32"
+      ot_flag: None
+      reset: "2025-03-28T14:12:41"
+      writeup: "2025-03-28T14:12:00"
+      host_logs: None
+  - team_id: "team7"
+    run_id: "run2"
+    team_subnet: '10.0.7.0/24'
+    path: "team7/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 14:41:48"
+      it_flag: "2025-03-28T15:18:49"
+      ot_flag: None
+      reset: "2025-03-28T15:24:28"
+      writeup: "2025-03-28T15:21:00"
+      host_logs: "2025-03-28T15:24:00"
+  - team_id: "team7"
+    run_id: "run3"
+    team_subnet: '10.0.7.0/24'
+    path: "team7/run3/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 15:40:56"
+      it_flag: "2025-03-28T16:15:27"
+      ot_flag: None
+      reset: None
+      writeup: "2025-03-28T16:14:00"
+      host_logs: None
+  - team_id: "team8"
+    run_id: "run1"
+    team_subnet: '10.0.8.0/24'
+    path: "team8/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:28"
+      it_flag: None
+      ot_flag: None
+      reset: "2025-03-28T13:50:48"
+      writeup: None
+      host_logs: "2025-03-28T13:50:00"
+  - team_id: "team8"
+    run_id: "run2"
+    team_subnet: '10.0.8.0/24'
+    path: "team8/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 14:06:34"
+      it_flag: None
+      ot_flag: None
+      reset: "2025-03-28T14:58:07"
+      writeup: None
+      host_logs: "2025-03-28T14:58:00"
+  - team_id: "team8"
+    run_id: "run3"
+    team_subnet: '10.0.8.0/24'
+    path: "team8/run3/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 15:08:54"
+      it_flag: "2025-03-28T16:18:25"
+      ot_flag: None
+      reset: None
+      writeup: "2025-03-28T16:21:00"
+      host_logs: None
+  - team_id: "team9"
+    run_id: "run1"
+    team_subnet: '10.0.9.0/24'
+    path: "team9/run1/run.yaml"
+    timeline:
+      start: "2025-03-28T08:30:00"
+      suricata_start: "2025-03-28 06:53:48"
+      it_flag: "2025-03-28T10:53:13"
+      ot_flag: None
+      reset: "2025-03-28T13:50:29"
+      writeup: "2025-03-28T10:57:00"
+      host_logs: "2025-03-28T13:50:00"
+  - team_id: "team9"
+    run_id: "run2"
+    team_subnet: '10.0.9.0/24'
+    path: "team9/run2/run.yaml"
+    timeline:
+      start: None
+      suricata_start: "2025-03-28 14:06:35"
+      it_flag: "2025-03-28T14:44:16"
+      ot_flag: None
+      reset: None
+      writeup: "2025-03-28T14:41:00"
+      host_logs: None

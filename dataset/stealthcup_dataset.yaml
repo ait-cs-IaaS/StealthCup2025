@@ -1,0 +1,115 @@
+dataset:
+  name: StealthCup2025 Dataset
+  version: "1.0"
+  timezones: 
+    - UTC
+    - Europe/Vienna
+
+time_reference:
+  "UTC":
+    utc_offset: "+00:00"
+    daylight_saving: false
+    source: "default for all logs if not specified here"
+    note: >
+      All timestamps, if not specified else are recorded in local system time (UTC).
+      No conversion to UTC has been performed.
+  "Europe/Vienna":
+    utc_offset: "+01:00"
+    daylight_saving: false
+    source: "local system time of Suricata hosts"
+    note: >
+      All timestamps, if not specified else are recorded in local system time (UTC).
+      No conversion to UTC has been performed.
+
+viewangles:
+  attacker:
+    includes:
+      - writeups
+  event:
+    includes:
+      - game_database
+      - alerts
+  host:
+    includes:
+      - logs
+      - metrics
+  ids:
+    includes:
+      - suricata
+      - wazuh
+      - commercial_vendor_a
+      - commercial_vendor_b
+  network:
+    includes:
+      - pcaps
+      - firewall_netflow
+      - firewall_alerts
+
+artifacts:
+  attacker:
+    writeups:
+      path: attacker/writeups/{team_id}/{run_id}/
+      format: markdown
+      notes: "Per-team writeups; typically contains writeup.md and supporting files."
+
+  event:
+    alerts:
+      path: event/alerts/
+      format: json|csv|yaml
+      notes: "Game/event-level alerts (format depends on export pipeline)."
+    game_database:
+      path: event/game_database/
+      format: sqlite|json|csv
+      notes: "Game database exports (if included)."
+
+  host:
+    host_logs:
+      path: host/logs/{team_id}/{run_id}/{host_logs_timestamp}/
+      format: json|evtx|syslog|txt
+      notes: "Timestamped host log snapshot; contains per-host subfolders (e.g., 10.0.X.Y/...)."
+    host_metrics:
+      path: host/metrics/{metrics_timestamp}/
+      format: csv|json|prometheus
+      notes: "Global metrics snapshots (not per-team in current layout)."
+
+  ids:
+    suricata:
+      path: ids/suricata/{team_id}/{run_id}/
+      format: json
+      notes: "Suricata outputs (often eve.json / eve.json.gz depending on pipeline)."
+    wazuh:
+      path: ids/wazuh/{team_id}/{run_id}/
+      format: json
+      notes: "Wazuh exports; may include filtered Suricata-derived events."
+    commercial_vendor_a:
+      path: ids/commercial_vendor_a/{team_id}/{run_id}/
+      format: vendor-specific
+      notes: "Commercial Vendor A exports (as provided)."
+    commercial_vendor_b:
+      path: ids/commercial_vendor_b/{team_id}/{run_id}/
+      format: vendor-specific
+      notes: "Commercial Vendor B exports (as provided)."
+
+  network:
+    pcaps:
+      path: network/pcap/{team_id}/{run_id}/
+      format: pcap|pcapng
+      vantage_point: "vxlan mirror on vms"
+      notes: "May contain a 'defect/' subfolder for known-bad captures."
+    firewall_netflow:
+      path: network/firewall/netflow/
+      format: csv|json|ipfix
+      notes: "Firewall netflow exports (scope depends on collection)."
+    firewall_alerts:
+      path: network/firewall/alerts/
+      format: json|csv
+      notes: "Firewall alert exports (scope depends on collection)."
+
+hosts:
+  10.0.x.11:
+    name: "DC1"
+
+objectives:
+  O1: ...
+  O2: ...
+  O3: ...

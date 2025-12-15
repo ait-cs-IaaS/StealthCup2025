@@ -1,0 +1,12 @@
+team_id: team12
+run_id: run1
+team_subnet: '10.0.12.0/24'
+
+timeline:
+  start: 2025-03-28T08:30:00
+  suricata_start: 2025-03-28 06:54:03
+  it_flag: None
+  ot_flag: None
+  reset: 2025-03-28T14:57:03
+  writeup: None
+  host_logs: 2025-03-28 14:57:00
