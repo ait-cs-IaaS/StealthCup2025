@@ -3,8 +3,9 @@ run_id: run2
 team_subnet: '10.0.1.0/24'
 
 timeline:
-  start: None
+  start: 2025-03-28 14:30:02
   suricata_start: 2025-03-28 14:41:56
+  first_con_not_win_host: 2025-03-28 14:44:45
   it_flag: 2025-03-28 15:25:00
   ot_flag: None
   reset: None

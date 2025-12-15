@@ -5,6 +5,7 @@ team_subnet: '10.0.8.0/24'
 timeline:
   start: None
   suricata_start: 2025-03-28 15:08:54
+  first_con_not_win_host: 2025-03-28 15:51:49
   it_flag: 2025-03-28T16:18:25
   ot_flag: None
   reset: None
