@@ -1,0 +1,30 @@
+attack_vectors:
+  intended:
+    - id: AV-01
+      name: "SQL injection in ERP search endpoint"
+      description: >
+        Classic SQL injection vulnerability intentionally exposed
+        to evaluate IDS visibility on application-layer attacks.
+      hosts:
+        - DC1
+      mitre_attack:
+        - T1190   # Exploit Public-Facing Application
+      phase: exploitation
+      expected_detection: true
+      notes: "Baseline attack path for IT objective"
+
+  unintended:
+    - id: UAV-01
+      name: "Authentication bypass via misconfigured reverse proxy"
+      description: >
+        Unintended attack path discovered by participants allowing
+        bypass of ERP authentication checks.
+      hosts:
+        - DC2
+      mitre_attack:
+        - T1078   # Valid Accounts
+      phase: initial-access
+      discovered_by_teams:
+        - team3
+        - team7
+      notes: "Not covered by IDS rules in initial configuration"

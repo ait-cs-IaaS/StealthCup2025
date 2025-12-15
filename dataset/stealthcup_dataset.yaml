@@ -9,14 +9,16 @@ time_reference:
   "UTC":
     utc_offset: "+00:00"
     daylight_saving: false
-    source: "default for all logs if not specified here"
+    source: "applies to all logs unless specified otherwise"
+    hosts: [ "all-hosts", "all-networks", "all-services" ]
     note: >
       All timestamps, if not specified else are recorded in local system time (UTC).
       No conversion to UTC has been performed.
   "Europe/Vienna":
     utc_offset: "+01:00"
     daylight_saving: false
-    source: "local system time of Suricata hosts"
+    source: "local system time of specified hosts/services"
+    hosts: [ "tbd" ]
     note: >
       All timestamps, if not specified else are recorded in local system time (UTC).
       No conversion to UTC has been performed.
@@ -105,11 +107,6 @@ artifacts:
       format: json|csv
       notes: "Firewall alert exports (scope depends on collection)."
 
-hosts:
-  10.0.x.11:
-    name: "DC1"
-
 objectives:
   O1: ...
   O2: ...
-  O3: ...

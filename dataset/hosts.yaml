@@ -1,0 +1,13 @@
+hosts:
+  dc1:
+    ip: "10.0.x.11"
+    name: "DC1"
+    role: "domain-controller"
+    os: "Windows Server"
+    services:
+      - kerberos
+      - ldap
+      - smb
+
+
+# add 10.0.X.74 (plc?) // 10.0.X.73 (one of those were plc hosts)
