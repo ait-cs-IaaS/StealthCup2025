@@ -35,12 +35,12 @@ Teams and runs:
 - runY where Y is the run number, e.g. run2
 
 ## Run
-To navigate the runs, we have created the following metadata for each run in a seperate file `dataset/teamX/runY/run.yaml`.
+To navigate the runs, we have created the following metadata for each run in a seperate file `dataset/teamX/runY/run.yaml`. An overview of all runs can be found in the [Dataset Run Index Table](dataset_run_index.md).
 
 Per run we provide the following metadata:
 ```
 timeline:
-  start: None (we notified players when we opened the game infrastructure for them)
+  start: None (we notified players when we opened the game infrastructure for them, this information is not available for all runs)
   suricata_start: 2025-03-28 15:08:53 (from backups of suricata logs - indicator when the infrastructure was up running)
   first_con_not_win_host: 2025-03-28 08:38:07 (first connection to host that is not in the same subnet, since windows and kali connection is noisy - indicator for hacking attempts)
   it_flag: 2025-03-28T15:51:57 (database - objective solves where automatically verified and saved to event database)
