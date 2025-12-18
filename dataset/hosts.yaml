@@ -32,6 +32,7 @@ hosts:
       - ldap
       - rdp
       - ssh
+      - adcs
   fs1:
     ip: "10.0.x.12"
     name: "FS1"

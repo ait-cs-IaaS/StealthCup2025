@@ -108,5 +108,5 @@ artifacts:
       notes: "Firewall alert exports (scope depends on collection)."
 
 objectives:
-  O1: ...
-  O2: ...
+  O1: Establish persistent privileged access by creating a backdoor domain administrator account named plumber.
+  O2: Gain control of the PLC and manipulate its logic to cause a chemical tank overflow.

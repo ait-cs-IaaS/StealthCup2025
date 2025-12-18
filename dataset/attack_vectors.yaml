@@ -1,30 +1,515 @@
 attack_vectors:
   intended:
-    - id: AV-01
-      name: "SQL injection in ERP search endpoint"
-      description: >
-        Classic SQL injection vulnerability intentionally exposed
-        to evaluate IDS visibility on application-layer attacks.
+    - id: AV01
+      name: Persistence via USB Rubber Ducky
+      description: The attacker gained an initial foothold after a host was compromised using a USB Rubber Ducky.
+      hosts:
+        - KALI
+      tactics:
+        - Persistence
+      techniques:
+        - T1219
+
+    - id: AV02
+      name: Respond to SMB authentication attempt
+      description: Attacker intercepts an SMB authentication attempt initiated by a user from workstation CLI1.
+      hosts:
+        - KALI
+        - CLI1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1557.001
+
+    - id: AV03
+      name: Enumerate potential employee usernames from public-facing website
+      description: Attacker collects employee usernames exposed on the companys public website.
+      hosts:
+        - FS1
+      tactics:
+        - Reconnaissance
+      techniques:
+        - T1589.002
+        - T1589.003
+
+    - id: AV04
+      name: Attempt offline cracking of captured NTLMv2 hash
+      description: Attacker attempts to crack a captured NTLMv2 hash offline, but the attempt fails due to a strong password.
+      hosts:
+        - KALI
+      tactics:
+        - Credential Access
+      techniques:
+        - T1110.002
+
+    - id: AV05
+      name: Relay NTLM authentication to AD CS and obtain certificate (ESC8)
+      description: Attacker relays a captured NTLMv2 authentication to the Certificate Authority to enroll and obtain an authentication certificate for an unprivileged user.
+      hosts:
+        - FS1
+        - KALI
+        - DC1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1649
+        - T1557.001
+
+    - id: AV06
+      name: Brute-force account with weak password
+      description: Attacker brute-forces a low privileged account with a weak password.
+      hosts:
+        - KALI
+      tactics:
+        - Credential Access
+      technique:
+        - T1110.001
+
+    - id: AV07
+      name: AS-REP roasting against account without Kerberos preauthentication
+      description: Attacker performs AS-REP roasting against an account that does not require Kerberos preauthentication to obtain crackable authentication material.
       hosts:
         - DC1
-      mitre_attack:
-        - T1190   # Exploit Public-Facing Application
-      phase: exploitation
-      expected_detection: true
-      notes: "Baseline attack path for IT objective"
+      tactics:
+        - Credential Access
+      techniques:
+        - T1558.004
+
+    - id: AV08
+      name: Access low-privileged domain account via AD CS certificate abuse (ESC8)
+      description: Attacker authenticates as a low-privileged domain user using a certificate obtained through AD CS abuse (ESC8).
+      hosts:
+        - DC1
+      tactics:
+        - Initial Access
+        - Persistence
+        - Privilege Escalation
+        - Defense Evasion
+      techniques:
+        - T1078
+        - T1649
+
+    - id: AV09
+      name: Access low-privileged domain account via brute-forced credentials
+      description: Attacker authenticates as a low-privileged domain user using credentials obtained through a successful brute-force attack.
+      hosts:
+        - DC1
+      tactics:
+        - Initial Access
+        - Persistence
+        - Privilege Escalation
+        - Defense Evasion
+      techniques:
+        - T1078
+        - T1110.001
+
+    - id: AV10
+      name: Access low-privileged domain account via AS-REP roasting
+      description: Attacker authenticates as a low-privileged domain user using credentials obtained through AS-REP roasting.
+      hosts:
+        - DC1
+      tactics:
+        - Initial Access
+        - Persistence
+        - Privilege Escalation
+        - Defense Evasion
+      techniques:
+        - T1078
+        - T1558.004
+
+    - id: AV11
+      name: Perform additional discovery on enterprise client
+      description: Attacker performs additional discovery on CLI1 system using low privileged domain user access.
+      hosts:
+        - CLI1
+      tactics:
+        - Discovery
+      techniques:
+        - T1555.003
+        - T1555.004
+        - T1680
+        - T1082
+
+    - id: AV12
+      name: Perform additional discovery on network file share
+      description: Attacker performs additional discovery on a network file share hosted on FS1 using low privileged domain user access.
+      hosts:
+        - FS1
+      tactics:
+        - Discovery
+      techniques:
+        - T1083
+
+    - id: AV13
+      name: Active Directory Certificate Services exploitation attempts
+      description: Attacker attempts to abuse Active Directory Certificate Services to enroll and obtain an authentication certificate, but the attempts fail due to hardened configurations.
+      hosts:
+        - DC1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1649
+
+    - id: AV14
+      name: Kerberoast service account and crack password
+      description: Attacker performs Kerberoasting to obtain a service ticket and successfully cracks it to compromise a domain user account.
+      hosts:
+        - DC1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1558.003
+        - T1110.002
+
+    - id: AV15
+      name: Abuse GenericAll privileges for RBCD
+      description: Attacker abuses GenericAll permissions to configure resource-based constrained delegation and add shadow credentials for privileged account impersonation using  compromised domain account (obtained via AS-REP roasting) 
+      hosts:
+        - DC1
+      tactics:
+        - Privilege Escalation
+        - Persistence
+      techniques:
+        - T1098
+        - T1550
+
+    - id: AV16
+      name: Discover application credentials in Windows Credential Manager
+      description: Attacker discovers stored application credentials for Grafana in the Windows Credential Manager on CLI1.
+      hosts:
+        - CLI1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1555.003
+        - T1555.004
+
+    - id: AV17
+      name: Discover network documentation on file share
+      description: Attacker finds network documentation stored on a file share on FS1 using low privileged domain user access.
+      hosts:
+        - FS1
+      tactics:
+        - Discovery
+        - Collection
+      techniques:
+        - T1083
+
+    - id: AV18
+      name: Password spray reused credentials to compromise privileged account
+      description: Attacker performs a password spraying attack using credentials obtained from a Kerberoasting compromise to gain access to a privileged domain account.
+      hosts:
+        - DC1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1110.003
+
+    - id: AV19
+      name: Access domain administrator account via password reuse
+      description: Attacker gains access to a privileged domain account using valid credentials obtained through a prior password spraying attack.
+      hosts:
+        - DC1
+      tactics:
+        - Privilege Escalation
+      techniques:
+        - T1078
+
+    - id: AV20
+      name: Access domain administrator account via alternate authentication material
+      description: Attacker gains access to a domain administrator using alternate authentication material.
+      hosts:
+        - DC1
+      tactics:
+        - Privilege Escalation
+        - Lateral Movement
+      techniques:
+        - T1078
+        - T1550
+
+    - id: AV21
+      name: Create backdoor domain administrator account
+      description: Attacker creates a new domain administrator account named "plumber" to establish persistent privileged access.
+      hosts:
+        - DC1
+      tactics:
+        - Persistence
+        - Privilege Escalation
+      techniques:
+        - T1136.002
+
+    - id: AV22
+      name: Extract domain trust key
+      description: Attacker runs Mimikatz to dump the domain trust key.
+      hosts:
+        - DC1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1003.004
+
+    - id: AV23
+      name: Reset password for account with jump host access
+      description: Attacker resets the password of an identified domain account (based on its AD description) to access the JUMP host.
+      hosts:
+        - DC1
+        - JUMP
+      tactics:
+        - Privilege Escalation
+        - Persistence
+      techniques:
+        - T1098
+
+    - id: AV24
+      name: Crack password for account with jump host access
+      description: Attacker cracks the password hash of an identified domain account (based on its AD description) to access the JUMP host.
+      hosts:
+        - DC1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1110.002
+
+    - id: AV25
+      name: Perform DCSync to obtain Active Directory secrets
+      description: Attacker performs a DCSync attack to replicate Active Directory data and obtain credential material from the domain.
+      hosts:
+        - DC1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1003.006
+
+    - id: AV26
+      name: Forge inter-domain Kerberos trust ticket
+      description: Attacker forges a Kerberos trust ticket to authenticate across a domain trust to take over a domain administrator in the OT domain.
+      hosts:
+        - DC1
+      tactics:
+        - Credential Access
+        - Lateral Movement
+      techniques:
+        - T1558.001
+
+    - id: AV27
+      name: Access jump host using authorized domain account
+      description: Attacker accesses the JUMP using an identified domain account (based on its AD description).
+      hosts:
+        - JUMP
+      tactics:
+        - Lateral Movement
+      techniques:
+        - T1078
+        - T1021.001
+
+    - id: AV28
+      name: Pass-the-Hash to access privileged account in OT domain
+      description: Attacker uses a Pass-the-Hash technique with domain administrator credentials to authenticate and access a privileged account with the same name in the OT domain.
+      hosts:
+        - DC1
+        - OTDC1
+      tactics:
+        - Lateral Movement
+        - Privilege Escalation
+      techniques:
+        - T1550.002
+
+    - id: AV29
+      name: Access jump host via RDP using OT domain administrator account
+      description: Attacker accesses the jump host over RDP using valid OT domain administrator credentials.
+      hosts:
+        - JUMP
+      tactics:
+        - Lateral Movement
+      techniques:
+        - T1021.001
+        - T1078
+
+    - id: AV30
+      name: Privilege escalation via scheduled task modification
+      description: Attacker escalates privileges by modifying a scheduled task on the JUMP host that runs as SYSTEM.
+      hosts:
+        - JUMP
+      tactics:
+        - Privilege Escalation
+        - Persistence
+      techniques:
+        - T1053.005
+
+    - id: AV31
+      name: Access JUMP host as OT domain administrator via Pass-the-Hash
+      description: Attacker accesses the JUMP host as OT domain administrator using identical credentials across IT and OT domains via Pass-the-Hash.
+      hosts:
+        - JUMP
+      tactics:
+        - Lateral Movement
+        - Privilege Escalation
+      techniques:
+        - T1550.002
+        - T1021.001
+        - T1078
+
+    - id: AV32
+      name: Access HIST via SSH using Grafana credentials
+      description: Attacker reuses credentials obtained for the Grafana web interface to authenticate to the HIST system over SSH.
+      hosts:
+        - HIST
+      tactics:
+        - Lateral Movement
+      techniques:
+        - T1078
+        - T1021.004
+
+    - id: AV33
+      name: Discover PLC documentation on JUMP host desktop
+      description: Attacker locates PLC documentation stored on the desktop of a user account on the JUMP host.
+      hosts:
+        - JUMP
+      tactics:
+        - Discovery
+        - Collection
+      techniques:
+        - T1083
+        - T1005
+
+    - id: AV34
+      name: Extract credentials from KeePass process via CVE-2023-32784
+      description: Attacker identifies an active KeePass process on the JUMP host and exploits CVE-2023-32784 to extract the master password.
+      hosts:
+        - JUMP
+      tactics:
+        - Credential Access
+        - Discovery
+      techniques:
+        - T1057
+        - T1555.005
+
+    - id: AV35
+      name: Extract and crack cached domain logon hash
+      description: Attacker extracts a cached domain logon hash DCC2 from JUMP and cracks it offline to recover the account password.
+      hosts:
+        - JUMP
+      tactics:
+        - Credential Access
+      techniques:
+        - T1003.005
+        - T1110.002
+
+    - id: AV36
+      name: Discover files and directories on OT domain file share
+      description: Attacker finds network documentation stored on a file share on OTDC1 using OT domain user access.
+      hosts:
+        - OTDC1
+      tactics:
+        - Discovery
+      techniques:
+        - T1083
+
+    - id: AV37
+      name: Privilege escalation via SUID vi binary
+      description: Attacker abuses a misconfigured SUID vi binary to execute commands with elevated privileges.
+      hosts:
+        - HIST
+      tactics:
+        - Privilege Escalation
+      techniques:
+        - T1548.001
+
+    - id: AV38
+      name: Access PLC web interface from HIST
+      description: Attacker accesses the PLC web interface from HIST.
+      hosts:
+        - HIST
+      tactics:
+        - Lateral Movement
+      techniques:
+        - T1021
+        - T1078
+
+    - id: AV39
+      name: Discover local administrator credentials for ENG1 in KeePass database
+      description: Attacker discovers credentials for a local administrator account on ENG1 stored within the KeePass database.
+      hosts:
+        - JUMP
+        - ENG1
+      tactics:
+        - Credential Access
+      techniques:
+        - T1555.005
+
+    - id: AV40
+      name: Discover SCADA-LTS credentials on file share
+      description: Attacker discovers credentials for SCADA-LTS stored on a shared file on OTDC1.
+      hosts:
+        - OTDC1
+      tactics:
+        - Credential Access
+        - Discovery
+      techniques:
+        - T1552.001
+        - T1083
+
+    - id: AV41
+      name: Access SCADA web interface from HIST
+      description: Attacker accesses the SCADA web interface from HIST.
+      hosts:
+        - HIST
+        - SCADA
+      tactics:
+        - Lateral Movement
+      techniques:
+        - T1078
+        - T1021
+
+    - id: AV42
+      name: Enable PLC debug mode
+      description: Attacker enables debug mode on the PLC to facilitate further manipulation.
+      hosts:
+        - PLC
+      tactics:
+        - Impact
+      techniques:
+        - T1565
+
+    - id: AV43
+      name: Access ENG1 via RDP
+      description: Attacker accesses ENG1 using RDP with valid credentials.
+      hosts:
+        - ENG1
+      tactics:
+        - Lateral Movement
+      techniques:
+        - T1021.001
+        - T1078
+
+    - id: AV44
+      name: Manipulate PLC
+      description: Attacker manipulates the PLC by modifying its operational logic to influence industrial process behavior.
+      hosts:
+        - PLC
+      tactics:
+        - Impact
+      techniques:
+        - T1565.001
+
+    - id: AV45
+      name: Exploit authenticated RCE on SCADA server
+      description: Attacker exploits CVE-2023-33472 to achieve authenticated remote code execution on the SCADA server.
+      hosts:
+        - SCADA
+      tactics:
+        - Execution
+      techniques:
+        - T1203 
 
   unintended:
-    - id: UAV-01
-      name: "Authentication bypass via misconfigured reverse proxy"
-      description: >
-        Unintended attack path discovered by participants allowing
-        bypass of ERP authentication checks.
-      hosts:
-        - DC2
-      mitre_attack:
-        - T1078   # Valid Accounts
-      phase: initial-access
-      discovered_by_teams:
-        - team3
-        - team7
-      notes: "Not covered by IDS rules in initial configuration"
+  - id: UAV01
+    name: Abuse ESC1 to impersonate domain administrators despite hardening
+    description: Attacker bypasses ADCS hardening controls to obtain authentication certificates that allow impersonation of domain administrator accounts.
+    hosts:
+      - DC1
+    tactics:
+      - Privilege Escalation
+      - Credential Access
+    techniques:
+      - T1649
