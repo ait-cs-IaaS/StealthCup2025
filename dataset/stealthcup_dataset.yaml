@@ -18,7 +18,7 @@ time_reference:
     utc_offset: "+01:00"
     daylight_saving: false
     source: "local system time of specified hosts/services"
-    hosts: [ "tbd" ]
+    hosts: [ "commercial_vendor_a" ]
     note: >
       All timestamps, if not specified else are recorded in local system time (UTC).
       No conversion to UTC has been performed.

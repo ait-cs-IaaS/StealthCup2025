@@ -55,7 +55,7 @@ hosts:
     ip: "10.0.x.30"
     name: "KALI"
     role: "client"
-    os: "Kali Linux"
+    os: "Kali Linux 2024.3.0"
     services:
       - ssh
   otdc1:
@@ -81,10 +81,11 @@ hosts:
     ip: "10.0.x.45"
     name: "HIST"
     role: "data-historian"
-    os: "Ubuntu"
+    os: "Ubuntu Server 24.04 LTS"
     services:
-      - http (Grafana)
+      - http (Grafana 11.5.2)
       - ssh
+      - telegraf (1.32.3)
   eng1:
     ip: "10.0.x.59"
     name: "ENG1"
@@ -93,13 +94,14 @@ hosts:
     services:
       - rdp
       - ssh
+      - PLCnext Egineer (2024.0.4)
   scada:
     ip: "10.0.x.60"
     name: "SCADA"
     role: "scada-lts"
-    os: "Ubuntu"
+    os: "Ubuntu Server 24.04 LTS"
     services:
-      - http (Scada-LTS)
+      - http (Scada-LTS v2.7.5.2)
       - ssh
   plc1:
     ip:
@@ -107,22 +109,26 @@ hosts:
       - "10.0.x.74"
     name: "PLC1"
     role: "plc"
-    os: "Ubuntu"
+    os: "Ubuntu Server 24.04 LTS"
+    plc_firmeware: "2021.6.0"
     services:
       - http (PLC webinterface)
       - ssh
+    description: "The ubuntu host was not accessbile for the players. It was required for the PLC digital twin. Only the PLC which was run as qemu-guest with a 1:1 ip forwarding to the PLC (.74)"
   mgmt:
     ip: "10.0.242.127"
     name: "MGMT"
     role: "management"
-    os: "Ubuntu"
+    os: "Ubuntu Server 24.04 LTS"
+    description: "Used for the event dashboard, ansible installations, backups and ssh tunneling for attackers to their respective team kali instance. Attackers were not able to use this machine. It is only for management. This machine was not used for attacks!"
     services:
       - http (Dashboard)
       - ssh
   mgmt2:
     ip: "10.0.242.109"
     name: "MGMT2"
-    role: management
-    os: "Ubuntu"
+    role: "management"
+    os: "Ubuntu Server 24.04 LTS"
+    description: "Second backup server. This machine was not used for attacks!"
     services::
       - ssh

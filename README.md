@@ -5,13 +5,11 @@ Instead of replaying synthetic datasets, StealthCup uses **evasion-focused Captu
 
 The project combines:
 - Realistic, multi-stage attack chains (IT → OT pivoting, AD takeover, PLC manipulation).
-- A fully automated, reproducible **Infrastructure-as-Code** setup (Terraform, Ansible, Packer).
+- A fully automated, reproducible Infrastructure-as-Code setup (Terraform, Ansible, Packer).
 - Comparative evaluation of open-source (Snort, Suricata, Wazuh) and commercial IDS solutions.
 - Open datasets of alerts, PCAPs, logs, and structured attacker writeups.  
 
-StealthCup complements traditional benchmarks by exposing **where IDS configurations fail against stealthy adversaries**.
-
----
+StealthCup complements traditional benchmarks by exposing where IDS configurations fail against stealthy adversaries.
 
 ## Key Documents
 - [Event Rules of the Game (PDF)](docs/Event_Rules_of_the_Game.pdf) – CTF competition format and scoring.  
@@ -30,11 +28,9 @@ StealthCup complements traditional benchmarks by exposing **where IDS configurat
 - [Local Wazuh Rules](docs/Wazuh-Detections/local_rules.xml)  
 - [Custom Suricata Rules](docs/Wazuh-Detections/suricata_custom.rules)  
 
----
+## Infrastructure
 
-## 🛠️ Infrastructure
-
-The `provisioning/` directories contain **Terraform, Ansible, and Packer** configurations for deploying the full IT/OT environment.  
+The `provisioning/` directories contain Terraform, Ansible, and Packer configurations for deploying the full IT/OT environment.  
 Scripts and utilities for redeployment, testing, and simulation can be found under `scripts/` and `testing/`. 
 
 ![Overview of the network](docs/img/Network.png)
@@ -44,21 +40,25 @@ Scripts and utilities for redeployment, testing, and simulation can be found und
 ### Setup
 We will publish more informations on how to deploy the network soon. Meanwhile you are invited to send us a message if you have any questions: pentest.ait.ac.at.
 
----
-
-## 📊 Publications
+## Publications
 
 StealthCup is described in detail in our upcoming research papers:  
-- xxx
+- StealthCup: Realistic, Multi-Stage, Evasion-Focused CTF for Benchmarking IDS, M. Kern, D. Steffan, F. Schuster, F. Skopik, M. Landauer, D. Allison, S. Freudenthaler, E. Weippl, arXiv preprint arXiv:2511.17761, 2025
 
----
+```
+@misc{kern2025stealthcuprealisticmultistageevasionfocused,
+      title={StealthCup: Realistic, Multi-Stage, Evasion-Focused CTF for Benchmarking IDS}, 
+      author={Manuel Kern and Dominik Steffan and Felix Schuster and Florian Skopik and Max Landauer and David Allison and Simon Freudenthaler and Edgar Weippl},
+      year={2025},
+      eprint={2511.17761},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2511.17761}, 
+}
+```
 
 ## Related
-
 - Dataset release (alerts, PCAPs, logs) – coming soon.  
-- CALDERA attack profiles derived from attacker writeups – work in progress.  
-
----
 
 ### Disclaimer
-StealthCup is a research framework. Some scripts, exploits, and configurations are provided **for academic use only**. Do **not** deploy outside controlled environments.
+StealthCup is a research framework. Some scripts, exploits, and configurations are provided for academic use only. Do not deploy outside controlled environments.
