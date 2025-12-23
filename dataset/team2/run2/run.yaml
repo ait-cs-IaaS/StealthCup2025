@@ -11,3 +11,24 @@ timeline:
   reset: None
   writeup: 2025-03-28T15:55:00
   host_logs: None
+
+killchain:
+  - AV01
+  - AV02
+  - AV08
+  - AV07
+  - AV12
+  - AV16
+  - AV10
+  - AV14
+  - AV13
+  - UAV01
+  - AV20
+  - AV21
+  - AV23
+  - AV27
+  - AV30
+  - AV34
+  - AV39
+  - AV43
+  - AV44

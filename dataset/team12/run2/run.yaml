@@ -11,3 +11,12 @@ timeline:
   reset: None
   writeup: None
   host_logs: None
+
+killchain:
+  - AV01
+  - AV03
+  - AV07
+  - AV10
+  - AV14
+  - AV11
+  - AV17
