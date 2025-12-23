@@ -1,0 +1,69 @@
+ids:
+  suricata:
+    hosts:
+      - wazuh
+      - dc1
+      - fs1
+      - cli1
+      - kali
+      - otdc1
+      - jump
+      - hist
+      - eng1
+      - scada
+      - plc1
+    software: "Suricata"
+    software_version: "7.0.3"
+    timestamp_of_rules: "up-to-date version from March 28, 2025"
+    configuration: "provisioning/ansible/playbooks/install_suricata.yml"
+  wazuh:
+    hosts:
+      - wazuh
+      - dc1
+      - fs1
+      - cli1
+      - otdc1
+      - jump
+      - hist
+      - eng1
+      - scada
+    software: "Wazuh"
+    software_version: "4.10.1"
+    configuration: "provisioning/ansible/playbooks/all-detections.yml"
+  commercial_vendor_a:
+    hosts:
+      - dc1
+      - fs1
+      - cli1
+      - otdc1
+      - jump
+      - hist
+      - eng1
+      - scada
+    software: "redacted"
+    software_version: "up-to-date version from March 28, 2025"
+    configuration: "Default configuration, no further tuning."
+  commercial_vendor_b:
+    network_tap:
+       - tap_a
+    software: "redacted"
+    software_version: "up-to-date version from March 28, 2025"
+    configuration: "Default configuration, no further tuning."
+
+network_tap:
+  tap_a:
+    description: "Each team had a network tap implemented as AWS vxlan. This tap forwarded all traffic from and to src_hosts to dst_hosts."
+    src_hosts:
+      - dc1
+      - fs1
+      - cli1
+      - kali
+      - otdc1
+      - jump
+      - hist
+      - eng1
+      - scada
+      - plc1
+    dst_hosts:
+      - vendor_b_nids
+      - suricata
