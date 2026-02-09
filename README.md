@@ -4,10 +4,11 @@
 Instead of replaying synthetic datasets, StealthCup uses **evasion-focused Capture-the-Flag (CTF)** challenges executed by professional penetration testers on a validated IT/OT testbed.  
 
 The project combines:
+- A fully automated, reproducible Infrastructure-as-Code setup (Terraform, Ansible, Packer) spanning enterprise IT (Active Directory, Windows/Linux servers) and OT environments (virtualized PLCs, SCADA, historians).
 - Realistic, multi-stage attack chains (IT → OT pivoting, AD takeover, PLC manipulation).
-- A fully automated, reproducible Infrastructure-as-Code setup (Terraform, Ansible, Packer).
-- Comparative evaluation of open-source (Snort, Suricata, Wazuh) and commercial IDS solutions.
-- Open datasets of alerts, PCAPs, logs, and structured attacker writeups.  
+- A fully automated, reproducible Infrastructure-as-Code setup (Terraform, Ansible, Packer) spanning enterprise IT and OT environments.
+- Comparative evaluation of open-source (Suricata, Wazuh) and anonymized commercial IDS solutions.
+- Open datasets of alerts, PCAPs, logs, and structured attacker writeups.
 
 StealthCup complements traditional benchmarks by exposing where IDS configurations fail against stealthy adversaries.
 
@@ -20,6 +21,7 @@ StealthCup complements traditional benchmarks by exposing where IDS configuratio
 
 ### Scientific Application & Results
 - [Evaluation CSV](docs/ScientificApplication/csv)
+- [IDS FP Labeling](docs/ManualDetectionEvaluation.xlsx)
 - [Comparison with Volt Typhoon TTPs (XLSX)](docs/ScientificApplication/Comparison_VoltTyphoon.xlsx)  
 - [StealthCup Event Timeline (XLSX)](docs/ScientificApplication/StealthCup_Timeline.xlsx)  
 
@@ -38,27 +40,19 @@ Scripts and utilities for redeployment, testing, and simulation can be found und
 [Detailed Infrastructure](docs/img/Network_detail_aws.drawio.pdf)
 
 ### Setup
-We will publish more informations on how to deploy the network soon. Meanwhile you are invited to send us a message if you have any questions: pentest.ait.ac.at.
+We will publish more informations on how to deploy the network soon. Meanwhile you are invited to send us a message if you have any questions: xxx
 
 ## Publications
 
-StealthCup is described in detail in our upcoming research papers:  
-- StealthCup: Realistic, Multi-Stage, Evasion-Focused CTF for Benchmarking IDS, M. Kern, D. Steffan, F. Schuster, F. Skopik, M. Landauer, D. Allison, S. Freudenthaler, E. Weippl, arXiv preprint arXiv:2511.17761, 2025
+StealthCup is described in detail in our research paper:  
+- StealthCup: Realistic, Multi-Stage, Evasion-Focused CTF for Benchmarking IDS (March 2025 event)
 
 ```
-@misc{kern2025stealthcuprealisticmultistageevasionfocused,
-      title={StealthCup: Realistic, Multi-Stage, Evasion-Focused CTF for Benchmarking IDS}, 
-      author={Manuel Kern and Dominik Steffan and Felix Schuster and Florian Skopik and Max Landauer and David Allison and Simon Freudenthaler and Edgar Weippl},
-      year={2025},
-      eprint={2511.17761},
-      archivePrefix={arXiv},
-      primaryClass={cs.CR},
-      url={https://arxiv.org/abs/2511.17761}, 
-}
+tbd
 ```
 
-## Related
-- Dataset release (alerts, PCAPs, logs) – coming soon.  
+## Dataset
+Full dataset (alerts, PCAPs, host logs, attacker writeups) will be released upon paper acceptance.
 
 ### Disclaimer
 StealthCup is a research framework. Some scripts, exploits, and configurations are provided for academic use only. Do not deploy outside controlled environments.
