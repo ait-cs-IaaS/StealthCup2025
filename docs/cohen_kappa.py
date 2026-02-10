@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.metrics import cohen_kappa_score
 
-FILE = "ManualDetectionEvaluation_Felix.xlsx"
+FILE = "ManualDetectionEvaluation.xlsx"
 
 COL_DOM = "Attack Confidence Pentester A"
 COL_FEL = "Attack Confidence Pentester B"
@@ -65,7 +65,6 @@ for sheet in xls.sheet_names:
 print("\n" + "=" * 70)
 print("DEBUG: Sheet inclusion summary")
 print("=" * 70)
-print(f"  Total sheets in file:     {len(xls.sheet_names)}")
 print(f"  Sheets with both columns: {len(xls.sheet_names) - len(skipped_sheets)}")
 print(f"  Sheets skipped (missing): {len(skipped_sheets)}")
 for s, reason in skipped_sheets:
@@ -73,7 +72,6 @@ for s, reason in skipped_sheets:
 print(f"  Sheets with 0 usable rows:{len(empty_sheets)}")
 for s in empty_sheets:
     print(f"    - {s}")
-print(f"  Sheets contributing data: {len(all_rows)}")
 
 if not all_rows:
     raise ValueError(f"No sheets found containing both '{COL_DOM}' and '{COL_FEL}' with usable data")
@@ -85,7 +83,6 @@ pooled = pd.concat(all_rows, ignore_index=True)
 print("\n" + "=" * 70)
 print("DEBUG: Pooled data summary")
 print("=" * 70)
-print(f"  Total pooled rows: {len(pooled)}")
 print(f"\n  Dominik label distribution:")
 for val, cnt in sorted(pooled[COL_DOM].value_counts().items()):
     print(f"    label {val}: {cnt:>6d}  ({100*cnt/len(pooled):.1f}%)")
@@ -161,7 +158,6 @@ kappa_binary = cohen_kappa_score(pooled["FP_Dominik"], pooled["FP_Felix"])
 print("\n" + "=" * 70)
 print("RESULTS: Binary FP Kappa")
 print("=" * 70)
-print(f"  Pooled rows:                        {len(pooled)}")
 print(f"  Cohen's kappa (binary FP/TP):        {kappa_binary:.4f}")
 
 # ── Per-sheet binary kappa ───────────────────────────────────────────────────

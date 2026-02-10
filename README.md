@@ -51,8 +51,8 @@ StealthCup is described in detail in our research paper:
 tbd
 ```
 
-## Dataset
-Full dataset (alerts, PCAPs, host logs, attacker writeups) will be released upon paper acceptance.
+## Raw data
+Raw data (PCAPs, host logs) can be found [here](https://drive.google.com/drive/folders/1tImOIJMAg2kVXX8EeBACiXdWf2wGdlnW?usp=sharing).
 
 ### Disclaimer
 StealthCup is a research framework. Some scripts, exploits, and configurations are provided for academic use only. Do not deploy outside controlled environments.
