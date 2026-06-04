@@ -45,10 +45,9 @@ We will publish more informations on how to deploy the network soon. Meanwhile y
 ## Publications
 
 StealthCup is described in detail in our research paper:  
-- StealthCup: Realistic, Multi-Stage, Evasion-Focused CTF for Benchmarking IDS (March 2025 event)
 
 ```
-tbd
+Kern, M., Steffan, D., Schuster, F., Freudenthaler, S., Weippl, E., Skopik, F., Landauer, M., and Allison, D. 2026. StealthCup: Realistic, Multi-Stage, Evasion-Focused CTF for Benchmarking IDS. In Proceedings of the ACM Asia Conference on Computer and Communications Security (ASIACCS '26), June 1–5, 2026, Bangalore, India. ACM, New York, NY, USA.
 ```
 
 ## Raw data
